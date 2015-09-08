@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="scripts/shared/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="styles/main.css">
+
+  </head>
+  <body ng-app="pruebaAngularApp">
+   <div class="container">
+     <div class="header">
+      <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="container">
+          
+          <ul class="nav navbar-nav">
+              <li class="text-navbar active"><a href="#/Index">Inicio</a>
+              </li>
+            
+                 
+                 
+              <li class="dropdown">
+          <a  class="dropdown-toggle" data-toggle="dropdown" >Eventos <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="#/registro">Crear Eventos</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Modificar Eventos</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Borrar Eventos</a></li>
+          </ul>
+        </li>
+             </ul>      
+            
+
+		<ul class="nav navbar-nav navbar-right">
+        <li class="text-navbar" ><a href="http://localhost:8080/PruebaWebServiceRestFul/login.html">Cerrar Sesión</a></li>
+		</ul>
+		
+          </div>
+      </nav>
+    </div>
+  </div>
+
+
+    <!-- Add your site or application content here -->
+    <div class="container" ng-view=""></div>
+	<script type="text/javascript"  src="scripts/shared/angular/angular.js"></script>
+    <script  type="text/javascript" src="scripts/shared/jquery/jquery.js"></script>
+    <script  type="text/javascript" src="scripts/shared/bootstrap/js/bootstrap.js"></script>
+    <script  type="text/javascript" src="scripts/shared/angular-route/angular-route.js"></script>
+    <script  type="text/javascript" src="scripts/shared/angular-bootstrap/ui-bootstrap-tpls-0.13.3.min.js"></script>
+  
+ 
+   
+    <!-- Modules -->
+    <script src="scripts/app.js"></script>
+    <!-- Controllers -->
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/registro.js"></script>
+    <!-- Services -->
+    <script src="scripts/services/myServices.js"></script>
+
+<script type="text/javascript">
+
+$(function(){
+    $(".dropdown").hover(            
+            function() {
+                $('.dropdown-menu', this).stop( true, true ).fadeIn("fast");
+                $(this).toggleClass('open');
+                $('b', this).toggleClass("caret caret-up");                
+            },
+            function() {
+                $('.dropdown-menu', this).stop( true, true ).fadeOut("fast");
+                $(this).toggleClass('open');
+                $('b', this).toggleClass("caret caret-up");                
+            });
+    });
+
+</script>
+      
+   
+
+  </body>
+

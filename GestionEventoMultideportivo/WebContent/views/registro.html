@@ -1,0 +1,81 @@
+
+
+<div class="container">
+
+	<form role="form" ng-controller="RegistroCtrl">
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="inputNombre">Nombre:</label>
+			<div class="col-sm-10">
+				<input id="inputNombre" placeholder="Nombre"
+					ng-model="formInfo.Nombre" class="form-control">
+			</div>
+
+
+			<label class="control-label col-sm-2" for="inputApellido">Apellido:</label>
+			<div class="col-sm-10">
+				<input id="inputApellido" placeholder="Apellido"
+					ng-model="formInfo.Apellido" class="form-control">
+			</div>
+
+			<label class="control-label col-sm-2" for="inputCedula">Cedula:</label>
+			<div class="col-sm-10">
+				<input id="inputCedula" placeholder="Cedula"
+					ng-model="formInfo.Cedula" class="form-control">
+			</div>
+
+			<label class="control-label col-sm-2" for="inputEdad">Edad:</label>
+			<div class="col-sm-10">
+				<input id="inputEdad" placeholder="Edad" ng-model="formInfo.Edad"
+					class="form-control">
+			</div>
+			
+			<label class="control-label col-sm-2" for="inputPassword">Password:</label>
+			<div class="col-sm-10">
+				<input id="inputPassword" placeholder="Password" ng-model="formInfo.Password"
+					class="form-control">
+			</div>
+
+
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" ng-click="insertUser()"
+					class="btn btn-default">Sign</button>
+			</div>
+
+		</div>
+		<button type="submit" ng-click="getStatus()" class="btn btn-default">Status</button>
+
+
+	</form>
+
+	<form role="form">
+
+
+		<label class="control-label col-sm-2" for="inputUsuario">Nombre:</label>
+		<div class="col-sm-10">
+			<input id="inputUsuario" placeholder="Nombre Usuario"
+				ng-model="nombre" class="form-control">
+		</div>
+
+
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" ng-click="getUsuario()" class="btn btn-default">Buscar</button>
+		</div>
+
+	</form>
+
+	<button type="submit" ng-click="showModal()" class="btn btn-default">Modal</button>
+	<label class="control-label col-sm-2" for="inputNombre">Nombre:</label>
+	<p>{{usurio.Nombre}}</p>
+	<label class="control-label col-sm-2" for="inputApellido">Apellido:</label>
+	<p>{{usurio.Apellido}}</p>
+	<label class="control-label col-sm-2" for="inputCedula">Cedula:</label>
+	<p>{{usurio.Cedula}}</p>
+	<label class="control-label col-sm-2" for="inputEdad">Edad:</label>
+	<p>{{usurio.Edad}}</p>
+	<p>{{usurio}}</p>
+	<p>{{status}}</p>
+
+
+
+
+</div>

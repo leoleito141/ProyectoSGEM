@@ -1,0 +1,35 @@
+<style type="text/css">
+
+#slides_control > div{
+  height: 100%;
+  
+}
+img{
+  margin:auto;
+  width: 100%;
+    
+}
+
+#slides_control {
+  position:absolute;
+  width: 100%;
+  left:10%;
+  top:20px;
+ margin-left:-137px;
+ margin-top : -145px;
+}
+
+</style>
+
+<div ng-app="app">
+  <div ng-controller="MainCtrl" id="slides_control">
+    <div>
+      <carousel interval="myInterval">
+        <slide ng-repeat="slide in slides" active="slide.active">
+          <img ng-src="{{slide.image}}" >
+         
+        </slide>
+      </carousel>
+    </div>
+  </div>
+</div>  
