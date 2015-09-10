@@ -1,15 +1,16 @@
 package com.sgem.persistencia;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import com.sgem.dominio.Usuario;
 
 @Stateless
 public class UsuarioDAO implements IUsuarioDAO {
-	
-	
-	@javax.persistence.PersistenceContext(unitName = "GestionEventoMultideportivo")
-	private javax.persistence.EntityManager em;
+		
+	@PersistenceContext(unitName = "GestionEventoMultideportivo")
+	private EntityManager em;
 
 	public boolean guardarUsuario(Usuario usuario) {
 
@@ -18,9 +19,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 			return true;
 
 		} catch (Exception e) {
-
 			e.printStackTrace();
-
 		}
 
 		return false;
