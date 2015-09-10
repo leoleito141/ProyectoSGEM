@@ -6,53 +6,66 @@
 
   </head>
   <body ng-app="pruebaAngularApp">
-   <div class="container">
-     <div class="header">
-      <nav class="navbar navbar-default navbar-fixed-top">
-          <div class="container">
-          
-          <ul class="nav navbar-nav">
-              <li class="text-navbar active"><a href="#/Index">Inicio</a>
-              </li>
-            
-                 
-                 
-              <li class="dropdown">
-          <a  class="dropdown-toggle" data-toggle="dropdown" >Eventos <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="#/registro">Crear Eventos</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Modificar Eventos</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Borrar Eventos</a></li>
-          </ul>
-        </li>
-             </ul>      
-            
 
-		<ul class="nav navbar-nav navbar-right">
-        <li class="text-navbar" ><a href="http://localhost:8080/PruebaWebServiceRestFul/login.html">Cerrar Sesión</a></li>
-		</ul>
-		
-          </div>
-      </nav>
-    </div>
-  </div>
 
 
     <!-- Add your site or application content here -->
-    <div class="container" ng-view=""></div>
+    <div ng-controller="AppCtrl">
+    
+		    <div class="container" ng-show="usrLogin.estaConectado">
+		     <div class="header">
+		      <nav class="navbar navbar-default navbar-fixed-top">
+		          <div class="container">
+		          
+		          <ul class="nav navbar-nav">
+		              <li class="text-navbar active">
+		              	<a href="/main">Inicio</a>
+		              </li>
+		            
+		                 
+		                 
+		              <li class="dropdown">
+			          	<a  class="dropdown-toggle" data-toggle="dropdown" >Eventos <b class="caret"></b></a>
+				          <ul class="dropdown-menu">
+				            <li><a href="/registro">Crear Eventos</a></li>
+				            <li role="separator" class="divider"></li>
+				            <li><a href="#">Modificar Eventos</a></li>
+				            <li role="separator" class="divider"></li>
+				            <li><a href="#">Borrar Eventos</a></li>
+				          </ul>
+			          </li>
+		        </ul>      
+		            
+		
+				<ul class="nav navbar-nav navbar-right">
+		        	<li class="text-navbar" >
+		        		<a ng-click="salir()">Cerrar Sesion</a>
+		        	</li>
+				</ul>
+				
+		          </div>
+		      </nav>
+		    </div>
+		  </div>
+    	
+	    <div class="container">
+	    	<div ng-view=""></div>
+	    </div>
+    </div>
 	<script type="text/javascript"  src="scripts/shared/angular/angular.js"></script>
     <script  type="text/javascript" src="scripts/shared/jquery/jquery.js"></script>
     <script  type="text/javascript" src="scripts/shared/bootstrap/js/bootstrap.js"></script>
     <script  type="text/javascript" src="scripts/shared/angular-route/angular-route.js"></script>
+    <script  type="text/javascript" src="scripts/shared/angular-cookies/angular-cookies.js"></script>
     <script  type="text/javascript" src="scripts/shared/angular-bootstrap/ui-bootstrap-tpls-0.13.3.min.js"></script>
-  
+ 
  
    
     <!-- Modules -->
     <script src="scripts/app.js"></script>
     <!-- Controllers -->
+    <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/controllers/appController.js"></script>   
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/registro.js"></script>
     <!-- Services -->

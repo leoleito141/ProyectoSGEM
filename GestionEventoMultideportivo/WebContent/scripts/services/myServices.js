@@ -24,6 +24,13 @@
             return $http.get('http://localhost:8080/GestionEventoMultideportivo/rest/UsuarioService/usuarioPrueba/'+nombre );
 
         };
+        
+     dataFactory.login = function (datos) {
+
+            console.log(datos);
+            return $http.post('http://localhost:8080/GestionEventoMultideportivo/rest/UsuarioService/login', datos);
+
+        };   
     
    
 

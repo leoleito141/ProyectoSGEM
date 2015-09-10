@@ -111,6 +111,34 @@ public class UsuarioService {
 		
 	}
 	
+	@PermitAll
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/login")
+	public Response login(String datos) {
+
+		String respuesta;
+		System.out.println("Entre Login ");
+		System.out.println("Usuario - " + datos);
+		
+		JSONObject jsonObj = new JSONObject();
+		
+		try {
+			jsonObj.put("Login","true");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+			
+		}
+
+		respuesta=jsonObj.toString();
+		return Response.ok().entity(respuesta).build();
+
+	
+	}
+	
 	
 
 }
