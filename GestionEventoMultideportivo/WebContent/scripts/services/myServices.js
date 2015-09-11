@@ -6,7 +6,7 @@
     dataFactory.insertUser = function (datos) {
 
             console.log(datos);
-            return $http.post('http://localhost:8080/GestionEventoMultideportivo/rest/UsuarioService/usuario', datos);
+            return $http.post('http://localhost:8080/GestionEventoMultideportivo/rest/UsuarioService/usuarios', datos);
 
         };
 

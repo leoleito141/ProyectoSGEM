@@ -21,15 +21,14 @@ public class UsuarioDAO implements IUsuarioDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return false;
 
 	}
 	
 	
-	public Usuario buscarUsuario(String nombre) {
+	public Usuario buscarUsuario(long id) {
 		
-		return em.find(Usuario.class, nombre);
+		return em.find(Usuario.class, id);
 	}
 
 }

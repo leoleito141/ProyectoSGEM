@@ -2,12 +2,13 @@ package com.sgem.controladores;
 
 import javax.ejb.Local;
 
+import com.sgem.datatypes.DataUsuario;
 import com.sgem.dominio.Usuario;
 
 @Local
 public interface IUsuarioController {
 	
-	public boolean guardarUsuario(Usuario usuario);	
-	public Usuario buscarUsuario(String nombre);
+	public boolean guardarUsuario(DataUsuario dataUsuario);
+	public Usuario buscarUsuario(long id);
 
 }
