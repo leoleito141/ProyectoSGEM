@@ -114,6 +114,15 @@ public class DataUsuario{
 	public void setRol(String rol) {
 		this.rol = rol;
 	}
+
+	@Override
+	public String toString() {
+		return "DataUsuario [email=" + email + ", facebook=" + facebook
+				+ ", twitter=" + twitter + ", canalYoutube=" + canalYoutube
+				+ ", nombre=" + nombre + ", apellido=" + apellido + ", edad="
+				+ edad + ", cedula=" + cedula + ", password=" + password
+				+ ", rol=" + rol + "]";
+	}
 	
 	
 	

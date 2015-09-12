@@ -1,11 +1,9 @@
 package com.sgem.dominio;
 
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@DiscriminatorValue("ORGANIZADOR")
 @Table(name="organizador")
 public class Organizador extends Usuario {
 

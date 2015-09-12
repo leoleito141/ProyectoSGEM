@@ -9,6 +9,6 @@ import com.sgem.dominio.Usuario;
 public interface IUsuarioDAO {
 
 	public boolean guardarUsuario(Usuario usuario);
-	public Usuario buscarUsuario(long id);
+	public Usuario buscarUsuario(String email);
 	
 }

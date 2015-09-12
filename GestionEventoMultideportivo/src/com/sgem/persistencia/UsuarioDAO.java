@@ -26,9 +26,16 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 	
 	
-	public Usuario buscarUsuario(long id) {
-		
-		return em.find(Usuario.class, id);
+	public Usuario buscarUsuario(String email) {
+		Usuario u;
+		try{
+			return u = em.createQuery("SELECT u FROM Usuario u WHERE u.email = '"+email+"'", Usuario.class).getSingleResult();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 
 }

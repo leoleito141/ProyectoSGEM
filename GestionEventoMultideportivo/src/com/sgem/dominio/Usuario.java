@@ -13,10 +13,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED)
-@DiscriminatorColumn(name="USUARIO")
 @Table(name="usuario")
-public abstract class Usuario implements Serializable {
+public class Usuario implements Serializable {
 	
 	private static final long serialVersionUID = 3285309246756091060L;
 	

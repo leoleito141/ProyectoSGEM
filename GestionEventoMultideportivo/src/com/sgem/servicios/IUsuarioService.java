@@ -34,16 +34,16 @@ public interface IUsuarioService {
 	@Path("/usuarios")
 	public Response guardarUsuario(DataUsuario dataUsuario);
 	
-	@RolesAllowed("ADMIN")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/status")
-	public Response obtenerPorId(@PathParam("id") long id);
+//	@RolesAllowed("ADMIN")
+//	@GET
+//	@Produces(MediaType.APPLICATION_JSON)
+//	@Path("/status")
+//	public Response obtenerPorId(@PathParam("id") long id);
 
 	@PermitAll
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/login")
-	public Response login(String datos);
+	public Response login(DataUsuario dataUsuario);
 }

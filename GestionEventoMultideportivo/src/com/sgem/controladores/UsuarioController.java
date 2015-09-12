@@ -2,16 +2,19 @@ package com.sgem.controladores;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.core.Response;
 
 import com.sgem.datatypes.DataUsuario;
 import com.sgem.dominio.Admin;
 import com.sgem.dominio.Usuario;
 import com.sgem.persistencia.IUsuarioDAO;
+import com.sgem.seguridad.JWTUtil;
 
 @Stateless
 public class UsuarioController implements IUsuarioController {
 
-	private static final String ROL_ADMIN = "Administrador";
+	public static final String ROL_ADMIN = "Administrador"; // faltan mas roles...
+	
 	@EJB
 	private IUsuarioDAO UsuarioDAO;
 	
@@ -45,14 +48,32 @@ public class UsuarioController implements IUsuarioController {
 
 	}
 	
-	public Usuario buscarUsuario(long id) {
+	public Usuario buscarUsuario(String email) {
+		
 		try{
-			return UsuarioDAO.buscarUsuario(id);
-			}catch(Exception e){
-				e.printStackTrace();
-				
-			}
-			return null;
+			return UsuarioDAO.buscarUsuario(email);
+		}catch(Exception e){
+			e.printStackTrace();
+			
+		}
+		return null;
+	}
+
+	public String loginUsuario(DataUsuario dataUsuario) {
+		
+		String jwt;
+		Usuario u =	this.buscarUsuario(dataUsuario.getEmail());
+			
+		if (u == null || !(u.getPassword().equalsIgnoreCase(dataUsuario.getPassword()))) {		
+			return null; // deso vemos como manejar esto.
+			
+		} else { // genero json web token.
+		
+			jwt = JWTUtil.generarToken(u);
+		
+		}
+		
+		return jwt;
 	}
 
 

@@ -9,6 +9,7 @@ import com.sgem.dominio.Usuario;
 public interface IUsuarioController {
 	
 	public boolean guardarUsuario(DataUsuario dataUsuario);
-	public Usuario buscarUsuario(long id);
+	public Usuario buscarUsuario(String email);
+	public String loginUsuario(DataUsuario dataUsuario);
 
 }
