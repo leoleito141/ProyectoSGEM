@@ -21,15 +21,21 @@ public class UsuarioDAO implements IUsuarioDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return false;
 
 	}
 	
 	
-	public Usuario buscarUsuario(String nombre) {
-		
-		return em.find(Usuario.class, nombre);
+	public Usuario buscarUsuario(String email) {
+		Usuario u;
+		try{
+			return u = em.createQuery("SELECT u FROM Usuario u WHERE u.email = '"+email+"'", Usuario.class).getSingleResult();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 
 }

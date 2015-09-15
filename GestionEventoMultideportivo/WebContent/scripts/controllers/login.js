@@ -15,7 +15,7 @@ angular.module('pruebaAngularApp')
        	.then(function (data){
             console.log(data); 
             console.log(status);  
-            $scope.usrLogin.nombre = $scope.usuario.nombre;
+            $scope.usrLogin.email = $scope.usuario.email;
             $scope.usrLogin.clave  = $scope.usuario.clave;
             $scope.usrLogin.estaConectado = true;
 

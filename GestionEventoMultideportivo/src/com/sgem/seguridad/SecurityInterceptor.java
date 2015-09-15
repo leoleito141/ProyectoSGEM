@@ -1,8 +1,16 @@
 package com.sgem.seguridad;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.impl.crypto.MacProvider;
+
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.security.Key;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -11,9 +19,11 @@ import java.util.StringTokenizer;
 import javax.annotation.security.DenyAll;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
+import javax.crypto.spec.SecretKeySpec;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.Provider;
+import javax.xml.bind.DatatypeConverter;
 
 import org.jboss.resteasy.annotations.interception.ServerInterceptor;
 import org.jboss.resteasy.core.Headers;
@@ -23,8 +33,8 @@ import org.jboss.resteasy.util.Base64;
 
 
 /**
- * Este interceptador verifica el accesso a nivel de permisos basado en roles 
- * para un usuario identificado por username y password proveniente del request
+ * Este interceptador verifica el accesso con JWT, a nivel de permisos basado en roles 
+ * para un usuario identificado proveniente del request.
  * */
 @Provider
 @ServerInterceptor
@@ -36,11 +46,17 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
     private static final ServerResponse ACCESS_FORBIDDEN = new ServerResponse("Nobody can access this resource", 403, new Headers<Object>());
     private static final ServerResponse SERVER_ERROR = new ServerResponse("INTERNAL SERVER ERROR", 500, new Headers<Object>());
      
+	 // We need a signing key, so we'll create one just for this example. Usually
+	 // the key would be read from your application configuration instead.
+	private Key clave = MacProvider.generateKey();
+//    private final String key = "ClaveSecreta";
+    
     @Override
     public void filter(ContainerRequestContext requestContext)
     {
         ResourceMethodInvoker methodInvoker = (ResourceMethodInvoker) requestContext.getProperty("org.jboss.resteasy.core.ResourceMethodInvoker");
         Method method = methodInvoker.getMethod();
+        
         //Acceso siempre permitido para todo tipo de rol.
         if( ! method.isAnnotationPresent(PermitAll.class))
         {
@@ -63,7 +79,7 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
                 requestContext.abortWith(ACCESS_DENIED);
                 return;
             }
-             
+                               
             /*	A partir este punto, se procesaran los datos obtenidos de los headers del método GET */
                         
             //Get encoded username and password
@@ -127,4 +143,48 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
         return isAllowed;
     }
 
+    
+    private String createJWT(String id, String issuer, String subject, long ttlMillis) {
+
+		//The JWT signature algorithm we will be using to sign the token
+		SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
+
+		long nowMillis = System.currentTimeMillis();
+		Date now = new Date(nowMillis);
+
+		//We will sign our JWT with our ApiKey secret
+		byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(clave.toString());
+		Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
+
+		  //Let's set the JWT Claims
+		JwtBuilder builder = Jwts.builder().setId(id)
+		                                .setIssuedAt(now)
+		                                .setSubject(subject)
+		                                .setIssuer(issuer)
+		                                .signWith(signatureAlgorithm, signingKey);
+
+		 //if it has been specified, let's add the expiration
+		if (ttlMillis >= 0) {
+		    long expMillis = nowMillis + ttlMillis;
+		    Date exp = new Date(expMillis);
+		    builder.setExpiration(exp);
+		}
+
+		 //Builds the JWT and serializes it to a compact, URL-safe string
+		return builder.compact();
+	}
+	
+	//Sample method to validate and read the JWT
+	private void parseJWT(String jwt) {
+		//This line will throw an exception if it is not a signed JWS (as expected)
+		Claims claims = Jwts.parser()         
+		   .setSigningKey(DatatypeConverter.parseBase64Binary(clave.toString()))
+		   .parseClaimsJws(jwt).getBody();
+		System.out.println("ID: " + claims.getId());
+		System.out.println("Subject: " + claims.getSubject());
+		System.out.println("Issuer: " + claims.getIssuer());
+		System.out.println("Expiration: " + claims.getExpiration());
+		
+	}
+    
 }
