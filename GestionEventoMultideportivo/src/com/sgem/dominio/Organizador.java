@@ -12,8 +12,11 @@ public class Organizador extends Usuario {
 	public Organizador() {}
 
 	public Organizador( String email, String facebook, String twitter, String canalYoutube, String nombre, 
-			String apellido, Integer edad, Integer cedula, String password) {
-		super(email, facebook, twitter, canalYoutube, nombre, apellido, edad, cedula, password);
+			String apellido, Integer edad, Integer cedula, String password,int tenantid) {
+		super(email, facebook, twitter, canalYoutube, nombre, apellido, edad, cedula, password,tenantid);
 	}
-
+public  String soy(){
+		
+		return"organizador";
+	}
 }

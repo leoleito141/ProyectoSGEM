@@ -11,17 +11,21 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 @Entity
-@Table(name="usuario")
-public class Usuario implements Serializable {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Usuario implements Serializable {
 	
 	private static final long serialVersionUID = 3285309246756091060L;
 	
+	@TableGenerator(name = "USER_GEN", table = "ID_GEN", pkColumnName = "GEN_NAME", valueColumnName = "GEN_VAL", allocationSize = 1)
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", nullable = false)
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "USER_GEN")
 	private long id;
+	
+	@Column(name = "tenantID", nullable = false)
+	private int tenantID;
 	
 	@Column(name = "Email", nullable = false)
 	private String email;
@@ -54,7 +58,7 @@ public class Usuario implements Serializable {
 
 	public Usuario(String email, String facebook, String twitter,
 			String canalYoutube, String nombre, String apellido, Integer edad,
-			Integer cedula, String password) {
+			Integer cedula, String password,int tenantid) {
 		this.email = email;
 		this.facebook = facebook;
 		this.twitter = twitter;
@@ -64,6 +68,11 @@ public class Usuario implements Serializable {
 		this.edad = edad;
 		this.cedula = cedula;
 		this.password = password;
+		this.tenantID=tenantid;
+	}
+	public  String soy(){
+		
+		return"";
 	}
 
 	public long getId() {
@@ -144,6 +153,14 @@ public class Usuario implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public int getTenantID() {
+		return tenantID;
+	}
+
+	public void setTenantID(int tenantID) {
+		this.tenantID = tenantID;
 	}
 			
 }

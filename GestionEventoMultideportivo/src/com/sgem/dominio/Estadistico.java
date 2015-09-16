@@ -23,16 +23,16 @@ public class Estadistico extends Usuario {
 	}
 	
 	public Estadistico(String email, String facebook, String twitter, String canalYoutube, String nombre,
-			String apellido, Integer edad, Integer cedula, String password) {
-		super( email, facebook, twitter, canalYoutube, nombre, apellido, edad, cedula, password);	
+			String apellido, Integer edad, Integer cedula, String password,int tenantid) {
+		super( email, facebook, twitter, canalYoutube, nombre, apellido, edad, cedula, password,tenantid);	
 		
 		estadisticas = new ArrayList<Estadistica>();	
 	}
 	
 	public Estadistico(String email, String facebook, String twitter, String canalYoutube, String nombre,
-			String apellido, Integer edad, Integer cedula, String password,List<Estadistica> estadisticas) {
-		super( email, facebook, twitter, canalYoutube, nombre, apellido, edad,
-				cedula, password);	
+			String apellido, Integer edad, Integer cedula, String password,List<Estadistica> estadisticas,int tenantid) {
+		super (email, facebook, twitter, canalYoutube, nombre, apellido, edad,
+				cedula, password,tenantid);	
 		
 		this.estadisticas = estadisticas;	
 	

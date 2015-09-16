@@ -6,6 +6,8 @@ import javax.ws.rs.core.Response;
 
 import com.sgem.datatypes.DataUsuario;
 import com.sgem.dominio.Admin;
+import com.sgem.dominio.Juez;
+import com.sgem.dominio.Organizador;
 import com.sgem.dominio.Usuario;
 import com.sgem.persistencia.IUsuarioDAO;
 import com.sgem.seguridad.JWTUtil;
@@ -23,20 +25,32 @@ public class UsuarioController implements IUsuarioController {
 		try {
 
 			Usuario usuario = null;
+		
 
 			if (dataUsuario.getRol().equalsIgnoreCase(ROL_ADMIN)) {
-				usuario = new Admin();
-				usuario.setNombre(dataUsuario.getNombre());
-				usuario.setApellido(dataUsuario.getApellido());
-				usuario.setEdad(dataUsuario.getEdad());
-				usuario.setEmail(dataUsuario.getEmail());
-				usuario.setCanalYoutube(dataUsuario.getCanalYoutube());
-				usuario.setTwitter(dataUsuario.getTwitter());
-				usuario.setFacebook(dataUsuario.getFacebook());
-				usuario.setCedula(dataUsuario.getCedula());
-				usuario.setPassword(dataUsuario.getPassword());
-				return UsuarioDAO.guardarUsuario(usuario);
+				
+				// Cambiar la condicion a alguna parte del data para ver el tipo de usuario que estoy creando
+				usuario = (dataUsuario.getEmail()=="")? (new Organizador()):( new Juez());
+				
+				if(usuario != null){
+					
+					usuario = new Organizador();
+					usuario.setNombre(dataUsuario.getNombre());
+					usuario.setApellido(dataUsuario.getApellido());
+					usuario.setEdad(dataUsuario.getEdad());
+					usuario.setEmail(dataUsuario.getEmail());
+					usuario.setCanalYoutube(dataUsuario.getCanalYoutube());
+					usuario.setTwitter(dataUsuario.getTwitter());
+					usuario.setFacebook(dataUsuario.getFacebook());
+					usuario.setCedula(dataUsuario.getCedula());
+					usuario.setPassword(dataUsuario.getPassword());
+					
+					return UsuarioDAO.guardarUsuario(usuario);
+					
+				}
+				
 			}else{
+
 				return false;
 			}
 
