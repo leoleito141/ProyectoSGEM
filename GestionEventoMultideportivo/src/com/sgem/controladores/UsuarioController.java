@@ -2,13 +2,13 @@ package com.sgem.controladores;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ws.rs.core.Response;
 
 import com.sgem.datatypes.DataUsuario;
 import com.sgem.dominio.Admin;
 import com.sgem.dominio.Usuario;
 import com.sgem.persistencia.IUsuarioDAO;
 import com.sgem.seguridad.JWTUtil;
+import com.sgem.seguridad.Token;
 
 @Stateless
 public class UsuarioController implements IUsuarioController {
@@ -59,9 +59,9 @@ public class UsuarioController implements IUsuarioController {
 		return null;
 	}
 
-	public String loginUsuario(DataUsuario dataUsuario) {
+	public Token loginUsuario(DataUsuario dataUsuario) {
 		
-		String jwt;
+		Token jwt;
 		Usuario u =	this.buscarUsuario(dataUsuario.getEmail());
 			
 		if (u == null || !(u.getPassword().equalsIgnoreCase(dataUsuario.getPassword()))) {		
