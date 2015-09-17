@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-
+@Table(name="admin")
 public class Admin extends Usuario {
 
 	private static final long serialVersionUID = -2107719096745478082L;

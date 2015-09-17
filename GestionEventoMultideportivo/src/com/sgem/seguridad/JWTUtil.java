@@ -10,12 +10,16 @@ import com.sgem.dominio.Usuario;
 
 public class JWTUtil {
 
-	private static Key clave = MacProvider.generateKey();
+	private static final Key clave = MacProvider.generateKey();
 	
-	public static String generarToken(Usuario u){
-				
-		String jwt = Jwts.builder().setSubject(u.getEmail()).signWith(SignatureAlgorithm.HS512, clave).compact();
-		return jwt;
+	public static Token generarToken(Usuario u){
+
+		String jwt = Jwts.builder().setSubject(u.getEmail()).signWith(SignatureAlgorithm.HS256, clave).compact();
+		Token token = new Token();
+		token.setToken(jwt);
+		
+		
+		return token;
 		
 	}
 	

@@ -7,6 +7,7 @@ import javax.ws.rs.core.Response;
 
 import com.sgem.controladores.IUsuarioController;
 import com.sgem.datatypes.DataUsuario;
+import com.sgem.seguridad.Token;
 
 @Stateless
 public class UsuarioService implements IUsuarioService{
@@ -25,7 +26,7 @@ private IUsuarioController iuc;
 
 		System.out.println("Entre Login ");
 		System.out.println("Usuario - " + dataUsuario.toString());
-		String jwt;
+		Token jwt;
 		try{
 		
 			jwt = iuc.loginUsuario(dataUsuario);

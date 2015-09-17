@@ -24,14 +24,17 @@
             return $http.get('http://localhost:8080/GestionEventoMultideportivo/rest/UsuarioService/usuarioPrueba/'+nombre );
 
         };
-        
+    /*
+     * Esta funcion queda comentada porque el login ahora se realiza mediante 
+     * satellizer
+     *     
      dataFactory.login = function (datos) {
 
             console.log(datos);
             return $http.post('http://localhost:8080/GestionEventoMultideportivo/rest/UsuarioService/login', datos);
 
         };   
-    
+    */
    
 
     return dataFactory;

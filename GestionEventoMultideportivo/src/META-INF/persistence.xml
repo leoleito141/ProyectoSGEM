@@ -18,7 +18,7 @@
 		<property name="hibernate.format_sql" value="true" />
 		<property name="hibernate.hbm2ddl.auto" value="update" />
 		<property name="hibernate.hbm2ddl.auto" value="create-drop" />
-<!-- 		<property name="hibernate.hbm2ddl.import_files" value="META-INF/scriptSQL/Datos.sql" />	 -->
+		<property name="hibernate.hbm2ddl.import_files" value="META-INF/scriptSQL/Datos.sql" />	
 	</properties>
 		
 	</persistence-unit>
