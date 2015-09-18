@@ -22,5 +22,9 @@ public class JWTUtil {
 		return token;
 		
 	}
+
+	public static Key getClave() {
+		return clave;
+	}
 	
 }

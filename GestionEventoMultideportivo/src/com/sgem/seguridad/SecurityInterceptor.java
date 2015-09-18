@@ -1,35 +1,26 @@
 package com.sgem.seguridad;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.impl.crypto.MacProvider;
+import io.jsonwebtoken.SignatureException;
 
-import java.io.IOException;
 import java.lang.reflect.Method;
 import java.security.Key;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.StringTokenizer;
 
 import javax.annotation.security.DenyAll;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
-import javax.crypto.spec.SecretKeySpec;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.Provider;
-import javax.xml.bind.DatatypeConverter;
 
 import org.jboss.resteasy.annotations.interception.ServerInterceptor;
 import org.jboss.resteasy.core.Headers;
 import org.jboss.resteasy.core.ResourceMethodInvoker;
 import org.jboss.resteasy.core.ServerResponse;
-import org.jboss.resteasy.util.Base64;
 
 
 /**
@@ -41,15 +32,14 @@ import org.jboss.resteasy.util.Base64;
 public class SecurityInterceptor implements javax.ws.rs.container.ContainerRequestFilter
 {
     private static final String AUTHORIZATION_PROPERTY = "Authorization";
-    private static final String AUTHENTICATION_SCHEME = "Basic";
+    private static final String ROL_PROPERTY = "Rol";
+//    private static final String AUTHENTICATION_SCHEME = "Basic";
+    private static final String AUTHENTICATION_SCHEME = "Bearer";
     private static final ServerResponse ACCESS_DENIED = new ServerResponse("Access denied for this resource", 401, new Headers<Object>());
     private static final ServerResponse ACCESS_FORBIDDEN = new ServerResponse("Nobody can access this resource", 403, new Headers<Object>());
     private static final ServerResponse SERVER_ERROR = new ServerResponse("INTERNAL SERVER ERROR", 500, new Headers<Object>());
      
-	 // We need a signing key, so we'll create one just for this example. Usually
-	 // the key would be read from your application configuration instead.
-	private Key clave = MacProvider.generateKey();
-//    private final String key = "ClaveSecreta";
+	private Key clave = JWTUtil.getClave();
     
     @Override
     public void filter(ContainerRequestContext requestContext)
@@ -81,35 +71,63 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
             }
                                
             /*	A partir este punto, se procesaran los datos obtenidos de los headers del método GET */
-                        
-            //Get encoded username and password
-            final String encodedUserPassword = authorization.get(0).replaceFirst(AUTHENTICATION_SCHEME + " ", "");
-             
-            //Decode username and password
-            String usernameAndPassword = null;
+         
+            
+            final String token = getToken(authorization);
+          
+            
             try {
-                usernameAndPassword = new String(Base64.decode(encodedUserPassword));
-            } catch (IOException e) {
-                requestContext.abortWith(SERVER_ERROR);
-                return;
+                Jwts.parser().setSigningKey(clave).parseClaimsJws(token);
+                //OK, we can trust this JWT
+            } catch (SignatureException e) {
+                //don't trust the JWT!
+            	 requestContext.abortWith(ACCESS_DENIED);
+                 return;
             }
- 
-            //Split username and password tokens
-            final StringTokenizer tokenizer = new StringTokenizer(usernameAndPassword, ":");
-            final String username = tokenizer.nextToken();
-            final String password = tokenizer.nextToken();
+            
+            
+//            //Get encoded username and password
+//            final String encodedUserPassword = authorization.get(0).replaceFirst(AUTHENTICATION_SCHEME + " ", "");
+//             
+//            //Decode username and password
+//            String usernameAndPassword = null;
+//            try {
+//                usernameAndPassword = new String(Base64.decode(encodedUserPassword));
+//            } catch (IOException e) {
+//                requestContext.abortWith(SERVER_ERROR);
+//                return;
+//            }
+// 
+//            //Split username and password tokens
+//            final StringTokenizer tokenizer = new StringTokenizer(usernameAndPassword, ":");
+//            final String username = tokenizer.nextToken();
+//            final String password = tokenizer.nextToken();
+//             
+//            System.out.println("Usuario ingresado: " + username);
+//            System.out.println("Contrasenia ingresada: " +password);
              
-            System.out.println("Usuario ingresado: " + username);
-            System.out.println("Contrasenia ingresada: " +password);
-             
-            //Verifico el acceso del usuario
+            
+            
+            //Verifico el acceso del usuario al método según su rol.
+            
+            //Si no hay información de autorización presente, bloqueo el acceso.
+            if(headers.get(ROL_PROPERTY) == null || headers.get(ROL_PROPERTY).isEmpty())
+            {
+            	requestContext.abortWith(ACCESS_DENIED);
+            	return;
+            }
+            
+            //Fetch authorization header
+            String rol = headers.get(ROL_PROPERTY).get(0);
+            
             if(method.isAnnotationPresent(RolesAllowed.class))
             {
                 RolesAllowed rolesAnnotation = method.getAnnotation(RolesAllowed.class);
                 Set<String> rolesSet = new HashSet<String>(Arrays.asList(rolesAnnotation.value()));
                  
                 //Es valido?
-                if( ! isUserAllowed(username, password, rolesSet))
+//                if( ! isUserAllowed(username, password, rolesSet))
+                if( ! isUserAllowed(rol, rolesSet)) 
                 {
                     requestContext.abortWith(ACCESS_DENIED);
                     return;
@@ -117,7 +135,15 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
             }
         }
     }
-    private boolean isUserAllowed(final String username, final String password, final Set<String> rolesSet)
+    
+    private String getToken(List<String> authorization) {
+    	
+    	return authorization.get(0).replaceFirst(AUTHENTICATION_SCHEME + " ", ""); // pulir mas esto..
+	
+    }
+    
+    
+	private boolean isUserAllowed(final String rol, final Set<String> rolesSet)
     {
         boolean isAllowed = false;
         
@@ -133,58 +159,14 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
         //String userRole = userMgr.getUserRole(username);
         
         // Se supone que el rol, para el usuario con username es :
-        String userRole = "ADMIN";
+//        String userRole = "ADMIN";
          
         //Paso 2. verificamos si el rol del usuario esta contenido en los roles que permite el método.
-        if(rolesSet.contains(userRole))
+        if(rolesSet.contains(rol))
         {
             isAllowed = true;
         }
         return isAllowed;
     }
 
-    
-    private String createJWT(String id, String issuer, String subject, long ttlMillis) {
-
-		//The JWT signature algorithm we will be using to sign the token
-		SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
-
-		long nowMillis = System.currentTimeMillis();
-		Date now = new Date(nowMillis);
-
-		//We will sign our JWT with our ApiKey secret
-		byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(clave.toString());
-		Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
-
-		  //Let's set the JWT Claims
-		JwtBuilder builder = Jwts.builder().setId(id)
-		                                .setIssuedAt(now)
-		                                .setSubject(subject)
-		                                .setIssuer(issuer)
-		                                .signWith(signatureAlgorithm, signingKey);
-
-		 //if it has been specified, let's add the expiration
-		if (ttlMillis >= 0) {
-		    long expMillis = nowMillis + ttlMillis;
-		    Date exp = new Date(expMillis);
-		    builder.setExpiration(exp);
-		}
-
-		 //Builds the JWT and serializes it to a compact, URL-safe string
-		return builder.compact();
-	}
-	
-	//Sample method to validate and read the JWT
-	private void parseJWT(String jwt) {
-		//This line will throw an exception if it is not a signed JWS (as expected)
-		Claims claims = Jwts.parser()         
-		   .setSigningKey(DatatypeConverter.parseBase64Binary(clave.toString()))
-		   .parseClaimsJws(jwt).getBody();
-		System.out.println("ID: " + claims.getId());
-		System.out.println("Subject: " + claims.getSubject());
-		System.out.println("Issuer: " + claims.getIssuer());
-		System.out.println("Expiration: " + claims.getExpiration());
-		
-	}
-    
 }

@@ -1,5 +1,5 @@
  angular.module('pruebaAngularApp')
-   .factory('dataFactory', ['$http','$location', function($http,$location) {
+   .factory('dataFactory', ['$http','$location','$auth', function($http,$location,$auth) {
     var dataFactory = {};
 
     console.log(dataFactory);
@@ -35,7 +35,15 @@
 
         };   
     */
-   
+        dataFactory.getPrueba = function () {
+
+//    	    console.log();
+    	
+    	    
+    	    $http.get('http://localhost:8080/GestionEventoMultideportivo/rest/UsuarioService/prueba', {
+                headers: {'Authorization': $auth.getToken(), 'Rol' : 'ADMIN'} 
+            });
+        }; 
 
     return dataFactory;
 }]); 

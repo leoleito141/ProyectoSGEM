@@ -15,7 +15,7 @@ angular.module('pruebaAngularApp')
 
        $auth.login({
            email: datos.email,
-           password: datos.password
+           password: btoa(datos.password) // base 64
        })
        .then(function (data){
             console.log(data); 
@@ -29,7 +29,9 @@ angular.module('pruebaAngularApp')
             $cookieStore.put('estaConectado', true);
             $cookieStore.put('usuario', $scope.usuario);
           */
-            $location.path('/'+ $scope.tenantid.tenant);
+          
+//            $location.path('/'+ $scope.tenantid.tenant);
+            $location.path('/registro');
              
 
            
@@ -38,7 +40,7 @@ angular.module('pruebaAngularApp')
             // Si ha habido errores llegamos a esta parte
         	console.log(response); 
         });
-    	};
+   		};
     
 
 	 
