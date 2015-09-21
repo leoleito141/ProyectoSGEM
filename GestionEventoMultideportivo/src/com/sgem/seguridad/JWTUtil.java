@@ -5,6 +5,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.crypto.MacProvider;
 
 import java.security.Key;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.sgem.dominio.Usuario;
 
@@ -14,7 +16,13 @@ public class JWTUtil {
 	
 	public static Token generarToken(Usuario u){
 
-		String jwt = Jwts.builder().setSubject(u.getEmail()).signWith(SignatureAlgorithm.HS256, clave).compact();
+		Map<String, Object> mapeo = new HashMap<String, Object>();
+		
+		mapeo.put("email", u.getEmail());
+		mapeo.put("tenantid", "tenant0");
+
+//		String jwt = Jwts.builder().setPayload("tenant 1").signWith(SignatureAlgorithm.HS256, clave).compact();
+		String jwt = Jwts.builder().setClaims(mapeo).signWith(SignatureAlgorithm.HS256, clave).compact();
 		Token token = new Token();
 		token.setToken(jwt);
 		

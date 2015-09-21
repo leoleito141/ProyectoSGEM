@@ -14,7 +14,7 @@
 
         console.log($location.absUrl());
         return $http.get('http://localhost:8080/GestionEventoMultideportivo/rest/UsuarioService/status/', {
-            headers: {'Authorization': 'Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=='}
+            headers: { 'Rol' : 'ADMIN'} 
         });
     };
         
@@ -36,14 +36,13 @@
         };   
     */
         dataFactory.getPrueba = function () {
-
-//    	    console.log();
-    	
-    	    
-    	    $http.get('http://localhost:8080/GestionEventoMultideportivo/rest/UsuarioService/prueba', {
-                headers: {'Authorization': $auth.getToken(), 'Rol' : 'ADMIN'} 
+        	$auth.setToken("papapapa");
+        	
+            return $http.get('http://localhost:8080/GestionEventoMultideportivo/rest/UsuarioService/prueba/', {
+                headers: { 'Rol' : 'ADMIN'} 
             });
         }; 
+        console.log(dataFactory);
 
-    return dataFactory;
+        return dataFactory;
 }]); 

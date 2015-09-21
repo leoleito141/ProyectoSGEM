@@ -1,6 +1,7 @@
 package com.sgem.seguridad;
 
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureException;
 
 import java.lang.reflect.Method;
@@ -63,18 +64,16 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
             //Fetch authorization header
             final List<String> authorization = headers.get(AUTHORIZATION_PROPERTY);
             
-            //Si no hay información de autorización presente, bloqueo el acceso.
+            //Si no hay informaciï¿½n de autorizaciï¿½n presente, bloqueo el acceso.
             if(authorization == null || authorization.isEmpty())
             {
                 requestContext.abortWith(ACCESS_DENIED);
                 return;
             }
                                
-            /*	A partir este punto, se procesaran los datos obtenidos de los headers del método GET */
-         
+            /*	A partir este punto, se procesaran los datos obtenidos de los headers del mï¿½todo GET */         
             
-            final String token = getToken(authorization);
-          
+            final String token = getToken(authorization);          
             
             try {
                 Jwts.parser().setSigningKey(clave).parseClaimsJws(token);
@@ -83,34 +82,15 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
                 //don't trust the JWT!
             	 requestContext.abortWith(ACCESS_DENIED);
                  return;
+            } catch(MalformedJwtException e){
+            	 requestContext.abortWith(SERVER_ERROR);
+                 return;
             }
             
             
-//            //Get encoded username and password
-//            final String encodedUserPassword = authorization.get(0).replaceFirst(AUTHENTICATION_SCHEME + " ", "");
-//             
-//            //Decode username and password
-//            String usernameAndPassword = null;
-//            try {
-//                usernameAndPassword = new String(Base64.decode(encodedUserPassword));
-//            } catch (IOException e) {
-//                requestContext.abortWith(SERVER_ERROR);
-//                return;
-//            }
-// 
-//            //Split username and password tokens
-//            final StringTokenizer tokenizer = new StringTokenizer(usernameAndPassword, ":");
-//            final String username = tokenizer.nextToken();
-//            final String password = tokenizer.nextToken();
-//             
-//            System.out.println("Usuario ingresado: " + username);
-//            System.out.println("Contrasenia ingresada: " +password);
-             
+            //Verifico el acceso del usuario al mï¿½todo segï¿½n su rol.
             
-            
-            //Verifico el acceso del usuario al método según su rol.
-            
-            //Si no hay información de autorización presente, bloqueo el acceso.
+            //Si no hay informaciï¿½n de autorizaciï¿½n presente, bloqueo el acceso.
             if(headers.get(ROL_PROPERTY) == null || headers.get(ROL_PROPERTY).isEmpty())
             {
             	requestContext.abortWith(ACCESS_DENIED);
@@ -122,12 +102,10 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
             
             if(method.isAnnotationPresent(RolesAllowed.class))
             {
-                RolesAllowed rolesAnnotation = method.getAnnotation(RolesAllowed.class);
-                Set<String> rolesSet = new HashSet<String>(Arrays.asList(rolesAnnotation.value()));
+                RolesAllowed anotacionesRol = method.getAnnotation(RolesAllowed.class);
+                Set<String> setRoles = new HashSet<String>(Arrays.asList(anotacionesRol.value()));
                  
-                //Es valido?
-//                if( ! isUserAllowed(username, password, rolesSet))
-                if( ! isUserAllowed(rol, rolesSet)) 
+                if( ! usuarioPermitido(rol, setRoles)) 
                 {
                     requestContext.abortWith(ACCESS_DENIED);
                     return;
@@ -142,31 +120,21 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
 	
     }
     
-    
-	private boolean isUserAllowed(final String rol, final Set<String> rolesSet)
-    {
-        boolean isAllowed = false;
-        
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-//       Paso 1. obtenemos el rol a partir del username, el password se supone que es solo 
-//        si se quiere hacer login en este nivel, pero en este momento se supone que el 
-//        usuario ya va a estar logueado en el sistema, ya que este método es para seguridad en nuestros servicios.
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-        //Step 1. Fetch password from database and match with password in argument
-        //If both match then get the defined role for user from database and continue; else return isAllowed [false]
-        //Access the database and do this part yourself
-        //String userRole = userMgr.getUserRole(username);
-        
-        // Se supone que el rol, para el usuario con username es :
-//        String userRole = "ADMIN";
-         
-        //Paso 2. verificamos si el rol del usuario esta contenido en los roles que permite el método.
-        if(rolesSet.contains(rol))
-        {
-            isAllowed = true;
-        }
-        return isAllowed;
-    }
+	/**
+	 * Se chequea que el rol del del usuario a utilizar mÃ©todo, sea uno de los
+	 * roles que el mÃ©todo accepte.
+	 * 
+	 * @param rol rol del usuario
+	 * @param setRoles  set de Roles del metodo
+	 * @return usuario Permitido
+	 */
+	private boolean usuarioPermitido(final String rol, final Set<String> setRoles) {
+		boolean permitido = false;
+
+		if (setRoles.contains(rol)) {
+			permitido = true;
+		}
+		return permitido;
+	}
 
 }

@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('pruebaAngularApp')
-  .controller('LoginCtrl', ['$scope','$q','$cookieStore','$auth','$location','dataFactory','$routeParams', function ($scope, $q, $cookieStore, $auth, $location, dataFactory,$routeParams) {
+  .controller('LoginCtrl', ['$scope','$auth','$location','dataFactory','$routeParams', function ($scope, $auth, $location, dataFactory,$routeParams) {
 
-   $scope.usuario={};
-   
-   $scope.tenantid.tenant= $routeParams.tenant;
+	 
+   $scope.usuario={};//Informacion del usuario para loguear pasada desde login.html
+   //$scope.tenantid.tenant= $routeParams.tenant;
    		
    $scope.loginUser = function () {
      
@@ -31,7 +31,9 @@ angular.module('pruebaAngularApp')
           */
           
 //            $location.path('/'+ $scope.tenantid.tenant);
-            $location.path('/registro');
+            var payLoad = $auth.getPayload();
+            console.log( payLoad.tenantid);
+            $location.path(payLoad.tenantid + '/registro');
              
 
            

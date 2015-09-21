@@ -45,11 +45,11 @@ angular.module('pruebaAngularApp')
     
   };
   
-  $scope.prueba = function(){
+  $scope.getPrueba = function(){
 
 	     dataFactory.getPrueba()
-	      .success(function (data, status, headers, config) {
-	                $scope.status = status;
+	     	.success(function (data, status, headers, config) {
+	                $scope.status = data.status;
 	                console.log("Entre get stat");
 	                console.log(data.status);
 	                console.log(status);
