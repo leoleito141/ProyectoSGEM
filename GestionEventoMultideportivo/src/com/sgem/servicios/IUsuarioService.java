@@ -53,4 +53,11 @@ public interface IUsuarioService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/login")
 	public Response login(DataUsuario dataUsuario);
+	
+	@RolesAllowed("ADMIN")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/eventos")
+	public Response altaEvento(String datos);
 }

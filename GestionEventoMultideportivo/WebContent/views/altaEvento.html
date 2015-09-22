@@ -1,0 +1,64 @@
+<style>
+  .full button span {
+    background-color: limegreen;
+    border-radius: 32px;
+    color: black;
+  }
+  .partially button span {
+    background-color: orange;
+    border-radius: 32px;
+    color: black;
+  }
+</style>
+
+
+	<form role="form" >
+		<div class="form-group">
+		
+			<label class="control-label col-sm-2" for="inputNombre">Nombre Evento:</label>
+			<div class="col-sm-10">
+				<input id="inputNombre" placeholder="Nombre Evento"
+					ng-model="evento.nombre" class="form-control">
+			</div>
+
+			<label class="control-label col-sm-2" for="inputLugar">Lugar:</label>
+			<div class="col-sm-10">
+				<input id="inputLugar" placeholder="Lugar Evento"
+					ng-model="evento.lugar" class="form-control">
+			</div>
+			
+			<label class="control-label col-sm-2" for="inputTwitter">Twitter:</label>
+			<div class="col-sm-10">
+				<input id="rol" placeholder="Twitter" ng-model="evento.twitter"
+					class="form-control">
+			</div>
+			
+				<label class="control-label col-sm-2" for="inputFacebook">Facebook:</label>
+			<div class="col-sm-10">
+				<input id="rol" placeholder="Facebook" ng-model="evento.facebook"
+					class="form-control">
+			</div>
+			
+			<label class="control-label col-sm-2" for="inputYoutube">Youtube:</label>
+			<div class="col-sm-10">
+				<input id="rol" placeholder="Youtube" ng-model="evento.canalYoutube"
+					class="form-control">
+			</div>
+			
+			<pre>Selected date is: <em>{{evento.dt | date:'fullDate' }}</em></pre>
+
+		    <h4>Inline</h4>
+		    <div style="display:inline-block; min-height:290px;">
+		      <datepicker ng-model="evento.dt" min-date="minDate" show-weeks="true" class="well well-sm" custom-class="getDayClass(date, mode)" datepicker-options="dd-MMMM-yyyy"></datepicker>
+		    </div>
+
+			
+
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" ng-click="altaEvento()" class="btn btn-default">
+				Alta Evento</button>
+			</div>
+
+		</div>
+
+	</form>

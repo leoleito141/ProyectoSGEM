@@ -78,6 +78,15 @@ private IUsuarioController iuc;
 				.ok("{\"status\":\"Anda bien la cosa che! \"}")
 				.build();
 	}
+
+	@Override
+	public Response altaEvento(String datos) {
+		
+		System.out.println("Entre alta evento" +datos);
+		return Response
+				.ok("{\"status\":\"Alta Correcta\"}")
+				.build();
+	}
  
 //	public Response obtenerPorId(long id) {
 //		try {

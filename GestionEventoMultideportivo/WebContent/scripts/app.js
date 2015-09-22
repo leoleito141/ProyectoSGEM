@@ -45,6 +45,10 @@ angular.module('pruebaAngularApp', ['ngRoute','ui.bootstrap','satellizer'])
         templateUrl: 'views/registro.html',
         controller: 'RegistroCtrl'
       })
+      .when('/:tenant/altaEvento', {
+        templateUrl: 'views/altaEvento.html',
+        controller: 'MainCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

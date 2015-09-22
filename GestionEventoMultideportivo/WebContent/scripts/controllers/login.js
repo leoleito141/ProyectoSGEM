@@ -24,16 +24,10 @@ angular.module('pruebaAngularApp')
             console.log($auth.getToken()); 
             $scope.usrLogin.email = $scope.usuario.email;
             $scope.usuario.password="";
-          /*
-            $scope.usrLogin.estaConectado = true;
-            $cookieStore.put('estaConectado', true);
-            $cookieStore.put('usuario', $scope.usuario);
-          */
-          
-//            $location.path('/'+ $scope.tenantid.tenant);
+ 
             var payLoad = $auth.getPayload();
             console.log( payLoad.tenantid);
-            $location.path(payLoad.tenantid + '/registro');
+            $location.path(payLoad.tenantid + '/altaEvento');
              
 
            
