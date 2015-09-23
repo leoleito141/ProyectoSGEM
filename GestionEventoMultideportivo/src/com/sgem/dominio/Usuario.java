@@ -24,34 +24,34 @@ public abstract class Usuario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "USER_GEN")
 	private long id;
 	
-	@Column(name = "tenantID", nullable = false)
+	@Column(name = "tenant_ID", nullable = false)
 	private int tenantID;
 	
-	@Column(name = "Email", nullable = false)
+	@Column(name = "email", nullable = false)
 	private String email;
 	
-	@Column(name = "Facebook", nullable = true)
+	@Column(name = "facebook", nullable = true)
 	private String facebook;
 	
-	@Column(name = "Twitter", nullable = true)
+	@Column(name = "twitter", nullable = true)
 	private String twitter;
 	
-	@Column(name = "CanalYoutube", nullable = true)
+	@Column(name = "canal_youtube", nullable = true)
 	private String canalYoutube;
 	
-	@Column(name = "Nombre", nullable = false)
+	@Column(name = "nombre", nullable = false)
 	private String nombre;
 	
-	@Column(name = "Apellido", nullable = false)
+	@Column(name = "apellido", nullable = false)
 	private String apellido;
 	
-	@Column(name = "Edad", nullable = false)
+	@Column(name = "edad", nullable = false)
 	private Integer edad;	
 	
-	@Column(name = "Cedula", nullable = false)
+	@Column(name = "cedula", nullable = false)
 	private Integer cedula;
 	
-	@Column(name = "Password", nullable = false)
+	@Column(name = "password", nullable = false)
 	private String password;
 
 	public Usuario() {}

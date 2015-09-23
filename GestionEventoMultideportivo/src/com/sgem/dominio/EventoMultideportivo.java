@@ -21,7 +21,7 @@ public class EventoMultideportivo implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int EventoId;
 	
-	@Column(name = "tenantId", nullable = true)
+	@Column(name = "tenant_ID", nullable = true)
 	private int tenantId;
 	
 	@Column(name = "nombre", nullable = true)
@@ -33,22 +33,22 @@ public class EventoMultideportivo implements Serializable{
 	@Column(name = "logo", nullable = true)
 	private String logo;
 	
-	@Column(name = "fechaInicio", nullable = true)
+	@Column(name = "fecha_inicio", nullable = true)
 	private Date fechaInicio;
 	
-	@Column(name = "fechaFin", nullable = true)
+	@Column(name = "fecha_fin", nullable = true)
 	private Date fechaFin;
 	
-	@Column(name = "Facebook", nullable = true)
+	@Column(name = "facebook", nullable = true)
 	private String facebook;
 	
-	@Column(name = "Hashtag", nullable = true)
+	@Column(name = "hashtag", nullable = true)
 	private String Hashtag;
 	
-	@Column(name = "CanalYoutube", nullable = true)
+	@Column(name = "canal_youtube", nullable = true)
 	private String canalYoutube;
 	
-	@Column(name = "Css", nullable = true)
+	@Column(name = "css", nullable = true)
 	private String Css;
 	
 	@OneToOne(targetEntity=Organizador.class,mappedBy="evento")

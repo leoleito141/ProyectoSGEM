@@ -1,1 +1,3 @@
-INSERT INTO `admin` (`id`,`Apellido`,`CanalYoutube`,`Cedula`,`Edad`,`Email`,`Facebook`,`Nombre`,`Password`,`Twitter`,`tenantID`) VALUES (1,'Admin','youtube',0,0,'admin@gmail.com','facebook','Admin','123','twitter','1');
+INSERT INTO `usuario` (`Apellido`, `CanalYoutube`, `Cedula`, `Edad`, `Email`, `Facebook`, `Nombre`, `Password`, `tenantID`, `Twitter`) VALUES ('admin', 'admin', 12345678, 0, 'admin@gmail.com', 'admin', 'admin', '123', 0, 'admin');
+
+INSERT INTO `admin` (`id`) VALUES (1);

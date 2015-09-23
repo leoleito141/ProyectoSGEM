@@ -2,6 +2,7 @@ package com.sgem.persistencia;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import com.sgem.dominio.Admin;
@@ -28,15 +29,15 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 		
 	public Usuario buscarUsuario(String email) {
-		Usuario u;
+		Usuario u = null;
 		try{
-			return u = em.createQuery("SELECT u FROM Usuario u WHERE u.email = '"+email+"'", Usuario.class).getSingleResult();
+			u = em.createQuery("SELECT u FROM Usuario u WHERE u.email = '"+email+"'", Usuario.class).getSingleResult();
 			
-		}catch(Exception e){
+		}catch(NoResultException e){
 			e.printStackTrace();
 			return null;
 		}
-
+		return u;
 	}
 
 
