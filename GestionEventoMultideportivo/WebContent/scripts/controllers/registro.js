@@ -45,6 +45,24 @@ angular.module('pruebaAngularApp')
     
   };
   
+  $scope.getPrueba = function(){
+
+	     dataFactory.getPrueba()
+	     	.success(function (data, status, headers, config) {
+	                $scope.status = data.status;
+	                console.log("Entre get stat");
+	                console.log(data.status);
+	                console.log(status);
+	                console.log(headers);
+	                console.log(config);
+	                
+	            }).
+	            error(function(error) {
+	                $scope.status = error.message;
+	            });
+	    
+	  };
+  
   $scope.getUsuario = function(){
 	     var nombre = $scope.nombre;
 	     dataFactory.getUsuario(nombre)

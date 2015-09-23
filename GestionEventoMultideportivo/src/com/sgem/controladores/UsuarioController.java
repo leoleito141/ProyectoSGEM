@@ -1,11 +1,14 @@
 
 package com.sgem.controladores;
 
+import java.io.IOException;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import org.jboss.resteasy.util.Base64;
+
 import com.sgem.datatypes.DataUsuario;
-import com.sgem.dominio.Admin;
 import com.sgem.dominio.Juez;
 import com.sgem.dominio.Organizador;
 import com.sgem.dominio.Usuario;
@@ -62,6 +65,32 @@ public class UsuarioController implements IUsuarioController {
 		return false;
 
 	}
+
+	public Token loginUsuario(DataUsuario dataUsuario) {	// String url){
+		
+		Token jwt;
+		String pass = null;
+		
+		Usuario u =	buscarUsuario(dataUsuario.getEmail());
+		
+		try {
+			pass = new String(Base64.decode(dataUsuario.getPassword()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		if(u != null || (u.getPassword().equalsIgnoreCase(pass))){// genero json web token.
+	
+			// tenantId = this.buscarTenantId(url); BUSCAR TENANTID, 	
+			//	jwt.setTenantId(tenantId);
+			jwt = JWTUtil.generarToken(u);
+			
+		}else { 
+			return null; // deso vemos como manejar esto.
+		}
+			
+		return jwt;
+	}
 	
 	public Usuario buscarUsuario(String email) {
 		
@@ -72,23 +101,6 @@ public class UsuarioController implements IUsuarioController {
 			
 		}
 		return null;
-	}
-
-	public Token loginUsuario(DataUsuario dataUsuario) {
-		
-		Token jwt;
-		Usuario u =	this.buscarUsuario(dataUsuario.getEmail());
-			
-		if (u == null || !(u.getPassword().equalsIgnoreCase(dataUsuario.getPassword()))) {		
-			return null; // deso vemos como manejar esto.
-			
-		} else { // genero json web token.
-		
-			jwt = JWTUtil.generarToken(u);
-		
-		}
-		
-		return jwt;
 	}
 
 

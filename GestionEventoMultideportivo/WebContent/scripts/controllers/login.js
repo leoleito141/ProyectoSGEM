@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('pruebaAngularApp')
-  .controller('LoginCtrl', ['$scope','$q','$cookieStore','$auth','$location','dataFactory','$routeParams', function ($scope, $q, $cookieStore, $auth, $location, dataFactory,$routeParams) {
+  .controller('LoginCtrl', ['$scope','$auth','$location','dataFactory','$routeParams', function ($scope, $auth, $location, dataFactory,$routeParams) {
 
-   $scope.usuario={};
-   
-   $scope.tenantid.tenant= $routeParams.tenant;
+	 
+   $scope.usuario={};//Informacion del usuario para loguear pasada desde login.html
+   //$scope.tenantid.tenant= $routeParams.tenant;
    		
    $scope.loginUser = function () {
      
@@ -15,7 +15,7 @@ angular.module('pruebaAngularApp')
 
        $auth.login({
            email: datos.email,
-           password: datos.password
+           password: btoa(datos.password) // base 64
        })
        .then(function (data){
             console.log(data); 
@@ -24,12 +24,10 @@ angular.module('pruebaAngularApp')
             console.log($auth.getToken()); 
             $scope.usrLogin.email = $scope.usuario.email;
             $scope.usuario.password="";
-          /*
-            $scope.usrLogin.estaConectado = true;
-            $cookieStore.put('estaConectado', true);
-            $cookieStore.put('usuario', $scope.usuario);
-          */
-            $location.path('/'+ $scope.tenantid.tenant);
+ 
+            var payLoad = $auth.getPayload();
+            console.log( payLoad.tenantid);
+            $location.path(payLoad.tenantid + '/altaEvento');
              
 
            
@@ -38,7 +36,7 @@ angular.module('pruebaAngularApp')
             // Si ha habido errores llegamos a esta parte
         	console.log(response); 
         });
-    	};
+   		};
     
 
 	 

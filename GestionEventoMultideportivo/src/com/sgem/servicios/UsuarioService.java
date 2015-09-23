@@ -1,9 +1,13 @@
 package com.sgem.servicios;
 
 
+import java.io.IOException;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.core.Response;
+
+import org.jboss.resteasy.util.Base64;
 
 import com.sgem.controladores.IUsuarioController;
 import com.sgem.datatypes.DataUsuario;
@@ -16,16 +20,23 @@ public class UsuarioService implements IUsuarioService{
 private IUsuarioController iuc;
 
 	// localhost:8080/GestionEventoMultideportivo/rest/ServicioUsuario/status/
+	@Override
 	public Response getStatus() {
 		return Response
 				.ok("{\"status\":\"El servicio de los usuarios esta funcionando...\"}")
 				.build();
 	}
-
+	
+	@Override
 	public Response login(DataUsuario dataUsuario) {
 
 		System.out.println("Entre Login ");
-		System.out.println("Usuario - " + dataUsuario.toString());
+		  try {
+			  System.out.println("Usuario - " + dataUsuario.toString() + " Password : " + new String(Base64.decode(dataUsuario.getPassword())));
+          } catch (IOException e) {
+        	  e.printStackTrace();
+          }
+		
 		Token jwt;
 		try{
 		
@@ -47,7 +58,7 @@ private IUsuarioController iuc;
 	
 	}
 	
-
+	@Override
 	public Response guardarUsuario(DataUsuario dataUsuario) {
 
 		try {
@@ -59,6 +70,22 @@ private IUsuarioController iuc;
 		}
 		return null;
 
+	}
+	
+	@Override
+	public Response prueba() {
+		return Response
+				.ok("{\"status\":\"Anda bien la cosa che! \"}")
+				.build();
+	}
+
+	@Override
+	public Response altaEvento(String datos) {
+		
+		System.out.println("Entre alta evento" +datos);
+		return Response
+				.ok("{\"status\":\"Alta Correcta\"}")
+				.build();
 	}
  
 //	public Response obtenerPorId(long id) {

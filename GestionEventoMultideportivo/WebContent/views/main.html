@@ -21,9 +21,7 @@ img{
 
 </style>
 
-
-<div ng-controller="MainCtrl" id="slides_control">
-    <div>
+    <div id="slides_control">
       <carousel interval="myInterval">
         <slide ng-repeat="slide in slides" active="slide.active">
           <img ng-src="{{slide.image}}" >
@@ -31,5 +29,5 @@ img{
         </slide>
       </carousel>
     </div>
-</div>
+
   

@@ -1,8 +1,7 @@
  angular.module('pruebaAngularApp')
-   .factory('dataFactory', ['$http','$location', function($http,$location) {
+   .factory('dataFactory', ['$http', function($http) {
     var dataFactory = {};
 
-    console.log(dataFactory);
     dataFactory.insertUser = function (datos) {
 
             console.log(datos);
@@ -14,7 +13,7 @@
 
         console.log($location.absUrl());
         return $http.get('http://localhost:8080/GestionEventoMultideportivo/rest/UsuarioService/status/', {
-            headers: {'Authorization': 'Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=='}
+            headers: { 'Rol' : 'ADMIN'} 
         });
     };
         
@@ -35,7 +34,18 @@
 
         };   
     */
-   
+        dataFactory.getPrueba = function () {
+            return $http.get('http://localhost:8080/GestionEventoMultideportivo/rest/UsuarioService/prueba/', {
+                headers: { 'Rol' : 'ADMIN'} 
+            });
+        }; 
+        
+        dataFactory.altaEvento = function(datos){
+        	console.log(datos);
+            return $http.post('http://localhost:8080/GestionEventoMultideportivo/rest/UsuarioService/eventos', datos,
+            		{headers: { 'Rol' : 'ADMIN'}});       	
+        }; 
+        
 
-    return dataFactory;
+        return dataFactory;
 }]); 

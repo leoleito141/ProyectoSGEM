@@ -34,6 +34,13 @@ public interface IUsuarioService {
 	@Path("/usuarios")
 	public Response guardarUsuario(DataUsuario dataUsuario);
 	
+	@RolesAllowed("ADMIN")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/prueba")
+	public Response prueba();
+	
 //	@RolesAllowed("ADMIN")
 //	@GET
 //	@Produces(MediaType.APPLICATION_JSON)
@@ -46,4 +53,11 @@ public interface IUsuarioService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/login")
 	public Response login(DataUsuario dataUsuario);
+	
+	@RolesAllowed("ADMIN")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/eventos")
+	public Response altaEvento(String datos);
 }
