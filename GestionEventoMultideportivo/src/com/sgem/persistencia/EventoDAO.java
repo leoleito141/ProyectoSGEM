@@ -5,19 +5,20 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import com.sgem.dominio.Admin;
+import com.sgem.dominio.EventoMultideportivo;
 import com.sgem.dominio.Organizador;
 import com.sgem.dominio.Usuario;
 
 @Stateless
-public class UsuarioDAO implements IUsuarioDAO {
+public class EventoDAO implements IEventoDAO {
 		
 	@PersistenceContext(unitName = "GestionEventoMultideportivo")
 	private EntityManager em;
 
-	public boolean guardarUsuario(Usuario usuario) {
+	public boolean guardarEvento(EventoMultideportivo evento) {
 
 		try {
-			em.persist(usuario);
+			em.persist(evento);
 			return true;
 
 		} catch (Exception e) {
@@ -27,10 +28,10 @@ public class UsuarioDAO implements IUsuarioDAO {
 
 	}
 		
-	public Usuario buscarUsuario(String email) {
-		Usuario u;
+	public EventoMultideportivo buscarEvento(String nombre) {
+		EventoMultideportivo evento;
 		try{
-			return u = em.createQuery("SELECT u FROM Usuario u WHERE u.email = '"+email+"'", Usuario.class).getSingleResult();
+			return evento = em.createQuery("SELECT u FROM EventoMultideportivo u WHERE u.nombre = '"+nombre+"'", EventoMultideportivo.class).getSingleResult();
 			
 		}catch(Exception e){
 			e.printStackTrace();

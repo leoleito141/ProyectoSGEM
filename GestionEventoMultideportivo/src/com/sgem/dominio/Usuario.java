@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Usuario implements Serializable {
 	
 	private static final long serialVersionUID = 3285309246756091060L;

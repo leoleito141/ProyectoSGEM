@@ -4,14 +4,15 @@ import javax.ejb.Local;
 
 import com.sgem.datatypes.DataUsuario;
 import com.sgem.dominio.Admin;
+import com.sgem.dominio.Deportista;
 import com.sgem.dominio.Organizador;
 import com.sgem.dominio.Usuario;
 
 @Local
-public interface IUsuarioDAO {
+public interface IDeportistaDAO {
 
-	public boolean guardarUsuario(Usuario usuario);
-	public Usuario buscarUsuario(String email);
+	public boolean guardarDeportista(Deportista d);
+	
 	
 		
 	

@@ -11,6 +11,9 @@
 	<class>com.sgem.dominio.Estadistica</class>
 	<class>com.sgem.dominio.Juez</class>
 	<class>com.sgem.dominio.TenantHandler</class>
+	<class>com.sgem.dominio.Deportista</class>
+	<class>com.sgem.dominio.ComiteOlimpico</class>
+	<class>com.sgem.dominio.EventoMultideportivo</class>
 	
 	
 	<properties>
