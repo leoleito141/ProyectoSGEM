@@ -32,6 +32,7 @@ angular.module('pruebaAngularApp', ['ngRoute','ui.bootstrap','satellizer'])
 //          controller: 'LoginCtrl'
 //        }) 
     
+    
     .when('/', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
@@ -49,6 +50,13 @@ angular.module('pruebaAngularApp', ['ngRoute','ui.bootstrap','satellizer'])
         templateUrl: 'views/altaEvento.html',
         controller: 'MainCtrl'
       })
+       
+     /* .when('/:tenant/altaEventoDeportivo'', {
+        templateUrl: 'views/altaEventDeportivo.html',
+        controller: 'EventDeportivoCtrl'
+      })*/
+      
+      
       .otherwise({
         redirectTo: '/'
       });

@@ -46,6 +46,12 @@
             		{headers: { 'Rol' : 'ADMIN'}});       	
         }; 
         
+        
+        dataFactory.altaEventoDeportivo = function(datos){
+        	console.log(datos);
+            return $http.post('http://localhost:8080/GestionEventoMultideportivo/rest/UsuarioService/altaEventoDeportivo', datos,
+            		{headers: { 'Rol' : 'ADMIN'}});       	
+        }; 
 
         return dataFactory;
 }]); 

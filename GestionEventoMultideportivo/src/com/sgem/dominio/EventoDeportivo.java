@@ -17,7 +17,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="eventoMultideportivo")
+@Table(name="eventoDeportivo")
 public class EventoDeportivo implements Serializable{
 	
 	private static final long serialVersionUID = -6321506554036389023L;
@@ -44,6 +44,18 @@ public class EventoDeportivo implements Serializable{
 	@Column(name = "fecha_fin", nullable = true)
 	private Date fechaFin;
 	
+	@Column(name = "sexo", nullable = false)
+	private String sexo;
+	
+	@ManyToOne	
+	private EventoMultideportivo eventoMultideportivo;
+
+	@OneToMany(fetch = FetchType.EAGER,mappedBy = "eventoDeportivo") 
+	private Set<Competencia> Competencia= new HashSet<Competencia>();
+	
+	@OneToMany(fetch = FetchType.EAGER,mappedBy = "eventoDeportivo") 
+	private Set<Ronda> ronda= new HashSet<Ronda>();
+	
 	
 	public EventoDeportivo(){}
 	
@@ -58,7 +70,7 @@ public class EventoDeportivo implements Serializable{
 		this.disciplina = disciplina;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
-		Sexo = sexo;
+		sexo = sexo;
 		this.eventoMultideportivo = eventoMultideportivo;
 		Competencia = competencia;
 		this.ronda = ronda;
@@ -80,17 +92,7 @@ public class EventoDeportivo implements Serializable{
 		this.ronda = ronda;
 	}
 
-	@Column(name = "Sexo", nullable = false)
-	private String Sexo;
 	
-	@ManyToOne	
-	private EventoMultideportivo eventoMultideportivo;
-
-	@OneToMany(fetch = FetchType.EAGER,mappedBy = "eventoDeportivo") 
-	private Set<Competencia> Competencia= new HashSet<Competencia>();
-	
-	@OneToMany(fetch = FetchType.EAGER,mappedBy = "eventoDeportivo") 
-	private Set<Ronda> ronda= new HashSet<Ronda>();
 
 	public int getEventoDepId() {
 		return EventoDepId;
@@ -149,11 +151,11 @@ public class EventoDeportivo implements Serializable{
 	}
 
 	public String getSexo() {
-		return Sexo;
+		return sexo;
 	}
 
 	public void setSexo(String sexo) {
-		Sexo = sexo;
+		sexo = sexo;
 	}
 
 	public EventoMultideportivo getEventoMultideportivo() {

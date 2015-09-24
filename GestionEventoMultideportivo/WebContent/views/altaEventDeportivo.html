@@ -28,10 +28,15 @@
 			</div>
 			
 			
+			  <label class="control-label col-sm-2" for="singleSelect"> Sexo: </label><br>
+			    <select name="singleSelect" ng-model="evento.singleSelect">
+			      <option value="Femenino">Femenino</option>
+			      <option value="Masculino">Masculino</option>
+			    </select><br>
 			
-			<pre>Selected date is: <em>{{evento.dt | date:'fullDate' }}</em></pre>
+			<pre>Fecha de Inicio: <em>{{evento.dt | date:'fullDate' }}</em></pre>
 
-		    <h4>Inline</h4>
+		    
 		    <div style="display:inline-block; min-height:290px;">
 		      <datepicker ng-model="evento.dt" min-date="minDate" show-weeks="true" class="well well-sm" custom-class="getDayClass(date, mode)" datepicker-options="dd-MMMM-yyyy"></datepicker>
 		    </div>
@@ -39,8 +44,8 @@
 			
 
 			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" ng-click="altaEvento()" class="btn btn-default">
-				Alta Evento</button>
+				<button type="submit" ng-click="altaEventoDeportivo()" class="btn btn-default">
+				Alta Evento Deportivo</button>
 			</div>
 
 		</div>
