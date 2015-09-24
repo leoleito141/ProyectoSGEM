@@ -14,6 +14,9 @@
 	<class>com.sgem.dominio.Deportista</class>
 	<class>com.sgem.dominio.ComiteOlimpico</class>
 	<class>com.sgem.dominio.EventoMultideportivo</class>
+	<class>com.sgem.dominio.EventoDeportivo</class>
+	<class>com.sgem.dominio.Ronda</class>
+	<class>com.sgem.dominio.Competencia</class>
 	
 	
 	<properties>
