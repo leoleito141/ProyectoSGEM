@@ -51,10 +51,10 @@ angular.module('pruebaAngularApp', ['ngRoute','ui.bootstrap','satellizer'])
         controller: 'MainCtrl'
       })
        
-     /* .when('/:tenant/altaEventoDeportivo'', {
+      .when('/:tenant/altaEventoDeportivo', {
         templateUrl: 'views/altaEventDeportivo.html',
         controller: 'EventDeportivoCtrl'
-      })*/
+      })
       
       
       .otherwise({

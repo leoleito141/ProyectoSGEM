@@ -18,18 +18,18 @@
 			<label class="control-label col-sm-2" for="inputNombreDeporte">Nombre Deporte:</label>
 			<div class="col-sm-10">
 				<input id="inputNombreDeporte" placeholder="Nombre Deporte"
-					ng-model="evento.nombreDeporte" class="form-control">
+					ng-model="eventoDeportivo.nombreDeporte" class="form-control">
 			</div>
 
 			<label class="control-label col-sm-2" for="inputDisciplina">Disciplina:</label>
 			<div class="col-sm-10">
-				<input id="inputDisciplina" placeholder="Lugar Evento"
-					ng-model="evento.Disciplina" class="form-control">
+				<input id="inputDisciplina" placeholder="Disciplina"
+					ng-model="eventoDeportivo.nombreDisciplina" class="form-control">
 			</div>
 			
 			
 			  <label class="control-label col-sm-2" for="singleSelect"> Sexo: </label><br>
-			    <select name="singleSelect" ng-model="evento.singleSelect">
+			    <select name="singleSelect" ng-model="eventoDeportivo.sexo">
 			      <option value="Femenino">Femenino</option>
 			      <option value="Masculino">Masculino</option>
 			    </select><br>
@@ -38,7 +38,7 @@
 
 		    
 		    <div style="display:inline-block; min-height:290px;">
-		      <datepicker ng-model="evento.dt" min-date="minDate" show-weeks="true" class="well well-sm" custom-class="getDayClass(date, mode)" datepicker-options="dd-MMMM-yyyy"></datepicker>
+		      <datepicker ng-model="eventoDeportivo.FechaInicio" min-date="minDate" show-weeks="true" class="well well-sm" custom-class="getDayClass(date, mode)" datepicker-options="dd-MMMM-yyyy"></datepicker>
 		    </div>
 
 			

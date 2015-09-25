@@ -49,7 +49,7 @@
         
         dataFactory.altaEventoDeportivo = function(datos){
         	console.log(datos);
-            return $http.post('http://localhost:8080/GestionEventoMultideportivo/rest/UsuarioService/altaEventoDeportivo', datos,
+            return $http.post('http://localhost:8080/GestionEventoMultideportivo/rest/EventoDeportivoService/altaEventoDeportivo', datos,
             		{headers: { 'Rol' : 'ADMIN'}});       	
         }; 
 

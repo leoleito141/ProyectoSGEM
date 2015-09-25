@@ -5,6 +5,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import com.sgem.dominio.Admin;
+import com.sgem.dominio.EventoDeportivo;
 import com.sgem.dominio.EventoMultideportivo;
 import com.sgem.dominio.Organizador;
 import com.sgem.dominio.Usuario;
@@ -38,6 +39,18 @@ public class EventoDAO implements IEventoDAO {
 			return null;
 		}
 
+	}
+
+	
+	public boolean guardarEventoDeportivo(EventoDeportivo eventoDeportivo) {
+		try {
+			em.persist(eventoDeportivo);
+			return true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 
