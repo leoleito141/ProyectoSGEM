@@ -10,6 +10,7 @@ import javax.ws.rs.core.Response;
 import org.jboss.resteasy.util.Base64;
 
 import com.sgem.controladores.IUsuarioController;
+import com.sgem.datatypes.DataEvento;
 import com.sgem.datatypes.DataUsuario;
 import com.sgem.seguridad.Token;
 
@@ -80,9 +81,9 @@ private IUsuarioController iuc;
 	}
 
 	@Override
-	public Response altaEvento(String datos) {
+	public Response altaEvento(DataEvento datosEvento) {
 		
-		System.out.println("Entre alta evento" +datos);
+		System.out.println("Entre alta evento" +datosEvento.toString());
 		return Response
 				.ok("{\"status\":\"Alta Correcta\"}")
 				.build();

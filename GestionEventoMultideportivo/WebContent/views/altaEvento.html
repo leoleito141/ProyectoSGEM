@@ -27,6 +27,18 @@
 					ng-model="evento.lugar" class="form-control">
 			</div>
 			
+			<label class="control-label col-sm-2" for="inputAño">Año:</label>
+			<div class="col-sm-10">
+				<input id="inputAnio" placeholder="Año Evento"
+					ng-model="evento.anio" class="form-control">
+			</div>
+			
+			<label class="control-label col-sm-2" for="inputHashtag">Hashtag:</label>
+			<div class="col-sm-10">
+				<input id="inputHashtag" placeholder="Hashtag Evento"
+					ng-model="evento.hashtag" class="form-control">
+			</div>
+			
 			<label class="control-label col-sm-2" for="inputTwitter">Twitter:</label>
 			<div class="col-sm-10">
 				<input id="rol" placeholder="Twitter" ng-model="evento.twitter"
@@ -44,13 +56,29 @@
 				<input id="rol" placeholder="Youtube" ng-model="evento.canalYoutube"
 					class="form-control">
 			</div>
+			<div class="col-md-6">
 			
-			<pre>Selected date is: <em>{{evento.dt | date:'fullDate' }}</em></pre>
-
-		    <h4>Inline</h4>
-		    <div style="display:inline-block; min-height:290px;">
-		      <datepicker ng-model="evento.dt" min-date="minDate" show-weeks="true" class="well well-sm" custom-class="getDayClass(date, mode)" datepicker-options="dd-MMMM-yyyy"></datepicker>
-		    </div>
+				<div class="col-md-6">
+				<pre>Seleccionar Fecha inicio: <em>{{evento.fechaInicio | date:'fullDate' }}</em></pre>
+		            <p class="input-group">
+		              <input type="text" class="form-control" datepicker-popup='dd-MMMM-yyyy' ng-model="evento.fechaInicio" is-open="statusInicio.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions"  ng-required="true" close-text="Close" />
+		              <span class="input-group-btn">
+		                <button type="button" class="btn btn-default" ng-click="openInicio($eventInicio)"><i class="glyphicon glyphicon-calendar"></i></button>
+		              </span>
+		            </p>
+	       		</div>
+	       		
+	       		
+				<div class="col-md-6">
+				<pre>Seleccionar Fecha fin: <em>{{evento.fechaFin | date:'fullDate' }}</em></pre>
+		            <p class="input-group">
+		              <input type="text" class="form-control" datepicker-popup='dd-MMMM-yyyy' ng-model="evento.fechaFin" is-open="statusFin.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions"  ng-required="true" close-text="Close" />
+		              <span class="input-group-btn">
+		                <button type="button" class="btn btn-default" ng-click="openFin($eventFin)"><i class="glyphicon glyphicon-calendar"></i></button>
+		              </span>
+		            </p>
+	       		</div>
+            </div>
 
 			
 

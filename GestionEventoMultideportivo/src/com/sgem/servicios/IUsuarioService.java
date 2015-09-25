@@ -12,6 +12,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.sgem.datatypes.DataEvento;
 import com.sgem.datatypes.DataUsuario;
 
 @RequestScoped
@@ -59,5 +60,5 @@ public interface IUsuarioService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/eventos")
-	public Response altaEvento(String datos);
+	public Response altaEvento(DataEvento datosEvento);
 }
