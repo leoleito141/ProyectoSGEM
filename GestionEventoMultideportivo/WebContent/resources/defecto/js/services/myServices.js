@@ -5,14 +5,14 @@
     dataFactory.insertUser = function (datos) {
 
             console.log(datos);
-            return $http.post('http://localhost:8080/GestionEventoMultideportivo/rest/UsuarioService/usuarios', datos);
+            return $http.post('https://localhost:443/GestionEventoMultideportivo/rest/UsuarioService/usuarios', datos);
 
         };
 
     dataFactory.getStatus = function () {
 
         console.log($location.absUrl());
-        return $http.get('http://localhost:8080/GestionEventoMultideportivo/rest/UsuarioService/status/', {
+        return $http.get('https://localhost:443/GestionEventoMultideportivo/rest/UsuarioService/status/', {
             headers: { 'Rol' : 'ADMIN'} 
         });
     };
@@ -20,7 +20,7 @@
      dataFactory.getUsuario = function (nombre) {
 
     	    console.log(nombre);
-            return $http.get('http://localhost:8080/GestionEventoMultideportivo/rest/UsuarioService/usuarioPrueba/'+nombre );
+            return $http.get('https://localhost:443/GestionEventoMultideportivo/rest/UsuarioService/usuarioPrueba/'+nombre );
 
         };
     /*
@@ -35,21 +35,21 @@
         };   
     */
         dataFactory.getPrueba = function () {
-            return $http.get('http://localhost:8080/GestionEventoMultideportivo/rest/UsuarioService/prueba/', {
+            return $http.get('https://localhost:443/GestionEventoMultideportivo/rest/UsuarioService/prueba/', {
                 headers: { 'Rol' : 'ADMIN'} 
             });
         }; 
         
         dataFactory.altaEvento = function(datos){
         	console.log(datos);
-            return $http.post('http://localhost:8080/GestionEventoMultideportivo/rest/UsuarioService/eventos', datos,
+            return $http.post('https://localhost:443/GestionEventoMultideportivo/rest/UsuarioService/eventos', datos,
             		{headers: { 'Rol' : 'ADMIN'}});       	
         }; 
         
         
         dataFactory.altaEventoDeportivo = function(datos){
         	console.log(datos);
-            return $http.post('http://localhost:8080/GestionEventoMultideportivo/rest/EventoDeportivoService/altaEventoDeportivo', datos,
+            return $http.post('https://localhost:443/GestionEventoMultideportivo/rest/EventoDeportivoService/altaEventoDeportivo', datos,
             		{headers: { 'Rol' : 'ADMIN'}});       	
         }; 
 
