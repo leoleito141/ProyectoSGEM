@@ -19,9 +19,9 @@ import com.sgem.datatypes.DataUsuario;
 @Path("/UsuarioService")
 public interface IUsuarioService {
 
-//	@PermitAll
+	@PermitAll
 //	@DenyAll
-	@RolesAllowed("ADMIN")
+//	@RolesAllowed("ADMIN")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/status")
