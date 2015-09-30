@@ -13,7 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -63,16 +62,16 @@ public class EventoDeportivo implements Serializable{
 			Date fechaInicio, Date fechaFin, String sexo, EventoMultideportivo eventoMultideportivo,
 			Set<com.sgem.dominio.Competencia> competencia, Set<Ronda> ronda) {
 		super();
-		EventoDepId = eventoDepId;
+		this.EventoDepId = eventoDepId;
 		this.tenantId = tenantId;
-		EventoMultiId = eventoMultiId;
+		this.EventoMultiId = eventoMultiId;
 		this.nombreDeporte = nombreDeporte;
 		this.disciplina = disciplina;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
-		sexo = sexo;
+		this.sexo = sexo;
 		this.eventoMultideportivo = eventoMultideportivo;
-		Competencia = competencia;
+		this.Competencia = competencia;
 		this.ronda = ronda;
 	}
 
@@ -155,7 +154,7 @@ public class EventoDeportivo implements Serializable{
 	}
 
 	public void setSexo(String sexo) {
-		sexo = sexo;
+		this.sexo = sexo;
 	}
 
 	public EventoMultideportivo getEventoMultideportivo() {

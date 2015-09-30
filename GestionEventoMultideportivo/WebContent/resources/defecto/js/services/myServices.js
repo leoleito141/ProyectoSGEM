@@ -42,7 +42,7 @@
         
         dataFactory.altaEvento = function(datos){
         	console.log(datos);
-            return $http.post('https://localhost:443/GestionEventoMultideportivo/rest/UsuarioService/eventos', datos,
+            return $http.post('https://localhost:443/GestionEventoMultideportivo/rest/EventoService/eventos', datos,
             		{headers: { 'Rol' : 'ADMIN'}});       	
         }; 
         

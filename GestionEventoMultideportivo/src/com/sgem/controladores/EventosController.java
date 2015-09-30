@@ -1,22 +1,12 @@
 package com.sgem.controladores;
 
-import java.io.IOException;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-
-import org.jboss.resteasy.util.Base64;
-
 import com.sgem.datatypes.DataEventoDeportivo;
-import com.sgem.datatypes.DataUsuario;
 import com.sgem.dominio.EventoDeportivo;
-import com.sgem.dominio.Juez;
-import com.sgem.dominio.Organizador;
-import com.sgem.dominio.Usuario;
 import com.sgem.persistencia.IEventoDAO;
 
-import com.sgem.seguridad.JWTUtil;
-import com.sgem.seguridad.Token;
 
 @Stateless
 public class EventosController implements IEventosController {

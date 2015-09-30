@@ -10,11 +10,6 @@ import com.sgem.dominio.Usuario;
 @Local
 public interface IEventoDAO {
 
-	public boolean guardarEvento(EventoMultideportivo evento);
-	public EventoMultideportivo buscarEvento(String nombre);
 	public boolean guardarEventoDeportivo(EventoDeportivo eventoDeportivo);
-	
-		
-	
 	
 }

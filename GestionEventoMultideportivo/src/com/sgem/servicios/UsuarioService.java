@@ -80,14 +80,7 @@ private IUsuarioController iuc;
 				.build();
 	}
 
-	@Override
-	public Response altaEvento(DataEvento datosEvento) {
-		
-		System.out.println("Entre alta evento" +datosEvento.toString());
-		return Response
-				.ok("{\"status\":\"Alta Correcta\"}")
-				.build();
-	}
+
  
 //	public Response obtenerPorId(long id) {
 //		try {
