@@ -52,6 +52,12 @@
             return $http.post('https://localhost:443/GestionEventoMultideportivo/rest/EventoDeportivoService/altaEventoDeportivo', datos,
             		{headers: { 'Rol' : 'ADMIN'}});       	
         }; 
+        
+        
+        dataFactory.getDatosTenant = function(datos){
+        	  return $http.post('https://localhost:443/GestionEventoMultideportivo/rest/EventoMultiService/obtenerDatosTenant', datos,
+              		{headers: { 'Rol' : 'VISITANTE'}});   
+        }
 
         return dataFactory;
 }]); 

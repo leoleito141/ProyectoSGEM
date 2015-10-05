@@ -32,5 +32,14 @@ public class EventoMultiService implements IEventoMultiService{
 				.ok("{\"status\":\"Alta Correcta\"}")
 				.build();
 	}
+	
+	@Override
+	public Response obtenerDatos(String tenant) {
+		
+		
+		
+		
+		return null;		
+	}
 
 }

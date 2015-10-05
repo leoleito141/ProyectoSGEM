@@ -23,4 +23,12 @@ public interface IEventoMultiService {
 	@Path("/eventos")
 	public Response altaEvento(DataEvento datosEvento);
 
+	
+	@RolesAllowed("VISITANTE")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/obtenerDatosTenant")
+	public Response obtenerDatos(String tenant);
+	
 }
