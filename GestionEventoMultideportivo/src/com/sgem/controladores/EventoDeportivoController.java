@@ -5,16 +5,16 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import com.sgem.datatypes.DataEventoDeportivo;
 import com.sgem.dominio.EventoDeportivo;
-import com.sgem.persistencia.IEventoDAO;
+import com.sgem.persistencia.IEventoDeportivoDAO;
 
 
 @Stateless
-public class EventosController implements IEventosController {
+public class EventoDeportivoController implements IEventoDeportivoController {
 
 	public static final String ROL_ADMIN = "Administrador"; // faltan mas roles...
 	
 	@EJB
-	private IEventoDAO EventosDAO;
+	private IEventoDeportivoDAO EventosDAO;
 	
 	@Override
 	public boolean guardarEventoDeportivo(DataEventoDeportivo dataEventoDeportivo) {

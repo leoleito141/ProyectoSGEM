@@ -7,7 +7,7 @@ import com.sgem.dominio.EventoDeportivo;
 
 
 @Stateless
-public class EventoDAO implements IEventoDAO {
+public class EventoDeportivoDAO implements IEventoDeportivoDAO {
 		
 	@PersistenceContext(unitName = "GestionEventoMultideportivo")
 	private EntityManager em;

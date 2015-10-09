@@ -5,7 +5,7 @@ import javax.ejb.Local;
 import com.sgem.datatypes.DataEventoDeportivo;
 
 @Local
-public interface IEventosController {
+public interface IEventoDeportivoController {
 
 	boolean guardarEventoDeportivo(DataEventoDeportivo dataEventoDeportivo);
 

@@ -8,7 +8,7 @@ import com.sgem.dominio.EventoMultideportivo;
 import com.sgem.dominio.Usuario;
 
 @Local
-public interface IEventoDAO {
+public interface IEventoDeportivoDAO {
 
 	public boolean guardarEventoDeportivo(EventoDeportivo eventoDeportivo);
 	
