@@ -2,9 +2,7 @@ package com.sgem.dominio;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletContextEvent;
@@ -12,7 +10,6 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 import com.sgem.persistencia.IDeportistaDAO;
-import com.sgem.persistencia.IEventoDAO;
 import com.sgem.persistencia.IEventoMultiDAO;
 import com.sgem.persistencia.IUsuarioDAO;
 

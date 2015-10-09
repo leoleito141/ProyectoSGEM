@@ -4,7 +4,8 @@ package com.sgem.servicios;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.core.Response;
-import com.sgem.controladores.IEventosController;
+
+import com.sgem.controladores.IEventoDeportivoController;
 import com.sgem.datatypes.DataEventoDeportivo;
 
 
@@ -12,7 +13,7 @@ import com.sgem.datatypes.DataEventoDeportivo;
 public class EventoDeportivoService implements IEventoDeportivoService{
  
 @EJB
-private IEventosController iec;
+private IEventoDeportivoController iec;
 
 	// localhost:8080/GestionEventoMultideportivo/rest/ServicioUsuario/status/
 	

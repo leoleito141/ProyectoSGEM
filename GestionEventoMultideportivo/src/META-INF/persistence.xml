@@ -5,8 +5,8 @@
 	<jta-data-source>java:/MySqlDS</jta-data-source>
 
 	<class>com.sgem.dominio.Usuario</class>
+	<class>com.sgem.dominio.UsuarioComun</class>
 	<class>com.sgem.dominio.Organizador</class>
-	<class>com.sgem.dominio.Estadistico</class>
 	<class>com.sgem.dominio.Admin</class>
 	<class>com.sgem.dominio.Estadistica</class>
 	<class>com.sgem.dominio.Juez</class>

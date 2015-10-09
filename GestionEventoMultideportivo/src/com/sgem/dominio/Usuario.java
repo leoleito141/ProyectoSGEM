@@ -70,11 +70,7 @@ public abstract class Usuario implements Serializable {
 		this.password = password;
 		this.tenantID=tenantid;
 	}
-	public  String soy(){
-		
-		return"";
-	}
-
+	
 	public long getId() {
 		return id;
 	}
@@ -163,4 +159,5 @@ public abstract class Usuario implements Serializable {
 		this.tenantID = tenantID;
 	}
 			
+	public abstract String soy();
 }
