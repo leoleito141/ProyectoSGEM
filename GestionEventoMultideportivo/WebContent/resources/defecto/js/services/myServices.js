@@ -54,10 +54,26 @@
         }; 
         
         
-        dataFactory.getDatosTenant = function(datos){
-        	  return $http.post('https://localhost:443/GestionEventoMultideportivo/rest/EventoMultiService/obtenerDatosTenant', datos,
-              		{headers: { 'Rol' : 'VISITANTE'}});   
-        }
-
+        dataFactory.getDatosTenant = function(tenant){
+        	
+        	 return $http.get('https://localhost:443/GestionEventoMultideportivo/rest/EventoService/obtenerDatosTenant/'+tenant)
+        	  .then(function (data, status, headers, config) {
+                  
+                  console.log("Entre get datos tenant");
+                  console.log(data);
+                  console.log(status);
+                  console.log(headers);
+                  console.log(config);
+                  return data; 
+                  
+              })
+              .catch(function(response){
+                  // Si ha habido errores llegamos a esta parte
+              	console.log(response); 
+              });
+              		 
+        };
+        
+     
         return dataFactory;
 }]); 

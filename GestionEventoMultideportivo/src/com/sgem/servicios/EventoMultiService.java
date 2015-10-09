@@ -36,10 +36,12 @@ public class EventoMultiService implements IEventoMultiService{
 	@Override
 	public Response obtenerDatos(String tenant) {
 		
+		System.out.println("Entre obtener datos tenant" + tenant);
 		
 		
-		
-		return null;		
+		return Response
+				.ok("{\"image\":\"Lighthouse.jpg\"}")
+				.build();
 	}
 
 }

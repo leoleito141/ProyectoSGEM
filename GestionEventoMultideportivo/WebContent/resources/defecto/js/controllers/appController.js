@@ -4,6 +4,11 @@ angular.module('pruebaAngularApp')
   .controller('AppCtrl', ['$scope','$location','$auth', function ($scope,$location,$auth) {
   	$scope.usrLogin={nombre:""};
   	$scope.tenantid={tenant:""};
+  	$scope.customStyle={
+  			background:"",
+  			
+  	};
+  	console.log($scope.customStyle);
 
   	$scope.salir = function() {
   		

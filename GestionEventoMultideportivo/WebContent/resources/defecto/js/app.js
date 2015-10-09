@@ -3,24 +3,7 @@
 angular.module('pruebaAngularApp', ['ngRoute','ui.bootstrap','satellizer'])
 .run(['dataFactory','$rootScope','$location','$auth',function($dataFactory,$rootScope, $location, $auth){ // esto se ejecuta en tiempo de ejecucion,
   $rootScope.$on('$routeChangeStart', function(event, next, current) {
-	
-	  
-	  var absUrl = $location.absUrl();
-	  
-	  
-	  var res = absUrl.split("/");
-	  var nombreTenant = res[5];
-	 
-	
-//	 miclase.algo = dataFactory.getDatosTenant(nombreTenant);
-//	  var jsonTenant = 
-	  
-	  console.log($auth.miItem);
-	  // ver sub url
-	  // obtener datos del tenant, como imagen de fondo que va a tener este login, css...
-	  
-	  console.log(absUrl);
-	  
+  
     if(!$auth.isAuthenticated()){
 
       if (next.templateUrl=='views/main.html' || next.templateUrl=='views/registro.html' ) {
@@ -48,7 +31,13 @@ angular.module('pruebaAngularApp', ['ngRoute','ui.bootstrap','satellizer'])
 		controller : 'LoginCtrl'
 	}).when('/:tenant/login', {
 		templateUrl : 'views/tenant/loginTenant.html',
-		controller : 'LoginTenantCtrl'
+		controller : 'LoginTenantCtrl',
+	    resolve: { 
+	    	loadData:['dataFactory','$route', function(dataFactory,$route) {
+	    		console.log($route.current.params.tenant);
+	    		return dataFactory.getDatosTenant($route.current.params.tenant);   
+        }]
+	    }   
 	}).when('/main', {
 		templateUrl : 'views/main.html',
 		controller : 'MainCtrl'
