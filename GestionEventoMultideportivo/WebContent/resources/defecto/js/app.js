@@ -48,7 +48,10 @@ angular.module('pruebaAngularApp', ['ngRoute','ui.bootstrap','satellizer'])
 		templateUrl : 'views/altaEvento.html',
 		controller : 'MainCtrl'
 	})
-
+	.when('/:tenant/altaOrganizador', {
+		templateUrl : 'views/altaOrganizador.html',
+		controller : 'MainCtrl'
+	})
 	.when('/:tenant/altaEventoDeportivo', {
 		templateUrl : 'views/altaEventDeportivo.html',
 		controller : 'EventDeportivoCtrl'

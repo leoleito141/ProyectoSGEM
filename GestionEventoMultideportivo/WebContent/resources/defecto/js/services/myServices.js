@@ -46,6 +46,11 @@
             		{headers: { 'Rol' : 'ADMIN'}});       	
         }; 
         
+        dataFactory.guardarOrganizador = function(datos){
+        	console.log(datos);
+            return $http.post('https://localhost:443/GestionEventoMultideportivo/rest/UsuarioService/organizador', datos,
+            		{headers: { 'Rol' : 'ADMIN'}});	      	
+        };
         
         dataFactory.altaEventoDeportivo = function(datos){
         	console.log(datos);
