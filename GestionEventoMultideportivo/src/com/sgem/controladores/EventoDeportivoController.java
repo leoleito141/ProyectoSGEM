@@ -11,8 +11,6 @@ import com.sgem.persistencia.IEventoDeportivoDAO;
 @Stateless
 public class EventoDeportivoController implements IEventoDeportivoController {
 
-	public static final String ROL_ADMIN = "Administrador"; // faltan mas roles...
-	
 	@EJB
 	private IEventoDeportivoDAO EventosDAO;
 	

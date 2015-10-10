@@ -44,4 +44,24 @@ public class EventoMultiService implements IEventoMultiService{
 				.build();
 	}
 
+	@Override
+	public Response obetenerTenant(String tenant) {
+		
+		//el json de abajo podría ser un Data por nosotros que tenga todo lo del tenant asi ya transforma
+		//el json, va a ser enorme.. jaja, despues vemos. Debería ir contra la BD, y si no existe
+		// hacer lo que hablaron bruno y maxi de mostrar error.
+		
+		String s = new String( "{\"tenant\" : {"
+								+ "\"tenantId\":\"1\","
+								+ "\"login_back_img\":\"Lighthouse.jpg\","
+								+ "\"registro_back_img\":\"Lighthouse.jpg\" } }");
+		return Response
+				.ok(s)
+				.build();
+		
+		
+	}
+	
+	
+
 }

@@ -42,7 +42,7 @@
         
         dataFactory.altaEvento = function(datos){
         	console.log(datos);
-            return $http.post('https://localhost:443/GestionEventoMultideportivo/rest/EventoService/eventos', datos,
+            return $http.post('https://localhost:443/GestionEventoMultideportivo/rest/EventoMultiService/eventos', datos,
             		{headers: { 'Rol' : 'ADMIN'}});       	
         }; 
         
@@ -61,7 +61,7 @@
         
         dataFactory.getDatosTenant = function(tenant){
         	
-        	 return $http.get('https://localhost:443/GestionEventoMultideportivo/rest/EventoService/obtenerDatosTenant/'+tenant)
+        	 return $http.get('https://localhost:443/GestionEventoMultideportivo/rest/EventoMultiService/obtenerDatosTenant/'+tenant)
         	  .then(function (data, status, headers, config) {
                   
                   console.log("Entre get datos tenant");
@@ -79,6 +79,23 @@
               		 
         };
         
+        dataFactory.getTenant = function(tenant){
+        	
+	   	return $http.get('https://localhost:443/GestionEventoMultideportivo/rest/EventoMultiService/obetenerTenant/'+tenant)
+		       	.then(function (data, status, headers, config) {
+		                 
+		                 console.log("Entre get tenant");
+		                 console.log(data);
+		                 console.log(status);
+		                 console.log(headers);
+		                 console.log(config);
+		                 return data; 
+		                 
+	             }).catch(function(response){
+		             	console.log(response); 
+		        });
+	         		 
+	    };
      
         return dataFactory;
 }]); 
