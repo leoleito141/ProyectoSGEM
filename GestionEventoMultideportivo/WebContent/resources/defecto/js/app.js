@@ -77,6 +77,10 @@ angular.module('pruebaAngularApp', ['ngRoute','ui.bootstrap','satellizer','Local
 		templateUrl : 'views/altaEventDeportivo.html',
 		controller : 'EventDeportivoCtrl'
 	})
+	.when('/:tenant/perfilComite', {
+		templateUrl : 'views/perfilComite.html',
+		controller : 'PerfilCtrl'
+	})
 
 	.otherwise({
 		redirectTo : '/'

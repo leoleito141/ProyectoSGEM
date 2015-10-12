@@ -11,8 +11,11 @@ angular.module('pruebaAngularApp')
 	  
 	  $(".bannerPerfil").css("background-color", "#0A2880");
 	  $(".bannerPerfil").css("background-color", "red");
+	  $(".PerfilNews").css("background-color", "#0A2880");
+	  
+	//  $(".PerfilContent").css("background","url('http://farm3.staticflickr.com/2832/12303719364_c25cecdc28_b.jpg') fixed");
 		 
 		  
-	 
+	  
 
   }]);
