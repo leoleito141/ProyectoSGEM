@@ -4,14 +4,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="juez")
-public class Juez extends Usuario {
+@Table(name="UsuarioComun")
+public class UsuarioComun extends Usuario {
 	
 	private static final long serialVersionUID = -5284790408432089498L;
-	private static final String TIPO = "JUEZ";
+	private static final String TIPO = "UsuarioComun";
 	
-	public Juez(){}
-	public Juez(String email, String facebook, String twitter, String canalYoutube, String nombre, String apellido, Integer edad, Integer cedula, String password,int tenantid) 
+	public UsuarioComun(){}
+	public UsuarioComun(String email, String facebook, String twitter, String canalYoutube, String nombre, String apellido, Integer edad, Integer cedula, String password,int tenantid) 
 	{
 		
 		super(email, facebook, twitter, canalYoutube, nombre, apellido, edad, cedula, password,tenantid);

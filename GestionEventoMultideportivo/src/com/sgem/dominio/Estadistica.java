@@ -18,11 +18,7 @@ public class Estadistica implements Serializable{
 	@Id
 	@Column(name = "id", nullable = false)
 	private long id;
-	
-	@ManyToOne(optional=true)
-	@JoinColumn(name="Estadistico", nullable = true)
-	private Estadistico estadistico;
-	
+
 	@Column(name = "Contenido", nullable = false)
 	private String contenido;
 	

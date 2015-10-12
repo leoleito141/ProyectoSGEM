@@ -2,9 +2,7 @@ package com.sgem.dominio;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletContextEvent;
@@ -12,7 +10,7 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 import com.sgem.persistencia.IDeportistaDAO;
-import com.sgem.persistencia.IEventoDAO;
+import com.sgem.persistencia.IEventoMultiDAO;
 import com.sgem.persistencia.IUsuarioDAO;
 
 
@@ -26,7 +24,7 @@ IUsuarioDAO  UsuarioDAO;
 IDeportistaDAO  DeportistaDAO;
 
 @EJB
-IEventoDAO  EventoDAO;
+IEventoMultiDAO  EventoMultiDAO;
 
 
    
@@ -67,13 +65,13 @@ IEventoDAO  EventoDAO;
 													   //ComiteOlimpico usuario 2 = new ComiteOlimpico();
 		((ComiteOlimpico)comite).setCodigo("COU");
 		((ComiteOlimpico)comite).setPaginaWeb("http://www.cou.org.uy/cou/es/");
-		comite.setNombre("Comité Olímpico Uruguayo");
-		comite.setApellido("República Oriental del Uruguay");
+		comite.setNombre("Comitï¿½ Olï¿½mpico Uruguayo");
+		comite.setApellido("Repï¿½blica Oriental del Uruguay");
 		comite.setEdad(123);
 		comite.setEmail("cou@gmail.com");
 		comite.setCanalYoutube("uruguay");
 		comite.setTwitter("uruguay");
-		comite.setFacebook("Comité Olímpico Uruguayo");
+		comite.setFacebook("Comitï¿½ Olï¿½mpico Uruguayo");
 		comite.setCedula(0);
 		comite.setPassword("cou123");
 		comite.setTenantID(1);			
@@ -148,14 +146,23 @@ IEventoDAO  EventoDAO;
 		}else{
 			System.out.println("No se encontro al usuario con email: "+co.getEmail());
 		}
-		EventoMultideportivo evento = new EventoMultideportivo("SOCHI", "sochi", "logo.jpg", new Date(), new Date(), "facebook/sochi", "#sochi", "youtube/sochi", "sochi.css",1);
 		
+		TenantHandler th = new TenantHandler();
+		EventoMultideportivo evento = new EventoMultideportivo("SOCHI", "sochi", "logo.jpg", new Date(), new Date(), "facebook/sochi", "#sochi", "youtube/sochi", "sochi.css");
+		List<EventoMultideportivo> listevento = new ArrayList<EventoMultideportivo>();
+		
+		evento.setTenant(th);
+		listevento.add(evento);
+		th.setEventos(listevento);
+
 		Organizador org =(Organizador)UsuarioDAO.buscarUsuario("dsa4");
 		
 		evento.setOrganizador(org);
-		EventoDAO.guardarEvento(evento);
-		
 		org.setEvento(evento);
+		EventoMultiDAO.guardarTenant(th);
+
+		
+		
 		//UsuarioDAO.guardarUsuario(usuario4);
     }
 

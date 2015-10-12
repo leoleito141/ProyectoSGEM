@@ -1,25 +1,19 @@
 package com.sgem.servicios;
 
 
-import java.io.IOException;
-
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.core.Response;
 
-import org.jboss.resteasy.util.Base64;
-
-import com.sgem.controladores.IEventosController;
-import com.sgem.controladores.IUsuarioController;
+import com.sgem.controladores.IEventoDeportivoController;
 import com.sgem.datatypes.DataEventoDeportivo;
-import com.sgem.datatypes.DataUsuario;
-import com.sgem.seguridad.Token;
+
 
 @Stateless
 public class EventoDeportivoService implements IEventoDeportivoService{
  
 @EJB
-private IEventosController iec;
+private IEventoDeportivoController iec;
 
 	// localhost:8080/GestionEventoMultideportivo/rest/ServicioUsuario/status/
 	

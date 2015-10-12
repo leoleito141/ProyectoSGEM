@@ -1,46 +1,11 @@
-<style>
 body
 {
-    background: url('resources/defecto/img/aros_olimpicos.jpg') fixed;
+    /*background: url('http://farm3.staticflickr.com/2832/12303719364_c25cecdc28_b.jpg') fixed;*/
     background-size: cover;
     padding: 0;
     margin: 0;
 }
-.form-title
-{
-    font-family: 'Open Sans' , sans-serif;
-    font-size: 20px;
-    font-weight: 600;
-    text-align: center;
-    color: #FFFFFF;
-    margin-top: 5%;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-}
-form.login input[type="text"], form.login input[type="password"]
-{
-   
-   
-    padding: 5px;
 
-   
-    margin-bottom: 15px;
-   
-
-}
-/*
- border-bottom: 1px solid #FFFFFF;
- color: #FFFFFF;
- font-style: italic;
-    font-size: 12px;
-    font-weight: 400;
-    letter-spacing: 1px;
-    
-        background: 0;
-    border: 0;
-       outline: 0;
-    outline: 0;
-    
 .wrap
 {
     width: 100%;
@@ -52,7 +17,17 @@ form.login input[type="text"], form.login input[type="password"]
     z-index: 99;
 }
 
-
+p.form-title
+{
+    font-family: 'Open Sans' , sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    color: #FFFFFF;
+    margin-top: 5%;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
 
 form
 {
@@ -203,28 +178,4 @@ form.login a:hover
     background-color: rgba(0, 0, 0, 0.66);
     padding: 10px;
     left: 45%;
-
-}*/
-.loginWrap{
-
-background-color: rgba(255, 255, 255, 0.5);
 }
-</style>
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="wrap col-md-8 col-md-offset-2 ">
-               <h1 class="form-title ">Login</h1>
-                <form class="login">
-               <div class="col-md-10 col-md-offset-1 loginWrap jumbotron">
-                    <input type="text" placeholder="Email"  ng-model="usuario.email"  class="col-md-6  form-control"/>
-                    <input type="password" placeholder="Contraseña" ng-model="usuario.password"  class="col-md-6  form-control" />
-                    <input type="submit" value="Login" class="btn btn-success btn-sm col-md-4 col-md-offset-4 " ng-click="loginUser()" /> 
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
-   
-</div>

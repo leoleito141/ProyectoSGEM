@@ -11,6 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -25,8 +27,8 @@ public class EventoMultideportivo implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int EventoId;
 	
-	@Column(name = "tenant_ID", nullable = true)
-	private int tenantId;
+//	@Column(name = "tenant_ID", nullable = true)
+//	private int tenantId;
 	
 	@Column(name = "nombre", nullable = true)
 	private String nombre;
@@ -61,11 +63,15 @@ public class EventoMultideportivo implements Serializable{
 	@OneToMany(fetch = FetchType.EAGER,mappedBy = "eventoMultideportivo") 
 	private Set<EventoDeportivo> deportes= new HashSet<EventoDeportivo>();
 	
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="tenantHandler_id")
+    private TenantHandler tenantHandler;
+	
 	public EventoMultideportivo(){}
 
 	public EventoMultideportivo( String nombre, String lugar,
 			String logo, Date date, Date date2, String facebook,
-			String hashtag, String canalYoutube, String css, int tenantid) {
+			String hashtag, String canalYoutube, String css) {
 		
 		
 		this.nombre = nombre;
@@ -74,18 +80,30 @@ public class EventoMultideportivo implements Serializable{
 		this.fechaInicio = date;
 		this.fechaFin = date2;
 		this.facebook = facebook;
-		Hashtag = hashtag;
+		this.Hashtag = hashtag;
 		this.canalYoutube = canalYoutube;
-		Css = css;
-		this.tenantId = tenantid;
+		this.Css = css;
+
 	}
+	
+	
+	
+	public TenantHandler getTenant() {
+		return tenantHandler;
+	}
+
+	
+	public void setTenant(TenantHandler tenant) {
+		    this.tenantHandler = tenant;
+		
+    }
 
 	public int getEventoId() {
 		return EventoId;
 	}
 
 	public void setEventoId(int eventoId) {
-		EventoId = eventoId;
+		this.EventoId = eventoId;
 	}
 
 	public String getNombre() {
