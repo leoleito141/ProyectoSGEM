@@ -17,6 +17,7 @@ import com.sgem.dominio.Usuario;
 import com.sgem.persistencia.IUsuarioDAO;
 import com.sgem.seguridad.JWTUtil;
 import com.sgem.seguridad.Token;
+import com.sgem.utilidades.Correo;
 
 @Stateless
 public class UsuarioController implements IUsuarioController {
@@ -71,7 +72,7 @@ public class UsuarioController implements IUsuarioController {
 	
 	public boolean guardarComite(DataComite dataComite) {
 		try {
-
+			boolean creado = false;
 			ComiteOlimpico co = null;
 			
 					co = new ComiteOlimpico();
@@ -84,6 +85,8 @@ public class UsuarioController implements IUsuarioController {
 					co.setPassword(dataComite.getPassword());
 					co.setCodigo(dataComite.getCodigo());
 					
+					Correo correoComite = new Correo();
+					creado = correoComite.enviarMensajeConAuth("smtp.gmail.com", 587,"inmogrupo13@gmail.com", co.getEmail(),"inmobiliaria13", "Notificacion de contraseña", "Estimado Comite Olimpico Nacional de "+co.getPais()+":Su contraseña es:"+co.getPassword()+"");
 					
 					return UsuarioDAO.guardarUsuario(co);
 		
