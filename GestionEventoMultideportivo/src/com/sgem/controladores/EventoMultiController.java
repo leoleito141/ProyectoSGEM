@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import com.sgem.datatypes.DataEvento;
+import com.sgem.datatypes.DataTenant;
 import com.sgem.dominio.EventoMultideportivo;
 import com.sgem.dominio.TenantHandler;
 import com.sgem.persistencia.IEventoMultiDAO;
@@ -42,6 +43,29 @@ public class EventoMultiController implements IEventoMultiController {
 		}
 		// TODO Auto-generated method stub
 		return true;
+	}
+
+
+	@Override
+	public DataTenant obtenerDataTenant(String tenant) {
+
+		DataTenant dt = null;
+		EventoMultideportivo e;
+		try {
+			e = EventoMultiDAO.obtenerDataTenant(tenant);
+			
+			dt = new DataTenant();
+			dt.setNombre_url(e.getNombre());
+			dt.setTenantId(e.getTenant().getTenantID());
+			dt.setLogin_back_img(e.getLogo());
+			dt.setRegistro_back_img(e.getLogo());
+						
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		return dt;
+
 	}
 	
 	

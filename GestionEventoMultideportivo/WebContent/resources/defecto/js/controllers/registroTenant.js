@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('pruebaAngularApp')
-  .controller('RegistroTenantCtrl', ['$scope','localStorageService','$modal','$auth','dataFactory','dataTenant', 
-                                     function ($scope,localStorageService,$modal, $auth, dataFactory,dataTenant) {
+  .controller('RegistroTenantCtrl', ['$scope','$modal','$auth','dataFactory','dataTenant', 
+                                     function ($scope,$modal, $auth, dataFactory,dataTenant) {
 
    console.log(dataTenant.data.tenant.tenantId);
    console.log(dataTenant.data.tenant.login_back_img);
@@ -10,21 +10,7 @@ angular.module('pruebaAngularApp')
   
    var tenant = dataTenant.data.tenant;   
    $scope.tenantId = tenant.tenantId;
-   
-//   try {
-//	   localStorageService.set("tenantId", "1");
-//	   localStorageService.set("tenantId", tenant.tenantId);
-//
-//	  } catch (exception) {
-//		  console.log(exception);
-//	  }
-  
-//   localStorageService.set('tenantId', tenant.tenantId);
-   
-//   console.log(localStorageService.get('tenantId'));
-
-	 
-   
+     
    $scope.status;
    $scope.users;
    $scope.formInfo={};

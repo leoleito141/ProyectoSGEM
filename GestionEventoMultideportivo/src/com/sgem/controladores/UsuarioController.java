@@ -85,8 +85,7 @@ public class UsuarioController implements IUsuarioController {
 					co.setPassword(dataComite.getPassword());
 					co.setCodigo(dataComite.getCodigo());
 					
-					Correo correoComite = new Correo();
-					creado = correoComite.enviarMensajeConAuth("smtp.gmail.com", 587,"inmogrupo13@gmail.com", co.getEmail(),"inmobiliaria13", "Notificacion de contraseña", "Estimado Comite Olimpico Nacional de "+co.getPais()+":Su contraseña es:"+co.getPassword()+"");
+					creado = Correo.enviarMensajeConAuth("smtp.gmail.com", 587,"inmogrupo13@gmail.com", co.getEmail(),"inmobiliaria13", "Notificacion de contraseña", "Estimado Comite Olimpico Nacional de "+co.getPais()+":Su contraseña es:"+co.getPassword()+"");
 					
 					return UsuarioDAO.guardarUsuario(co);
 		

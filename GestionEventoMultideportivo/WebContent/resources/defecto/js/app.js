@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('pruebaAngularApp', ['ngRoute','ui.bootstrap','satellizer','LocalStorageModule'])
+angular.module('pruebaAngularApp', ['ngRoute','ui.bootstrap','satellizer'])
 .run(['dataFactory','$rootScope','$location','$auth',function($dataFactory,$rootScope, $location, $auth){ // esto se ejecuta en tiempo de ejecucion,
   $rootScope.$on('$routeChangeStart', function(event, next, current) {
   
@@ -17,23 +17,17 @@ angular.module('pruebaAngularApp', ['ngRoute','ui.bootstrap','satellizer','Local
   });
   
 }])
-.config(['localStorageServiceProvider', function(localStorageServiceProvider){
-	
-	/*
-	 * While you’re in app.js, also configure localStorageServiceProvider to use "ls" as a localStorage 
-	 * name prefix so your app doesn’t accidently read properties from another app using the same variable names
-	 */
-    localStorageServiceProvider.setPrefix('ls');
-    
-}])
 .config(function ($authProvider,$routeProvider) {
 	  
 	// Parametros de configuración
-    $authProvider.loginUrl = "https://localhost:443/GestionEventoMultideportivo/rest/UsuarioService/login";
+    $authProvider.loginUrl = "https://sgem.com/rest/UsuarioService/login";
     //$authProvider.signupUrl = "http://api.com/auth/signup";
     $authProvider.tokenName = "token";
     $authProvider.tokenPrefix = "myApp";
     
+//    if(localStorage.getItem("tenantActual") != null){
+//    	localStorage.setItem("tenantActual", "");
+//    }
     // Configuración de las rutas/estados
     $routeProvider	    
     .when('/', {
@@ -44,8 +38,17 @@ angular.module('pruebaAngularApp', ['ngRoute','ui.bootstrap','satellizer','Local
 		controller : 'LoginTenantCtrl',
 	    resolve: { 
 	    	loadData:['dataFactory','$route', function(dataFactory,$route) {
-	    		console.log($route.current.params.tenant);
-	    		return dataFactory.getDatosTenant($route.current.params.tenant);   
+	    		
+	    		/***** ESTO ESTARÍA BUENO IMPLEMENTARLO EN UN UTIL O FUNCION ****/
+	    		
+	    		if(localStorage.getItem("tenantActual") == null || (JSON.parse(localStorage.getItem("tenantActual"))).nombre_url != $route.current.params.tenant){
+
+	    			return dataFactory.getDataTenant($route.current.params.tenant);
+	    			
+	    		}else{
+	    			return JSON.parse(localStorage.getItem("tenantActual"));
+	    		}
+	    		/**********************************************************/
 	    	}]
 	    }   
 	}).when('/:tenant/registro', {
@@ -53,8 +56,16 @@ angular.module('pruebaAngularApp', ['ngRoute','ui.bootstrap','satellizer','Local
 		controller : 'RegistroTenantCtrl',
 	    resolve: { 
 	    	dataTenant:['dataFactory','$route', function(dataFactory,$route) {
-	    		console.log("Registro url : "+$route.current.params.tenant);
-	    		return dataFactory.getTenant($route.current.params.tenant);   
+	    		/***** ESTO ESTARÍA BUENO IMPLEMENTARLO EN UN UTIL O FUNCION ****/
+	    		
+	    		if(localStorage.getItem("tenantActual") == null || (JSON.parse(localStorage.getItem("tenantActual"))).nombre_url != $route.current.params.tenant){
+
+	    			return dataFactory.getDataTenant($route.current.params.tenant);
+	    			
+	    		}else{
+	    			return JSON.parse(localStorage.getItem("tenantActual"));
+	    		}
+	    		/**********************************************************/
 	    	}]
 	    }   
 	}).when('/main', {
@@ -63,7 +74,8 @@ angular.module('pruebaAngularApp', ['ngRoute','ui.bootstrap','satellizer','Local
 	})
 //	.when('/:tenant/registro', {
 //		templateUrl : 'views/registro.html',
-//		controller : 'RegistroCtrl'
+//		controller : 'RegistroCtrl',
+//		
 //	})
 	.when('/:tenant/altaEvento', {
 		templateUrl : 'views/altaEvento.html',
@@ -80,7 +92,21 @@ angular.module('pruebaAngularApp', ['ngRoute','ui.bootstrap','satellizer','Local
 	
 	.when('/:tenant/altaComite', {
 		templateUrl : 'views/altaComite.html',
-		controller : 'RegistroCtrl'
+		controller : 'RegistroCtrl',
+		resolve: { 
+		    	dataTenant:['dataFactory','$route', function(dataFactory,$route) {
+		    		/***** ESTO ESTARÍA BUENO IMPLEMENTARLO EN UN UTIL O FUNCION ****/
+		    		
+		    		if(localStorage.getItem("tenantActual") == null || (JSON.parse(localStorage.getItem("tenantActual"))).nombre_url != $route.current.params.tenant){
+
+		    			return dataFactory.getDataTenant($route.current.params.tenant);
+		    			
+		    		}else{
+		    			return JSON.parse(localStorage.getItem("tenantActual"));
+		    		}
+		    		/**********************************************************/
+		    	}]
+		}
 	})
 	
 	.when('/:tenant/perfilComite', {

@@ -19,6 +19,13 @@ import com.sgem.datatypes.DataEvento;
 @Path("/EventoMultiService")
 public interface IEventoMultiService {
 	
+
+	@PermitAll
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/status")
+	public Response getStatus();
+	
 	@RolesAllowed("ADMIN")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
@@ -27,25 +34,29 @@ public interface IEventoMultiService {
 	public Response altaEvento(DataEvento datosEvento);
 
 	
-	//@RolesAllowed("VISITANTE")
-	@PermitAll	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/obtenerDatosTenant/{tenant}")
-	public Response obtenerDatos(@PathParam("tenant") String tenant);
-	
-	
-	/************ Metodo de Juan ***********/
-	
-	//@RolesAllowed("VISITANTE")
-	@PermitAll	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/obetenerTenant/{tenant}")
-	public Response obetenerTenant(@PathParam("tenant") String tenant);
+//	//@RolesAllowed("VISITANTE")
+//	@PermitAll	
+//	@GET
+//	@Produces(MediaType.APPLICATION_JSON)
+//	@Consumes(MediaType.APPLICATION_JSON)
+//	@Path("/obtenerDatosTenant/{tenant}")
+//	public Response obtenerDatos(@PathParam("tenant") String tenant);
+//	
+//	
+//	//@RolesAllowed("VISITANTE")
+//	@PermitAll	
+//	@GET
+//	@Produces(MediaType.APPLICATION_JSON)
+//	@Consumes(MediaType.APPLICATION_JSON)
+//	@Path("/obtenerTenant/{tenant}")
+//	public Response obtenerTenant(@PathParam("tenant") String tenant);
+//
 
-	/***************************************/
+	@PermitAll	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/obtenerDataTenant/{tenant}")
+	public Response obtenerDataTenant(@PathParam("tenant") String tenant);
+
 		
 }

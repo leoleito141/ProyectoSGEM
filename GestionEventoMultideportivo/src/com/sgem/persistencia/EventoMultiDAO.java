@@ -1,9 +1,13 @@
 package com.sgem.persistencia;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import com.sgem.datatypes.DataTenant;
 import com.sgem.dominio.EventoMultideportivo;
 import com.sgem.dominio.TenantHandler;
 
@@ -49,6 +53,19 @@ public class EventoMultiDAO implements IEventoMultiDAO {
 		}
 		return false;
 
+	}
+
+	@Override
+	public EventoMultideportivo obtenerDataTenant(String tenant) {
+		List<EventoMultideportivo> evento = new ArrayList<EventoMultideportivo>();
+		
+		try{
+			evento = em.createQuery("SELECT e FROM EventoMultideportivo e WHERE e.nombre = '"+tenant+"'", EventoMultideportivo.class).getResultList();
+		}catch(Exception e){
+			e.printStackTrace();			
+		}
+		
+		return evento.get(evento.size()-1);
 	}
 
 	

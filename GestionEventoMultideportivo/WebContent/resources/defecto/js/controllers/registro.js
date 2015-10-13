@@ -1,13 +1,15 @@
 'use strict';
 
 angular.module('pruebaAngularApp')
-  .controller('RegistroCtrl',['$scope','$modal','dataFactory', function ($scope,$modal,dataFactory) {
+  .controller('RegistroCtrl',['$scope','$modal','dataFactory','dataTenant', function ($scope,$modal,dataFactory,dataTenant) {
     $scope.status;
     $scope.users;
     $scope.formInfo={};
     $scope.usurio;
     $scope.nombre;
     $scope.comite={};
+    
+    console.log(dataTenant.tenantId);
 
    $scope.insertUser = function () {
      
@@ -92,6 +94,9 @@ angular.module('pruebaAngularApp')
 
 	  
 	  $scope.altaComite = function(){
+		  
+		  $scope.comite.tenantId = dataTenant.tenantId;
+			  
 		  dataFactory.altaComite($scope.comite)
 	     	.then(function (data, status, headers, config) {
 	                $scope.status = data.status;
