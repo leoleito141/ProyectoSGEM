@@ -77,6 +77,12 @@ angular.module('pruebaAngularApp', ['ngRoute','ui.bootstrap','satellizer','Local
 		templateUrl : 'views/altaEventDeportivo.html',
 		controller : 'EventDeportivoCtrl'
 	})
+	
+	.when('/:tenant/altaComite', {
+		templateUrl : 'views/altaComite.html',
+		controller : 'RegistroCtrl'
+	})
+	
 	.when('/:tenant/perfilComite', {
 		templateUrl : 'views/perfilComite.html',
 		controller : 'PerfilCtrl'

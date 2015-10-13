@@ -8,7 +8,9 @@ import javax.ejb.Stateless;
 
 import org.jboss.resteasy.util.Base64;
 
+import com.sgem.datatypes.DataComite;
 import com.sgem.datatypes.DataUsuario;
+import com.sgem.dominio.ComiteOlimpico;
 import com.sgem.dominio.Juez;
 import com.sgem.dominio.Organizador;
 import com.sgem.dominio.Usuario;
@@ -39,14 +41,14 @@ public class UsuarioController implements IUsuarioController {
 				if(usuario != null){
 					
 					usuario = new Organizador();
-					usuario.setNombre(dataUsuario.getNombre());
-					usuario.setApellido(dataUsuario.getApellido());
-					usuario.setEdad(dataUsuario.getEdad());
+				//	usuario.setNombre(dataUsuario.getNombre());
+				//	usuario.setApellido(dataUsuario.getApellido());
+				//	usuario.setEdad(dataUsuario.getEdad());
 					usuario.setEmail(dataUsuario.getEmail());
 					usuario.setCanalYoutube(dataUsuario.getCanalYoutube());
 					usuario.setTwitter(dataUsuario.getTwitter());
 					usuario.setFacebook(dataUsuario.getFacebook());
-					usuario.setCedula(dataUsuario.getCedula());
+			//		usuario.setCedula(dataUsuario.getCedula());
 					usuario.setPassword(dataUsuario.getPassword());
 					
 					return UsuarioDAO.guardarUsuario(usuario);
@@ -65,6 +67,33 @@ public class UsuarioController implements IUsuarioController {
 		return false;
 
 	}
+	
+	
+	public boolean guardarComite(DataComite dataComite) {
+		try {
+
+			ComiteOlimpico co = null;
+			
+					co = new ComiteOlimpico();
+				
+					co.setEmail(dataComite.getEmail());
+					co.setTwitter(dataComite.getTwitter());
+					co.setFacebook(dataComite.getFacebook());
+					co.setPassword(dataComite.getPassword());
+					co.setPais(dataComite.getPais());
+					co.setPassword(dataComite.getPassword());
+					co.setCodigo(dataComite.getCodigo());
+					
+					
+					return UsuarioDAO.guardarUsuario(co);
+		
+			}
+		 catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 
 	public Token loginUsuario(DataUsuario dataUsuario) {	// String url){
 		

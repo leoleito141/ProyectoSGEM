@@ -10,6 +10,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import com.sgem.datatypes.DataComite;
 import com.sgem.datatypes.DataUsuario;
 
 @RequestScoped
@@ -31,6 +33,15 @@ public interface IUsuarioService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/usuarios")
 	public Response guardarUsuario(DataUsuario dataUsuario);
+	
+//	@RolesAllowed("ADMIN")
+	@PermitAll	// para pruebas
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/altaComite")
+	public Response altaComite(DataComite dataComite);
+	
 	
 	@RolesAllowed("ADMIN")
 	@GET

@@ -39,7 +39,7 @@ public abstract class Usuario implements Serializable {
 	@Column(name = "canal_youtube", nullable = true)
 	private String canalYoutube;
 	
-	@Column(name = "nombre", nullable = false)
+/*	@Column(name = "nombre", nullable = false)
 	private String nombre;
 	
 	@Column(name = "apellido", nullable = false)
@@ -50,23 +50,22 @@ public abstract class Usuario implements Serializable {
 	
 	@Column(name = "cedula", nullable = false)
 	private Integer cedula;
-	
+	*/
 	@Column(name = "password", nullable = false)
 	private String password;
 
 	public Usuario() {}
 
 	public Usuario(String email, String facebook, String twitter,
-			String canalYoutube, String nombre, String apellido, Integer edad,
-			Integer cedula, String password,int tenantid) {
+			String canalYoutube, String password,int tenantid) {
 		this.email = email;
 		this.facebook = facebook;
 		this.twitter = twitter;
 		this.canalYoutube = canalYoutube;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.edad = edad;
-		this.cedula = cedula;
+	//	this.nombre = nombre;
+	//	this.apellido = apellido;
+	//	this.edad = edad;
+	//	this.cedula = cedula;
 		this.password = password;
 		this.tenantID=tenantid;
 	}
@@ -111,7 +110,7 @@ public abstract class Usuario implements Serializable {
 		this.canalYoutube = canalYoutube;
 	}
 
-	public String getNombre() {
+/*	public String getNombre() {
 		return nombre;
 	}
 
@@ -142,7 +141,7 @@ public abstract class Usuario implements Serializable {
 	public void setCedula(Integer cedula) {
 		this.cedula = cedula;
 	}
-
+*/
 	public String getPassword() {
 		return password;
 	}

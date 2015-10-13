@@ -7,7 +7,7 @@ angular.module('pruebaAngularApp')
     $scope.formInfo={};
     $scope.usurio;
     $scope.nombre;
-    	    
+    $scope.comite={};
 
    $scope.insertUser = function () {
      
@@ -90,5 +90,26 @@ angular.module('pruebaAngularApp')
 		  
 	  };
 
+	  
+	  $scope.altaComite = function(){
+		  dataFactory.altaComite($scope.comite)
+	     	.then(function (data, status, headers, config) {
+	                $scope.status = data.status;
+	                console.log("Entre Alta comite");
+	                console.log(data.status);
+	                console.log(status);
+	                console.log(headers);
+	                console.log(config);
+	                
+	            })
+	            .catch(function(response){
+	                // Si ha habido errores llegamos a esta parte
+	            	console.log(response); 
+	            });
+		  
+		  
+		  
+	  };
+	  
 
   }]);

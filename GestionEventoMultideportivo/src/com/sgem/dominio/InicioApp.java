@@ -49,14 +49,14 @@ IEventoMultiDAO  EventoMultiDAO;
 		Usuario usuario4 = null;
 
 		admin = new Admin();
-		admin.setNombre("Admin");
-		admin.setApellido("Admin");
-		admin.setEdad(0);
+	//	admin.setNombre("Admin");
+	//	admin.setApellido("Admin");
+	//	admin.setEdad(0);
 		admin.setEmail("admin@gmail.com");
 		admin.setCanalYoutube("admin");
 		admin.setTwitter("admin");
 		admin.setFacebook("admin");
-		admin.setCedula(0);
+//		admin.setCedula(0);
 		admin.setPassword("123");
 		admin.setTenantID(0);			
 			
@@ -64,15 +64,14 @@ IEventoMultiDAO  EventoMultiDAO;
 		((ComiteOlimpico)comite).setPais("Uruguay"); // para evitar esto, se declara a usuario2 como: 
 													   //ComiteOlimpico usuario 2 = new ComiteOlimpico();
 		((ComiteOlimpico)comite).setCodigo("COU");
-		((ComiteOlimpico)comite).setPaginaWeb("http://www.cou.org.uy/cou/es/");
-		comite.setNombre("Comit� Ol�mpico Uruguayo");
-		comite.setApellido("Rep�blica Oriental del Uruguay");
-		comite.setEdad(123);
+	//	comite.setNombre("Comit� Ol�mpico Uruguayo");
+	//	comite.setApellido("Rep�blica Oriental del Uruguay");
+	//	comite.setEdad(123);
 		comite.setEmail("cou@gmail.com");
 		comite.setCanalYoutube("uruguay");
 		comite.setTwitter("uruguay");
 		comite.setFacebook("Comit� Ol�mpico Uruguayo");
-		comite.setCedula(0);
+	//	comite.setCedula(0);
 		comite.setPassword("cou123");
 		comite.setTenantID(1);			
 		
@@ -88,14 +87,14 @@ IEventoMultiDAO  EventoMultiDAO;
 //			usuario3.setPassword("dsa3");
 		
 		usuario4 = new Organizador();
-		usuario4.setNombre("dsa4");
-		usuario4.setApellido("dsa4");
-		usuario4.setEdad(321);
+	//	usuario4.setNombre("dsa4");
+	//	usuario4.setApellido("dsa4");
+	//	usuario4.setEdad(321);
 		usuario4.setEmail("dsa4");
 		usuario4.setCanalYoutube("dsa4");
 		usuario4.setTwitter("dsa4");
 		usuario4.setFacebook("dsa4");
-		usuario4.setCedula(312312);
+//		usuario4.setCedula(312312);
 		usuario4.setPassword("dsa4");
 		usuario4.setTenantID(1);			
 		

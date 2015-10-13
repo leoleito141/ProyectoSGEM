@@ -59,6 +59,13 @@
         }; 
         
         
+        dataFactory.altaComite = function(datos){
+        	console.log(datos);
+            return $http.post('https://localhost:443/GestionEventoMultideportivo/rest/UsuarioService/altaComite', datos,
+            		{headers: { 'Rol' : 'ADMIN'}});       	
+        }; 
+        
+        
         dataFactory.getDatosTenant = function(tenant){
         	
         	 return $http.get('https://localhost:443/GestionEventoMultideportivo/rest/EventoMultiService/obtenerDatosTenant/'+tenant)
