@@ -11,10 +11,11 @@ import com.sgem.persistencia.IEventoDeportivoDAO;
 @Stateless
 public class EventoDeportivoController implements IEventoDeportivoController {
 
-	public static final String ROL_ADMIN = "Administrador"; // faltan mas roles...
-	
 	@EJB
 	private IEventoDeportivoDAO EventosDAO;
+	
+	@EJB
+	private IEventoMultiController  iemc;
 	
 	@Override
 	public boolean guardarEventoDeportivo(DataEventoDeportivo dataEventoDeportivo) {
@@ -22,7 +23,7 @@ public class EventoDeportivoController implements IEventoDeportivoController {
 
 			EventoDeportivo eventoDeportivo = null;
 		//// Falta mandar el tennat del evento multideportivo al que pertenece 
-
+			        int idEventoMulti = 0;
 					eventoDeportivo = new EventoDeportivo();
 					
 				
@@ -31,6 +32,10 @@ public class EventoDeportivoController implements IEventoDeportivoController {
 					eventoDeportivo.setSexo(dataEventoDeportivo.getSexo());
 					eventoDeportivo.setFechaInicio(dataEventoDeportivo.getFechaInicio());
 					eventoDeportivo.setFechaFin(dataEventoDeportivo.getFechaFin());
+					eventoDeportivo.setTenantId(dataEventoDeportivo.getTenantId());
+					
+					idEventoMulti = iemc.traeridEventoMultit(dataEventoDeportivo.getTenantId());
+					eventoDeportivo.setEventoMultiId(idEventoMulti);
 					
 					return EventosDAO.guardarEventoDeportivo(eventoDeportivo);
 					

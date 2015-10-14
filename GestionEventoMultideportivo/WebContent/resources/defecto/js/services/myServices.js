@@ -1,18 +1,20 @@
  angular.module('pruebaAngularApp')
    .factory('dataFactory', ['$http', function($http) {
     var dataFactory = {};
-
+    
+    const dominio = "https://sgem.com/rest/";
+    
     dataFactory.insertUser = function (datos) {
 
             console.log(datos);
-            return $http.post('https://localhost:443/GestionEventoMultideportivo/rest/UsuarioService/usuarios', datos);
+            return $http.post(dominio+'UsuarioService/usuarios', datos);
 
         };
 
     dataFactory.getStatus = function () {
 
         console.log($location.absUrl());
-        return $http.get('https://localhost:443/GestionEventoMultideportivo/rest/UsuarioService/status/', {
+        return $http.get(dominio+'UsuarioService/status/', {
             headers: { 'Rol' : 'ADMIN'} 
         });
     };
@@ -20,7 +22,7 @@
      dataFactory.getUsuario = function (nombre) {
 
     	    console.log(nombre);
-            return $http.get('https://localhost:443/GestionEventoMultideportivo/rest/UsuarioService/usuarioPrueba/'+nombre );
+            return $http.get(dominio+'UsuarioService/usuarioPrueba/'+nombre );
 
         };
     /*
@@ -35,45 +37,97 @@
         };   
     */
         dataFactory.getPrueba = function () {
-            return $http.get('https://localhost:443/GestionEventoMultideportivo/rest/UsuarioService/prueba/', {
+            return $http.get(dominio+'UsuarioService/prueba/', {
                 headers: { 'Rol' : 'ADMIN'} 
             });
         }; 
         
         dataFactory.altaEvento = function(datos){
         	console.log(datos);
-            return $http.post('https://localhost:443/GestionEventoMultideportivo/rest/EventoService/eventos', datos,
+            return $http.post(dominio+'EventoMultiService/eventos', datos,
             		{headers: { 'Rol' : 'ADMIN'}});       	
         }; 
         
+        dataFactory.guardarOrganizador = function(datos){
+        	console.log(datos);
+            return $http.post(dominio+'UsuarioService/organizador', datos,
+            		{headers: { 'Rol' : 'ADMIN'}});	      	
+        };
         
         dataFactory.altaEventoDeportivo = function(datos){
         	console.log(datos);
-            return $http.post('https://localhost:443/GestionEventoMultideportivo/rest/EventoDeportivoService/altaEventoDeportivo', datos,
+            return $http.post(dominio+'EventoDeportivoService/altaEventoDeportivo', datos,
             		{headers: { 'Rol' : 'ADMIN'}});       	
         }; 
         
         
-        dataFactory.getDatosTenant = function(tenant){
-        	
-        	 return $http.get('https://localhost:443/GestionEventoMultideportivo/rest/EventoService/obtenerDatosTenant/'+tenant)
-        	  .then(function (data, status, headers, config) {
-                  
-                  console.log("Entre get datos tenant");
-                  console.log(data);
-                  console.log(status);
-                  console.log(headers);
-                  console.log(config);
-                  return data; 
-                  
-              })
-              .catch(function(response){
-                  // Si ha habido errores llegamos a esta parte
-              	console.log(response); 
-              });
-              		 
-        };
+        dataFactory.altaComite = function(datos){
+        	console.log(datos);
+            return $http.post(dominio+'UsuarioService/altaComite', datos,
+            		{headers: { 'Rol' : 'ADMIN'}});       	
+        }; 
         
+        
+//        dataFactory.getDatosTenant = function(tenant){
+//        	
+//        	 return $http.get('dominio+'EventoMultiService/obtenerDatosTenant/'+tenant, {
+//                 headers: { 'Rol' : 'VISITANTE'} 
+//             })
+//        	  .then(function (data, status, headers, config) {
+//                  
+//                  console.log("Entre get datos tenant");
+//                  console.log(data);
+//                  console.log(status);
+//                  console.log(headers);
+//                  console.log(config);
+//                  return data; 
+//                  
+//              })
+//              .catch(function(response){
+//                  // Si ha habido errores llegamos a esta parte
+//              	console.log(response); 
+//              });
+//              		 
+//        };
+//        
+//        dataFactory.getTenant = function(tenant){
+//        	//fijarse si no esta cargado ya, ese "tenant", si es distinto al que tenemos seteado ir a buscarlo.
+//	   	return $http.get('dominio+'EventoMultiService/obetenerTenant/'+tenant)
+//		       	.then(function (data, status, headers, config) {
+//		                 
+//		                 console.log("Entre get tenant");
+//		                 console.log(data);
+//		                 console.log(status);
+//		                 console.log(headers);
+//		                 console.log(config);
+//		                 return data; 
+//		                 
+//	             }).catch(function(response){
+//		             	console.log(response); 
+//		        });
+//	         		 
+//	    };
      
+	    dataFactory.getDataTenant = function(tenant){
+   
+	   	return $http.get(dominio+'EventoMultiService/obtenerDataTenant/'+tenant)
+		       	.then(function (response) {
+
+		       		localStorage.setItem("tenantActual", JSON.stringify(response.data));
+		       				       		
+		                 console.log("Entre get Data tenant");
+		                 console.log(response);
+		                 console.log(response.status);
+		                 console.log(response.headers);
+		                 console.log(response.config);
+		                 return response; 
+		                 
+	             }).catch(function(response){
+		             	console.log(response); 
+		        });
+	         		 
+	    };
+     
+	    
         return dataFactory;
 }]); 

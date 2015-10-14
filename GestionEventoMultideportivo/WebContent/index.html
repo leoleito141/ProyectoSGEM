@@ -2,13 +2,14 @@
 <html>
   <head>
     <link rel="stylesheet" href="resources/angular/shared/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="resources/defecto/css/Perfil.css" />
   
   </head>
   <body ng-app="pruebaAngularApp" ng-controller="AppCtrl" ng-style="customStyle" >
 
 
     <!-- Add your site or application content here -->
-    <div >
+    <div class="FullHeight " >
     
 		    
 		     <div class="header" ng-show="isAuthenticated()">
@@ -45,9 +46,9 @@
 		      </nav>
 		    </div>
 		  
-    	
-<!-- 	    <div class="container" ng-view="" ></div> -->
-	    <div class="container" ui-view></div>
+
+	    <div class=" FullHeight col-md-12" ui-view></div>
+
     </div>
 	<script type="text/javascript"  src="resources/angular/shared/angular/angular.js"></script>
     <script  type="text/javascript" src="resources/angular/shared/jquery/jquery.js"></script>
@@ -66,10 +67,13 @@
     <!-- Controllers -->
     <script src="resources/defecto/js/controllers/login.js"></script>
     <script src="resources/defecto/js/controllers/loginTenant.js"></script>
+    <script src="resources/defecto/js/controllers/registroTenant.js"></script>
     <script src="resources/defecto/js/controllers/appController.js"></script>   
-    <script src="resources/defecto/js/controllers/main.js"></script>
+    <script src="resources/defecto/js/controllers/eventoMulti.js"></script>
     <script src="resources/defecto/js/controllers/registro.js"></script>
     <script src="resources/defecto/js/controllers/eventoDeportivo.js"></script>
+    <script src="resources/defecto/js/controllers/perfil.js"></script>
+    
   
     <!-- Services -->
     <script src="resources/defecto/js/services/myServices.js"></script>

@@ -3,8 +3,8 @@
 angular.module('pruebaAngularApp')
   .controller('LoginTenantCtrl', ['$scope','$auth','dataFactory','$state','loadData', function ($scope, $auth, dataFactory,$state,loadData) {
 
-   console.log(loadData.data.image);
-   $scope.customStyle.background= 'url(resources/defecto/img/tenant1/' + loadData.data.image +')fixed';
+   console.log(loadData.login_back_img);
+   $scope.customStyle.background= 'url(resources/defecto/img/tenant1/' + loadData.login_back_img +')fixed';
 //   $scope.customStyle = {
 //	   'background-image': 'url(resources/defecto/img/tenant1/' + loadData.data.image +')'
 ////	   'background-image': 'url(resources/defecto/img/tenant1/' + loadData.data.image +')fixed',
@@ -19,7 +19,7 @@ angular.module('pruebaAngularApp')
     
        $auth.login({
            email: datos.email,
-           password: btoa(datos.password) // base 64
+           password: btoa(datos.password) // base 64 
        })
        .then(function (data){
           

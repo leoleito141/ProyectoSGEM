@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class DataEventoDeportivo{
 	
-
+	private int tenantId;
 //	@SerializedName(value="nombreDeporte")
 	private String nombreDeporte;
 	
@@ -60,8 +60,19 @@ public class DataEventoDeportivo{
 		FechaFin = fechaFin;
 	}
 	
+	
+	
+	public int getTenantId() {
+		return tenantId;
+	}
+
+	public void setTenantId(int tenantId) {
+		this.tenantId = tenantId;
+	}
+
 	public String toString() {
 		return "DataUsuario [nombreDeporte=" + nombreDeporte + ", nombreDisciplina=" + nombreDisciplina
+				+ ", tenantId=" + tenantId
 				+ ", sexo=" + sexo + ", FechaInicio=" + FechaInicio
 				+ ", FechaFin=" + FechaFin +  "]";
 	}

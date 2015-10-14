@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pruebaAngularApp')
-  .controller('MainCtrl', ['$scope','dataFactory', function ($scope,dataFactory) {
+  .controller('EventoMultiCtrl', ['$scope','dataFactory', function ($scope,dataFactory) {
 	
 	  $scope.evento={};
 	  console.log($scope.evento);
@@ -52,4 +52,3 @@ angular.module('pruebaAngularApp')
 	  
 	  
   }]);
-

@@ -23,18 +23,17 @@ public class ComiteOlimpico extends Usuario{
 	@Column(name = "cod_comite_olimpico", nullable = false, unique = true)
 	private String codigo;
 	
-	@Column(name = "pagina_web", nullable = true)
-	private String paginaWeb;
-	
+		
 	@OneToMany(fetch = FetchType.EAGER,mappedBy = "comiteOlimpico") 
 	 private Set<Deportista> Deportistas= new HashSet<Deportista>();
 	
 	public ComiteOlimpico(){}
-	public ComiteOlimpico(String email, String facebook, String twitter, String canalYoutube, String nombre, String apellido, Integer edad, Integer cedula, String password,int tenantid) 
+	public ComiteOlimpico(String email, String facebook, String codigo, String pais,String twitter, String canalYoutube,String password,int tenantid) 
 	{
 		
-		super(email, facebook, twitter, canalYoutube, nombre, apellido, edad, cedula, password,tenantid);
-				
+		super(email, facebook, twitter, canalYoutube, password,tenantid);
+		this.codigo = codigo;
+		this.pais = pais;
 	}
 
 	public String soy() {
@@ -66,12 +65,7 @@ public class ComiteOlimpico extends Usuario{
 		this.codigo = codigo;
 	}
 	
-	public String getPaginaWeb() {
-		return paginaWeb;
-	}
-	public void setPaginaWeb(String paginaWeb) {
-		this.paginaWeb = paginaWeb;
-	}
+
 	public void agregarDeportista(Deportista d) {
 
 		if (this.Deportistas != null)

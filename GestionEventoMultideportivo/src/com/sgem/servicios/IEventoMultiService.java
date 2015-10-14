@@ -16,8 +16,15 @@ import com.sgem.datatypes.DataEvento;
 
 
 @RequestScoped
-@Path("/EventoService")
+@Path("/EventoMultiService")
 public interface IEventoMultiService {
+	
+
+	@PermitAll
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/status")
+	public Response getStatus();
 	
 	@RolesAllowed("ADMIN")
 	@POST
@@ -27,12 +34,29 @@ public interface IEventoMultiService {
 	public Response altaEvento(DataEvento datosEvento);
 
 	
-	//@RolesAllowed("VISITANTE")
+//	//@RolesAllowed("VISITANTE")
+//	@PermitAll	
+//	@GET
+//	@Produces(MediaType.APPLICATION_JSON)
+//	@Consumes(MediaType.APPLICATION_JSON)
+//	@Path("/obtenerDatosTenant/{tenant}")
+//	public Response obtenerDatos(@PathParam("tenant") String tenant);
+//	
+//	
+//	//@RolesAllowed("VISITANTE")
+//	@PermitAll	
+//	@GET
+//	@Produces(MediaType.APPLICATION_JSON)
+//	@Consumes(MediaType.APPLICATION_JSON)
+//	@Path("/obtenerTenant/{tenant}")
+//	public Response obtenerTenant(@PathParam("tenant") String tenant);
+//
+
 	@PermitAll	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/obtenerDatosTenant/{tenant}")
-	public Response obtenerDatos(@PathParam("tenant") String tenant);
-	
+	@Path("/obtenerDataTenant/{tenant}")
+	public Response obtenerDataTenant(@PathParam("tenant") String tenant);
+
+		
 }

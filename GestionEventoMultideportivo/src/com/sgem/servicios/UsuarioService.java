@@ -10,6 +10,7 @@ import javax.ws.rs.core.Response;
 import org.jboss.resteasy.util.Base64;
 
 import com.sgem.controladores.IUsuarioController;
+import com.sgem.datatypes.DataComite;
 import com.sgem.datatypes.DataEvento;
 import com.sgem.datatypes.DataUsuario;
 import com.sgem.seguridad.Token;
@@ -64,6 +65,20 @@ private IUsuarioController iuc;
 
 		try {
 			return Response.ok(iuc.guardarUsuario(dataUsuario)).build();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return null;
+
+	}
+	
+	
+	public Response altaComite(DataComite dataComite) {
+
+		try {
+			return Response.ok(iuc.guardarComite(dataComite)).build();
 
 		} catch (Exception e) {
 			e.printStackTrace();

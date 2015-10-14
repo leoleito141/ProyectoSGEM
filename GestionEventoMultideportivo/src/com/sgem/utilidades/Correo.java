@@ -12,7 +12,7 @@ import javax.mail.internet.MimeMessage;
 
 public class Correo
 {     
-    public boolean enviarMensajeConAuth(String host, Integer puerto, String origen, String destino, String password,
+    public static boolean enviarMensajeConAuth(String host, Integer puerto, String origen, String destino, String password,
     		String asunto, String mensaje) throws AddressException, MessagingException
     {
     	

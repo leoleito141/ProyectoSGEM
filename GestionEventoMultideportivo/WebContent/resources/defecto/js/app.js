@@ -3,17 +3,15 @@
 angular.module('pruebaAngularApp', ['ui.router','ui.bootstrap','satellizer'])
 .run(['dataFactory','$rootScope','$state','$auth',function(dataFactory,$rootScope, $state, $auth){ // esto se ejecuta en tiempo de ejecucion,
   $rootScope.$on('$stateChangeStart', function(event, next, current) {
-  console.log($auth.isAuthenticated());
+  
     if(!$auth.isAuthenticated()){
-    	console.log(next.templateUrl);
-      if (next.templateUrl=='views/main.html' || next.templateUrl=='views/registro.html' ) {
-    	 console.log("entre"); 
-    	  event.preventDefault();
-    	  $state.go('homeLogin');
+    	
+      if (next.templateUrl=='views/altaEvento.html' ) {
+       	  event.preventDefault();
+    	  $state.go('adminLogin');
 
       }
-//   // stop state change
-//      event.preventDefault();
+
 
     } 
     /* Act on the event */
@@ -30,37 +28,75 @@ angular.module('pruebaAngularApp', ['ui.router','ui.bootstrap','satellizer'])
     // Configuración de las rutas/estados
     $urlRouterProvider.otherwise('/');
     $stateProvider	    
-    .state('homeLogin', {
+    .state('adminLogin', {
     	url:'/',
 		templateUrl : 'views/login.html',
 		controller : 'LoginCtrl'
-	}).state('login', {
+	}).state('tenantLogin', {
 		url:'/:tenant/login',
 		templateUrl : 'views/tenant/loginTenant.html',
 		controller : 'LoginTenantCtrl',
 	    resolve: { 
 	    	loadData:function(dataFactory,$stateParams) {
-	    		return dataFactory.getDatosTenant( $stateParams.tenant);   
-        }
+	    		/***** ESTO ESTARÍA BUENO IMPLEMENTARLO EN UN UTIL O FUNCION ****/
+	    		
+	    		if(localStorage.getItem("tenantActual") == null || (JSON.parse(localStorage.getItem("tenantActual"))).nombre_url != $stateParams.tenant){
+
+	    			return dataFactory.getDataTenant($stateParams.tenant);
+	    			
+	    		}else{
+	    			return JSON.parse(localStorage.getItem("tenantActual"));
+	    		}
+	    		/**********************************************************/   
+	    	}
 	    }   
-	}).state('main', {
-		url:'/main',
-		templateUrl : 'views/main.html',
-		controller : 'MainCtrl'
-	}).state('registro', {
-		url:'/:tenant/registro',
-		templateUrl : 'views/registro.html',
-		controller : 'RegistroCtrl'
 	}).state('altaEvento', {
 		url:'/:tenant/altaEvento',
 		templateUrl : 'views/altaEvento.html',
-		controller : 'MainCtrl'
+		controller : 'EventoMultiCtrl'
 	}).state('altaEventoDeportivo', {
 		url:'/:tenant/altaEventoDeportivo',
 		templateUrl : 'views/altaEventDeportivo.html',
-		controller : 'EventDeportivoCtrl'
+		controller : 'EventDeportivoCtrl',
+		resolve: { 
+		    loadData:function(dataFactory,$stateParams) {
+		    	/***** ESTO ESTARÍA BUENO IMPLEMENTARLO EN UN UTIL O FUNCION ****/
+		    		
+		    	if(localStorage.getItem("tenantActual") == null || (JSON.parse(localStorage.getItem("tenantActual"))).nombre_url != $stateParams.tenant){
+
+		    		return dataFactory.getDataTenant($stateParams.tenant);
+		    			
+		   		}else{
+		   			return JSON.parse(localStorage.getItem("tenantActual"));
+		   		}
+		   		/**********************************************************/	   
+	        }
+		}   	
+	}).state('altaComite', {
+		url:'/:tenant/altaComite',
+		templateUrl : 'views/altaComite.html',
+		controller : 'RegistroCtrl',
+		resolve: { 
+		    	dataTenant: function(dataFactory,$stateParams) {
+		    		/***** ESTO ESTARÍA BUENO IMPLEMENTARLO EN UN UTIL O FUNCION ****/
+		    		
+		    		if(localStorage.getItem("tenantActual") == null || (JSON.parse(localStorage.getItem("tenantActual"))).nombre_url != $stateParams.tenant){
+
+		    			return dataFactory.getDataTenant($stateParams.tenant);
+		    			
+		    		}else{
+		    			return JSON.parse(localStorage.getItem("tenantActual"));
+		    		}
+		    		/**********************************************************/
+		    	}
+		}
+	}).state('perfilComite', {
+		url:'/:tenant/perfilComite',
+		templateUrl : 'views/perfilComite.html',
+		controller : 'PerfilCtrl'
 	});
 	
 
  });
+
 
