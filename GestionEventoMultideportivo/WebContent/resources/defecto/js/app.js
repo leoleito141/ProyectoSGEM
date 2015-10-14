@@ -20,7 +20,7 @@ angular.module('pruebaAngularApp', ['ui.router','ui.bootstrap','satellizer'])
 }])
 .config(function ($authProvider,$stateProvider, $urlRouterProvider) {
 	// Parametros de configuración
-    $authProvider.loginUrl = "https://localhost:443/GestionEventoMultideportivo/rest/UsuarioService/login";
+    $authProvider.loginUrl = "https://sgem.com/rest/UsuarioService/login";
     //$authProvider.signupUrl = "http://api.com/auth/signup";
     $authProvider.tokenName = "token";
     $authProvider.tokenPrefix = "myApp";
@@ -59,7 +59,7 @@ angular.module('pruebaAngularApp', ['ui.router','ui.bootstrap','satellizer'])
 		templateUrl : 'views/altaEventDeportivo.html',
 		controller : 'EventDeportivoCtrl',
 		resolve: { 
-		    loadData:function(dataFactory,$stateParams) {
+			dataTenant:function(dataFactory,$stateParams) {
 		    	/***** ESTO ESTARÍA BUENO IMPLEMENTARLO EN UN UTIL O FUNCION ****/
 		    		
 		    	if(localStorage.getItem("tenantActual") == null || (JSON.parse(localStorage.getItem("tenantActual"))).nombre_url != $stateParams.tenant){

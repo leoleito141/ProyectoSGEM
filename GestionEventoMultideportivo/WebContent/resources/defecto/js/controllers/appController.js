@@ -16,7 +16,7 @@ angular.module('pruebaAngularApp')
 	    $auth.logout(); //Limpia localStorage y pone isAuthenticated en false
 	
 	    //Redirecciona al login
-	    $state.go('homeLogin');
+	    $state.go('adminLogin');
     };
     
     $scope.isAuthenticated = function() {

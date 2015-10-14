@@ -5,13 +5,10 @@ angular.module('pruebaAngularApp')
 
 	 
    $scope.usuario={};//Informacion del usuario para loguear pasada desde login.html
-   //$scope.tenantid.tenant= $routeParams.tenant;
    		
    $scope.loginUser = function () {
      
-	   console.log($scope.usuario);  
        var datos = $scope.usuario;
-       console.log("entre insertar" + datos);
 
        $auth.login({
            email: datos.email,

@@ -27,7 +27,6 @@ angular.module('pruebaAngularApp')
 			    startingDay: 1
 			  };
 	  
-	  
 	  $scope.altaEventoDeportivo = function(){
 		  
 		  $scope.eventoDeportivo.tenantId = dataTenant.tenantId;
