@@ -87,7 +87,21 @@ angular.module('pruebaAngularApp', ['ngRoute','ui.bootstrap','satellizer'])
 	})
 	.when('/:tenant/altaEventoDeportivo', {
 		templateUrl : 'views/altaEventDeportivo.html',
-		controller : 'EventDeportivoCtrl'
+		controller : 'EventDeportivoCtrl',
+		resolve: { 
+	    	dataTenant:['dataFactory','$route', function(dataFactory,$route) {
+	    		/***** ESTO ESTARÍA BUENO IMPLEMENTARLO EN UN UTIL O FUNCION ****/
+	    		
+	    		if(localStorage.getItem("tenantActual") == null || (JSON.parse(localStorage.getItem("tenantActual"))).nombre_url != $route.current.params.tenant){
+
+	    			return dataFactory.getDataTenant($route.current.params.tenant);
+	    			
+	    		}else{
+	    			return JSON.parse(localStorage.getItem("tenantActual"));
+	    		}
+	    		/**********************************************************/
+	    	}]
+	}
 	})
 	
 	.when('/:tenant/altaComite', {

@@ -25,6 +25,9 @@ public class DataComite{
 	
 //	@SerializedName(value="Twitter")
 	private String twitter;
+	
+	
+	private int tenantId;
 
 	public String getEmail() {
 		return email;
@@ -74,8 +77,18 @@ public class DataComite{
 		this.twitter = twitter;
 	}
 	
+	
+	public int getTenantId() {
+		return tenantId;
+	}
+
+	public void setTenantId(int tenantId) {
+		this.tenantId = tenantId;
+	}
+
 	public String toString() {
 		return "DataUsuario [email=" + email + ", facebook=" + facebook
+				+ ", tenantId=" + tenantId
 				+ ", twitter=" + twitter + ", pais=" + pais
 				+ ", codigo=" + codigo + ",  password=" + password
 				+  "]";

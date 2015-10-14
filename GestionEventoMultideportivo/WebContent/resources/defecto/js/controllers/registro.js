@@ -9,7 +9,7 @@ angular.module('pruebaAngularApp')
     $scope.nombre;
     $scope.comite={};
     
-    console.log(dataTenant.tenantId);
+
 
    $scope.insertUser = function () {
      

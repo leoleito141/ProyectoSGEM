@@ -1,6 +1,6 @@
 angular.module('pruebaAngularApp')
-  .controller('EventDeportivoCtrl', ['$scope','$location','dataFactory','$routeParams', 
-                           function ($scope, $location, dataFactory, $routeParams) {
+  .controller('EventDeportivoCtrl', ['$scope','$location','dataFactory','$routeParams', 'dataTenant', 
+                           function ($scope, $location, dataFactory, $routeParams,dataTenant) {
 	
 	  $scope.eventoDeportivo={};
 	  console.log($scope.eventoDeportivo);
@@ -29,6 +29,9 @@ angular.module('pruebaAngularApp')
 	  
 	  
 	  $scope.altaEventoDeportivo = function(){
+		  
+		  $scope.eventoDeportivo.tenantId = dataTenant.tenantId;
+		  
 		  dataFactory.altaEventoDeportivo($scope.eventoDeportivo)
 	     	.then(function (data, status, headers, config) {
 	                $scope.status = data.status;

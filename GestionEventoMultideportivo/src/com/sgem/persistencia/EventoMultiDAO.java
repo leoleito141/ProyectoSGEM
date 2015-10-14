@@ -68,6 +68,18 @@ public class EventoMultiDAO implements IEventoMultiDAO {
 		return evento.get(evento.size()-1);
 	}
 
+	@Override
+	public int traeridEventoMulti(int tenantID) {
+		int idEventoMulti = 0;
+		
+		try{
+			idEventoMulti = (Integer) em.createQuery("SELECT e.EventoId FROM EventoMultideportivo e WHERE e.tenantHandler = '"+tenantID+"'").getSingleResult();
+		}catch(Exception e){
+			e.printStackTrace();			
+		}
+		return idEventoMulti;
+	}
+
 	
 
 }

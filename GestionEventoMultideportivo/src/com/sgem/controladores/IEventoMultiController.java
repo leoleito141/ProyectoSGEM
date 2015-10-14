@@ -10,5 +10,6 @@ public interface IEventoMultiController {
 	
 	boolean guardarEventoMultideportivo(DataEvento dataEvento);
 	public DataTenant obtenerDataTenant(String tenant);
+	int traeridEventoMultit(int tenantId);
 
 }

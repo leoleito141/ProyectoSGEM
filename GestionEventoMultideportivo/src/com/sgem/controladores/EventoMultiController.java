@@ -69,6 +69,24 @@ public class EventoMultiController implements IEventoMultiController {
 	}
 	
 	
+	public int traeridEventoMultit(int tenantID) {
+
+		int idEventoMulti=0;
+		
+		try {
+			idEventoMulti = EventoMultiDAO.traeridEventoMulti(tenantID);
+			
+						
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		return idEventoMulti;
+
+	}
+
+
+
 	
 
 }
