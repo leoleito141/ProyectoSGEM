@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pruebaAngularApp')
-  .controller('LoginCtrl', ['$scope','$auth','$location','dataFactory','$routeParams', function ($scope, $auth, $location, dataFactory,$routeParams) {
+  .controller('LoginCtrl', ['$scope','$auth','$state','dataFactory', function ($scope, $auth, $state, dataFactory) {
 
 	 
    $scope.usuario={};//Informacion del usuario para loguear pasada desde login.html
@@ -26,8 +26,8 @@ angular.module('pruebaAngularApp')
             $scope.usuario.password="";
  
             var payLoad = $auth.getPayload();
-            console.log( payLoad.tenantid);
-            $location.path(payLoad.tenantid + '/altaEvento');
+           
+            $state.transitionTo("altaEvento", { tenant: payLoad.tenantid });
              
 
            

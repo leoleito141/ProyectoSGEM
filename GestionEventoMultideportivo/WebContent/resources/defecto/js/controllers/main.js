@@ -1,8 +1,7 @@
 'use strict';
 
 angular.module('pruebaAngularApp')
-  .controller('MainCtrl', ['$scope','$location','dataFactory','$routeParams', 
-                           function ($scope, $location, dataFactory, $routeParams) {
+  .controller('MainCtrl', ['$scope','dataFactory', function ($scope,dataFactory) {
 	
 	  $scope.evento={};
 	  console.log($scope.evento);

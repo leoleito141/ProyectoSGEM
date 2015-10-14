@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pruebaAngularApp')
-  .controller('AppCtrl', ['$scope','$location','$auth', function ($scope,$location,$auth) {
+  .controller('AppCtrl', ['$scope','$state','$auth', function ($scope,$state,$auth) {
   	$scope.usrLogin={nombre:""};
   	$scope.tenantid={tenant:""};
   	$scope.customStyle={
@@ -16,7 +16,7 @@ angular.module('pruebaAngularApp')
 	    $auth.logout(); //Limpia localStorage y pone isAuthenticated en false
 	
 	    //Redirecciona al login
-	    $location.path('/');
+	    $state.go('homeLogin');
     };
     
     $scope.isAuthenticated = function() {

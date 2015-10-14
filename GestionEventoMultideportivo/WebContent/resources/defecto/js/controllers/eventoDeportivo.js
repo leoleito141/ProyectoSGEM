@@ -1,6 +1,6 @@
 angular.module('pruebaAngularApp')
-  .controller('EventDeportivoCtrl', ['$scope','$location','dataFactory','$routeParams', 
-                           function ($scope, $location, dataFactory, $routeParams) {
+  .controller('EventDeportivoCtrl', ['$scope','$state','dataFactory','$routeParams', 
+                           function ($scope, $state, dataFactory, $routeParams) {
 	
 	  $scope.eventoDeportivo={};
 	  console.log($scope.eventoDeportivo);

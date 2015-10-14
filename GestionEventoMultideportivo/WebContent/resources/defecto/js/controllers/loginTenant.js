@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pruebaAngularApp')
-  .controller('LoginTenantCtrl', ['$scope','$auth','dataFactory','loadData', function ($scope, $auth, dataFactory,loadData) {
+  .controller('LoginTenantCtrl', ['$scope','$auth','dataFactory','$state','loadData', function ($scope, $auth, dataFactory,$state,loadData) {
 
    console.log(loadData.data.image);
    $scope.customStyle.background= 'url(resources/defecto/img/tenant1/' + loadData.data.image +')fixed';
@@ -26,7 +26,8 @@ angular.module('pruebaAngularApp')
             $scope.usrLogin.email = $scope.usuario.email;
             $scope.usuario.password="";
             var payLoad = $auth.getPayload();    
-            $location.path(payLoad.tenantid + '/altaEvento');
+           
+            $state.transitionTo("altaEvento", { tenant: payLoad.tenantid });
   
         })
         .catch(function(response){
