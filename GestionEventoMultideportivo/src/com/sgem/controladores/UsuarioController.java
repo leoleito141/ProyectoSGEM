@@ -2,6 +2,7 @@
 package com.sgem.controladores;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -14,6 +15,7 @@ import com.sgem.dominio.ComiteOlimpico;
 import com.sgem.dominio.Juez;
 import com.sgem.dominio.Organizador;
 import com.sgem.dominio.Usuario;
+import com.sgem.dominio.UsuarioComun;
 import com.sgem.persistencia.IUsuarioDAO;
 import com.sgem.seguridad.JWTUtil;
 import com.sgem.seguridad.Token;
@@ -22,7 +24,8 @@ import com.sgem.utilidades.Correo;
 @Stateless
 public class UsuarioController implements IUsuarioController {
 
-	public static final String ROL_ADMIN = "Administrador"; // faltan mas roles...
+	public static final String USUARIO_ADMIN = "Administrador";
+	public static final String USUARIO_COMUN = "Comun";
 	
 	@EJB
 	private IUsuarioDAO UsuarioDAO;
@@ -32,9 +35,10 @@ public class UsuarioController implements IUsuarioController {
 		try {
 
 			Usuario usuario = null;
-		
-
-			if (dataUsuario.getRol().equalsIgnoreCase(ROL_ADMIN)) {
+			String pass = "";
+			
+					//////////////////// Esto creo que no es mas necesario... ni idea donde se usa
+			if (dataUsuario.getTipoUsuario().equalsIgnoreCase(USUARIO_ADMIN)) {
 				
 				// Cambiar la condicion a alguna parte del data para ver el tipo de usuario que estoy creando
 				usuario = (dataUsuario.getEmail()=="")? (new Organizador()):( new Juez());
@@ -56,8 +60,26 @@ public class UsuarioController implements IUsuarioController {
 					
 				}
 				
+			}else if (dataUsuario.getTipoUsuario().equalsIgnoreCase(USUARIO_COMUN)) {
+					usuario = new UsuarioComun();
+				
+					usuario.setTenantID(dataUsuario.getTenantId());
+					usuario.setEmail(dataUsuario.getEmail());
+					usuario.setCanalYoutube(dataUsuario.getCanalYoutube());
+					usuario.setTwitter(dataUsuario.getTwitter());
+					usuario.setFacebook(dataUsuario.getFacebook());
+					
+					try {
+						pass = new String(Base64.decode(dataUsuario.getPassword()));
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					usuario.setPassword(pass);
+					
+					return UsuarioDAO.guardarUsuario(usuario);
+				
 			}else{
-
+				
 				return false;
 			}
 
@@ -72,7 +94,8 @@ public class UsuarioController implements IUsuarioController {
 	
 	public boolean guardarComite(DataComite dataComite) {
 		try {
-			boolean creado = false;
+			boolean enviado = false;
+			boolean guardo = false;
 			ComiteOlimpico co = null;
 			
 					co = new ComiteOlimpico();
@@ -86,10 +109,16 @@ public class UsuarioController implements IUsuarioController {
 					co.setCodigo(dataComite.getCodigo());
 					co.setTenantID(dataComite.getTenantId());
 					
-					creado = Correo.enviarMensajeConAuth("smtp.gmail.com", 587,"inmogrupo13@gmail.com", co.getEmail(),"inmobiliaria13", "Notificacion de contraseña", "Estimado Comite Olimpico Nacional de "+co.getPais()+":Su contraseña es:"+co.getPassword()+"");
-					
-					return UsuarioDAO.guardarUsuario(co);
+					guardo = UsuarioDAO.guardarUsuario(co);
 		
+					if(guardo){
+						// Se debería enviar luego del guardar Usuario.. porque devuelve un booleano, si se pudo guardar enviar correo, sino no.
+						enviado = Correo.enviarMensajeConAuth("smtp.gmail.com", 587,"inmogrupo13@gmail.com", co.getEmail(),"inmobiliaria13", "Notificacion de contraseña", "Estimado Comite Olimpico Nacional de "+co.getPais()+":Su contraseña es:"+co.getPassword()+"");
+						
+					}else{
+						// controlar esto..
+					}
+					return guardo;
 			}
 		 catch (Exception e) {
 			e.printStackTrace();

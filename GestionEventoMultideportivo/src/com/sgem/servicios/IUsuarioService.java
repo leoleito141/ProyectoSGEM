@@ -20,14 +20,13 @@ public interface IUsuarioService {
 
 	@PermitAll
 //	@DenyAll
-//	@RolesAllowed("ADMIN")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/status")
 	public Response getStatus();
 	
-//	@RolesAllowed("ADMIN")
-	@PermitAll	// para pruebas
+//	@RolesAllowed("VISITANTE")
+	@PermitAll
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)

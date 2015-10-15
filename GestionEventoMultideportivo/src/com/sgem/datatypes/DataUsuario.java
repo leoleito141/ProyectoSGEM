@@ -1,39 +1,55 @@
 package com.sgem.datatypes;
 
+public class DataUsuario {
 
-public class DataUsuario{
-	
-//	Ver bien desp si crear un data por rol.
-	
-//	@Expose(serialize = false, deserialize = false)
-//	@SerializedName(value="Email")
+	private Integer tenantId;
+
 	private String email;
-	
-//	@SerializedName(value="Facebook")
+
 	private String facebook;
-	
-//	@SerializedName(value="Twitter")
+
 	private String twitter;
-	
-//	@SerializedName(value="CanalYoutube")
+
 	private String canalYoutube;
-	
-//	@SerializedName(value="Nombre")
+
 	private String nombre;
-	
-//	@SerializedName(value="Apellido")
+
 	private String apellido;
-	
-//	@SerializedName(value="Edad")
-	private Integer edad;	
-	
-//	@SerializedName(value="Cedula")
+
+	private Integer edad;
+
 	private Integer cedula;
-	
-//	@SerializedName(value="Password")
+
 	private String password;
 
-	private String rol;
+	private String tipoUsuario;
+
+	public DataUsuario(){}
+	
+	public DataUsuario(Integer tenantId, String email, String facebook,
+			String twitter, String canalYoutube, String nombre,
+			String apellido, Integer edad, Integer cedula, String password,
+			String tipoUsuario) {
+		this.tenantId = tenantId;
+		this.email = email;
+		this.facebook = facebook;
+		this.twitter = twitter;
+		this.canalYoutube = canalYoutube;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.edad = edad;
+		this.cedula = cedula;
+		this.password = password;
+		this.tipoUsuario = tipoUsuario;
+	}
+
+	public Integer getTenantId() {
+		return tenantId;
+	}
+
+	public void setTenantId(Integer tenantId) {
+		this.tenantId = tenantId;
+	}
 
 	public String getEmail() {
 		return email;
@@ -107,23 +123,22 @@ public class DataUsuario{
 		this.password = password;
 	}
 
-	public String getRol() {
-		return rol;
+	public String getTipoUsuario() {
+		return tipoUsuario;
 	}
 
-	public void setRol(String rol) {
-		this.rol = rol;
+	public void setTipoUsuario(String tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
 	}
 
 	@Override
 	public String toString() {
-		return "DataUsuario [email=" + email + ", facebook=" + facebook
-				+ ", twitter=" + twitter + ", canalYoutube=" + canalYoutube
-				+ ", nombre=" + nombre + ", apellido=" + apellido + ", edad="
-				+ edad + ", cedula=" + cedula + ", password=" + password
-				+ ", rol=" + rol + "]";
+		return "DataUsuario [tenantId=" + tenantId + ", email=" + email
+				+ ", facebook=" + facebook + ", twitter=" + twitter
+				+ ", canalYoutube=" + canalYoutube + ", nombre=" + nombre
+				+ ", apellido=" + apellido + ", edad=" + edad + ", cedula="
+				+ cedula + ", password=" + password + ", tipoUsuario="
+				+ tipoUsuario + "]";
 	}
-	
-	
-	
+
 }

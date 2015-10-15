@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pruebaAngularApp')
-  .controller('LoginTenantCtrl', ['$scope','$auth','dataFactory','$state','loadData', function ($scope, $auth, dataFactory,$state,loadData) {
+  .controller('LoginTenantCtrl', ['$scope','$auth','dataFactory','$state','dataTenant', function ($scope, $auth, dataFactory,$state,dataTenant) {
 
    console.log(loadData.login_back_img);
    $scope.customStyle.background= 'url(resources/defecto/img/tenant1/' + loadData.login_back_img +')fixed';
@@ -27,14 +27,14 @@ angular.module('pruebaAngularApp')
             $scope.usuario.password="";
             var payLoad = $auth.getPayload();    
            
-            $state.transitionTo("altaEvento", { tenant: payLoad.tenantid });
+//            $state.transitionTo("altaEvento", { tenant: payLoad.tenantid });
   
         })
         .catch(function(response){
             // Si ha habido errores llegamos a esta parte
         	console.log(response); 
         });
-   		};
+	};
    		
    	
     

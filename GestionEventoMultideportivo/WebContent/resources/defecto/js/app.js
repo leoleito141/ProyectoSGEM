@@ -37,7 +37,7 @@ angular.module('pruebaAngularApp', ['ui.router','ui.bootstrap','satellizer'])
 		templateUrl : 'views/tenant/loginTenant.html',
 		controller : 'LoginTenantCtrl',
 	    resolve: { 
-	    	loadData:function(dataFactory,$stateParams) {
+	    	dataTenant:function(dataFactory,$stateParams) {
 	    		/***** ESTO ESTARÍA BUENO IMPLEMENTARLO EN UN UTIL O FUNCION ****/
 	    		
 	    		if(localStorage.getItem("tenantActual") == null || (JSON.parse(localStorage.getItem("tenantActual"))).nombre_url != $stateParams.tenant){
@@ -50,6 +50,24 @@ angular.module('pruebaAngularApp', ['ui.router','ui.bootstrap','satellizer'])
 	    		/**********************************************************/   
 	    	}
 	    }   
+	}).state('tenantRegistro', {
+		url:'/:tenant/registro',
+		templateUrl : 'views/tenant/registroTenant.html',
+		controller : 'RegistroTenantCtrl',
+	    resolve: { 
+	    	dataTenant:function(dataFactory,$stateParams) {
+    			/***** ESTO ESTARÍA BUENO IMPLEMENTARLO EN UN UTIL O FUNCION ****/
+	    		
+	    		if(localStorage.getItem("tenantActual") == null || (JSON.parse(localStorage.getItem("tenantActual"))).nombre_url != $stateParams.tenant){
+
+	    			return dataFactory.getDataTenant($stateParams.tenant);
+	    			
+	    		}else{
+	    			return JSON.parse(localStorage.getItem("tenantActual"));
+	    		}
+	    		/**********************************************************/   
+	    	}  
+	    }
 	}).state('altaEvento', {
 		url:'/:tenant/altaEvento',
 		templateUrl : 'views/altaEvento.html',

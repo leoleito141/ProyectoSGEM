@@ -34,7 +34,6 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
 {
     private static final String AUTHORIZATION_PROPERTY = "Authorization";
     private static final String ROL_PROPERTY = "Rol";
-//    private static final String AUTHENTICATION_SCHEME = "Basic";
     private static final String AUTHENTICATION_SCHEME = "Bearer";
     private static final ServerResponse ACCESS_DENIED = new ServerResponse("Access denied for this resource", 401, new Headers<Object>());
     private static final ServerResponse ACCESS_FORBIDDEN = new ServerResponse("Nobody can access this resource", 403, new Headers<Object>());
@@ -71,7 +70,7 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
                 return;
             }
                                
-            /*	A partir este punto, se procesaran los datos obtenidos de los headers del m�todo GET */         
+            /*	A partir este punto, se procesaran los datos obtenidos de los headers del metodo GET */         
             
             final String token = getToken(authorization);          
             
@@ -121,8 +120,8 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
     }
     
 	/**
-	 * Se chequea que el rol del del usuario a utilizar método, sea uno de los
-	 * roles que el método accepte.
+	 * Se chequea que el rol del usuario a utilizar el metodo, sea uno de los
+	 * roles que el metodo accepte.
 	 * 
 	 * @param rol rol del usuario
 	 * @param setRoles  set de Roles del metodo
