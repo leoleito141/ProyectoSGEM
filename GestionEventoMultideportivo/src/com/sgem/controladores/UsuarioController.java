@@ -24,7 +24,6 @@ import com.sgem.utilidades.Correo;
 @Stateless
 public class UsuarioController implements IUsuarioController {
 
-	public static final String USUARIO_ADMIN = "Administrador";
 	public static final String USUARIO_COMUN = "Comun";
 	
 	@EJB
@@ -37,30 +36,7 @@ public class UsuarioController implements IUsuarioController {
 			Usuario usuario = null;
 			String pass = "";
 			
-					//////////////////// Esto creo que no es mas necesario... ni idea donde se usa
-			if (dataUsuario.getTipoUsuario().equalsIgnoreCase(USUARIO_ADMIN)) {
-				
-				// Cambiar la condicion a alguna parte del data para ver el tipo de usuario que estoy creando
-				usuario = (dataUsuario.getEmail()=="")? (new Organizador()):( new Juez());
-				
-				if(usuario != null){
-					
-					usuario = new Organizador();
-				//	usuario.setNombre(dataUsuario.getNombre());
-				//	usuario.setApellido(dataUsuario.getApellido());
-				//	usuario.setEdad(dataUsuario.getEdad());
-					usuario.setEmail(dataUsuario.getEmail());
-					usuario.setCanalYoutube(dataUsuario.getCanalYoutube());
-					usuario.setTwitter(dataUsuario.getTwitter());
-					usuario.setFacebook(dataUsuario.getFacebook());
-			//		usuario.setCedula(dataUsuario.getCedula());
-					usuario.setPassword(dataUsuario.getPassword());
-					
-					return UsuarioDAO.guardarUsuario(usuario);
-					
-				}
-				
-			}else if (dataUsuario.getTipoUsuario().equalsIgnoreCase(USUARIO_COMUN)) {
+			if (dataUsuario.getTipoUsuario().equalsIgnoreCase(USUARIO_COMUN)) {
 					usuario = new UsuarioComun();
 				
 					usuario.setTenantID(dataUsuario.getTenantId());
@@ -98,6 +74,8 @@ public class UsuarioController implements IUsuarioController {
 			boolean guardo = false;
 			ComiteOlimpico co = null;
 			
+			// ANTES DE DAR DE ALTA, FIJARSE EN EL dataComite que viene, si ya existe uno con ese cod y ese pais 
+			// en ese tenant. 
 					co = new ComiteOlimpico();
 				
 					co.setEmail(dataComite.getEmail());

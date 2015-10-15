@@ -3,8 +3,8 @@
 angular.module('pruebaAngularApp')
   .controller('LoginTenantCtrl', ['$scope','$auth','dataFactory','$state','dataTenant', function ($scope, $auth, dataFactory,$state,dataTenant) {
 
-   console.log(loadData.login_back_img);
-   $scope.customStyle.background= 'url(resources/defecto/img/tenant1/' + loadData.login_back_img +')fixed';
+   console.log(dataTenant.login_back_img);
+   $scope.customStyle.background= 'url(resources/defecto/img/tenant1/' + dataTenant.login_back_img +')fixed';
 //   $scope.customStyle = {
 //	   'background-image': 'url(resources/defecto/img/tenant1/' + loadData.data.image +')'
 ////	   'background-image': 'url(resources/defecto/img/tenant1/' + loadData.data.image +')fixed',
