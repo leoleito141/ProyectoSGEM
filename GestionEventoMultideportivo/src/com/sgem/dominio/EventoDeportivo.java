@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -55,6 +56,12 @@ public class EventoDeportivo implements Serializable{
 	@OneToMany(fetch = FetchType.EAGER,mappedBy = "eventoDeportivo") 
 	private Set<Ronda> ronda= new HashSet<Ronda>();
 	
+	/*@ManyToMany( fetch = FetchType.EAGER)
+	private Set<Deportista> deportistas;*/
+	
+	/*@ManyToMany(mappedBy="eventoDep")
+	private Set<Deportista> deportistas;
+	*/
 	
 	public EventoDeportivo(){}
 	
@@ -73,6 +80,7 @@ public class EventoDeportivo implements Serializable{
 		this.eventoMultideportivo = eventoMultideportivo;
 		this.Competencia = competencia;
 		this.ronda = ronda;
+	//	this.deportistas= deportistas;
 	}
 
 	public Set<Competencia> getCompetencia() {
@@ -164,7 +172,15 @@ public class EventoDeportivo implements Serializable{
 	public void setEventoMultideportivo(EventoMultideportivo eventoMultideportivo) {
 		this.eventoMultideportivo = eventoMultideportivo;
 	}
-	
 
+	/*public Set<Deportista> getDeportistas() {
+		return deportistas;
+	}
+
+	public void setDeportistas(Set<Deportista> deportistas) {
+		this.deportistas = deportistas;
+	}
+	
+*/
 	
 }

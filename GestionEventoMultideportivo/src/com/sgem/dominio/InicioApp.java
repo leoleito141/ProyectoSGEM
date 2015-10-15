@@ -3,6 +3,7 @@ package com.sgem.dominio;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletContextEvent;
@@ -110,10 +111,13 @@ IEventoMultiDAO  EventoMultiDAO;
 		System.out.println("obtuve el usuario "+u2.getEmail()+" "+u2.getId());
 		System.out.println(" y es "+u2.soy());
 		
-		Deportista d = new Deportista(0,0,"Dep1","1212","M");			
-		Deportista d1 = new Deportista(0,0,"Dep2","1212","F");			
-		Deportista d2 = new Deportista(0,0,"Dep3","1212","M");			
-		Deportista d3 = new Deportista(0,0,"Dep4","1212","F");
+		Deportista d = new Deportista(1, "Juan", "Perez",new Date(), "Masulino",null,null);			
+		Deportista d1 = new Deportista(1, "Jose", "Lopez",new Date(), "Masulino",null,null);		
+		Deportista d2 = new Deportista(1, "Pedro", "Fernandez",new Date(), "Masulino",null,null);			
+		Deportista d3 = new Deportista(1, "Debo", "Rodriguez",new Date(), "Femenino",null,null);			
+
+		
+
 		
 		d.setComiteOlimpico(u2);
 		d1.setComiteOlimpico(u2);
