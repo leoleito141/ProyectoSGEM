@@ -74,8 +74,16 @@ public class UsuarioController implements IUsuarioController {
 			boolean guardo = false;
 			ComiteOlimpico co = null;
 			
+			boolean existeCodigoCO = UsuarioDAO.existeCodigoCO(dataComite.getTenantId(),dataComite.getCodigo());
+			System.out.println(existeCodigoCO);
+			boolean existePais = UsuarioDAO.existePais(dataComite.getTenantId(),dataComite.getPais());
+			
+			
 			// ANTES DE DAR DE ALTA, FIJARSE EN EL dataComite que viene, si ya existe uno con ese cod y ese pais 
 			// en ese tenant. 
+			
+			if((existeCodigoCO == false)&&(existePais==false)){
+			
 					co = new ComiteOlimpico();
 				
 					co.setEmail(dataComite.getEmail());
@@ -97,6 +105,12 @@ public class UsuarioController implements IUsuarioController {
 						// controlar esto..
 					}
 					return guardo;
+			}else{ // ya existe CO con es codigo y pais no se guarda
+				
+				return false;
+			}		
+					
+					
 			}
 		 catch (Exception e) {
 			e.printStackTrace();

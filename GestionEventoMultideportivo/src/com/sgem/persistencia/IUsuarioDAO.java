@@ -12,6 +12,8 @@ public interface IUsuarioDAO {
 
 	public boolean guardarUsuario(Usuario usuario);
 	public Usuario buscarUsuario(String email);
+	public boolean existeCodigoCO(int tenantId, String codigo);
+	public boolean existePais(int tenantId, String pais);
 	
 		
 	

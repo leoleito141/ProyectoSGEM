@@ -1,5 +1,7 @@
 package com.sgem.persistencia;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -38,6 +40,52 @@ public class UsuarioDAO implements IUsuarioDAO {
 			return null;
 		}
 		return u;
+	}
+
+	@Override
+	public boolean existeCodigoCO(int tenantId, String codigo) {
+		
+		List<Usuario> usuarios = null;
+		try{
+			usuarios = em.createQuery("SELECT u FROM Usuario u, ComiteOlimpico co WHERE u.id = co.id AND u.tenantID = '"+tenantId+"' AND co.codigo = '"+codigo+"'", Usuario.class).getResultList();;
+			
+			System.out.println(usuarios);
+			
+		if( usuarios.isEmpty()){
+			System.out.println("Fue null la consulta");
+			return false;
+		}else{
+			
+			return true;
+		}	
+			
+		}catch(NoResultException e){
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+
+	@Override
+	public boolean existePais(int tenantId, String pais) {
+		List<Usuario> usuarios = null;
+		try{
+			usuarios = em.createQuery("SELECT u FROM Usuario u, ComiteOlimpico co WHERE u.id = co.id AND u.tenantID = '"+tenantId+"' AND co.pais = '"+pais+"'", Usuario.class).getResultList();;
+			
+			System.out.println(usuarios);
+			
+		if( usuarios.isEmpty()){
+			System.out.println("Fue null la consulta");
+			return false;
+		}else{
+			
+			return true;
+		}	
+			
+		}catch(NoResultException e){
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 
