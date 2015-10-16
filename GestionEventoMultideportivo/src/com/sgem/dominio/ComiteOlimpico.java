@@ -17,10 +17,10 @@ public class ComiteOlimpico extends Usuario{
 	
 	private static final long serialVersionUID = -5284790408432089498L;
 	
-	@Column(name = "pais", nullable = false, unique = true)
+	@Column(name = "pais", nullable = false)
 	private String pais;	
 	
-	@Column(name = "cod_comite_olimpico", nullable = false, unique = true)
+	@Column(name = "cod_comite_olimpico", nullable = false)
 	private String codigo;
 	
 		

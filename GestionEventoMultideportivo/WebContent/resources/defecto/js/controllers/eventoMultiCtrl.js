@@ -1,8 +1,13 @@
 'use strict';
 
 angular.module('pruebaAngularApp')
-  .controller('EventoMultiCtrl', ['$scope','dataFactory', function ($scope,dataFactory) {
+  .controller('EventoMultiCtrl', ['$scope','dataFactory','dataTenant', function ($scope,dataFactory,dataTenant) {
 	
+	  $scope.nombreTenant = dataTenant.nombre_url;
+	  
+	  //hacemos de cuenta que somos organizadores
+	  
+	  
 	  $scope.evento={};
 	  console.log($scope.evento);
 	  
@@ -48,7 +53,10 @@ angular.module('pruebaAngularApp')
 		  
 	  };
 	  
-	  
+	  $scope.soyOrganizador = function() {
+	    	 
+    	  return false;
+    };
 	  
 	  
   }]);
