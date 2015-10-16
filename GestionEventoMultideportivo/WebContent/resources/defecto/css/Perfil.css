@@ -6,7 +6,10 @@
 
 }
 html, body  { height: 100%; width: 100%; margin: 0; 
-
+background-image: url('http://destinosa1.com/wp-content/uploads/2015/06/PlazaIndependencia21.jpg');
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-attachment: fixed;
 
 }
 
@@ -14,11 +17,8 @@ html, body  { height: 100%; width: 100%; margin: 0;
 	height: 100%;
 }
 .PerfilContent{
-	overflow-y: scroll;
-	background-image: url('http://destinosa1.com/wp-content/uploads/2015/06/PlazaIndependencia21.jpg');
-    background-repeat: no-repeat;
-    background-size:cover;
-    background-attachment: fixed;
+	/*overflow-y: scroll;*/
+	
 }
 .HeaderPerfil{
 	margin-left: 10%;
