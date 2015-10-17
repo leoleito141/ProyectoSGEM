@@ -24,6 +24,7 @@ background-image: url('http://destinosa1.com/wp-content/uploads/2015/06/PlazaInd
 	margin-left: 10%;
 	margin-right: 10%;
 	height: 25%;
+	
 }
 .ImagenPerfil{
 	background: rgb(255,255,255);
@@ -44,6 +45,12 @@ background-image: url('http://destinosa1.com/wp-content/uploads/2015/06/PlazaInd
 	
 	margin-left: 10%;
 	margin-right: 10%;
+	
+	
+}
+.newsWrapper{
+	border-radius: 5px;
+	padding:10px;
 	
 	
 }
