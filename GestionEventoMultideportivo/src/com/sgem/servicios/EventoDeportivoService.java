@@ -31,6 +31,37 @@ private IEventoDeportivoController iec;
 	}
 	
 	
+	public Response listarDeportes(int tenantID, String sexo){
+
+		try {
+			return Response.ok(iec.listarDeportes(tenantID, sexo)).build();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return null;
+
+	}
 	
+	
+	public Response listarDisciplinas(int tenantID, String nombreDeporte, String sexo){
+
+		try {
+			return Response.ok(iec.listarDisciplinas(tenantID,nombreDeporte,sexo)).build();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return null;
+
+	}
+
+
+
+
+
+
 
 }
