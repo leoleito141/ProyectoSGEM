@@ -24,5 +24,13 @@ import com.sgem.datatypes.DataEventoDeportivo;
 		@Consumes(MediaType.APPLICATION_JSON)
 		@Path("/altaEventoDeportivo")
 		public Response guardarEventoDeportivo(DataEventoDeportivo datos);
+		
+		@RolesAllowed("ADMIN")
+		@POST
+		@Produces(MediaType.APPLICATION_JSON)
+		@Consumes(MediaType.APPLICATION_JSON)
+		@Path("/listarDeportes")
+		public Response  listarDeportes(int tenantID, String sexo);
+		
 	}
 	

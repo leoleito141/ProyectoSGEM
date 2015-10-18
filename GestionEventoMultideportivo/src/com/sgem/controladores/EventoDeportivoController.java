@@ -1,6 +1,8 @@
 package com.sgem.controladores;
 
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import com.sgem.datatypes.DataEventoDeportivo;
@@ -48,4 +50,29 @@ public class EventoDeportivoController implements IEventoDeportivoController {
 		}
 		return false;
 	}
+	
+	@Override
+	public List<String> listarDeportes(int tenantID, String sexo) {
+		try {
+	      					
+			return EventosDAO.listarDeportes(tenantID,sexo);
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<String> listarDisciplinas(int tenantID, String nombreDeporte, String sexo) {
+		try {
+				
+			return EventosDAO.listarDisciplinas(tenantID,nombreDeporte,sexo);
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 }
