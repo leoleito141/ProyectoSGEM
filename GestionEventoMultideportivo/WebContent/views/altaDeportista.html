@@ -1,0 +1,51 @@
+<form role="form" >
+		<div class="form-group">
+		
+			<label class="control-label col-sm-2" for="inputNombreDeportista">Nombre:</label>
+			<div class="col-sm-10">
+				<input id="inputNombreDeportista" placeholder="Nombre"
+					ng-model="deportista.nombre" class="form-control">
+			</div>
+
+			<label class="control-label col-sm-2" for="inputApellido">Apellido:</label>
+			<div class="col-sm-10">
+				<input id="inputApellido" placeholder="Apellido"
+					ng-model="deportista.apellido" class="form-control">
+			</div>
+			
+			
+			
+			    <label class="control-label col-sm-2" for="singleSelect"> Sexo: </label><br>
+			  <div class="col-sm-10">
+			  <label>
+			  <input type="radio" ng-model="deportista.sexo" value="Masculino"> Masculino
+			  </label>
+			  <label>
+			  <input type="radio" ng-model="deportista.sexo" value="Femenino"> Femenino
+			  </label><br>
+			</div>	
+			
+				
+				
+			<label class="control-label col-sm-2" for="inputApellido">Fecha Nacimiento:</label>
+				
+				
+			<div class="control-label col-sm-2">	
+		    	       <p class="input-group">
+		              <input type="text" class="form-control" datepicker-popup='dd-MMMM-yyyy' ng-model="deportista.fechaInicio" is-open="statusInicio.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions"  ng-required="true" close-text="Close" />
+		              <span class="input-group-btn">
+		                <button type="button" class="btn btn-default" ng-click="openInicio($eventInicio)"><i class="glyphicon glyphicon-calendar"></i></button>
+		              </span>
+		            </p>
+	       		
+	       	</div>	
+				
+
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" ng-click="altaDeportista()" class="btn btn-default">
+				Alta Deportista</button>
+			</div>
+
+		</div>
+
+	</form>

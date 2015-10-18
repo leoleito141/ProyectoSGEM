@@ -151,6 +151,24 @@ angular.module('pruebaAngularApp', ['ui.router','ui.bootstrap','satellizer'])
 	    		/**********************************************************/
 	    	}
 		}
+	}).state('altaDeportista', {
+		url:'/:tenant/altaDeportista',
+		templateUrl : 'views/altaDeportista.html',
+		controller : 'deportistaCtrl',
+		resolve: { 
+	    	dataTenant: function(dataFactory,$stateParams) {
+	    		/***** ESTO ESTARÍA BUENO IMPLEMENTARLO EN UN UTIL O FUNCION ****/
+	    		
+	    		if(localStorage.getItem("tenantActual") == null || (JSON.parse(localStorage.getItem("tenantActual"))).nombre_url != $stateParams.tenant){
+
+	    			return dataFactory.getDataTenant($stateParams.tenant);
+	    			
+	    		}else{
+	    			return JSON.parse(localStorage.getItem("tenantActual"));
+	    		}
+	    		/**********************************************************/
+	    	}
+		}
 	});
 	
 
