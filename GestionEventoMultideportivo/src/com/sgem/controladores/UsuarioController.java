@@ -3,6 +3,7 @@ package com.sgem.controladores;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -156,6 +157,17 @@ public class UsuarioController implements IUsuarioController {
 		return null;
 	}
 
+	
+public List<ComiteOlimpico> buscarComiteporPais(String pais, int tenantID) {
+		
+		try{
+			return UsuarioDAO.buscarComiteporPais(pais, tenantID);
+		}catch(Exception e){
+			e.printStackTrace();
+			
+		}
+		return null;
+	}
 
 }
 

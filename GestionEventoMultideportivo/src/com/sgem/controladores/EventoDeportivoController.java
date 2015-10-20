@@ -84,5 +84,34 @@ public class EventoDeportivoController implements IEventoDeportivoController {
 		}
 		return null;
 	}
+
+	@Override
+	public List<EventoDeportivo> buscarEventosDeportivos(Integer tenantId, String deporte, List<String> disciplinas, String sexo) {
+		
+		try {
+		
+		List<EventoDeportivo> led = new ArrayList<EventoDeportivo>();
+		Integer idEventoDep = 0;
+		EventoDeportivo ed = null;
+		
+		for (int i = 0; i < disciplinas.size(); i++) {
+			
+			String disciplina =	disciplinas.get(i).toString();
+			
+			idEventoDep = EventosDAO.traerIDEventoDeportivo(tenantId, deporte,disciplina,sexo);
+			
+			ed = EventosDAO.traerEventoDeportivo(idEventoDep);
+			
+			led.add(ed);
+			
+			
+		}
+		
+		return led;
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 }

@@ -1,9 +1,12 @@
 package com.sgem.controladores;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 import com.sgem.datatypes.DataComite;
 import com.sgem.datatypes.DataUsuario;
+import com.sgem.dominio.ComiteOlimpico;
 import com.sgem.dominio.Usuario;
 import com.sgem.seguridad.Token;
 
@@ -14,5 +17,6 @@ public interface IUsuarioController {
 	public Usuario buscarUsuario(String email);
 	public Token loginUsuario(DataUsuario dataUsuario);
 	public boolean guardarComite(DataComite dataComite);
+	public List<ComiteOlimpico> buscarComiteporPais(String pais, int tenantID);
 
 }

@@ -8,6 +8,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import com.sgem.dominio.Admin;
+import com.sgem.dominio.ComiteOlimpico;
 import com.sgem.dominio.Organizador;
 import com.sgem.dominio.Usuario;
 
@@ -86,6 +87,22 @@ public class UsuarioDAO implements IUsuarioDAO {
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	@Override
+	public List<ComiteOlimpico> buscarComiteporPais(String pais, int TenantID) {
+		List<ComiteOlimpico> co = null;
+		try{
+			co = em.createQuery("SELECT co FROM Usuario u, ComiteOlimpico co WHERE u.id = co.id AND u.tenantID = '"+TenantID+"' AND co.pais = '"+pais+"'", ComiteOlimpico.class).getResultList();;
+			
+			
+			
+			
+		}catch(NoResultException e){
+			e.printStackTrace();
+			return null;
+		}
+		return co;
 	}
 
 
