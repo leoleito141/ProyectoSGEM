@@ -3,7 +3,6 @@ package com.sgem.dominio;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletContextEvent;
@@ -11,6 +10,7 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 import com.sgem.persistencia.IDeportistaDAO;
+import com.sgem.persistencia.IEventoDeportivoDAO;
 import com.sgem.persistencia.IEventoMultiDAO;
 import com.sgem.persistencia.IUsuarioDAO;
 
@@ -26,6 +26,9 @@ IDeportistaDAO  DeportistaDAO;
 
 @EJB
 IEventoMultiDAO  EventoMultiDAO;
+
+@EJB
+IEventoDeportivoDAO  EventoDeportivoDAO;
 
 
    
@@ -164,9 +167,15 @@ IEventoMultiDAO  EventoMultiDAO;
 		org.setEvento(evento);
 		EventoMultiDAO.guardarTenant(th);
 
+	/*	EventoDeportivo futbol = new EventoDeportivo(5, "Futbol", null, new Date(), new Date(), "Masculino", evento, null, null);
+		EventoDeportivoDAO.guardarEventoDeportivo(futbol);
 		
+		EventoDeportivo basket = new EventoDeportivo(5, "Basket", null, new Date(), new Date(), "Masculino", evento, null, null);
+		EventoDeportivoDAO.guardarEventoDeportivo(basket);
 		
-		//UsuarioDAO.guardarUsuario(usuario4);
+		EventoDeportivo basketF = new EventoDeportivo(5, "Basket", null, new Date(), new Date(), "Femenino", evento, null, null);
+		EventoDeportivoDAO.guardarEventoDeportivo(basketF);
+	*/	//UsuarioDAO.guardarUsuario(usuario4);
     }
 
 }

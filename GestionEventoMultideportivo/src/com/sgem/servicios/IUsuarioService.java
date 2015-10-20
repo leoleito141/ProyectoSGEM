@@ -40,14 +40,7 @@ public interface IUsuarioService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/altaComite")
 	public Response altaComite(DataComite dataComite);
-	
-	
-	@RolesAllowed("ADMIN")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/prueba")
-	public Response prueba();
+
 	
 //	@RolesAllowed("ADMIN")
 //	@GET

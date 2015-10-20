@@ -126,6 +126,12 @@
             return $http.post(dominio+'UsuarioService/usuarios', usuario,
             		{ headers: { 'Rol' : 'VISITANTE'} });       	
         }; 
+        
+        dataFactory.listarDeportes = function(tenantId,sexo){
+            return $http.get(dominio+'EventoDeportivoService/listarDeportes/'+tenantId+'/'+sexo , 
+            		{headers: { 'Rol' : 'COMITE_OLIMPICO'} }
+            		);
+        };
 
 	    
         return dataFactory;

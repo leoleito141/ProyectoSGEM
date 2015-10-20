@@ -1,12 +1,15 @@
 package com.sgem.controladores;
 
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import com.sgem.datatypes.DataEventoDeportivo;
 import com.sgem.dominio.EventoDeportivo;
+import com.sgem.dominio.EventoMultideportivo;
 import com.sgem.persistencia.IEventoDeportivoDAO;
 
 
@@ -36,10 +39,17 @@ public class EventoDeportivoController implements IEventoDeportivoController {
 					eventoDeportivo.setFechaFin(dataEventoDeportivo.getFechaFin());
 					eventoDeportivo.setTenantId(dataEventoDeportivo.getTenantId());
 					
-					idEventoMulti = iemc.traeridEventoMultit(dataEventoDeportivo.getTenantId());
-					eventoDeportivo.setEventoMultiId(idEventoMulti);
 					
-					return EventosDAO.guardarEventoDeportivo(eventoDeportivo);
+					
+					EventoMultideportivo emd = iemc.obtenerEventoMultideportivoXTenantId(dataEventoDeportivo.getTenantId()) ;
+					
+				
+					
+					
+					
+					
+					return  EventosDAO.guardarEventoDeportivo(eventoDeportivo,emd);
+					
 					
 			
 				
