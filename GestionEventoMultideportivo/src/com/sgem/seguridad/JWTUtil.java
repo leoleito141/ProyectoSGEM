@@ -17,7 +17,7 @@ public class JWTUtil {
 	public static Token generarToken(Usuario u){
 
 		Map<String, Object> mapeo = new HashMap<String, Object>();
-		
+		 
 		mapeo.put("email", u.getEmail());
 		mapeo.put("tenantid", "tenant0");
 
