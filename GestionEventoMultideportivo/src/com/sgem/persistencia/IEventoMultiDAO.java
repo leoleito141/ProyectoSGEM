@@ -12,6 +12,7 @@ public interface IEventoMultiDAO {
 	public EventoMultideportivo buscarEvento(String nombre);
 	public boolean guardarTenant(TenantHandler tenat);
 	public EventoMultideportivo obtenerDataTenant(String tenant);
-	public int traeridEventoMulti(int tenantID); 
+	public int traeridEventoMulti(int tenantID);
+	public EventoMultideportivo traerEventoMulti(int tenantId); 
 
 }

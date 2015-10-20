@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import com.sgem.dominio.EventoDeportivo;
+import com.sgem.dominio.EventoMultideportivo;
 import com.sgem.dominio.Usuario;
 
 
@@ -15,16 +16,7 @@ public class EventoDeportivoDAO implements IEventoDeportivoDAO {
 	@PersistenceContext(unitName = "GestionEventoMultideportivo")
 	private EntityManager em;
 
-	public boolean guardarEventoDeportivo(EventoDeportivo eventoDeportivo) {
-		try {
-			em.persist(eventoDeportivo);
-			return true;
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
+	
 
 	
 	public List<String> listarDeportes(int tenantID, String sexo) {
@@ -33,7 +25,7 @@ public class EventoDeportivoDAO implements IEventoDeportivoDAO {
 		
 		try {
 			
-			 deportes = em.createQuery("SELECT distinct ed.nombreDeporte FROM eventoDeportivo ed WHERE ed.tenantId = '"+tenantID+"' AND ed.sexo = '"+sexo+"'", String.class).getResultList();;
+			 deportes = em.createQuery("SELECT distinct ed.nombreDeporte FROM EventoDeportivo ed WHERE ed.tenantId = "+tenantID+" AND ed.sexo = '"+sexo+"'", String.class).getResultList();;
 			 
 			 return deportes;
 			
@@ -59,6 +51,23 @@ public class EventoDeportivoDAO implements IEventoDeportivoDAO {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+
+	@Override
+	public boolean guardarEventoDeportivo(EventoDeportivo eventoDeportivo, EventoMultideportivo emd) {
+		
+try {
+			
+			eventoDeportivo.setEventoMultideportivo(emd);			
+			em.merge(eventoDeportivo);			
+			return true;
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+
+		}
+		return false;
 	}
 
 

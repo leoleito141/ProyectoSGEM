@@ -88,13 +88,6 @@ private IUsuarioController iuc;
 
 	}
 	
-	@Override
-	public Response prueba() {
-		return Response
-				.ok("{\"status\":\"Anda bien la cosa che! \"}")
-				.build();
-	}
-
 
  
 //	public Response obtenerPorId(long id) {

@@ -12,7 +12,7 @@ import com.sgem.dominio.Usuario;
 @Local
 public interface IEventoDeportivoDAO {
 
-	public boolean guardarEventoDeportivo(EventoDeportivo eventoDeportivo);
+	public boolean guardarEventoDeportivo(EventoDeportivo eventoDeportivo, EventoMultideportivo emd);
 	public List<String> listarDeportes(int tenantID, String sexo);
 	public List<String> listarDisciplinas(int tenantID, String nombreDeporte, String sexo);
 	
