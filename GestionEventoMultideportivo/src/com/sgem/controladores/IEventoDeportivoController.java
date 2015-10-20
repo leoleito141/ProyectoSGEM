@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 import com.sgem.datatypes.DataEventoDeportivo;
+import com.sgem.dominio.EventoDeportivo;
 
 @Local
 public interface IEventoDeportivoController {
@@ -14,5 +15,7 @@ public interface IEventoDeportivoController {
 	List<String> listarDeportes(int tenantID, String sexo);
 
 	List<String> listarDisciplinas(int tenantID, String nombreDeporte, String sexo);
+
+	List<EventoDeportivo> buscarEventosDeportivos(Integer tenantId, String deporte, List<String> disciplinas, String sexo);
 
 }

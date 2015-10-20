@@ -1,9 +1,12 @@
 package com.sgem.persistencia;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 import com.sgem.datatypes.DataUsuario;
 import com.sgem.dominio.Admin;
+import com.sgem.dominio.ComiteOlimpico;
 import com.sgem.dominio.Organizador;
 import com.sgem.dominio.Usuario;
 
@@ -14,6 +17,7 @@ public interface IUsuarioDAO {
 	public Usuario buscarUsuario(String email);
 	public boolean existeCodigoCO(int tenantId, String codigo);
 	public boolean existePais(int tenantId, String pais);
+	public List<ComiteOlimpico> buscarComiteporPais(String pais, int tenantID);
 	
 		
 	

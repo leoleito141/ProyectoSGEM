@@ -77,7 +77,7 @@ IEventoDeportivoDAO  EventoDeportivoDAO;
 		comite.setFacebook("Comit� Ol�mpico Uruguayo");
 	//	comite.setCedula(0);
 		comite.setPassword("cou123");
-		comite.setTenantID(1);			
+		comite.setTenantID(5);			
 		
 //			usuario3 = new Admin();
 //			usuario3.setNombre("dsa3");
@@ -167,15 +167,24 @@ IEventoDeportivoDAO  EventoDeportivoDAO;
 		org.setEvento(evento);
 		EventoMultiDAO.guardarTenant(th);
 
-	/*	EventoDeportivo futbol = new EventoDeportivo(5, "Futbol", null, new Date(), new Date(), "Masculino", evento, null, null);
-		EventoDeportivoDAO.guardarEventoDeportivo(futbol);
+		EventoDeportivo futbol = new EventoDeportivo(5, "Futbol", null, new Date(), new Date(), "Masculino", null, null, null);
+		EventoDeportivoDAO.guardarEventoDeportivo(futbol,evento);
 		
-		EventoDeportivo basket = new EventoDeportivo(5, "Basket", null, new Date(), new Date(), "Masculino", evento, null, null);
-		EventoDeportivoDAO.guardarEventoDeportivo(basket);
+		EventoDeportivo basket = new EventoDeportivo(5, "Basket", null, new Date(), new Date(), "Masculino", null, null, null);
+		EventoDeportivoDAO.guardarEventoDeportivo(basket,evento);
 		
-		EventoDeportivo basketF = new EventoDeportivo(5, "Basket", null, new Date(), new Date(), "Femenino", evento, null, null);
-		EventoDeportivoDAO.guardarEventoDeportivo(basketF);
-	*/	//UsuarioDAO.guardarUsuario(usuario4);
+		EventoDeportivo basketF = new EventoDeportivo(5, "Basket", null, new Date(), new Date(), "Femenino", null, null, null);
+		EventoDeportivoDAO.guardarEventoDeportivo(basketF,evento);
+		
+		EventoDeportivo Natacion1 = new EventoDeportivo(5, "Natacion", "100M Libres", new Date(), new Date(), "Femenino", null, null, null);
+		EventoDeportivoDAO.guardarEventoDeportivo(Natacion1,evento);
+		
+		EventoDeportivo Natacion2 = new EventoDeportivo(5, "Natacion", "200M Mariposa", new Date(), new Date(), "Femenino", null, null, null);
+		EventoDeportivoDAO.guardarEventoDeportivo(Natacion2,evento);
+		
+		EventoDeportivo Natacion3 = new EventoDeportivo(5, "Natacion", "Posta 4x100", new Date(), new Date(), "Femenino", null, null, null);
+		EventoDeportivoDAO.guardarEventoDeportivo(Natacion3,evento);
+	
     }
 
 }
