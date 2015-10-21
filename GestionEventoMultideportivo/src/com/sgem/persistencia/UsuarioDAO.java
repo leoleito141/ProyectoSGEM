@@ -1,5 +1,6 @@
 package com.sgem.persistencia;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -7,9 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
-import com.sgem.dominio.Admin;
 import com.sgem.dominio.ComiteOlimpico;
-import com.sgem.dominio.Organizador;
 import com.sgem.dominio.Usuario;
 
 @Stateless
@@ -30,17 +29,18 @@ public class UsuarioDAO implements IUsuarioDAO {
 		return false;
 
 	}
-		
-	public Usuario buscarUsuario(String email) {
-		Usuario u = null;
+	
+	@Override
+	public Usuario buscarAdmin(String email) {
+		List<Usuario> u = new ArrayList<Usuario>();
+
 		try{
-			u = em.createQuery("SELECT u FROM Usuario u WHERE u.email = '"+email+"'", Usuario.class).getSingleResult();
-			
-		}catch(NoResultException e){
+			u = em.createQuery("SELECT u FROM Usuario u WHERE u.email = '"+email+"' AND u.tenantID = 0", Usuario.class).getResultList();			
+		}catch(Exception e){
 			e.printStackTrace();
-			return null;
 		}
-		return u;
+		
+		return (u.size() == 0 ? null : u.get(0));
 	}
 
 	@Override
@@ -105,5 +105,19 @@ public class UsuarioDAO implements IUsuarioDAO {
 		return co;
 	}
 
+	@Override
+	public Usuario buscarUsuario(String email) {
+		List<Usuario> u = new ArrayList<Usuario>();
+
+		try{
+			u = em.createQuery("SELECT u FROM Usuario u WHERE u.email = '"+email+"' AND u.tenantID != 0", Usuario.class).getResultList();			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return (u.size() == 0 ? null : u.get(0));
+	}
+
+	
 
 }

@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.jboss.resteasy.util.Base64;
 
@@ -42,7 +43,7 @@ private IUsuarioController iuc;
 		Token jwt;
 		try{
 		
-			jwt = iuc.loginUsuario(dataUsuario);
+			jwt = iuc.loginAdmin(dataUsuario);
 		
 		}catch(Exception e){
 			e.printStackTrace();
@@ -87,59 +88,25 @@ private IUsuarioController iuc;
 		return null;
 
 	}
-	
 
- 
-//	public Response obtenerPorId(long id) {
-//		try {
-//			iuc.buscarUsuario(id);
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//
-//		}
-//
-//		return null;
-//	}
+	@Override
+	public Response loginUsuario(DataUsuario dataUsuario) {
+			
+		Token jwt = null;
+		try{		
+			jwt = iuc.loginUsuario(dataUsuario);
+		}catch(Exception e){
+			e.printStackTrace();	
+		}
+		
+		if (jwt == null){
+			return Response.status(Status.NOT_FOUND).build();	
+		}
+		
+		return Response.ok(jwt).build();
 
-	
-//	@RolesAllowed("ADMIN")
-//	@POST
-//	@Produces(MediaType.APPLICATION_JSON)
-//	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-//	@Path("/usuario")
-//	public Response guardarUsuario(String datos) {
-//		
-//		System.out.println("Entre  Usuario Service ");
-//		System.out.println("Usuario - " + datos);
-//		
-//		ObjectMapper mapper = new ObjectMapper();
-//		boolean guardado = false;
-//		
-//			try {
-//				Usuario usuario = mapper.readValue(datos, Usuario.class);
-//				guardado = iuc.guardarUsuario(usuario);
-//			} catch (JsonParseException e) {
-//				e.printStackTrace();
-//				return Response.serverError().build();
-//			} catch (JsonMappingException e) {
-//				e.printStackTrace();
-//				return Response.serverError().build();
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//				return Response.serverError().build();
-//			} catch (ExcepcionSistema e) {
-//				e.printStackTrace();
-//				return Response.status(500).entity("Error - "+ e.getMensajeError()).build();
-//			}
-//	
-//		if(guardado){
-//			return Response.ok("{\"status\":\"Usuario guardado\"}").build();
-//		}else{
-//			return Response.notModified("{\"status\":\"Usuario no guardado\"}").build();
-//		} 
-//	   
-//	}
+	}
+
 	
 //	@GET
 //	@Produces(MediaType.APPLICATION_JSON)

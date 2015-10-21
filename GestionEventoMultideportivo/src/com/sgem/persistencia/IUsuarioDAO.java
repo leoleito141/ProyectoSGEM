@@ -18,6 +18,7 @@ public interface IUsuarioDAO {
 	public boolean existeCodigoCO(int tenantId, String codigo);
 	public boolean existePais(int tenantId, String pais);
 	public List<ComiteOlimpico> buscarComiteporPais(String pais, int tenantID);
+	public Usuario buscarAdmin(String email);
 	
 		
 	

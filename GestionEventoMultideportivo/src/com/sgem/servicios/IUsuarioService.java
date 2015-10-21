@@ -54,5 +54,12 @@ public interface IUsuarioService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/login")
 	public Response login(DataUsuario dataUsuario);
+	
+	@PermitAll
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/loginUsuario")
+	public Response loginUsuario(DataUsuario dataUsuario);
 
 }

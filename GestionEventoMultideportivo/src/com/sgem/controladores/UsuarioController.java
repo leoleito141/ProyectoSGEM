@@ -25,7 +25,11 @@ import com.sgem.utilidades.Correo;
 @Stateless
 public class UsuarioController implements IUsuarioController {
 
+	public static final String USUARIO_ADMINISTRADOR = "Administrador";
 	public static final String USUARIO_COMUN = "Comun";
+	public static final String USUARIO_COMITE = "Comite";
+	public static final String USUARIO_ORGANIZADOR = "Organizador";
+	public static final String USUARIO_JUEZ = "Juez";
 	
 	@EJB
 	private IUsuarioDAO UsuarioDAO;
@@ -68,7 +72,7 @@ public class UsuarioController implements IUsuarioController {
 
 	}
 	
-	
+	@Override
 	public boolean guardarComite(DataComite dataComite) {
 		try {
 			boolean enviado = false;
@@ -119,13 +123,13 @@ public class UsuarioController implements IUsuarioController {
 		}
 	}
 	
-
-	public Token loginUsuario(DataUsuario dataUsuario) {	// String url){
+	@Override
+	public Token loginAdmin(DataUsuario dataUsuario) {	// String url){
 		
 		Token jwt;
-		String pass = null;
+		String pass = "";
 		
-		Usuario u =	buscarUsuario(dataUsuario.getEmail());
+		Usuario u =	buscarAdmin(dataUsuario.getEmail());
 		
 		try {
 			pass = new String(Base64.decode(dataUsuario.getPassword()));
@@ -137,7 +141,7 @@ public class UsuarioController implements IUsuarioController {
 	
 			// tenantId = this.buscarTenantId(url); BUSCAR TENANTID, 	
 			//	jwt.setTenantId(tenantId);
-			jwt = JWTUtil.generarToken(u);
+			jwt = JWTUtil.generarToken(u,USUARIO_ADMINISTRADOR);
 			
 		}else { 
 			return null; // deso vemos como manejar esto.
@@ -145,19 +149,18 @@ public class UsuarioController implements IUsuarioController {
 			
 		return jwt;
 	}
-	
-	public Usuario buscarUsuario(String email) {
-		
+	@Override
+	public Usuario buscarAdmin(String email) {
+		Usuario u = null;
 		try{
-			return UsuarioDAO.buscarUsuario(email);
+			u = UsuarioDAO.buscarAdmin(email);
 		}catch(Exception e){
 			e.printStackTrace();
-			
 		}
-		return null;
+		return u;
 	}
 
-	
+	@Override
 public List<ComiteOlimpico> buscarComiteporPais(String pais, int tenantID) {
 		
 		try{
@@ -167,6 +170,42 @@ public List<ComiteOlimpico> buscarComiteporPais(String pais, int tenantID) {
 			
 		}
 		return null;
+	}
+
+
+	@Override
+	public Token loginUsuario(DataUsuario dataUsuario) {
+		Token jwt = null;
+		String pass = "";
+		String rol = "";
+		
+		try {			
+			Usuario u =	buscarUsuario(dataUsuario.getEmail());		
+			pass = new String(Base64.decode(dataUsuario.getPassword()));		
+			
+			if(u != null && (u.getPassword().equalsIgnoreCase(pass))){// genero json web token.
+				
+				rol = u instanceof UsuarioComun ? USUARIO_COMUN : u instanceof ComiteOlimpico ? USUARIO_COMITE : u instanceof Organizador ? USUARIO_ORGANIZADOR : USUARIO_JUEZ;
+							
+				jwt = JWTUtil.generarToken(u,rol);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			
+		return jwt;
+	}
+
+
+	@Override
+	public Usuario buscarUsuario(String email) {
+		Usuario u = null;
+		try{
+			u = UsuarioDAO.buscarUsuario(email);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return u;
 	}
 
 }
