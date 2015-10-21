@@ -1,5 +1,6 @@
 package com.sgem.dominio;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,6 +14,7 @@ import com.sgem.persistencia.IDeportistaDAO;
 import com.sgem.persistencia.IEventoDeportivoDAO;
 import com.sgem.persistencia.IEventoMultiDAO;
 import com.sgem.persistencia.IUsuarioDAO;
+import com.sgem.utilidades.IpUtil;
 
 
 @WebListener
@@ -44,6 +46,33 @@ IEventoDeportivoDAO  EventoDeportivoDAO;
         System.out.println("Iniciando aplicacion--------Ver: utiles.InicioApp");
         System.out.println("*****************************");
         System.out.println("******* Test mensajes *******");
+        System.out.println("*****************************");
+        
+        System.out.println("*****************************");
+        System.out.println("*****Comienza Verificacion ip EventosSGEM*****");
+        
+        String miIp = IpUtil.getPublicIpAddress();
+		System.out.println("Mi ip: " + miIp);
+		
+		File file = new File("C:\\Windows\\System32\\drivers\\etc\\hosts");
+		System.out.println("Path : " + file.getAbsolutePath());
+				
+		String ipVieja = IpUtil.verificarIp(file,miIp);
+		if(!ipVieja.isEmpty()){
+			System.out.println("Su ip cambio, se modificara ip en hosts!");
+			System.out.println("De "+ipVieja+ " a "+miIp);
+			
+			if(IpUtil.modificarIp(file, ipVieja,miIp))
+				System.out.println("Se modifico la ip con exito!");
+			
+		}else{
+			System.out.println("Ip esta bien, no hay que modificar!");
+		}
+        
+        System.out.println("*****Finaliza Verificacion ip EventosSGEM*****");        
+        
+        System.out.println("********* Usuarios *********");
+        System.out.println("*****************************");
         System.out.println("*****************************");
         System.out.println("Creando usuario userTest (si no existe)...");
         
@@ -186,5 +215,9 @@ IEventoDeportivoDAO  EventoDeportivoDAO;
 		EventoDeportivoDAO.guardarEventoDeportivo(Natacion3,evento);
 	
     }
+    
+    
+    
+    
 
 }

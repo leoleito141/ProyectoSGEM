@@ -65,13 +65,16 @@ private IUsuarioController iuc;
 	public Response guardarUsuario(DataUsuario dataUsuario) {
 
 		try {
-			return Response.ok(iuc.guardarUsuario(dataUsuario)).build();
+			
+			if(iuc.guardarUsuario(dataUsuario)){
+				return Response.ok(new Boolean(true)).build();				
+			}
+			return Response.status(Status.FOUND).entity(new Boolean(false)).build();
 
 		} catch (Exception e) {
 			e.printStackTrace();
-
-		}
-		return null;
+			return Response.serverError().build();
+		}	
 
 	}
 	

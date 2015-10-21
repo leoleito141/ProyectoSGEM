@@ -18,15 +18,16 @@ public class UsuarioDAO implements IUsuarioDAO {
 	private EntityManager em;
 
 	public boolean guardarUsuario(Usuario usuario) {
-
+		boolean guardo = false;
+		
 		try {
 			em.persist(usuario);
-			return true;
-
+			guardo = true;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return guardo; 
 		}
-		return false;
+		return guardo;
 
 	}
 	
@@ -48,7 +49,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		
 		List<Usuario> usuarios = null;
 		try{
-			usuarios = em.createQuery("SELECT u FROM Usuario u, ComiteOlimpico co WHERE u.id = co.id AND u.tenantID = '"+tenantId+"' AND co.codigo = '"+codigo+"'", Usuario.class).getResultList();;
+			usuarios = em.createQuery("SELECT u FROM Usuario u, ComiteOlimpico co WHERE u.id = co.id AND u.tenantID = '"+tenantId+"' AND co.codigo = '"+codigo+"'", Usuario.class).getResultList();
 			
 			System.out.println(usuarios);
 			
@@ -71,7 +72,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 	public boolean existePais(int tenantId, String pais) {
 		List<Usuario> usuarios = null;
 		try{
-			usuarios = em.createQuery("SELECT u FROM Usuario u, ComiteOlimpico co WHERE u.id = co.id AND u.tenantID = '"+tenantId+"' AND co.pais = '"+pais+"'", Usuario.class).getResultList();;
+			usuarios = em.createQuery("SELECT u FROM Usuario u, ComiteOlimpico co WHERE u.id = co.id AND u.tenantID = '"+tenantId+"' AND co.pais = '"+pais+"'", Usuario.class).getResultList();
 			
 			System.out.println(usuarios);
 			
@@ -118,6 +119,19 @@ public class UsuarioDAO implements IUsuarioDAO {
 		return (u.size() == 0 ? null : u.get(0));
 	}
 
+	@Override
+	public boolean existeEmail(int tenantId, String email) {
+		List<Usuario> usuarios = null;
+		
+		try{
+			usuarios = em.createQuery("SELECT u FROM Usuario u, UsuarioComun uc WHERE u.id = uc.id AND u.tenantID = '"+tenantId+"' AND u.email = '"+email+"'", Usuario.class).getResultList();
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+		
+		return (usuarios.isEmpty() ? false : true);
+	}
 	
 
 }

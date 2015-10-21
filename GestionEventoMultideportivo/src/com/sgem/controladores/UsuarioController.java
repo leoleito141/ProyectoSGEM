@@ -36,40 +36,30 @@ public class UsuarioController implements IUsuarioController {
 	
 	@Override
 	public boolean guardarUsuario(DataUsuario dataUsuario) {
+		Usuario usuario = null;
+		String pass = "";
+		boolean guardo = false;
+
 		try {
-
-			Usuario usuario = null;
-			String pass = "";
-			
-			if (dataUsuario.getTipoUsuario().equalsIgnoreCase(USUARIO_COMUN)) {
-					usuario = new UsuarioComun();
+			usuario = new UsuarioComun();
+			if(!UsuarioDAO.existeEmail(dataUsuario.getTenantId(),dataUsuario.getEmail()) ){
 				
-					usuario.setTenantID(dataUsuario.getTenantId());
-					usuario.setEmail(dataUsuario.getEmail());
-					usuario.setCanalYoutube(dataUsuario.getCanalYoutube());
-					usuario.setTwitter(dataUsuario.getTwitter());
-					usuario.setFacebook(dataUsuario.getFacebook());
-					
-					try {
-						pass = new String(Base64.decode(dataUsuario.getPassword()));
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					usuario.setPassword(pass);
-					
-					return UsuarioDAO.guardarUsuario(usuario);
-				
+				usuario.setTenantID(dataUsuario.getTenantId());			
+				usuario.setEmail(dataUsuario.getEmail());
+	
+				pass = new String(Base64.decode(dataUsuario.getPassword()));
+				usuario.setPassword(pass);
+	
+				guardo = UsuarioDAO.guardarUsuario(usuario);
 			}else{
-				
-				return false;
+				guardo = false;
 			}
-
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return false;
 
+		return guardo;
 	}
 	
 	@Override

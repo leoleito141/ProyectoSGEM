@@ -13,7 +13,9 @@ import com.sgem.dominio.Usuario;
 @Local
 public interface IUsuarioDAO {
 
-	public boolean guardarUsuario(Usuario usuario);
+	public 
+	boolean guardarUsuario(Usuario usuario);
+	public boolean existeEmail(int tenantId, String pais);
 	public Usuario buscarUsuario(String email);
 	public boolean existeCodigoCO(int tenantId, String codigo);
 	public boolean existePais(int tenantId, String pais);
