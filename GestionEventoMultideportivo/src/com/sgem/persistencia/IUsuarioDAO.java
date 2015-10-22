@@ -9,14 +9,15 @@ import com.sgem.dominio.Admin;
 import com.sgem.dominio.ComiteOlimpico;
 import com.sgem.dominio.Organizador;
 import com.sgem.dominio.Usuario;
+import com.sgem.dominio.UsuarioComun;
 
 @Local
 public interface IUsuarioDAO {
 
-	public 
 	boolean guardarUsuario(Usuario usuario);
-	public boolean existeEmail(int tenantId, String pais);
-	public Usuario buscarUsuario(String email);
+//	public boolean existeUsuario(int tenantId, String pais, String clase);
+	public Usuario buscarUsuario(int tenantId, String email, String clase);
+	public Usuario buscarUsuario(int tenantId, String email);
 	public boolean existeCodigoCO(int tenantId, String codigo);
 	public boolean existePais(int tenantId, String pais);
 	public List<ComiteOlimpico> buscarComiteporPais(String pais, int tenantID);

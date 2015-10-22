@@ -1,4 +1,4 @@
-package com.sgem.dominio;
+package com.sgem.utilidades;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -10,11 +10,18 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import com.sgem.dominio.Admin;
+import com.sgem.dominio.ComiteOlimpico;
+import com.sgem.dominio.Deportista;
+import com.sgem.dominio.EventoDeportivo;
+import com.sgem.dominio.EventoMultideportivo;
+import com.sgem.dominio.Organizador;
+import com.sgem.dominio.TenantHandler;
+import com.sgem.dominio.Usuario;
 import com.sgem.persistencia.IDeportistaDAO;
 import com.sgem.persistencia.IEventoDeportivoDAO;
 import com.sgem.persistencia.IEventoMultiDAO;
 import com.sgem.persistencia.IUsuarioDAO;
-import com.sgem.utilidades.IpUtil;
 
 
 @WebListener
@@ -139,7 +146,7 @@ IEventoDeportivoDAO  EventoDeportivoDAO;
 		System.out.println("Alta de 4 usuarios completa");
 			
 		System.out.println("Obtengo el usuario dsa2");			
-		ComiteOlimpico u2 = (ComiteOlimpico) UsuarioDAO.buscarUsuario("cou@gmail.com");
+		ComiteOlimpico u2 = (ComiteOlimpico) UsuarioDAO.buscarUsuario(5,"cou@gmail.com");
 		System.out.println("obtuve el usuario "+u2.getEmail()+" "+u2.getId());
 		System.out.println(" y es "+u2.soy());
 		
@@ -172,7 +179,7 @@ IEventoDeportivoDAO  EventoDeportivoDAO;
 		System.out.println("BuscoLista");
 		ComiteOlimpico co = null;
 		
-		co = (ComiteOlimpico) UsuarioDAO.buscarUsuario("cou@gmail.com");
+		co = (ComiteOlimpico) UsuarioDAO.buscarUsuario(5,"cou@gmail.com");
 		
 		if(co != null){
 			for (Deportista dep : co.getDeportistas()) {
@@ -190,7 +197,7 @@ IEventoDeportivoDAO  EventoDeportivoDAO;
 		listevento.add(evento);
 		th.setEventos(listevento);
 
-		Organizador org =(Organizador)UsuarioDAO.buscarUsuario("dsa4");
+		Organizador org =(Organizador)UsuarioDAO.buscarUsuario(1,"dsa4");
 		
 		evento.setOrganizador(org);
 		org.setEvento(evento);

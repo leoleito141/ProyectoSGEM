@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.sgem.datatypes.DataComite;
+import com.sgem.datatypes.DataNovedad;
 import com.sgem.datatypes.DataUsuario;
 
 @RequestScoped
@@ -62,4 +63,11 @@ public interface IUsuarioService {
 	@Path("/loginUsuario")
 	public Response loginUsuario(DataUsuario dataUsuario);
 
+	@PermitAll
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/novedades")
+	public Response guardarNovedad(DataNovedad dataNovedad);
+	
 }

@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 
 import com.sgem.dominio.ComiteOlimpico;
 import com.sgem.dominio.Usuario;
+import com.sgem.dominio.UsuarioComun;
 
 @Stateless
 public class UsuarioDAO implements IUsuarioDAO {
@@ -107,31 +108,30 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 
 	@Override
-	public Usuario buscarUsuario(String email) {
-		List<Usuario> u = new ArrayList<Usuario>();
+	public Usuario buscarUsuario(int tenantId, String email, String clase) {
+		List<Usuario> usuarios = null;
+		
+		try{
+			usuarios = em.createQuery("SELECT u FROM Usuario u, "+clase+" cu WHERE u.id = cu.id AND u.tenantID = '"+tenantId+"' AND u.email = '"+email+"'", Usuario.class).getResultList();
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+		
+		return (usuarios.isEmpty() ? null : usuarios.get(0));
+	}
 
+	@Override
+	public Usuario buscarUsuario(int tenantId, String email) {
+		List<Usuario> u = new ArrayList<Usuario>();
+		
 		try{
 			u = em.createQuery("SELECT u FROM Usuario u WHERE u.email = '"+email+"' AND u.tenantID != 0", Usuario.class).getResultList();			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		
-		return (u.size() == 0 ? null : u.get(0));
+		return (u.isEmpty() ? null : u.get(0));
 	}
-
-	@Override
-	public boolean existeEmail(int tenantId, String email) {
-		List<Usuario> usuarios = null;
-		
-		try{
-			usuarios = em.createQuery("SELECT u FROM Usuario u, UsuarioComun uc WHERE u.id = uc.id AND u.tenantID = '"+tenantId+"' AND u.email = '"+email+"'", Usuario.class).getResultList();
-		}catch(Exception e){
-			e.printStackTrace();
-			return false;
-		}
-		
-		return (usuarios.isEmpty() ? false : true);
-	}
-	
 
 }

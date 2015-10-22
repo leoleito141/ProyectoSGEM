@@ -12,9 +12,11 @@ import org.jboss.resteasy.util.Base64;
 
 import com.sgem.controladores.IUsuarioController;
 import com.sgem.datatypes.DataComite;
-import com.sgem.datatypes.DataEvento;
+import com.sgem.datatypes.DataNovedad;
 import com.sgem.datatypes.DataUsuario;
-import com.sgem.seguridad.Token;
+import com.sgem.seguridad.excepciones.UsuarioNoEncontradoException;
+import com.sgem.seguridad.excepciones.UsuarioYaExisteException;
+import com.sgem.seguridad.jwt.Token;
 
 @Stateless
 public class UsuarioService implements IUsuarioService{
@@ -63,18 +65,13 @@ private IUsuarioController iuc;
 	
 	@Override
 	public Response guardarUsuario(DataUsuario dataUsuario) {
-
-		try {
-			
-			if(iuc.guardarUsuario(dataUsuario)){
-				return Response.ok(new Boolean(true)).build();				
-			}
+		
+		try {						
+			return Response.ok(iuc.guardarUsuario(dataUsuario)).build();				
+		} catch (UsuarioYaExisteException e) {
+//			e.printStackTrace();
 			return Response.status(Status.FOUND).entity(new Boolean(false)).build();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			return Response.serverError().build();
-		}	
+		}
 
 	}
 	
@@ -98,15 +95,23 @@ private IUsuarioController iuc;
 		Token jwt = null;
 		try{		
 			jwt = iuc.loginUsuario(dataUsuario);
-		}catch(Exception e){
-			e.printStackTrace();	
-		}
-		
-		if (jwt == null){
+		}catch(UsuarioNoEncontradoException e){
+//			e.printStackTrace();	// esto lo sacamos desp.
 			return Response.status(Status.NOT_FOUND).build();	
 		}
 		
 		return Response.ok(jwt).build();
+
+	}
+
+	@Override
+	public Response guardarNovedad(DataNovedad dataNovedad) {
+		try {						
+			return Response.ok(iuc.guardarNovedad(dataNovedad)).build();				
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.serverError().build();
+		}
 
 	}
 
