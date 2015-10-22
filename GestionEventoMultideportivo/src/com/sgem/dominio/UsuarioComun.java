@@ -11,13 +11,7 @@ public class UsuarioComun extends Usuario {
 	private static final String TIPO = "UsuarioComun";
 	
 	public UsuarioComun(){}
-	public UsuarioComun(String email, String facebook, String twitter, String canalYoutube, String nombre, String apellido, Integer edad, Integer cedula, String password,int tenantid) 
-	{
-		
-		super(email, facebook, twitter, canalYoutube, password,tenantid);
-				
-	}
-	
+
 	@Override
 	public  String soy(){			
 		return TIPO;

@@ -139,7 +139,26 @@
             return $http.post(dominio+'UsuarioService/usuarios', usuario,
             		{ headers: { 'Rol' : 'VISITANTE'} });       	
         }; 
+        
+        dataFactory.listarDeportes = function(tenantId,sexo){
+            return $http.get(dominio+'EventoDeportivoService/listarDeportes/'+tenantId+'/'+sexo , 
+            		{headers: { 'Rol' : 'COMITE_OLIMPICO'} }
+            		);
+        };
+        
+        dataFactory.listarDisciplinas = function(tenantId,sexo,selectDeportes){
+            return $http.get(dominio+'EventoDeportivoService/listarDisciplinas/'+tenantId+'/'+sexo+'/'+selectDeportes , 
+            		{headers: { 'Rol' : 'COMITE_OLIMPICO'} }
+            		);
+        };
 
 	    
+        dataFactory.altaDeportista = function(datos){
+        	console.log(datos);
+            return $http.post(dominio+'DeportistaService/altaDeportista', datos,
+            		{headers: { 'Rol' : 'COMITE_OLIMPICO'}});       	
+        };
+        
+        
         return dataFactory;
 }]); 

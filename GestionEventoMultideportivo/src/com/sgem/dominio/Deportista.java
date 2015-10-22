@@ -2,6 +2,7 @@ package com.sgem.dominio;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -56,7 +57,11 @@ public class Deportista implements Serializable{
 	  private Set <EventoDeportivo> eventoDep;
 	
 	*/
-	public Deportista(){}
+	public Deportista(){
+		this.eventoDep = new HashSet<EventoDeportivo>();
+	}
+	
+	
 
 	public Deportista(int tenantID, String nombre, String apellido,
 			Date fechaNac, String sexo, Set <EventoDeportivo> eventoDep, ComiteOlimpico comiteOlimpico ) {
@@ -69,7 +74,7 @@ public class Deportista implements Serializable{
 		this.Sexo = sexo;
 		this.comiteOlimpico = comiteOlimpico;
 		this.eventoDep = eventoDep;
-		
+		this.eventoDep = new HashSet<EventoDeportivo>();
 	}
 
 	public int getDeportistaID() {

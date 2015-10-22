@@ -1,28 +1,30 @@
 
 .PerfilWrapper{
 	
-	height: 100%;
-	
+	/*height: 100%;*/
+
 
 }
-html, body  { height: 100%; width: 100%; margin: 0; }
+html, body  { height: 100%; width: 100%; margin: 0; 
+background-image: url('http://destinosa1.com/wp-content/uploads/2015/06/PlazaIndependencia21.jpg');
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-attachment: fixed;
+
+}
 
 .FullHeight{
 	height: 100%;
 }
 .PerfilContent{
-	
-	width: 100%;
-	background-image: url('http://destinosa1.com/wp-content/uploads/2015/06/PlazaIndependencia21.jpg');
-    background-repeat: no-repeat;
-    background-size:cover;
-    background-attachment: fixed;
+	/*overflow-y: scroll;*/
 	
 }
 .HeaderPerfil{
 	margin-left: 10%;
 	margin-right: 10%;
 	height: 25%;
+	
 }
 .ImagenPerfil{
 	background: rgb(255,255,255);
@@ -40,9 +42,16 @@ html, body  { height: 100%; width: 100%; margin: 0; }
 	
 }
 .PerfilNews{
+	
 	margin-left: 10%;
 	margin-right: 10%;
-	min-height:70%
+	
+	
+}
+.newsWrapper{
+	border-radius: 5px;
+	padding:10px;
+	
 	
 }
 

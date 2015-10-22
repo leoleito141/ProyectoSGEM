@@ -2,7 +2,7 @@
 package com.sgem.controladores;
 
 import java.io.IOException;
-import java.lang.reflect.Method;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -10,93 +10,75 @@ import javax.ejb.Stateless;
 import org.jboss.resteasy.util.Base64;
 
 import com.sgem.datatypes.DataComite;
+import com.sgem.datatypes.DataNovedad;
 import com.sgem.datatypes.DataUsuario;
 import com.sgem.dominio.ComiteOlimpico;
-import com.sgem.dominio.Juez;
 import com.sgem.dominio.Organizador;
 import com.sgem.dominio.Usuario;
 import com.sgem.dominio.UsuarioComun;
 import com.sgem.persistencia.IUsuarioDAO;
-import com.sgem.seguridad.JWTUtil;
-import com.sgem.seguridad.Token;
+import com.sgem.seguridad.excepciones.UsuarioNoEncontradoException;
+import com.sgem.seguridad.excepciones.UsuarioYaExisteException;
+import com.sgem.seguridad.jwt.JWTUtil;
+import com.sgem.seguridad.jwt.Token;
 import com.sgem.utilidades.Correo;
 
 @Stateless
 public class UsuarioController implements IUsuarioController {
 
-	public static final String USUARIO_ADMIN = "Administrador";
+	public static final String USUARIO_ADMINISTRADOR = "Administrador";
 	public static final String USUARIO_COMUN = "Comun";
+	public static final String USUARIO_COMITE = "Comite";
+	public static final String USUARIO_ORGANIZADOR = "Organizador";
+	public static final String USUARIO_JUEZ = "Juez";
 	
 	@EJB
 	private IUsuarioDAO UsuarioDAO;
 	
 	@Override
-	public boolean guardarUsuario(DataUsuario dataUsuario) {
-		try {
+	public boolean guardarUsuario(DataUsuario dataUsuario) throws UsuarioYaExisteException {
+		Usuario usuario = null;
+		String pass = "";
+		boolean guardo = false;
 
-			Usuario usuario = null;
-			String pass = "";
+		usuario = new UsuarioComun();
+		if(UsuarioDAO.buscarUsuario(dataUsuario.getTenantId(),dataUsuario.getEmail(),UsuarioComun.class.getSimpleName()) == null ){
 			
-					//////////////////// Esto creo que no es mas necesario... ni idea donde se usa
-			if (dataUsuario.getTipoUsuario().equalsIgnoreCase(USUARIO_ADMIN)) {
-				
-				// Cambiar la condicion a alguna parte del data para ver el tipo de usuario que estoy creando
-				usuario = (dataUsuario.getEmail()=="")? (new Organizador()):( new Juez());
-				
-				if(usuario != null){
-					
-					usuario = new Organizador();
-				//	usuario.setNombre(dataUsuario.getNombre());
-				//	usuario.setApellido(dataUsuario.getApellido());
-				//	usuario.setEdad(dataUsuario.getEdad());
-					usuario.setEmail(dataUsuario.getEmail());
-					usuario.setCanalYoutube(dataUsuario.getCanalYoutube());
-					usuario.setTwitter(dataUsuario.getTwitter());
-					usuario.setFacebook(dataUsuario.getFacebook());
-			//		usuario.setCedula(dataUsuario.getCedula());
-					usuario.setPassword(dataUsuario.getPassword());
-					
-					return UsuarioDAO.guardarUsuario(usuario);
-					
-				}
-				
-			}else if (dataUsuario.getTipoUsuario().equalsIgnoreCase(USUARIO_COMUN)) {
-					usuario = new UsuarioComun();
-				
-					usuario.setTenantID(dataUsuario.getTenantId());
-					usuario.setEmail(dataUsuario.getEmail());
-					usuario.setCanalYoutube(dataUsuario.getCanalYoutube());
-					usuario.setTwitter(dataUsuario.getTwitter());
-					usuario.setFacebook(dataUsuario.getFacebook());
-					
-					try {
-						pass = new String(Base64.decode(dataUsuario.getPassword()));
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					usuario.setPassword(pass);
-					
-					return UsuarioDAO.guardarUsuario(usuario);
-				
-			}else{
-				
+			usuario.setTenantID(dataUsuario.getTenantId());			
+			usuario.setEmail(dataUsuario.getEmail());
+
+			try {
+				pass = new String(Base64.decode(dataUsuario.getPassword()));
+			} catch (IOException e) {
+				e.printStackTrace();
 				return false;
 			}
+			usuario.setPassword(pass);
 
-			
-		} catch (Exception e) {
-			e.printStackTrace();
+			guardo = UsuarioDAO.guardarUsuario(usuario);
+		}else{
+			throw new UsuarioYaExisteException("El usuario con email: "+dataUsuario.getEmail()+ " ya existe.");
 		}
-		return false;
 
+		return guardo;
 	}
 	
-	
+	@Override
 	public boolean guardarComite(DataComite dataComite) {
 		try {
 			boolean enviado = false;
 			boolean guardo = false;
 			ComiteOlimpico co = null;
+			
+			boolean existeCodigoCO = UsuarioDAO.existeCodigoCO(dataComite.getTenantId(),dataComite.getCodigo());
+			System.out.println(existeCodigoCO);
+			boolean existePais = UsuarioDAO.existePais(dataComite.getTenantId(),dataComite.getPais());
+			
+			
+			// ANTES DE DAR DE ALTA, FIJARSE EN EL dataComite que viene, si ya existe uno con ese cod y ese pais 
+			// en ese tenant. 
+			
+			if((existeCodigoCO == false)&&(existePais==false)){
 			
 					co = new ComiteOlimpico();
 				
@@ -119,6 +101,12 @@ public class UsuarioController implements IUsuarioController {
 						// controlar esto..
 					}
 					return guardo;
+			}else{ // ya existe CO con es codigo y pais no se guarda
+				
+				return false;
+			}		
+					
+					
 			}
 		 catch (Exception e) {
 			e.printStackTrace();
@@ -126,13 +114,13 @@ public class UsuarioController implements IUsuarioController {
 		}
 	}
 	
-
-	public Token loginUsuario(DataUsuario dataUsuario) {	// String url){
+	@Override
+	public Token loginAdmin(DataUsuario dataUsuario) {	// String url){
 		
 		Token jwt;
-		String pass = null;
+		String pass = "";
 		
-		Usuario u =	buscarUsuario(dataUsuario.getEmail());
+		Usuario u =	buscarAdmin(dataUsuario.getEmail());
 		
 		try {
 			pass = new String(Base64.decode(dataUsuario.getPassword()));
@@ -144,7 +132,9 @@ public class UsuarioController implements IUsuarioController {
 	
 			// tenantId = this.buscarTenantId(url); BUSCAR TENANTID, 	
 			//	jwt.setTenantId(tenantId);
-			jwt = JWTUtil.generarToken(u);
+			DataUsuario du = new DataUsuario();
+			du.setTipoUsuario(USUARIO_ADMINISTRADOR);
+			jwt = JWTUtil.generarToken(convertir(u));
 			
 		}else { 
 			return null; // deso vemos como manejar esto.
@@ -152,11 +142,22 @@ public class UsuarioController implements IUsuarioController {
 			
 		return jwt;
 	}
-	
-	public Usuario buscarUsuario(String email) {
+	@Override
+	public Usuario buscarAdmin(String email) {
+		Usuario u = null;
+		try{
+			u = UsuarioDAO.buscarAdmin(email);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return u;
+	}
+
+	@Override
+	public List<ComiteOlimpico> buscarComiteporPais(String pais, int tenantID) {
 		
 		try{
-			return UsuarioDAO.buscarUsuario(email);
+			return UsuarioDAO.buscarComiteporPais(pais, tenantID);
 		}catch(Exception e){
 			e.printStackTrace();
 			
@@ -164,6 +165,61 @@ public class UsuarioController implements IUsuarioController {
 		return null;
 	}
 
+
+	@Override
+	public Token loginUsuario(DataUsuario dataUsuario) throws UsuarioNoEncontradoException {
+		Token jwt = null;
+		String pass = "";
+		
+		Usuario u =	UsuarioDAO.buscarUsuario(dataUsuario.getTenantId(), dataUsuario.getEmail());				
+	
+		try {
+			pass = new String(Base64.decode(dataUsuario.getPassword()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
+		
+		if( u != null && (u.getPassword().equalsIgnoreCase(pass)) ){// genero json web token.
+			
+			String tipoUsuario = u instanceof UsuarioComun ? USUARIO_COMUN : u instanceof ComiteOlimpico ? USUARIO_COMITE : u instanceof Organizador ? USUARIO_ORGANIZADOR : USUARIO_JUEZ;
+			DataUsuario du = new DataUsuario();
+			du.setTipoUsuario(tipoUsuario);
+			jwt = JWTUtil.generarToken(du);
+		}else{
+			throw new UsuarioNoEncontradoException("No se encuentra usuario con dichas credenciales");
+		}
+						
+		return jwt;
+	}
+
+	@Override
+	public boolean guardarNovedad(DataNovedad dataNovedad) {
+		return false;
+	}
+
+	private DataUsuario convertir(Usuario u){
+		DataUsuario du = new DataUsuario();
+		
+		du.setCanalYoutube(u.getCanalYoutube());
+		du.setEmail(u.getEmail());
+		du.setFacebook(u.getFacebook());		
+		du.setTenantId(u.getTenantID());
+		du.setTwitter(u.getTwitter());
+		
+		return du;
+	}
+	
+	
+//	@Override
+//	public Usuario buscarUsuario(String email) {
+//		Usuario u = null;
+//		try{
+//			u = UsuarioDAO.buscarUsuario(email);
+//		}catch(Exception e){
+//			e.printStackTrace();
+//		}
+//		return u ;
+//	}
 
 }
 

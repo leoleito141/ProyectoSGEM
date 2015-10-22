@@ -4,12 +4,13 @@ import javax.ejb.Local;
 
 import com.sgem.datatypes.DataEvento;
 import com.sgem.datatypes.DataTenant;
+import com.sgem.dominio.EventoMultideportivo;
 
 @Local
 public interface IEventoMultiController {
 	
-	boolean guardarEventoMultideportivo(DataEvento dataEvento);
+	public boolean guardarEventoMultideportivo(DataEvento dataEvento);
 	public DataTenant obtenerDataTenant(String tenant);
-	int traeridEventoMultit(int tenantId);
+	public EventoMultideportivo obtenerEventoMultideportivoXTenantId(int tenantId);
 
 }

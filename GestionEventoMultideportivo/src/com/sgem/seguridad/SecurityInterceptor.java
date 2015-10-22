@@ -5,7 +5,6 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureException;
 
 import java.lang.reflect.Method;
-import java.security.Key;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -23,6 +22,8 @@ import org.jboss.resteasy.core.Headers;
 import org.jboss.resteasy.core.ResourceMethodInvoker;
 import org.jboss.resteasy.core.ServerResponse;
 
+import com.sgem.seguridad.jwt.JWTUtil;
+
 
 /**
  * Este interceptador verifica el accesso con JWT, a nivel de permisos basado en roles 
@@ -38,9 +39,7 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
     private static final ServerResponse ACCESS_DENIED = new ServerResponse("Access denied for this resource", 401, new Headers<Object>());
     private static final ServerResponse ACCESS_FORBIDDEN = new ServerResponse("Nobody can access this resource", 403, new Headers<Object>());
     private static final ServerResponse SERVER_ERROR = new ServerResponse("INTERNAL SERVER ERROR", 500, new Headers<Object>());
-     
-	private Key clave = JWTUtil.getClave();
-    
+     	    
     @Override
     public void filter(ContainerRequestContext requestContext)
     {
@@ -59,37 +58,9 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
              
             //Get request headers
             final MultivaluedMap<String, String> headers = requestContext.getHeaders();
-             
-            //Fetch authorization header
-            final List<String> authorization = headers.get(AUTHORIZATION_PROPERTY);
             
-            //Si no hay informaci�n de autorizaci�n presente, bloqueo el acceso.
-            if(authorization == null || authorization.isEmpty())
-            {
-                requestContext.abortWith(ACCESS_DENIED);
-                return;
-            }
-                               
-            /*	A partir este punto, se procesaran los datos obtenidos de los headers del metodo GET */         
-            
-            final String token = getToken(authorization);          
-            
-            try {
-                Jwts.parser().setSigningKey(clave).parseClaimsJws(token);
-                //OK, we can trust this JWT
-            } catch (SignatureException e) {
-                //don't trust the JWT!
-            	 requestContext.abortWith(ACCESS_DENIED);
-                 return;
-            } catch(MalformedJwtException e){
-            	 requestContext.abortWith(SERVER_ERROR);
-                 return;
-            }
-            
-            
-            //Verifico el acceso del usuario al m�todo seg�n su rol.
-            
-            //Si no hay informaci�n de autorizaci�n presente, bloqueo el acceso.
+            //Verifico el acceso del usuario al metodo segun su rol.            
+            //Si no hay informacion de autorizacion presente, bloqueo el acceso.
             if(headers.get(ROL_PROPERTY) == null || headers.get(ROL_PROPERTY).isEmpty())
             {
             	requestContext.abortWith(ACCESS_DENIED);
@@ -99,26 +70,60 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
             //Fetch authorization header
             String rol = headers.get(ROL_PROPERTY).get(0);
             
+            if(!rol.equals("VISITANTE")){
+            
+	            //Fetch authorization header
+	            final List<String> authorization = headers.get(AUTHORIZATION_PROPERTY);
+	            
+	            //Si no hay informacion de autorizacion presente, bloqueo el acceso.
+	            if(authorization == null || authorization.isEmpty())
+	            {
+	                requestContext.abortWith(ACCESS_DENIED);
+	                return;
+	            }
+	                               
+	            /*	A partir este punto, se procesaran los datos obtenidos de los headers del metodo GET */         
+	            
+	            final String token = getToken(authorization);          
+	            
+	            try {
+	                Jwts.parser().setSigningKey(JWTUtil.getClave()).parseClaimsJws(token);
+	                //OK, we can trust this JWT
+	            } catch (SignatureException e) {//don't trust the JWT!
+	            	 requestContext.abortWith(ACCESS_DENIED);
+	                 return;
+	            } catch(MalformedJwtException e){
+	            	 requestContext.abortWith(SERVER_ERROR);
+	                 return;
+	            }	            	        
+            }          	
+            
             if(method.isAnnotationPresent(RolesAllowed.class))
-            {
-                RolesAllowed anotacionesRol = method.getAnnotation(RolesAllowed.class);
-                Set<String> setRoles = new HashSet<String>(Arrays.asList(anotacionesRol.value()));
-                 
-                if( ! usuarioPermitido(rol, setRoles)) 
-                {
-                    requestContext.abortWith(ACCESS_DENIED);
-                    return;
-                }
-            }
+	   		{
+	   		    RolesAllowed anotacionesRol = method.getAnnotation(RolesAllowed.class);
+	   		    Set<String> setRoles = new HashSet<String>(Arrays.asList(anotacionesRol.value()));
+	   		      
+	   		    if( ! usuarioPermitido(rol, setRoles)) 
+	   		    {
+	   		        requestContext.abortWith(ACCESS_DENIED);
+	   		        return;
+	   		    }
+	   		}            
         }
     }
     
+    /**
+	 * Devuelve el token proveniente de los headers del request. 
+	 * 
+	 * @param List(String) lista que contiene los headers de autorizacion
+	 * @return token token proveniente del header.
+	 */
     private String getToken(List<String> authorization) {
     	
-    	return authorization.get(0).replaceFirst(AUTHENTICATION_SCHEME + " ", ""); // pulir mas esto..
+    	return authorization.get(0).replaceFirst(AUTHENTICATION_SCHEME + " ", ""); 
 	
     }
-    
+       
 	/**
 	 * Se chequea que el rol del usuario a utilizar el metodo, sea uno de los
 	 * roles que el metodo accepte.
@@ -135,5 +140,5 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
 		}
 		return permitido;
 	}
-
+	
 }

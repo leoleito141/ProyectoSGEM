@@ -1,10 +1,15 @@
 package com.sgem.controladores;
 
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import com.sgem.datatypes.DataEventoDeportivo;
 import com.sgem.dominio.EventoDeportivo;
+import com.sgem.dominio.EventoMultideportivo;
 import com.sgem.persistencia.IEventoDeportivoDAO;
 
 
@@ -34,10 +39,17 @@ public class EventoDeportivoController implements IEventoDeportivoController {
 					eventoDeportivo.setFechaFin(dataEventoDeportivo.getFechaFin());
 					eventoDeportivo.setTenantId(dataEventoDeportivo.getTenantId());
 					
-					idEventoMulti = iemc.traeridEventoMultit(dataEventoDeportivo.getTenantId());
-					eventoDeportivo.setEventoMultiId(idEventoMulti);
 					
-					return EventosDAO.guardarEventoDeportivo(eventoDeportivo);
+					
+					EventoMultideportivo emd = iemc.obtenerEventoMultideportivoXTenantId(dataEventoDeportivo.getTenantId()) ;
+					
+				
+					
+					
+					
+					
+					return  EventosDAO.guardarEventoDeportivo(eventoDeportivo,emd);
+					
 					
 			
 				
@@ -48,4 +60,58 @@ public class EventoDeportivoController implements IEventoDeportivoController {
 		}
 		return false;
 	}
+	
+	@Override
+	public List<String> listarDeportes(int tenantID, String sexo) {
+		try {
+	      					
+			return EventosDAO.listarDeportes(tenantID,sexo);
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<String> listarDisciplinas(int tenantID, String nombreDeporte, String sexo) {
+		try {
+				
+			return EventosDAO.listarDisciplinas(tenantID,nombreDeporte,sexo);
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<EventoDeportivo> buscarEventosDeportivos(Integer tenantId, String deporte, List<String> disciplinas, String sexo) {
+		
+		try {
+		
+		List<EventoDeportivo> led = new ArrayList<EventoDeportivo>();
+		Integer idEventoDep = 0;
+		EventoDeportivo ed = null;
+		
+		for (int i = 0; i < disciplinas.size(); i++) {
+			
+			String disciplina =	disciplinas.get(i).toString();
+			
+			idEventoDep = EventosDAO.traerIDEventoDeportivo(tenantId, deporte,disciplina,sexo);
+			
+			ed = EventosDAO.traerEventoDeportivo(idEventoDep);
+			
+			led.add(ed);
+			
+			
+		}
+		
+		return led;
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 }

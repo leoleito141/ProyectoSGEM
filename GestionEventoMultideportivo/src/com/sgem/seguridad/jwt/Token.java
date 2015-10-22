@@ -1,4 +1,4 @@
-package com.sgem.seguridad;
+package com.sgem.seguridad.jwt;
 
 public class Token {
 	private String token;

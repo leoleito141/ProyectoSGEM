@@ -12,7 +12,22 @@ angular.module('pruebaAngularApp', ['ui.router','ui.bootstrap','satellizer'])
 
       }
 
+      $scope.rol = 'Organizador'
+      
+      if (next.templateUrl=='views/tenant/indexOrganizador.html' ) {
+       	  if($scope.rol = 'Organizador'){
+       		  
+       		        	  event.preventDefault();
+       		        	  $state.go('indexOrganizador');
+       		  
+       	  }
+    	  
 
+
+      }
+      
+      
+    
     } 
     /* Act on the event */
   });
@@ -39,7 +54,7 @@ angular.module('pruebaAngularApp', ['ui.router','ui.bootstrap','satellizer'])
 	    resolve: { 
 	    	dataTenant:function(dataFactory,$stateParams) {
 	    		/***** ESTO ESTARÍA BUENO IMPLEMENTARLO EN UN UTIL O FUNCION ****/
-	    		
+	    		 
 	    		if(localStorage.getItem("tenantActual") == null || (JSON.parse(localStorage.getItem("tenantActual"))).nombre_url != $stateParams.tenant){
 
 	    			return dataFactory.getDataTenant($stateParams.tenant);
@@ -53,7 +68,7 @@ angular.module('pruebaAngularApp', ['ui.router','ui.bootstrap','satellizer'])
 	}).state('tenantRegistro', {
 		url:'/:tenant/registro',
 		templateUrl : 'views/tenant/registroTenant.html',
-		controller : 'RegistroTenantCtrl',
+		controller : 'UsuarioCtrl',
 	    resolve: { 
 	    	dataTenant:function(dataFactory,$stateParams) {
     			/***** ESTO ESTARÍA BUENO IMPLEMENTARLO EN UN UTIL O FUNCION ****/
@@ -105,7 +120,7 @@ angular.module('pruebaAngularApp', ['ui.router','ui.bootstrap','satellizer'])
 	}).state('altaComite', {
 		url:'/:tenant/altaComite',
 		templateUrl : 'views/altaComite.html',
-		controller : 'RegistroCtrl',
+		controller : 'UsuarioCtrl',
 		resolve: { 
 		    	dataTenant: function(dataFactory,$stateParams) {
 		    		/***** ESTO ESTARÍA BUENO IMPLEMENTARLO EN UN UTIL O FUNCION ****/
@@ -124,6 +139,48 @@ angular.module('pruebaAngularApp', ['ui.router','ui.bootstrap','satellizer'])
 		url:'/:tenant/perfilComite',
 		templateUrl : 'views/perfilComite.html',
 		controller : 'PerfilCtrl'
+			
+	}).state('indexOrganizador', {
+		url:'/:tenant/indexOrganizador',
+		templateUrl : 'views/tenant/indexOrganizador.html',
+		controller : 'EventoMultiCtrl'
+			
+	}).state('indexTenant', {
+		url:'/:tenant/',
+		templateUrl : 'views/tenant/index.html',
+		controller : 'EventoMultiCtrl',
+		resolve: { 
+	    	dataTenant: function(dataFactory,$stateParams) {
+	    		/***** ESTO ESTARÍA BUENO IMPLEMENTARLO EN UN UTIL O FUNCION ****/
+	    		
+	    		if(localStorage.getItem("tenantActual") == null || (JSON.parse(localStorage.getItem("tenantActual"))).nombre_url != $stateParams.tenant){
+
+	    			return dataFactory.getDataTenant($stateParams.tenant);
+	    			
+	    		}else{
+	    			return JSON.parse(localStorage.getItem("tenantActual"));
+	    		}
+	    		/**********************************************************/
+	    	}
+		}
+	}).state('altaDeportista', {
+		url:'/:tenant/altaDeportista',
+		templateUrl : 'views/altaDeportista.html',
+		controller : 'deportistaCtrl',
+		resolve: { 
+	    	dataTenant: function(dataFactory,$stateParams) {
+	    		/***** ESTO ESTARÍA BUENO IMPLEMENTARLO EN UN UTIL O FUNCION ****/
+	    		
+	    		if(localStorage.getItem("tenantActual") == null || (JSON.parse(localStorage.getItem("tenantActual"))).nombre_url != $stateParams.tenant){
+
+	    			return dataFactory.getDataTenant($stateParams.tenant);
+	    			
+	    		}else{
+	    			return JSON.parse(localStorage.getItem("tenantActual"));
+	    		}
+	    		/**********************************************************/
+	    	}
+		}
 	});
 	
 

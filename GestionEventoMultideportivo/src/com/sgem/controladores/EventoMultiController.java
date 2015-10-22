@@ -103,8 +103,20 @@ public class EventoMultiController implements IEventoMultiController {
 
 	}
 
-
-
+	@Override
+	public EventoMultideportivo obtenerEventoMultideportivoXTenantId(int tenantId) {
+		
 	
+		
+		try {
+			return EventoMultiDAO.traerEventoMulti(tenantId);
+			
+						
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return null;
+		
+	}
 
 }

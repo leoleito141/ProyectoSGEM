@@ -186,6 +186,23 @@ public class EventoMultideportivo implements Serializable{
 	public void setOrganizador(Organizador organizador) {
 		this.organizador = organizador;
 	}
+
+	public Set<EventoDeportivo> getDeportes() {
+		return deportes;
+	}
+
+	public void setDeportes(Set<EventoDeportivo> deportes) {
+		this.deportes = deportes;
+	}
+	
+	public void agregarEventos(EventoDeportivo ed) {
+
+		if (this.deportes == null)
+			this.deportes = new HashSet<EventoDeportivo>();
+
+		this.deportes.add(ed);
+
+	}
 	
 	
 }

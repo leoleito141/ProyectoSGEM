@@ -29,9 +29,6 @@ public class EventoDeportivo implements Serializable{
 	@Column(name = "tenant_ID", nullable = true)
 	private int tenantId;
 	
-	@Column(name = "EventoId", nullable = true)
-	private int EventoMultiId;
-	
 	@Column(name = "nombreDeporte", nullable = true)
 	private String nombreDeporte;
 	
@@ -65,13 +62,11 @@ public class EventoDeportivo implements Serializable{
 	
 	public EventoDeportivo(){}
 	
-	public EventoDeportivo(int eventoDepId, int tenantId, int eventoMultiId, String nombreDeporte, String disciplina,
+	public EventoDeportivo(int tenantId, String nombreDeporte, String disciplina,
 			Date fechaInicio, Date fechaFin, String sexo, EventoMultideportivo eventoMultideportivo,
 			Set<com.sgem.dominio.Competencia> competencia, Set<Ronda> ronda) {
 		super();
-		this.EventoDepId = eventoDepId;
 		this.tenantId = tenantId;
-		this.EventoMultiId = eventoMultiId;
 		this.nombreDeporte = nombreDeporte;
 		this.disciplina = disciplina;
 		this.fechaInicio = fechaInicio;
@@ -99,8 +94,6 @@ public class EventoDeportivo implements Serializable{
 		this.ronda = ronda;
 	}
 
-	
-
 	public int getEventoDepId() {
 		return EventoDepId;
 	}
@@ -115,14 +108,6 @@ public class EventoDeportivo implements Serializable{
 
 	public void setTenantId(int tenantId) {
 		this.tenantId = tenantId;
-	}
-
-	public int getEventoMultiId() {
-		return EventoMultiId;
-	}
-
-	public void setEventoMultiId(int eventoMultiId) {
-		EventoMultiId = eventoMultiId;
 	}
 
 	public String getNombreDeporte() {

@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.sgem.datatypes.DataComite;
+import com.sgem.datatypes.DataNovedad;
 import com.sgem.datatypes.DataUsuario;
 
 @RequestScoped
@@ -40,14 +41,7 @@ public interface IUsuarioService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/altaComite")
 	public Response altaComite(DataComite dataComite);
-	
-	
-	@RolesAllowed("ADMIN")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/prueba")
-	public Response prueba();
+
 	
 //	@RolesAllowed("ADMIN")
 //	@GET
@@ -61,5 +55,19 @@ public interface IUsuarioService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/login")
 	public Response login(DataUsuario dataUsuario);
+	
+	@PermitAll
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/loginUsuario")
+	public Response loginUsuario(DataUsuario dataUsuario);
 
+	@PermitAll
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/novedades")
+	public Response guardarNovedad(DataNovedad dataNovedad);
+	
 }
