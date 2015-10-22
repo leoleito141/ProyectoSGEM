@@ -39,6 +39,19 @@ public class UsuarioDAO implements IUsuarioDAO {
 		}
 		return u;
 	}
+	
+	public boolean guardarOrganizador(Organizador organizador) {
+
+		try {
+			em.merge(organizador);
+			return true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+
+	}
 
 
 }

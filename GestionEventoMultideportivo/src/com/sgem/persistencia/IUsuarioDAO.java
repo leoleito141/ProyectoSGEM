@@ -12,6 +12,7 @@ public interface IUsuarioDAO {
 
 	public boolean guardarUsuario(Usuario usuario);
 	public Usuario buscarUsuario(String email);
+	public boolean guardarOrganizador(Organizador org);
 	
 		
 	

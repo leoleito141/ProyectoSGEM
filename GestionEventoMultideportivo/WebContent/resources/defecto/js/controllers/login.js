@@ -24,7 +24,7 @@ angular.module('pruebaAngularApp')
  
             var payLoad = $auth.getPayload();
            
-            $state.transitionTo("altaEvento", { tenant: payLoad.tenantid });
+            $state.transitionTo("formAltaEventoMulti.altaEvento", { tenant: payLoad.tenantid });
              
 
            

@@ -12,6 +12,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
+
 import com.sgem.datatypes.DataEvento;
 
 
@@ -26,12 +28,20 @@ public interface IEventoMultiService {
 	@Path("/status")
 	public Response getStatus();
 	
-	@RolesAllowed("ADMIN")
+	//@RolesAllowed("ADMIN")
+	@PermitAll
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/eventos")
 	public Response altaEvento(DataEvento datosEvento);
+	
+	@PermitAll
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes("multipart/form-data")
+	@Path("/subirImagen")
+	public Response subirImagen(MultipartFormDataInput input);
 
 	
 //	//@RolesAllowed("VISITANTE")

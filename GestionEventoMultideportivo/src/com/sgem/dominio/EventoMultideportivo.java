@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -57,7 +58,7 @@ public class EventoMultideportivo implements Serializable{
 	@Column(name = "css", nullable = true)
 	private String Css;
 	
-	@OneToOne(targetEntity=Organizador.class,mappedBy="evento")
+	@OneToOne(targetEntity=Organizador.class,mappedBy="evento",cascade = CascadeType.ALL)
 	private Organizador organizador;
 	
 	@OneToMany(fetch = FetchType.EAGER,mappedBy = "eventoMultideportivo") 

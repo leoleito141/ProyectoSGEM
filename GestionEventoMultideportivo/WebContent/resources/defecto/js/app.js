@@ -68,11 +68,23 @@ angular.module('pruebaAngularApp', ['ui.router','ui.bootstrap','satellizer'])
 	    		/**********************************************************/   
 	    	}  
 	    }
-	}).state('altaEvento', {
-		url:'/:tenant/altaEvento',
-		templateUrl : 'views/altaEvento.html',
+	}).state('formAltaEventoMulti', {
+		url:'/:tenant/altaEventoMultiDeportivo',
+		templateUrl : 'views/formAltaEventoMulti.html',
 		controller : 'EventoMultiCtrl'
-	}).state('altaEventoDeportivo', {
+	})// nested states 
+	.state('formAltaEventoMulti.altaEvento', {
+		url:'/altaEvento',
+		templateUrl : 'views/altaEvento.html'
+
+	})// nested states 
+    // each of these sections will have their own view
+    // url will be nested (/altaEvento/organizador)
+	.state('formAltaEventoMulti.organizador', {
+        url: '/organizador',
+        templateUrl: 'views/altaOrganizador.html'
+        	
+    }).state('altaEventoDeportivo', {
 		url:'/:tenant/altaEventoDeportivo',
 		templateUrl : 'views/altaEventDeportivo.html',
 		controller : 'EventDeportivoCtrl',

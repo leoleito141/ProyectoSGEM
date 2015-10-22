@@ -4,7 +4,9 @@ angular.module('pruebaAngularApp')
   .controller('EventoMultiCtrl', ['$scope','dataFactory', function ($scope,dataFactory) {
 	
 	  $scope.evento={};
-	  console.log($scope.evento);
+//	  $scope.organizador={};
+//	  var file = $scope.myFile;
+	 
 	  
 	  $scope.openInicio = function($eventInicio) {
 		    $scope.statusInicio.opened = true;
@@ -29,14 +31,12 @@ angular.module('pruebaAngularApp')
 	  
 	  
 	  $scope.altaEvento = function(){
-		  dataFactory.altaEvento($scope.evento)
+		  var file = $scope.myFile;
+
+		  dataFactory.altaEvento($scope.evento,file)
 	     	.then(function (data, status, headers, config) {
-	                $scope.status = data.status;
-	                console.log("Entre Alta Evento");
-	                console.log(data.status);
-	                console.log(status);
-	                console.log(headers);
-	                console.log(config);
+	                 console.log(data);
+	                
 	                
 	            })
 	            .catch(function(response){

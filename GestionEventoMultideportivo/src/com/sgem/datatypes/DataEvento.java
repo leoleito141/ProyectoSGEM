@@ -25,8 +25,12 @@ public class DataEvento {
 	private String hashtag;
 
 	private String css;
-
 	
+	private String emailOrganizador;
+	
+	private String passwordOrganizador;
+
+
 
 
 	public String getNombre() {
@@ -172,11 +176,36 @@ public class DataEvento {
 		return css;
 	}
 
-
-
-
 	public void setCss(String css) {
 		this.css = css;
+	}
+	
+	
+
+
+	public String getEmailOrganizador() {
+		return emailOrganizador;
+	}
+
+
+
+
+	public void setEmailOrganizador(String emailOrganizador) {
+		this.emailOrganizador = emailOrganizador;
+	}
+
+
+
+
+	public String getPasswordOrganizador() {
+		return passwordOrganizador;
+	}
+
+
+
+
+	public void setPasswordOrganizador(String passwordOrganizador) {
+		this.passwordOrganizador = passwordOrganizador;
 	}
 
 
@@ -188,7 +217,8 @@ public class DataEvento {
 				+ ", año=" + anio + ", logo=" + logo
 				+ ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", facebook="
 				+ facebook + ", twitter=" + twitter + ", canalYoutube=" + canalYoutube
-				+ ", hashtag=" + hashtag + ", css="+ css + "]";
+				+ ", hashtag=" + hashtag + ", css="+ css + ", emailOrganizador=" + emailOrganizador
+				+ ", passwordOrganizador=" + passwordOrganizador +"]";
 	}
 	
 	

@@ -1,5 +1,6 @@
 package com.sgem.dominio;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -10,7 +11,7 @@ public class Organizador extends Usuario {
 
 	private static final long serialVersionUID = -5284790408432089498L;
 
-	@OneToOne(targetEntity=EventoMultideportivo.class)
+	@OneToOne(targetEntity=EventoMultideportivo.class,cascade = CascadeType.ALL)
 	private EventoMultideportivo evento;
 	
 	public Organizador() {}
