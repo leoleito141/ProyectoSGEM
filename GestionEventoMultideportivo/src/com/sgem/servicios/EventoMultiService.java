@@ -17,13 +17,15 @@ import javax.ws.rs.core.Response.Status;
 
 
 
+
+import org.apache.commons.io.IOUtils;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 
 
 
-import com.ibm.wsdl.util.IOUtils;
+
 import com.sgem.controladores.IEventoMultiController;
 import com.sgem.datatypes.DataEvento;
 import com.sgem.datatypes.DataTenant;
@@ -117,36 +119,37 @@ public class EventoMultiService implements IEventoMultiService{
 	public Response subirImagen(MultipartFormDataInput input) {
 		System.out.println("Entre alta subirImagen" + input.toString());
 		
-//		String fileName = "";
-//		
-//		Map<String, List<InputPart>> uploadForm = input.getFormDataMap();
-//		List<InputPart> inputParts = uploadForm.get("uploadedFile");
-//
-//		for (InputPart inputPart : inputParts) {
-//
-//		 try {
-//
-//			MultivaluedMap<String, String> header = inputPart.getHeaders();
-//			fileName = getFileName(header);
-//
-//			//convert the uploaded file to inputstream
-//			InputStream inputStream = inputPart.getBody(InputStream.class,null);
-//
-//			byte [] bytes = IOUtils.toByteArray(inputStream);
-//				
-//			//constructs upload file path
-//			fileName = UPLOADED_FILE_PATH + fileName;
-//				
-//			writeFile(bytes,fileName);
-//				
-//			System.out.println("Done");
-//
-//		  } catch (IOException e) {
-//			e.printStackTrace();
-//		  }
-//
-//		}
-//
+		String fileName = "";
+		String UPLOADED_FILE_PATH="WebContent/resources/defecto/img/tenant1";
+		
+		Map<String, List<InputPart>> uploadForm = input.getFormDataMap();
+		List<InputPart> inputParts = uploadForm.get("uploadedFile");
+
+		for (InputPart inputPart : inputParts) {
+
+		 try {
+
+			MultivaluedMap<String, String> header = inputPart.getHeaders();
+			fileName = getFileName(header);
+
+			//convert the uploaded file to inputstream
+			InputStream inputStream = inputPart.getBody(InputStream.class,null);
+
+			byte [] bytes = IOUtils.toByteArray(inputStream);
+				
+			//constructs upload file path
+			fileName = UPLOADED_FILE_PATH + fileName;
+				
+			writeFile(bytes,fileName);
+				
+			System.out.println("Done");
+
+		  } catch (IOException e) {
+			e.printStackTrace();
+		  }
+
+		}
+
 		return Response.status(200)
 		    .entity("uploadFile is called, Uploaded file ").build();
 		

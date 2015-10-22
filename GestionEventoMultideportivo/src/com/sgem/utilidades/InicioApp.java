@@ -57,7 +57,7 @@ IEventoDeportivoDAO  EventoDeportivoDAO;
         
         System.out.println("*****************************");
         System.out.println("*****Comienza Verificacion ip EventosSGEM*****");
-        
+//        
         String miIp = IpUtil.getPublicIpAddress();
 		System.out.println("Mi ip: " + miIp);
 		
