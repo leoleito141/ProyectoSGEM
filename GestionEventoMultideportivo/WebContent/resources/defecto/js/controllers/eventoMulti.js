@@ -1,4 +1,4 @@
-'use strict';
+/*'use strict';
 
 angular.module('pruebaAngularApp')
   .controller('EventoMultiCtrl', ['$scope','dataFactory', function ($scope,dataFactory) {
@@ -52,3 +52,5 @@ angular.module('pruebaAngularApp')
 	  
 	  
   }]);
+
+*/

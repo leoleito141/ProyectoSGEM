@@ -34,20 +34,22 @@ angular.module('pruebaAngularApp')
 	  
 	  
 	  $scope.altaEvento = function(){
-		  dataFactory.altaEvento($scope.evento)
+		  var file = $scope.myFile;
+
+		  dataFactory.altaEvento($scope.evento,file)
 	     	.then(function (data, status, headers, config) {
-	                $scope.status = data.status;
-	                console.log("Entre Alta Evento");
-	                console.log(data.status);
-	                console.log(status);
-	                console.log(headers);
-	                console.log(config);
+	                 console.log(data);
+	                
 	                
 	            })
 	            .catch(function(response){
 	                // Si ha habido errores llegamos a esta parte
 	            	console.log(response); 
 	            });
+		  
+		  
+		  
+	  
 		  
 		  
 		  

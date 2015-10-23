@@ -12,7 +12,7 @@ angular.module('pruebaAngularApp', ['ui.router','ui.bootstrap','satellizer'])
 
       }
 
-      $scope.rol = 'Organizador'
+  //    $scope.rol = 'Organizador';
       
       if (next.templateUrl=='views/tenant/indexOrganizador.html' ) {
        	  if($scope.rol = 'Organizador'){
