@@ -86,7 +86,7 @@ IEventoDeportivoDAO  EventoDeportivoDAO;
         Usuario admin = null;
         Usuario comite = null;
 //		Usuario usuario3 = null;
-		Usuario usuario4 = null;
+//		Usuario usuario4 = null;
 
 		admin = new Admin();
 	//	admin.setNombre("Admin");
@@ -126,22 +126,22 @@ IEventoDeportivoDAO  EventoDeportivoDAO;
 //			usuario3.setCedula(312312);
 //			usuario3.setPassword("dsa3");
 		
-		usuario4 = new Organizador();
-	//	usuario4.setNombre("dsa4");
-	//	usuario4.setApellido("dsa4");
-	//	usuario4.setEdad(321);
-		usuario4.setEmail("dsa4");
-		usuario4.setCanalYoutube("dsa4");
-		usuario4.setTwitter("dsa4");
-		usuario4.setFacebook("dsa4");
-//		usuario4.setCedula(312312);
-		usuario4.setPassword("dsa4");
-		usuario4.setTenantID(1);			
+			
+		//	usuario4.setNombre("dsa4");
+		//	usuario4.setApellido("dsa4");
+		//	usuario4.setEdad(321);
+		//	usuario4.setEmail("dsa4");
+		//	usuario4.setCanalYoutube("dsa4");
+		//	usuario4.setTwitter("dsa4");
+		//	usuario4.setFacebook("dsa4");
+	//		usuario4.setCedula(312312);
+		//	usuario4.setPassword("dsa4");
+		//	usuario4.setTenantID(1);			
 		
 		UsuarioDAO.guardarUsuario(admin);  
 		UsuarioDAO.guardarUsuario(comite);			
 //			UsuarioDAO.guardarUsuario(usuario3); 
-		UsuarioDAO.guardarUsuario(usuario4); 
+	//	UsuarioDAO.guardarUsuario(usuario4); 
    
 		System.out.println("Alta de 4 usuarios completa");
 			
@@ -193,14 +193,25 @@ IEventoDeportivoDAO  EventoDeportivoDAO;
 		EventoMultideportivo evento = new EventoMultideportivo("SOCHI", "sochi", "logo.jpg", new Date(), new Date(), "facebook/sochi", "#sochi", "youtube/sochi", "sochi.css");
 		List<EventoMultideportivo> listevento = new ArrayList<EventoMultideportivo>();
 		
+		
+		
+		
+
+	//	Organizador org =(Organizador)UsuarioDAO.buscarUsuario(1,"dsa4");
+		
+		Organizador usuario4 = new Organizador();
+		usuario4.setEmail("organizador@gmail");
+		usuario4.setPassword("123");
+		usuario4.setTenantID(5);
+		usuario4.setEvento(evento);
+		
+		evento.setOrganizador(usuario4);
 		evento.setTenant(th);
 		listevento.add(evento);
 		th.setEventos(listevento);
-
-		Organizador org =(Organizador)UsuarioDAO.buscarUsuario(1,"dsa4");
 		
-		evento.setOrganizador(org);
-		org.setEvento(evento);
+		
+		
 		EventoMultiDAO.guardarTenant(th);
 
 		EventoDeportivo futbol = new EventoDeportivo(5, "Futbol", null, new Date(), new Date(), "Masculino", null, null, null);
