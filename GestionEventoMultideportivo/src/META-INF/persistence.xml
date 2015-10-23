@@ -16,6 +16,7 @@
 	<class>com.sgem.dominio.EventoDeportivo</class>
 	<class>com.sgem.dominio.Ronda</class>
 	<class>com.sgem.dominio.Competencia</class>
+	<class>com.sgem.dominio.Novedad</class>
 	
 	
 	<properties>

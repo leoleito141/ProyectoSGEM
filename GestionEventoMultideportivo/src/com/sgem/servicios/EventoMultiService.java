@@ -36,6 +36,8 @@ public class EventoMultiService implements IEventoMultiService{
 	@EJB
 	private IEventoMultiController iemc;
 	
+	private static final String FILE_PATH = "C:\\Users\\Juanma\\git\\ProyectoSGEM\\GestionEventoMultideportivo\\WebContent\\resources\\defecto\\img\\";
+	
 	@Override
 	public Response getStatus() {
 		return Response
@@ -120,10 +122,9 @@ public class EventoMultiService implements IEventoMultiService{
 		System.out.println("Entre alta subirImagen" + input.toString());
 		
 		String fileName = "";
-		String UPLOADED_FILE_PATH="WebContent/resources/defecto/img/tenant1";
 		
 		Map<String, List<InputPart>> uploadForm = input.getFormDataMap();
-		List<InputPart> inputParts = uploadForm.get("uploadedFile");
+		List<InputPart> inputParts = uploadForm.get("file");
 
 		for (InputPart inputPart : inputParts) {
 
@@ -138,8 +139,8 @@ public class EventoMultiService implements IEventoMultiService{
 			byte [] bytes = IOUtils.toByteArray(inputStream);
 				
 			//constructs upload file path
-			fileName = UPLOADED_FILE_PATH + fileName;
-				
+			fileName = FILE_PATH + fileName;
+			
 			writeFile(bytes,fileName);
 				
 			System.out.println("Done");

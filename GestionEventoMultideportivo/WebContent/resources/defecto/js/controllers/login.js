@@ -24,10 +24,7 @@ angular.module('pruebaAngularApp')
  
             var payLoad = $auth.getPayload();
 
-            $state.transitionTo("formAltaEventoMulti.altaEvento", { tenant: payLoad.tenantid });
-//            $state.go("altaEvento", { tenant: payLoad.tenantid });             
-
-
+            $state.go("formAltaEventoMulti.altaEvento");
            
         })
         .catch(function(response){
@@ -36,8 +33,5 @@ angular.module('pruebaAngularApp')
         });
    		};
     
-
-	 
-
 
   }]);

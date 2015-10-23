@@ -36,7 +36,7 @@
         }; 
         
         dataFactory.altaEvento = function(evento,file){
-        	
+        	console.log(file);
         	
         	return $http.post(dominio+'EventoMultiService/eventos', evento,{
         		 		headers: { 'Rol' : 'ADMIN'} 
