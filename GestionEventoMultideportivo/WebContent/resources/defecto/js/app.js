@@ -101,7 +101,7 @@ angular.module('pruebaAngularApp', ['ui.router','ui.bootstrap','satellizer'])
         	
     }).state('altaEventoDeportivo', {
 		url:'/:tenant/altaEventoDeportivo',
-		templateUrl : 'views/altaEventDeportivo.html',
+		templateUrl : 'views/tenant/organizador/altaEventDeportivo.html',
 		controller : 'EventDeportivoCtrl',
 		resolve: { 
 			dataTenant:function(dataFactory,$stateParams) {
@@ -119,7 +119,7 @@ angular.module('pruebaAngularApp', ['ui.router','ui.bootstrap','satellizer'])
 		}   	
 	}).state('altaComite', {
 		url:'/:tenant/altaComite',
-		templateUrl : 'views/altaComite.html',
+		templateUrl : 'views/tenant/comite/altaComite.html',
 		controller : 'UsuarioCtrl',
 		resolve: { 
 		    	dataTenant: function(dataFactory,$stateParams) {
@@ -137,13 +137,8 @@ angular.module('pruebaAngularApp', ['ui.router','ui.bootstrap','satellizer'])
 		}
 	}).state('perfilComite', {
 		url:'/:tenant/perfilComite',
-		templateUrl : 'views/perfilComite.html',
+		templateUrl : 'views/tenant/comite/perfilComite.html',
 		controller : 'PerfilCtrl'
-			
-	}).state('indexOrganizador', {
-		url:'/:tenant/indexOrganizador',
-		templateUrl : 'views/tenant/indexOrganizador.html',
-		controller : 'EventoMultiCtrl'
 			
 	}).state('indexTenant', {
 		url:'/:tenant/',
@@ -165,7 +160,7 @@ angular.module('pruebaAngularApp', ['ui.router','ui.bootstrap','satellizer'])
 		}
 	}).state('altaDeportista', {
 		url:'/:tenant/altaDeportista',
-		templateUrl : 'views/altaDeportista.html',
+		templateUrl : 'views/tenant/comite/altaDeportista.html',
 		controller : 'deportistaCtrl',
 		resolve: { 
 	    	dataTenant: function(dataFactory,$stateParams) {
