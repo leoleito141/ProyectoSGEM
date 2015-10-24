@@ -118,5 +118,20 @@ public class EventoMultiController implements IEventoMultiController {
 		return null;
 		
 	}
+	
+	@Override
+	public String obtenerProximoTenant() {
 
+		try {
+			return EventoMultiDAO.traerProximoTenant();
+			
+						
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return null;
+		
+	}
+
+	
 }

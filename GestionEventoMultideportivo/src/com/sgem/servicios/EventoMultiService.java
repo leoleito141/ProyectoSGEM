@@ -18,6 +18,7 @@ import javax.ws.rs.core.Response.Status;
 
 
 
+
 import org.apache.commons.io.IOUtils;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
@@ -138,10 +139,15 @@ public class EventoMultiService implements IEventoMultiService{
 
 			byte [] bytes = IOUtils.toByteArray(inputStream);
 				
-			//constructs upload file path
-			fileName = FILE_PATH + fileName;
+			String proxTenant = iemc.obtenerProximoTenant();
 			
-			writeFile(bytes,fileName);
+			System.out.println(proxTenant);
+			
+			//constructs upload file path
+			fileName = FILE_PATH +"Tenant2"+"\\"+fileName;
+			String dir =FILE_PATH +"Tenant2";
+			System.out.println(" nombre file:   "+ fileName);
+			writeFile(bytes,fileName,dir);
 				
 			System.out.println("Done");
 
@@ -182,12 +188,21 @@ public class EventoMultiService implements IEventoMultiService{
 	}
 
 	//save to somewhere
-	private void writeFile(byte[] content, String filename) throws IOException {
+	private void writeFile(byte[] content, String filename, String dir ) throws IOException {
 
+		File directorio = new File(dir);
 		File file = new File(filename);
+		
+		
 
-		if (!file.exists()) {
-			file.createNewFile();
+		if (!directorio.exists()) {
+			if (directorio.mkdir()) {
+				file.createNewFile();
+				System.out.println("Directory is created!");
+			} else {
+				System.out.println("Failed to create directory!");
+			}
+			//file.createNewFile();
 		}
 
 		FileOutputStream fop = new FileOutputStream(file);

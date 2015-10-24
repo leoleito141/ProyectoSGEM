@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import com.sgem.datatypes.DataTenant;
 import com.sgem.dominio.EventoMultideportivo;
@@ -91,6 +92,24 @@ public class EventoMultiDAO implements IEventoMultiDAO {
 			return null;
 		}
 
+	}
+
+	@Override
+	public String traerProximoTenant() {
+		try{
+		//	int resultado = (int) em.createQuery("SELECT u.next_val FROM hibernate_sequence u ").getSingleResult();
+		//	String proxTenantID = "Tenant"+Integer.toString(resultado);
+			Query query  = em.createNativeQuery("SELECT u.next_val FROM hibernate_sequence u; ");
+			String proxTenantID = "Tenant"+Integer.toString(query.getFirstResult());
+		
+			return proxTenantID;
+			
+			}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+		
+		
 	}
 
 }
