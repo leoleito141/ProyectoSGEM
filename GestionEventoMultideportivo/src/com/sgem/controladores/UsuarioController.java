@@ -29,7 +29,7 @@ import com.sgem.utilidades.Correo;
 
 @Stateless
 public class UsuarioController implements IUsuarioController {
-
+ 
 	public static final String USUARIO_ADMINISTRADOR = Admin.class.getSimpleName();
 	public static final String USUARIO_COMUN =  UsuarioComun.class.getSimpleName();
 	public static final String USUARIO_COMITE =  ComiteOlimpico.class.getSimpleName();
