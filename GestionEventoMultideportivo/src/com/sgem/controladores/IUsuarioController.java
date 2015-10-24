@@ -17,12 +17,10 @@ import com.sgem.seguridad.jwt.Token;
 public interface IUsuarioController {
 	
 	public boolean guardarUsuario(DataUsuario dataUsuario) throws UsuarioYaExisteException;
-//	public Usuario buscarUsuario(String email);
-	public Usuario buscarAdmin(String email);
-	public Token loginAdmin(DataUsuario dataUsuario);
+	public Token loginAdmin(DataUsuario dataUsuario) throws UsuarioNoEncontradoException;
 	public Token loginUsuario(DataUsuario dataUsuario) throws UsuarioNoEncontradoException;
 	public boolean guardarComite(DataComite dataComite);
 	public List<ComiteOlimpico> buscarComiteporPais(String pais, int tenantID);
-	public boolean guardarNovedad(DataNovedad dataNovedad);
+	public boolean guardarNovedad(DataNovedad dataNovedad) throws UsuarioNoEncontradoException;
 
 }

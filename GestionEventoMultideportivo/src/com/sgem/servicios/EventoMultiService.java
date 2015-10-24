@@ -37,7 +37,8 @@ public class EventoMultiService implements IEventoMultiService{
 	@EJB
 	private IEventoMultiController iemc;
 	
-	private static final String FILE_PATH = "C:\\Users\\Juanma\\git\\ProyectoSGEM\\GestionEventoMultideportivo\\WebContent\\resources\\defecto\\img\\";
+//	private static final String FILE_PATH = "C:\\Users\\Juanma\\git\\ProyectoSGEM\\GestionEventoMultideportivo\\WebContent\\resources\\defecto\\img\\";
+	private static final String FILE_PATH = "C:\\Users\\USUARIO\\git\\ProyectoSGEM\\GestionEventoMultideportivo\\WebContent\\resources\\defecto\\img\\";
 	
 	@Override
 	public Response getStatus() {
@@ -144,8 +145,8 @@ public class EventoMultiService implements IEventoMultiService{
 			System.out.println(proxTenant);
 			
 			//constructs upload file path
-			fileName = FILE_PATH +"Tenant2"+"\\"+fileName;
-			String dir =FILE_PATH +"Tenant2";
+			fileName = FILE_PATH +"Tenant"+proxTenant+"\\"+fileName;
+			String dir =FILE_PATH +"Tenant"+proxTenant;
 			System.out.println(" nombre file:   "+ fileName);
 			writeFile(bytes,fileName,dir);
 				

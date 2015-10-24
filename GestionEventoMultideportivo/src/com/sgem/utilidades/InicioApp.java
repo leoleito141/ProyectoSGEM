@@ -113,7 +113,7 @@ IEventoDeportivoDAO  EventoDeportivoDAO;
 		comite.setFacebook("Comit� Ol�mpico Uruguayo");
 	//	comite.setCedula(0);
 		comite.setPassword("cou123");
-		comite.setTenantID(5);			
+		comite.setTenantID(1);			
 		
 //			usuario3 = new Admin();
 //			usuario3.setNombre("dsa3");
@@ -146,7 +146,7 @@ IEventoDeportivoDAO  EventoDeportivoDAO;
 		System.out.println("Alta de 4 usuarios completa");
 			
 		System.out.println("Obtengo el usuario dsa2");			
-		ComiteOlimpico u2 = (ComiteOlimpico) UsuarioDAO.buscarUsuario(5,"cou@gmail.com");
+		ComiteOlimpico u2 = (ComiteOlimpico) UsuarioDAO.buscarUsuario(1,"cou@gmail.com");
 		System.out.println("obtuve el usuario "+u2.getEmail()+" "+u2.getId());
 		System.out.println(" y es "+u2.soy());
 		
@@ -179,7 +179,7 @@ IEventoDeportivoDAO  EventoDeportivoDAO;
 		System.out.println("BuscoLista");
 		ComiteOlimpico co = null;
 		
-		co = (ComiteOlimpico) UsuarioDAO.buscarUsuario(5,"cou@gmail.com");
+		co = (ComiteOlimpico) UsuarioDAO.buscarUsuario(1,"cou@gmail.com");
 		
 		if(co != null){
 			for (Deportista dep : co.getDeportistas()) {
@@ -202,7 +202,7 @@ IEventoDeportivoDAO  EventoDeportivoDAO;
 		Organizador usuario4 = new Organizador();
 		usuario4.setEmail("organizador@gmail");
 		usuario4.setPassword("123");
-		usuario4.setTenantID(5);
+		usuario4.setTenantID(th.getTenantID());
 		usuario4.setEvento(evento);
 		
 		evento.setOrganizador(usuario4);
@@ -214,22 +214,22 @@ IEventoDeportivoDAO  EventoDeportivoDAO;
 		
 		EventoMultiDAO.guardarTenant(th);
 
-		EventoDeportivo futbol = new EventoDeportivo(5, "Futbol", null, new Date(), new Date(), "Masculino", null, null, null);
+		EventoDeportivo futbol = new EventoDeportivo(th.getTenantID(), "Futbol", null, new Date(), new Date(), "Masculino", null, null, null);
 		EventoDeportivoDAO.guardarEventoDeportivo(futbol,evento);
 		
-		EventoDeportivo basket = new EventoDeportivo(5, "Basket", null, new Date(), new Date(), "Masculino", null, null, null);
+		EventoDeportivo basket = new EventoDeportivo(th.getTenantID(), "Basket", null, new Date(), new Date(), "Masculino", null, null, null);
 		EventoDeportivoDAO.guardarEventoDeportivo(basket,evento);
 		
-		EventoDeportivo basketF = new EventoDeportivo(5, "Basket", null, new Date(), new Date(), "Femenino", null, null, null);
+		EventoDeportivo basketF = new EventoDeportivo(th.getTenantID(), "Basket", null, new Date(), new Date(), "Femenino", null, null, null);
 		EventoDeportivoDAO.guardarEventoDeportivo(basketF,evento);
 		
-		EventoDeportivo Natacion1 = new EventoDeportivo(5, "Natacion", "100M Libres", new Date(), new Date(), "Femenino", null, null, null);
+		EventoDeportivo Natacion1 = new EventoDeportivo(th.getTenantID(), "Natacion", "100M Libres", new Date(), new Date(), "Femenino", null, null, null);
 		EventoDeportivoDAO.guardarEventoDeportivo(Natacion1,evento);
 		
-		EventoDeportivo Natacion2 = new EventoDeportivo(5, "Natacion", "200M Mariposa", new Date(), new Date(), "Femenino", null, null, null);
+		EventoDeportivo Natacion2 = new EventoDeportivo(th.getTenantID(), "Natacion", "200M Mariposa", new Date(), new Date(), "Femenino", null, null, null);
 		EventoDeportivoDAO.guardarEventoDeportivo(Natacion2,evento);
 		
-		EventoDeportivo Natacion3 = new EventoDeportivo(5, "Natacion", "Posta 4x100", new Date(), new Date(), "Femenino", null, null, null);
+		EventoDeportivo Natacion3 = new EventoDeportivo(th.getTenantID(), "Natacion", "Posta 4x100", new Date(), new Date(), "Femenino", null, null, null);
 		EventoDeportivoDAO.guardarEventoDeportivo(Natacion3,evento);
 	
     }

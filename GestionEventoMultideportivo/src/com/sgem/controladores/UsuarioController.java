@@ -12,10 +12,14 @@ import org.jboss.resteasy.util.Base64;
 import com.sgem.datatypes.DataComite;
 import com.sgem.datatypes.DataNovedad;
 import com.sgem.datatypes.DataUsuario;
+import com.sgem.dominio.Admin;
 import com.sgem.dominio.ComiteOlimpico;
+import com.sgem.dominio.Juez;
+import com.sgem.dominio.Novedad;
 import com.sgem.dominio.Organizador;
 import com.sgem.dominio.Usuario;
 import com.sgem.dominio.UsuarioComun;
+import com.sgem.persistencia.INovedadDAO;
 import com.sgem.persistencia.IUsuarioDAO;
 import com.sgem.seguridad.excepciones.UsuarioNoEncontradoException;
 import com.sgem.seguridad.excepciones.UsuarioYaExisteException;
@@ -26,14 +30,17 @@ import com.sgem.utilidades.Correo;
 @Stateless
 public class UsuarioController implements IUsuarioController {
 
-	public static final String USUARIO_ADMINISTRADOR = "Administrador";
-	public static final String USUARIO_COMUN = "Comun";
-	public static final String USUARIO_COMITE = "Comite";
-	public static final String USUARIO_ORGANIZADOR = "Organizador";
-	public static final String USUARIO_JUEZ = "Juez";
+	public static final String USUARIO_ADMINISTRADOR = Admin.class.getSimpleName();
+	public static final String USUARIO_COMUN =  UsuarioComun.class.getSimpleName();
+	public static final String USUARIO_COMITE =  ComiteOlimpico.class.getSimpleName();
+	public static final String USUARIO_ORGANIZADOR =  Organizador.class.getSimpleName();
+	public static final String USUARIO_JUEZ =  Juez.class.getSimpleName();
 	
 	@EJB
 	private IUsuarioDAO UsuarioDAO;
+	
+	@EJB
+	private INovedadDAO NovedadDAO;
 	
 	@Override
 	public boolean guardarUsuario(DataUsuario dataUsuario) throws UsuarioYaExisteException {
@@ -42,7 +49,7 @@ public class UsuarioController implements IUsuarioController {
 		boolean guardo = false;
 
 		usuario = new UsuarioComun();
-		if(UsuarioDAO.buscarUsuario(dataUsuario.getTenantId(),dataUsuario.getEmail(),UsuarioComun.class.getSimpleName()) == null ){
+		if(UsuarioDAO.buscarUsuario(dataUsuario.getTenantId(),dataUsuario.getEmail(),USUARIO_COMUN) == null ){
 			
 			usuario.setTenantID(dataUsuario.getTenantId());			
 			usuario.setEmail(dataUsuario.getEmail());
@@ -115,42 +122,27 @@ public class UsuarioController implements IUsuarioController {
 	}
 	
 	@Override
-	public Token loginAdmin(DataUsuario dataUsuario) {	// String url){
-		
-		Token jwt;
+	public Token loginAdmin(DataUsuario dataUsuario) throws UsuarioNoEncontradoException {	// String url){
+		Token jwt = null;
 		String pass = "";
 		
-		Usuario u =	buscarAdmin(dataUsuario.getEmail());
-		
+		Usuario u =	UsuarioDAO.buscarAdmin(dataUsuario.getEmail(),USUARIO_ADMINISTRADOR);				
+	
 		try {
 			pass = new String(Base64.decode(dataUsuario.getPassword()));
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}		
 		
-		if(u != null || (u.getPassword().equalsIgnoreCase(pass))){// genero json web token.
-	
-			// tenantId = this.buscarTenantId(url); BUSCAR TENANTID, 	
-			//	jwt.setTenantId(tenantId);
-			DataUsuario du = new DataUsuario();
+		if( u != null && (u.getPassword().equalsIgnoreCase(pass)) ){// genero json web token.
+			DataUsuario du = convertir(u);
 			du.setTipoUsuario(USUARIO_ADMINISTRADOR);
-			jwt = JWTUtil.generarToken(convertir(u));
-			
-		}else { 
-			return null; // deso vemos como manejar esto.
+			jwt = JWTUtil.generarToken(du);
+		}else{
+			throw new UsuarioNoEncontradoException("No se encuentra usuario con dichas credenciales");
 		}
-			
+						
 		return jwt;
-	}
-	@Override
-	public Usuario buscarAdmin(String email) {
-		Usuario u = null;
-		try{
-			u = UsuarioDAO.buscarAdmin(email);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return u;
 	}
 
 	@Override
@@ -182,7 +174,7 @@ public class UsuarioController implements IUsuarioController {
 		if( u != null && (u.getPassword().equalsIgnoreCase(pass)) ){// genero json web token.
 			
 			String tipoUsuario = u instanceof UsuarioComun ? USUARIO_COMUN : u instanceof ComiteOlimpico ? USUARIO_COMITE : u instanceof Organizador ? USUARIO_ORGANIZADOR : USUARIO_JUEZ;
-			DataUsuario du = new DataUsuario();
+			DataUsuario du = convertir(u);
 			du.setTipoUsuario(tipoUsuario);
 			jwt = JWTUtil.generarToken(du);
 		}else{
@@ -193,8 +185,21 @@ public class UsuarioController implements IUsuarioController {
 	}
 
 	@Override
-	public boolean guardarNovedad(DataNovedad dataNovedad) {
-		return false;
+	public boolean guardarNovedad(DataNovedad dataNovedad) throws UsuarioNoEncontradoException {
+		
+		boolean guardo = false;
+		ComiteOlimpico comite = (ComiteOlimpico)UsuarioDAO.buscarUsuario(dataNovedad.getTenantId(), dataNovedad.getEmailComiteOlimpico(), USUARIO_COMITE);		
+		
+		if(comite != null){
+		
+			Novedad n = new Novedad(dataNovedad.getTitulo(), dataNovedad.getDescripcion(), dataNovedad.getColumna(), comite);
+			guardo = NovedadDAO.guardarNovedadDAO(n);
+			
+		}else{
+			throw new UsuarioNoEncontradoException("No se encuentra el comite olimpico '"+dataNovedad.getEmailComiteOlimpico()+"'");			
+		}
+		
+		return guardo;
 	}
 
 	private DataUsuario convertir(Usuario u){

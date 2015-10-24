@@ -24,8 +24,8 @@ public class TenantHandler implements Serializable {
 	private List<EventoMultideportivo> eventos = new ArrayList<EventoMultideportivo>();
 	
 	@Id 
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int tenantID;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int tenantId;
 
 	public TenantHandler(){}
 
@@ -38,7 +38,7 @@ public class TenantHandler implements Serializable {
 	}
 
 	public int getTenantID() {
-		return tenantID;
+		return tenantId;
 	}
 	
 	

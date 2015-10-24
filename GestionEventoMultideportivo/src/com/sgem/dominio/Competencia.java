@@ -23,7 +23,7 @@ public class Competencia implements Serializable{
 	private static final long serialVersionUID = -6321506554036389023L;
 	
 	@Id 
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int CompetenciaId;
 	
 	@Column(name = "tenant_ID", nullable = true)

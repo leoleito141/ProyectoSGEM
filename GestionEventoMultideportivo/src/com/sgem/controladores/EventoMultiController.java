@@ -18,8 +18,10 @@ import com.sgem.persistencia.IUsuarioDAO;
 public class EventoMultiController implements IEventoMultiController {
 	
 	@EJB
-	IEventoMultiDAO  EventoMultiDAO;
-    IUsuarioDAO usuarioDAO;
+	private IEventoMultiDAO  EventoMultiDAO;
+	
+	@EJB
+	private IUsuarioDAO usuarioDAO;
 
 	@Override
 	public boolean guardarEventoMultideportivo(DataEvento dataEvento) {
@@ -123,9 +125,9 @@ public class EventoMultiController implements IEventoMultiController {
 	public String obtenerProximoTenant() {
 
 		try {
-			return EventoMultiDAO.traerProximoTenant();
 			
-						
+			return ((Integer) (EventoMultiDAO.obtenerMaximoTenant()+1)).toString();
+			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

@@ -95,21 +95,18 @@ public class EventoMultiDAO implements IEventoMultiDAO {
 	}
 
 	@Override
-	public String traerProximoTenant() {
+	public int obtenerMaximoTenant() {
+		int maxTenant = 0;
+		
 		try{
-		//	int resultado = (int) em.createQuery("SELECT u.next_val FROM hibernate_sequence u ").getSingleResult();
-		//	String proxTenantID = "Tenant"+Integer.toString(resultado);
-			Query query  = em.createNativeQuery("SELECT u.next_val FROM hibernate_sequence u; ");
-			String proxTenantID = "Tenant"+Integer.toString(query.getFirstResult());
-		
-			return proxTenantID;
-			
-			}catch(Exception e){
-			e.printStackTrace();
-			return null;
-		}
-		
-		
-	}
+			maxTenant = (int) em.createQuery("SELECT max(th.tenantId) FROM TenantHandler th").getSingleResult();
 
+			return maxTenant;
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return maxTenant;
+	}
+		
 }

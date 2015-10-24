@@ -2,13 +2,19 @@ package com.sgem.servicios;
 
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import org.jboss.resteasy.util.Base64;
+import org.apache.commons.io.IOUtils;
+import org.jboss.resteasy.plugins.providers.multipart.InputPart;
+import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 import com.sgem.controladores.IUsuarioController;
 import com.sgem.datatypes.DataComite;
@@ -17,50 +23,33 @@ import com.sgem.datatypes.DataUsuario;
 import com.sgem.seguridad.excepciones.UsuarioNoEncontradoException;
 import com.sgem.seguridad.excepciones.UsuarioYaExisteException;
 import com.sgem.seguridad.jwt.Token;
+import com.sgem.utilidades.ImagenUtil;
 
 @Stateless
 public class UsuarioService implements IUsuarioService{
  
-@EJB
-private IUsuarioController iuc;
-
-	// localhost:8080/GestionEventoMultideportivo/rest/ServicioUsuario/status/
+	@EJB
+	private IUsuarioController iuc;
+	
 	@Override
-	public Response getStatus() {
+	public Response getStatus() { // localhost:8080/GestionEventoMultideportivo/rest/ServicioUsuario/status/
 		return Response
 				.ok("{\"status\":\"El servicio de los usuarios esta funcionando...\"}")
 				.build();
 	}
 	
 	@Override
-	public Response login(DataUsuario dataUsuario) {
+	public Response loginAdmin(DataUsuario dataUsuario) {
 
-		System.out.println("Entre Login ");
-		  try {
-			  System.out.println("Usuario - " + dataUsuario.toString() + " Password : " + new String(Base64.decode(dataUsuario.getPassword())));
-          } catch (IOException e) {
-        	  e.printStackTrace();
-          }
-		
-		Token jwt;
-		try{
-		
+		Token jwt = null;
+		try{		
 			jwt = iuc.loginAdmin(dataUsuario);
-		
-		}catch(Exception e){
-			e.printStackTrace();
-			return Response.status(404).entity("El usuario con email '"+dataUsuario.getEmail()+"' no existe.").build();	
+		}catch(UsuarioNoEncontradoException e){
+//			e.printStackTrace();	// esto lo sacamos desp.
+			return Response.status(Status.NOT_FOUND).build();	
 		}
 		
-//		if(jwt == null){
-//			// hay que decir que no se encontro.
-//			
-//		}	
-		
-		
 		return Response.ok(jwt).build();
-
-	
 	}
 	
 	@Override
@@ -75,20 +64,6 @@ private IUsuarioController iuc;
 
 	}
 	
-	
-	public Response altaComite(DataComite dataComite) {
-
-		try {
-			return Response.ok(iuc.guardarComite(dataComite)).build();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		}
-		return null;
-
-	}
-
 	@Override
 	public Response loginUsuario(DataUsuario dataUsuario) {
 			
@@ -101,49 +76,73 @@ private IUsuarioController iuc;
 		}
 		
 		return Response.ok(jwt).build();
+	}	
+	
+	@Override
+	public Response altaComite(DataComite dataComite) {
 
-	}
+		try {
+			return Response.ok(iuc.guardarComite(dataComite)).build();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return null;
+
+	}	
 
 	@Override
 	public Response guardarNovedad(DataNovedad dataNovedad) {
 		try {						
 			return Response.ok(iuc.guardarNovedad(dataNovedad)).build();				
+		} catch (UsuarioNoEncontradoException e) {
+			return Response.status(Status.NOT_FOUND).build();	
 		} catch (Exception e) {
-			e.printStackTrace();
 			return Response.serverError().build();
 		}
 
 	}
-
 	
-//	@GET
-//	@Produces(MediaType.APPLICATION_JSON)
-//	@Path("/usuarioPrueba/{nombre}")
-//	public Response darUsuario(@PathParam("nombre") String nombre)
-//	{
-//		System.out.println("Entre get Usuario " + nombre);
-//		 JSONObject jsonObj = new JSONObject();
-//
-//		 try {
-//			Usuario usuario = iuc.buscarUsuario(nombre);
-//			System.out.println("Entre get Usuario ");
-//			System.out.println("Usuario - " +usuario.getNombre());
-//			jsonObj.put("Nombre",usuario.getNombre());
-//			jsonObj.put("Apellido",usuario.getApellido());
-//			jsonObj.put("Edad",usuario.getEdad());
-//			jsonObj.put("Cedula",usuario.getCedula());
-//			jsonObj.put("Password", usuario.getPassword());
-//		} catch (JSONException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		 
-//		 
-//		 String json = jsonObj.toString(); 
-//		 return Response.ok(json).build();
-//	
-//		
-//	}
-	
+	@Override
+	public Response subirImagen(MultipartFormDataInput input) {
+		
+		String fileName = "";
+		
+		Map<String, List<InputPart>> uploadForm = input.getFormDataMap();
+		List<InputPart> inputParts = uploadForm.get("file");
 
+		for (InputPart inputPart : inputParts) {
+
+		 try {
+
+			MultivaluedMap<String, String> header = inputPart.getHeaders();
+			
+			// hago de cuenta que 1 es el tenant id...
+			fileName = ImagenUtil.getFileName(header,1);
+
+			//convert the uploaded file to inputstream
+			InputStream inputStream = inputPart.getBody(InputStream.class,null);
+
+			byte [] bytes = IOUtils.toByteArray(inputStream);
+				
+//			String proxTenant = iemc.obtenerProximoTenant();
+			
+			String dir = ImagenUtil.getDirectoryName(1);
+			
+			System.out.println(" nombre file:   "+ fileName);
+			ImagenUtil.writeFile(bytes,fileName,dir);
+				
+			System.out.println("Done");
+
+		  } catch (IOException e) {
+			e.printStackTrace();
+		  }
+
+		}
+
+		return Response.status(200)
+		    .entity("uploadFile is called, Uploaded file ").build();
+		
+	}
 }

@@ -26,9 +26,9 @@ angular.module('pruebaAngularApp', ['ui.router','ui.bootstrap','satellizer'])
 }])
 .config(function ($authProvider,$stateProvider, $urlRouterProvider) {
 	// Parametros de configuración
-    $authProvider.loginUrl = "https://sgem.com/rest/UsuarioService/login";
+    $authProvider.loginUrl = "https://sgem.com/rest/UsuarioService/loginAdmin";
     $authProvider.tokenName = "token";
-    $authProvider.tokenPrefix = "myApp";
+    $authProvider.tokenPrefix = "sgem.com";
     
     // Configuración de las rutas/estados
     $urlRouterProvider.otherwise('/');
@@ -36,7 +36,7 @@ angular.module('pruebaAngularApp', ['ui.router','ui.bootstrap','satellizer'])
     .state('adminLogin', {
     	url:'/',
 		templateUrl : 'views/login.html',
-		controller : 'LoginCtrl'
+		controller : 'AdminCtrl'
 	}).state('formAltaEventoMulti', {
 		url:'/altaEventoMultiDeportivo',
 		templateUrl : 'views/formAltaEventoMulti.html',

@@ -11,6 +11,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
+
 import com.sgem.datatypes.DataComite;
 import com.sgem.datatypes.DataNovedad;
 import com.sgem.datatypes.DataUsuario;
@@ -26,35 +28,19 @@ public interface IUsuarioService {
 	@Path("/status")
 	public Response getStatus();
 	
-//	@RolesAllowed("VISITANTE")
 	@PermitAll
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/loginAdmin")
+	public Response loginAdmin(DataUsuario dataUsuario);
+	
+	@RolesAllowed("VISITANTE")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/usuarios")
 	public Response guardarUsuario(DataUsuario dataUsuario);
-	
-//	@RolesAllowed("ADMIN")
-	@PermitAll	// para pruebas
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/altaComite")
-	public Response altaComite(DataComite dataComite);
-
-	
-//	@RolesAllowed("ADMIN")
-//	@GET
-//	@Produces(MediaType.APPLICATION_JSON)
-//	@Path("/status")
-//	public Response obtenerPorId(@PathParam("id") long id);
-
-	@PermitAll
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/login")
-	public Response login(DataUsuario dataUsuario);
 	
 	@PermitAll
 	@POST
@@ -63,11 +49,26 @@ public interface IUsuarioService {
 	@Path("/loginUsuario")
 	public Response loginUsuario(DataUsuario dataUsuario);
 
-	@PermitAll
+	//	@RolesAllowed("ADMIN")
+	@PermitAll	// para pruebas
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/altaComite")
+	public Response altaComite(DataComite dataComite);
+
+	@RolesAllowed("COMITE_OLIMPICO")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/novedades")
 	public Response guardarNovedad(DataNovedad dataNovedad);
+
+	@RolesAllowed("COMITE_OLIMPICO")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes("multipart/form-data")
+	@Path("/subirImagen")
+	public Response subirImagen(MultipartFormDataInput input);
 	
 }

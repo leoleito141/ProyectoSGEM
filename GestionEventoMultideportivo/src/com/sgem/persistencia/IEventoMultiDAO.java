@@ -14,6 +14,6 @@ public interface IEventoMultiDAO {
 	public EventoMultideportivo obtenerDataTenant(String tenant);
 	public int traeridEventoMulti(int tenantID);
 	public EventoMultideportivo traerEventoMulti(int tenantId);
-	public String traerProximoTenant(); 
+	public int obtenerMaximoTenant(); 
 
 }

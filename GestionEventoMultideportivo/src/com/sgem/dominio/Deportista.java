@@ -24,7 +24,7 @@ public class Deportista implements Serializable{
 	private static final long serialVersionUID = -2107719096745478082L;
 	
 	@Id 
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int deportistaID;
 	
 	@Column(name = "TenantID", nullable = false)
