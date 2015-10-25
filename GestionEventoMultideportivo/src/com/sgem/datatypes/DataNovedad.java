@@ -6,19 +6,19 @@ public class DataNovedad {
 	private String descripcion;
 	private int columna;
 	private int tenantId;
-	private String emailComiteOlimpico;
-	
-	// private DataImagen imagen;
+	private String emailComiteOlimpico;	
+	private DataImagen imagen;
 
 	public DataNovedad() {}
 
 	public DataNovedad(String titulo, String descripcion, int columna,
-			int tenantId, String emailComiteOlimpico) {
+			int tenantId, String emailComiteOlimpico, DataImagen imagen) {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.columna = columna;
 		this.tenantId = tenantId;
 		this.emailComiteOlimpico = emailComiteOlimpico;
+		this.imagen = imagen;
 	}
 
 	public String getTitulo() {
@@ -59,6 +59,14 @@ public class DataNovedad {
 
 	public void setEmailComiteOlimpico(String emailComiteOlimpico) {
 		this.emailComiteOlimpico = emailComiteOlimpico;
+	}
+
+	public DataImagen getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(DataImagen imagen) {
+		this.imagen = imagen;
 	}
 	
 }

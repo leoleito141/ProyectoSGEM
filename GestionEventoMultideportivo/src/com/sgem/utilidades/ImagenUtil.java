@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
+import javax.activation.MimetypesFileTypeMap;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
@@ -17,8 +18,9 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 public class ImagenUtil {
 	
 	private static final String FILE_PATH = "C:\\Users\\USUARIO\\git\\ProyectoSGEM\\GestionEventoMultideportivo\\WebContent\\resources\\defecto\\img\\";
+	private static final String NOVEDADES_DIR = "novedades";
 	
-	public static String getFileName(MultivaluedMap<String, String> header, int tenantId) {
+	public static String getFileName(MultivaluedMap<String, String> header, String tenantId) {
 
 		String[] contentDisposition = header.getFirst("Content-Disposition").split(";");
 		
@@ -33,16 +35,35 @@ public class ImagenUtil {
 		}
 		return "unknown";
 	}
+	
+	public static String getNovedadFilePath(MultivaluedMap<String, String> header, String tenantId) {
 
-	public static String getDirectoryName(int tenantId) {
+		String[] contentDisposition = header.getFirst("Content-Disposition").split(";");
+		
+		for (String filename : contentDisposition) {
+			if ((filename.trim().startsWith("filename"))) {
+
+				String[] name = filename.split("=");
+				
+				String finalFileName = name[1].trim().replaceAll("\"", "");
+				return FILE_PATH +"Tenant"+tenantId+"\\"+NOVEDADES_DIR+"\\"+finalFileName;
+			}
+		}
+		return "unknown";
+	}
+
+	public static String getDirectoryName(String tenantId) {
 		return FILE_PATH +"Tenant"+tenantId;
 	}
 	
-	public static void writeFile(byte[] content, String filename, String dir ) throws IOException {
+	public static String getNovedadDirectoryName(String tenantId) {
+		return FILE_PATH +"Tenant"+tenantId+"\\"+NOVEDADES_DIR+"\\";
+	}
+	
+	public static File writeFile(byte[] content, String filename, String dir ) throws IOException {
 
 		File directorio = new File(dir);
-		File file = new File(filename);
-	
+		File file = new File(filename);	
 
 		if (!directorio.exists()) {
 			if (directorio.mkdir()) {
@@ -51,7 +72,6 @@ public class ImagenUtil {
 			} else {
 				System.out.println("Failed to create directory!");
 			}
-			//file.createNewFile();
 		}
 
 		FileOutputStream fop = new FileOutputStream(file);
@@ -59,9 +79,18 @@ public class ImagenUtil {
 		fop.write(content);
 		fop.flush();
 		fop.close();
-
+		
+		return file;		
 	}
 
+	public static String getMimeType(File f){ 
+		return (new MimetypesFileTypeMap().getContentType(f));
+	}
 	
-	// falta la de borrar imagen..
+	public static boolean borrarImagen(String path) throws IOException {
+		
+		File file = new File(path);
+		return file.delete();	
+		
+	}
 }

@@ -30,13 +30,16 @@ public class Imagen implements Serializable{
 
 	@Column(name = "ruta", nullable = false)
 	private String ruta;
-
-	public Imagen(){}
 	
-	public Imagen(String mime, String ruta) {
-		super();
+	@Column(name = "tenantId", nullable = false)
+	private int tenantId;
+	
+	public Imagen() {}
+
+	public Imagen(String mime, String ruta, int tenantId) {
 		this.mime = mime;
 		this.ruta = ruta;
+		this.tenantId = tenantId;
 	}
 
 	public int getImagenID() {
@@ -61,6 +64,14 @@ public class Imagen implements Serializable{
 
 	public void setRuta(String ruta) {
 		this.ruta = ruta;
+	}
+
+	public int getTenantId() {
+		return tenantId;
+	}
+
+	public void setTenantId(int tenantId) {
+		this.tenantId = tenantId;
 	}
 	
 }

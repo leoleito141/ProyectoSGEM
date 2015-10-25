@@ -4,11 +4,14 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
+
 import com.sgem.datatypes.DataComite;
 import com.sgem.datatypes.DataNovedad;
 import com.sgem.datatypes.DataUsuario;
 import com.sgem.dominio.ComiteOlimpico;
-import com.sgem.dominio.Usuario;
+import com.sgem.dominio.Imagen;
+import com.sgem.seguridad.excepciones.AplicacionException;
 import com.sgem.seguridad.excepciones.UsuarioNoEncontradoException;
 import com.sgem.seguridad.excepciones.UsuarioYaExisteException;
 import com.sgem.seguridad.jwt.Token;
@@ -16,11 +19,12 @@ import com.sgem.seguridad.jwt.Token;
 @Local
 public interface IUsuarioController {
 	
-	public boolean guardarUsuario(DataUsuario dataUsuario) throws UsuarioYaExisteException;
-	public Token loginAdmin(DataUsuario dataUsuario) throws UsuarioNoEncontradoException;
-	public Token loginUsuario(DataUsuario dataUsuario) throws UsuarioNoEncontradoException;
+	public boolean guardarUsuario(DataUsuario dataUsuario) throws UsuarioYaExisteException, AplicacionException;
+	public Token loginAdmin(DataUsuario dataUsuario) throws UsuarioNoEncontradoException, AplicacionException;
+	public Token loginUsuario(DataUsuario dataUsuario) throws UsuarioNoEncontradoException, AplicacionException;
 	public boolean guardarComite(DataComite dataComite);
 	public List<ComiteOlimpico> buscarComiteporPais(String pais, int tenantID);
-	public boolean guardarNovedad(DataNovedad dataNovedad) throws UsuarioNoEncontradoException;
+	public boolean guardarNovedad(DataNovedad dataNovedad) throws UsuarioNoEncontradoException, AplicacionException;
+	public Imagen subirImagen(MultipartFormDataInput input) throws AplicacionException;
 
 }

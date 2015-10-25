@@ -1,12 +1,19 @@
 
 package com.sgem.controladores;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.core.MultivaluedMap;
 
+import org.apache.commons.io.IOUtils;
+import org.jboss.resteasy.plugins.providers.multipart.InputPart;
+import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 import org.jboss.resteasy.util.Base64;
 
 import com.sgem.datatypes.DataComite;
@@ -14,18 +21,22 @@ import com.sgem.datatypes.DataNovedad;
 import com.sgem.datatypes.DataUsuario;
 import com.sgem.dominio.Admin;
 import com.sgem.dominio.ComiteOlimpico;
+import com.sgem.dominio.Imagen;
 import com.sgem.dominio.Juez;
 import com.sgem.dominio.Novedad;
 import com.sgem.dominio.Organizador;
 import com.sgem.dominio.Usuario;
 import com.sgem.dominio.UsuarioComun;
+import com.sgem.persistencia.IImagenDAO;
 import com.sgem.persistencia.INovedadDAO;
 import com.sgem.persistencia.IUsuarioDAO;
+import com.sgem.seguridad.excepciones.AplicacionException;
 import com.sgem.seguridad.excepciones.UsuarioNoEncontradoException;
 import com.sgem.seguridad.excepciones.UsuarioYaExisteException;
 import com.sgem.seguridad.jwt.JWTUtil;
 import com.sgem.seguridad.jwt.Token;
 import com.sgem.utilidades.Correo;
+import com.sgem.utilidades.ImagenUtil;
 
 @Stateless
 public class UsuarioController implements IUsuarioController {
@@ -42,8 +53,11 @@ public class UsuarioController implements IUsuarioController {
 	@EJB
 	private INovedadDAO NovedadDAO;
 	
+	@EJB
+	private IImagenDAO ImagenDAO;
+	
 	@Override
-	public boolean guardarUsuario(DataUsuario dataUsuario) throws UsuarioYaExisteException {
+	public boolean guardarUsuario(DataUsuario dataUsuario) throws UsuarioYaExisteException, AplicacionException {
 		Usuario usuario = null;
 		String pass = "";
 		boolean guardo = false;
@@ -57,8 +71,7 @@ public class UsuarioController implements IUsuarioController {
 			try {
 				pass = new String(Base64.decode(dataUsuario.getPassword()));
 			} catch (IOException e) {
-				e.printStackTrace();
-				return false;
+				throw new AplicacionException("Error al guardar usuario");
 			}
 			usuario.setPassword(pass);
 
@@ -122,7 +135,7 @@ public class UsuarioController implements IUsuarioController {
 	}
 	
 	@Override
-	public Token loginAdmin(DataUsuario dataUsuario) throws UsuarioNoEncontradoException {	// String url){
+	public Token loginAdmin(DataUsuario dataUsuario) throws UsuarioNoEncontradoException, AplicacionException {	
 		Token jwt = null;
 		String pass = "";
 		
@@ -131,7 +144,7 @@ public class UsuarioController implements IUsuarioController {
 		try {
 			pass = new String(Base64.decode(dataUsuario.getPassword()));
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new AplicacionException("Error al obtener contrasenia del usuario");
 		}		
 		
 		if( u != null && (u.getPassword().equalsIgnoreCase(pass)) ){// genero json web token.
@@ -159,7 +172,7 @@ public class UsuarioController implements IUsuarioController {
 
 
 	@Override
-	public Token loginUsuario(DataUsuario dataUsuario) throws UsuarioNoEncontradoException {
+	public Token loginUsuario(DataUsuario dataUsuario) throws UsuarioNoEncontradoException, AplicacionException {
 		Token jwt = null;
 		String pass = "";
 		
@@ -168,7 +181,7 @@ public class UsuarioController implements IUsuarioController {
 		try {
 			pass = new String(Base64.decode(dataUsuario.getPassword()));
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new AplicacionException("Error al obtener contrasenia del usuario");
 		}		
 		
 		if( u != null && (u.getPassword().equalsIgnoreCase(pass)) ){// genero json web token.
@@ -185,17 +198,44 @@ public class UsuarioController implements IUsuarioController {
 	}
 
 	@Override
-	public boolean guardarNovedad(DataNovedad dataNovedad) throws UsuarioNoEncontradoException {
+	public boolean guardarNovedad(DataNovedad dataNovedad) throws UsuarioNoEncontradoException, AplicacionException {
 		
 		boolean guardo = false;
 		ComiteOlimpico comite = (ComiteOlimpico)UsuarioDAO.buscarUsuario(dataNovedad.getTenantId(), dataNovedad.getEmailComiteOlimpico(), USUARIO_COMITE);		
 		
 		if(comite != null){
 		
-			Novedad n = new Novedad(dataNovedad.getTitulo(), dataNovedad.getDescripcion(), dataNovedad.getColumna(), comite);
-			guardo = NovedadDAO.guardarNovedadDAO(n);
+			Imagen i = new Imagen(dataNovedad.getImagen().getMime(), dataNovedad.getImagen().getRuta(), dataNovedad.getImagen().getTenantId());
+			
+			if(ImagenDAO.guardarImagen(i)){			
+		
+				Novedad n = new Novedad(dataNovedad.getTitulo(), dataNovedad.getDescripcion(), dataNovedad.getColumna(), comite,i);
+				guardo = NovedadDAO.guardarNovedad(n);
+
+				if(!guardo){
+					try {
+						ImagenUtil.borrarImagen(dataNovedad.getImagen().getRuta());
+					} catch (IOException e) {
+						throw new AplicacionException("Error al guardar novedad. Tampoco se pudo borrar la imagen para dicha novedad.");
+					}					
+					throw new AplicacionException("Error al guardar novedad");
+				}
+				
+			}else{
+				try {
+					ImagenUtil.borrarImagen(dataNovedad.getImagen().getRuta());
+				} catch (IOException e) {
+					throw new AplicacionException("Error al guardar novedad. No se pudo borrar la imagen para dicha novedad.");
+				}				
+				throw new AplicacionException("Error al guardar imagen");
+			}
 			
 		}else{
+			try {
+				ImagenUtil.borrarImagen(dataNovedad.getImagen().getRuta());
+			} catch (IOException e) {
+				throw new AplicacionException("Error al guardar novedad. No se pudo borrar la imagen para dicha novedad.");
+			}			
 			throw new UsuarioNoEncontradoException("No se encuentra el comite olimpico '"+dataNovedad.getEmailComiteOlimpico()+"'");			
 		}
 		
@@ -213,18 +253,44 @@ public class UsuarioController implements IUsuarioController {
 		
 		return du;
 	}
+
+	@Override
+	public Imagen subirImagen(MultipartFormDataInput input) throws AplicacionException{
+		
+		String fileName = "";
+		String tenantId = "";
+		File f = null;
+		
+		try {
+			Map<String, List<InputPart>> uploadForm = input.getFormDataMap();
+			List<InputPart> inputParts = uploadForm.get("file");
+		
+			tenantId = uploadForm.get("tenantId").get(0).getBodyAsString();		
+		
+			for (InputPart inputPart : inputParts) {		
 	
+				MultivaluedMap<String, String> header = inputPart.getHeaders();
+				
+				// Ojo con esto, puede que subam 2 noticias y la foto si se llama igual va a hacer cualquiera, quizas renombrarla..
+				fileName = ImagenUtil.getNovedadFilePath(header,tenantId);
 	
-//	@Override
-//	public Usuario buscarUsuario(String email) {
-//		Usuario u = null;
-//		try{
-//			u = UsuarioDAO.buscarUsuario(email);
-//		}catch(Exception e){
-//			e.printStackTrace();
-//		}
-//		return u ;
-//	}
+				InputStream inputStream;
+			
+				inputStream = inputPart.getBody(InputStream.class,null);				
+	
+				byte [] bytes = IOUtils.toByteArray(inputStream);
+				
+				String dir = ImagenUtil.getNovedadDirectoryName(tenantId);
+				
+				f = ImagenUtil.writeFile(bytes,fileName,dir);			
+			}
+		} catch (IOException e) {
+			throw new AplicacionException("Error al subir la imagen");
+		}			
+		
+		return (new Imagen(ImagenUtil.getMimeType(f), fileName,Integer.parseInt(tenantId)));
+		
+	}	
 
 }
 

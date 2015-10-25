@@ -4,18 +4,18 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.sgem.dominio.Novedad;
+import com.sgem.dominio.Imagen;
 
 @Stateless
-public class NovedadDAO implements INovedadDAO {
+public class ImagenDAO implements IImagenDAO {
 		
 	@PersistenceContext(unitName = "GestionEventoMultideportivo")
 	private EntityManager em;
 
 	@Override
-	public boolean guardarNovedad(Novedad n) {
+	public boolean guardarImagen(Imagen i) {
 		try {
-			em.persist(n);
+			em.persist(i);
 			return true;
 
 		} catch (Exception e) {

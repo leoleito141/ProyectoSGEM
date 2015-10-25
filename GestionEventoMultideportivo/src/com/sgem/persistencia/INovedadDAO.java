@@ -12,6 +12,6 @@ import com.sgem.dominio.Usuario;
 @Local
 public interface INovedadDAO {
 
-	public boolean guardarNovedadDAO(Novedad n);
+	public boolean guardarNovedad(Novedad n);
 	
 }
