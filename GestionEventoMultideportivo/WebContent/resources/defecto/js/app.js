@@ -86,7 +86,21 @@ angular.module('pruebaAngularApp', ['ui.router','ui.bootstrap','satellizer'])
 	}).state('formAltaEventoMulti', {
 		url:'/:tenant/altaEventoMultiDeportivo',
 		templateUrl : 'views/formAltaEventoMulti.html',
-		controller : 'EventoMultiCtrl'
+		controller : 'EventoMultiCtrl',
+		resolve: { 
+		    	dataTenant:function(dataFactory,$stateParams) {
+	    			/***** ESTO ESTARÍA BUENO IMPLEMENTARLO EN UN UTIL O FUNCION ****/
+		    		
+		    		if(localStorage.getItem("tenantActual") == null || (JSON.parse(localStorage.getItem("tenantActual"))).nombre_url != $stateParams.tenant){
+
+		    			return dataFactory.getDataTenant($stateParams.tenant);
+		    			
+		    		}else{
+		    			return JSON.parse(localStorage.getItem("tenantActual"));
+		    		}
+		    		/**********************************************************/   
+		    	}  
+		    }	
 	})// nested states 
 	.state('formAltaEventoMulti.altaEvento', {
 		url:'/altaEvento',
