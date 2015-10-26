@@ -34,17 +34,45 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 	
 	@Override
-	public Usuario buscarAdmin(String email) {
-		List<Usuario> u = new ArrayList<Usuario>();
-
+	public Usuario buscarUsuario(int tenantId, String email, String clase) {
+		List<Usuario> usuarios = null;
+		
 		try{
-			u = em.createQuery("SELECT u FROM Usuario u WHERE u.email = '"+email+"' AND u.tenantID = 0", Usuario.class).getResultList();			
+			usuarios = em.createQuery("SELECT u FROM Usuario u, "+clase+" cu WHERE u.id = cu.id AND u.tenantID = '"+tenantId+"' AND u.email = '"+email+"'", Usuario.class).getResultList();
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+		
+		return (usuarios.isEmpty() ? null : usuarios.get(0));
+	}
+
+	@Override
+	public Usuario buscarUsuario(int tenantId, String email) {
+		List<Usuario> u = new ArrayList<Usuario>();
+		
+		try{
+			u = em.createQuery("SELECT u FROM Usuario u WHERE u.email = '"+email+"' AND u.tenantID != 0", Usuario.class).getResultList();			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		
-		return (u.size() == 0 ? null : u.get(0));
+		return (u.isEmpty() ? null : u.get(0));
 	}
+	
+	@Override
+	public Usuario buscarAdmin(String email,String clase) {
+		List<Usuario> usuarios = null;
+		
+		try{
+			usuarios = em.createQuery("SELECT u FROM Usuario u, "+clase+" cu WHERE u.id = cu.id AND u.tenantID = 0 AND u.email = '"+email+"'", Usuario.class).getResultList();
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+		
+		return (usuarios.isEmpty() ? null : usuarios.get(0));
+	}	
 
 	@Override
 	public boolean existeCodigoCO(int tenantId, String codigo) {
@@ -66,8 +94,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		}catch(NoResultException e){
 			e.printStackTrace();
 			return false;
-		}
-		
+		}		
 	}
 
 	@Override
@@ -119,33 +146,6 @@ public class UsuarioDAO implements IUsuarioDAO {
 		}
 		return false;
 
-	}
-
-	@Override
-	public Usuario buscarUsuario(int tenantId, String email, String clase) {
-		List<Usuario> usuarios = null;
-		
-		try{
-			usuarios = em.createQuery("SELECT u FROM Usuario u, "+clase+" cu WHERE u.id = cu.id AND u.tenantID = '"+tenantId+"' AND u.email = '"+email+"'", Usuario.class).getResultList();
-		}catch(Exception e){
-			e.printStackTrace();
-			return null;
-		}
-		
-		return (usuarios.isEmpty() ? null : usuarios.get(0));
-	}
-
-	@Override
-	public Usuario buscarUsuario(int tenantId, String email) {
-		List<Usuario> u = new ArrayList<Usuario>();
-		
-		try{
-			u = em.createQuery("SELECT u FROM Usuario u WHERE u.email = '"+email+"' AND u.tenantID != 0", Usuario.class).getResultList();			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
-		return (u.isEmpty() ? null : u.get(0));
-	}
+	}	
 
 }

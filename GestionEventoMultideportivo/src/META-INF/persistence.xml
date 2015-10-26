@@ -16,7 +16,8 @@
 	<class>com.sgem.dominio.EventoDeportivo</class>
 	<class>com.sgem.dominio.Ronda</class>
 	<class>com.sgem.dominio.Competencia</class>
-	
+	<class>com.sgem.dominio.Novedad</class>
+	<class>com.sgem.dominio.Imagen</class>	
 	
 	<properties>
 		<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />

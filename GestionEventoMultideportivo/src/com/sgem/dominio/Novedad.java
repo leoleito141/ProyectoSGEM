@@ -22,7 +22,7 @@ public class Novedad implements Serializable{
 	private static final long serialVersionUID = 1771315983993274410L;
 
 	@Id 
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int novedadID;
 
 	@Column(name = "titulo", nullable = false)
@@ -37,20 +37,21 @@ public class Novedad implements Serializable{
 	@ManyToOne	
 	private ComiteOlimpico comite_olimpico;
 
-//	@OneToOne
-//	private Imagen imagen;
+	@OneToOne(fetch=FetchType.LAZY)
+	private Imagen imagen;
 	
 //	@ManyToMany(fetch = FetchType.LAZY)
 //	private Set<Comentario> comentarios;
 	
 	public Novedad(){}
 	
-	public Novedad(String titulo, String descripcion,
-			int columna, ComiteOlimpico comite_olimpico) {
+	public Novedad(String titulo, String descripcion, int columna,
+			ComiteOlimpico comite_olimpico,Imagen imagen) {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.columna = columna;
 		this.comite_olimpico = comite_olimpico;
+		this.imagen = imagen;
 	}
 
 	public int getNovedadID() {
@@ -92,5 +93,13 @@ public class Novedad implements Serializable{
 	public void setComite_olimpico(ComiteOlimpico comite_olimpico) {
 		this.comite_olimpico = comite_olimpico;
 	}
-	
+
+	public Imagen getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(Imagen imagen) {
+		this.imagen = imagen;
+	}
+
 }

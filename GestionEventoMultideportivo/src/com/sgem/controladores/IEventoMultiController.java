@@ -12,5 +12,6 @@ public interface IEventoMultiController {
 	public boolean guardarEventoMultideportivo(DataEvento dataEvento);
 	public DataTenant obtenerDataTenant(String tenant);
 	public EventoMultideportivo obtenerEventoMultideportivoXTenantId(int tenantId);
+	public String obtenerProximoTenant();
 
 }

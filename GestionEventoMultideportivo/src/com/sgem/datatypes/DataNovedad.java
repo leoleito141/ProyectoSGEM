@@ -3,17 +3,22 @@ package com.sgem.datatypes;
 public class DataNovedad {
 
 	private String titulo;
-
 	private String descripcion;
-
 	private int columna;
+	private int tenantId;
+	private String emailComiteOlimpico;	
+	private DataImagen imagen;
 
 	public DataNovedad() {}
 
-	public DataNovedad(String titulo, String descripcion, int columna) {
+	public DataNovedad(String titulo, String descripcion, int columna,
+			int tenantId, String emailComiteOlimpico, DataImagen imagen) {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.columna = columna;
+		this.tenantId = tenantId;
+		this.emailComiteOlimpico = emailComiteOlimpico;
+		this.imagen = imagen;
 	}
 
 	public String getTitulo() {
@@ -40,4 +45,28 @@ public class DataNovedad {
 		this.columna = columna;
 	}
 
+	public int getTenantId() {
+		return tenantId;
+	}
+
+	public void setTenantId(int tenantId) {
+		this.tenantId = tenantId;
+	}
+
+	public String getEmailComiteOlimpico() {
+		return emailComiteOlimpico;
+	}
+
+	public void setEmailComiteOlimpico(String emailComiteOlimpico) {
+		this.emailComiteOlimpico = emailComiteOlimpico;
+	}
+
+	public DataImagen getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(DataImagen imagen) {
+		this.imagen = imagen;
+	}
+	
 }

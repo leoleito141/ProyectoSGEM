@@ -1,9 +1,8 @@
 'use strict';
 
 angular.module('pruebaAngularApp')
-  .controller('EventoMultiCtrl', ['$scope','dataFactory','dataTenant', function ($scope,dataFactory,dataTenant) {
+  .controller('EventoMultiCtrl', ['$scope','dataFactory', function ($scope,dataFactory) {
 	
-	  $scope.nombreTenant = dataTenant.nombre_url;
 	  
 	  //hacemos de cuenta que somos organizadores
 	  

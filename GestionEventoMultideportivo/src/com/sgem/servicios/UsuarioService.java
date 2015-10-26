@@ -1,81 +1,68 @@
 package com.sgem.servicios;
 
 
-import java.io.IOException;
-
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import org.jboss.resteasy.util.Base64;
+import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 import com.sgem.controladores.IUsuarioController;
 import com.sgem.datatypes.DataComite;
 import com.sgem.datatypes.DataNovedad;
 import com.sgem.datatypes.DataUsuario;
+import com.sgem.seguridad.excepciones.AplicacionException;
 import com.sgem.seguridad.excepciones.UsuarioNoEncontradoException;
 import com.sgem.seguridad.excepciones.UsuarioYaExisteException;
-import com.sgem.seguridad.jwt.Token;
 
 @Stateless
 public class UsuarioService implements IUsuarioService{
  
-@EJB
-private IUsuarioController iuc;
-
-	// localhost:8080/GestionEventoMultideportivo/rest/ServicioUsuario/status/
+	@EJB
+	private IUsuarioController iuc;
+	
 	@Override
-	public Response getStatus() {
+	public Response getStatus() { // localhost:8080/GestionEventoMultideportivo/rest/ServicioUsuario/status/
 		return Response
 				.ok("{\"status\":\"El servicio de los usuarios esta funcionando...\"}")
 				.build();
 	}
 	
 	@Override
-	public Response login(DataUsuario dataUsuario) {
-
-		System.out.println("Entre Login ");
-		  try {
-			  System.out.println("Usuario - " + dataUsuario.toString() + " Password : " + new String(Base64.decode(dataUsuario.getPassword())));
-          } catch (IOException e) {
-        	  e.printStackTrace();
-          }
-		
-		Token jwt;
-		try{
-		
-			jwt = iuc.loginAdmin(dataUsuario);
-		
-		}catch(Exception e){
-			e.printStackTrace();
-			return Response.status(404).entity("El usuario con email '"+dataUsuario.getEmail()+"' no existe.").build();	
+	public Response loginAdmin(DataUsuario dataUsuario) {
+		try{		
+			return Response.ok(iuc.loginAdmin(dataUsuario)).build();
+		}catch(UsuarioNoEncontradoException e){
+			return Response.status(Status.NOT_FOUND).build();	
+		} catch (AplicacionException e) {
+			return Response.serverError().build();
 		}
-		
-//		if(jwt == null){
-//			// hay que decir que no se encontro.
-//			
-//		}	
-		
-		
-		return Response.ok(jwt).build();
-
-	
 	}
 	
 	@Override
 	public Response guardarUsuario(DataUsuario dataUsuario) {
-		
 		try {						
 			return Response.ok(iuc.guardarUsuario(dataUsuario)).build();				
 		} catch (UsuarioYaExisteException e) {
-//			e.printStackTrace();
 			return Response.status(Status.FOUND).entity(new Boolean(false)).build();
+		} catch (AplicacionException e) {
+			return Response.serverError().build();
 		}
-
 	}
 	
+	@Override
+	public Response loginUsuario(DataUsuario dataUsuario) {
+		try{
+			return Response.ok(iuc.loginUsuario(dataUsuario)).build();
+		}catch(UsuarioNoEncontradoException e){
+			return Response.status(Status.NOT_FOUND).build();	
+		} catch (AplicacionException e) {
+			return Response.serverError().build();
+		}	
+	}	
 	
+	@Override
 	public Response altaComite(DataComite dataComite) {
 
 		try {
@@ -87,63 +74,26 @@ private IUsuarioController iuc;
 		}
 		return null;
 
-	}
-
-	@Override
-	public Response loginUsuario(DataUsuario dataUsuario) {
-			
-		Token jwt = null;
-		try{		
-			jwt = iuc.loginUsuario(dataUsuario);
-		}catch(UsuarioNoEncontradoException e){
-//			e.printStackTrace();	// esto lo sacamos desp.
-			return Response.status(Status.NOT_FOUND).build();	
-		}
-		
-		return Response.ok(jwt).build();
-
-	}
+	}	
 
 	@Override
 	public Response guardarNovedad(DataNovedad dataNovedad) {
 		try {						
 			return Response.ok(iuc.guardarNovedad(dataNovedad)).build();				
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (UsuarioNoEncontradoException e) {
+			return Response.status(Status.NOT_FOUND).build();	
+		} catch (AplicacionException e) {
 			return Response.serverError().build();
 		}
-
 	}
-
 	
-//	@GET
-//	@Produces(MediaType.APPLICATION_JSON)
-//	@Path("/usuarioPrueba/{nombre}")
-//	public Response darUsuario(@PathParam("nombre") String nombre)
-//	{
-//		System.out.println("Entre get Usuario " + nombre);
-//		 JSONObject jsonObj = new JSONObject();
-//
-//		 try {
-//			Usuario usuario = iuc.buscarUsuario(nombre);
-//			System.out.println("Entre get Usuario ");
-//			System.out.println("Usuario - " +usuario.getNombre());
-//			jsonObj.put("Nombre",usuario.getNombre());
-//			jsonObj.put("Apellido",usuario.getApellido());
-//			jsonObj.put("Edad",usuario.getEdad());
-//			jsonObj.put("Cedula",usuario.getCedula());
-//			jsonObj.put("Password", usuario.getPassword());
-//		} catch (JSONException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		 
-//		 
-//		 String json = jsonObj.toString(); 
-//		 return Response.ok(json).build();
-//	
-//		
-//	}
+	@Override
+	public Response subirImagen(MultipartFormDataInput input) {		
+		try {						
+			return Response.ok(iuc.subirImagen(input)).build();	
+		} catch (AplicacionException e) {
+			return Response.serverError().build();
+		}	
+	}
 	
-
 }

@@ -18,6 +18,7 @@ import javax.ws.rs.core.Response.Status;
 
 
 
+
 import org.apache.commons.io.IOUtils;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
@@ -35,6 +36,9 @@ public class EventoMultiService implements IEventoMultiService{
 	
 	@EJB
 	private IEventoMultiController iemc;
+	
+//	private static final String FILE_PATH = "C:\\Users\\Juanma\\git\\ProyectoSGEM\\GestionEventoMultideportivo\\WebContent\\resources\\defecto\\img\\";
+	private static final String FILE_PATH = "C:\\Users\\USUARIO\\git\\ProyectoSGEM\\GestionEventoMultideportivo\\WebContent\\resources\\defecto\\img\\";
 	
 	@Override
 	public Response getStatus() {
@@ -120,10 +124,9 @@ public class EventoMultiService implements IEventoMultiService{
 		System.out.println("Entre alta subirImagen" + input.toString());
 		
 		String fileName = "";
-		String UPLOADED_FILE_PATH="WebContent/resources/defecto/img/tenant1";
 		
 		Map<String, List<InputPart>> uploadForm = input.getFormDataMap();
-		List<InputPart> inputParts = uploadForm.get("uploadedFile");
+		List<InputPart> inputParts = uploadForm.get("file");
 
 		for (InputPart inputPart : inputParts) {
 
@@ -137,10 +140,15 @@ public class EventoMultiService implements IEventoMultiService{
 
 			byte [] bytes = IOUtils.toByteArray(inputStream);
 				
+			String proxTenant = iemc.obtenerProximoTenant();
+			
+			System.out.println(proxTenant);
+			
 			//constructs upload file path
-			fileName = UPLOADED_FILE_PATH + fileName;
-				
-			writeFile(bytes,fileName);
+			fileName = FILE_PATH +"Tenant"+proxTenant+"\\"+fileName;
+			String dir =FILE_PATH +"Tenant"+proxTenant;
+			System.out.println(" nombre file:   "+ fileName);
+			writeFile(bytes,fileName,dir);
 				
 			System.out.println("Done");
 
@@ -181,12 +189,21 @@ public class EventoMultiService implements IEventoMultiService{
 	}
 
 	//save to somewhere
-	private void writeFile(byte[] content, String filename) throws IOException {
+	private void writeFile(byte[] content, String filename, String dir ) throws IOException {
 
+		File directorio = new File(dir);
 		File file = new File(filename);
+		
+		
 
-		if (!file.exists()) {
-			file.createNewFile();
+		if (!directorio.exists()) {
+			if (directorio.mkdir()) {
+				file.createNewFile();
+				System.out.println("Directory is created!");
+			} else {
+				System.out.println("Failed to create directory!");
+			}
+			//file.createNewFile();
 		}
 
 		FileOutputStream fop = new FileOutputStream(file);
