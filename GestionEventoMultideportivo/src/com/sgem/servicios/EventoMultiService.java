@@ -49,10 +49,10 @@ public class EventoMultiService implements IEventoMultiService{
 	
 	@Override
 	public Response altaEvento(DataEvento datosEvento) {
-		System.out.println("Entre alta evento" + datosEvento);		 
+			 
 		try {
 			
-			boolean alta = iemc.guardarEventoMultideportivo(datosEvento);
+			return Response.ok(iemc.guardarEventoMultideportivo(datosEvento)).build();
 			
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -61,9 +61,7 @@ public class EventoMultiService implements IEventoMultiService{
 		}
 		
 		
-		return Response
-				.ok("{\"status\":\"Alta Correcta\"}")
-				.build();
+		
 	}
 	
 //	@Override

@@ -6,8 +6,6 @@ public class DataEvento {
 
 	private String nombre;
 	
-	private String lugar;
-	
 	private int anio;
 
 	private String logo;
@@ -17,6 +15,8 @@ public class DataEvento {
 	private Date fechaFin;
 	
 	private String facebook;
+	
+	private String instagram;
 
 	private String twitter;
 
@@ -29,8 +29,8 @@ public class DataEvento {
 	private String emailOrganizador;
 	
 	private String passwordOrganizador;
-
-
+	
+	private DataPais pais;
 
 
 	public String getNombre() {
@@ -47,15 +47,15 @@ public class DataEvento {
 
 
 
-	public String getLugar() {
-		return lugar;
+	public DataPais getDataPais() {
+		return pais;
 	}
 
 
 
 
-	public void setLugar(String lugar) {
-		this.lugar = lugar;
+	public void setDataPais(DataPais pais ) {
+		this.pais = pais;
 	}
 
 
@@ -126,8 +126,15 @@ public class DataEvento {
 	public void setFacebook(String facebook) {
 		this.facebook = facebook;
 	}
+	
+	public String getInstagram() {
+		return instagram;
+	}
 
 
+	public void setInstagram(String instagram) {
+		this.instagram = instagram;
+	}
 
 
 	public String getTwitter() {
@@ -135,13 +142,9 @@ public class DataEvento {
 	}
 
 
-
-
 	public void setTwitter(String twitter) {
 		this.twitter = twitter;
 	}
-
-
 
 
 	public String getCanalYoutube() {
@@ -213,10 +216,10 @@ public class DataEvento {
 
 	@Override
 	public String toString() {
-		return "DataEvento [nombre=" + nombre + ", lugar=" + lugar
+		return "DataEvento [nombre=" + nombre + ", lugar=" + pais
 				+ ", año=" + anio + ", logo=" + logo
 				+ ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", facebook="
-				+ facebook + ", twitter=" + twitter + ", canalYoutube=" + canalYoutube
+				+ facebook +",instagram="+ instagram + ", twitter=" + twitter + ", canalYoutube=" + canalYoutube
 				+ ", hashtag=" + hashtag + ", css="+ css + ", emailOrganizador=" + emailOrganizador
 				+ ", passwordOrganizador=" + passwordOrganizador +"]";
 	}

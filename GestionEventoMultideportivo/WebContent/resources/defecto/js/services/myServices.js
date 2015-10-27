@@ -35,22 +35,10 @@
             });
         }; 
         
-        dataFactory.altaEvento = function(evento,file){
-        	console.log(file);
-        	
+        dataFactory.altaEvento = function(evento){
         	return $http.post(dominio+'EventoMultiService/eventos', evento,{
         		 		headers: { 'Rol' : 'ADMIN'} 
-        	}).then(function (response) {
-        		var formData = new FormData();
-                formData.append("file", file);
-                return $http.post(dominio+'EventoMultiService/subirImagen', formData,{
-                		transformRequest: angular.identity,
-                        headers: {'Content-Type': undefined}
-            	}); 
-	                 
-             }).catch(function(response){
-	             	console.log(response); 
-	        });       	
+        	});        	
         	      	
         }; 
         

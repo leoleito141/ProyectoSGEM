@@ -23,10 +23,16 @@
 			ng-model="evento.nombre" class="form-control">
 	</div>
 
-	<label class="control-label col-sm-2" for="inputLugar">Lugar:</label>
+	<label class="control-label col-sm-2" for="inputPais">Pais:</label>
 	<div class="col-sm-10">
-		<input id="inputLugar" placeholder="Lugar Evento"
-			ng-model="evento.lugar" class="form-control">
+		<input id="inputPais" placeholder="Pais Evento"
+			ng-model="pais.pais" class="form-control">
+	</div>
+	
+	<label class="control-label col-sm-2" for="inputCiudad">Ciudad:</label>
+	<div class="col-sm-10">
+		<input id="inputCiudad" placeholder="Ciudad Evento"
+			ng-model="pais.ciudad" class="form-control">
 	</div>
 
 	<label class="control-label col-sm-2" for="inputAño">Año:</label>
@@ -50,6 +56,12 @@
 	<label class="control-label col-sm-2" for="inputFacebook">Facebook:</label>
 	<div class="col-sm-10">
 		<input id="rol" placeholder="Facebook" ng-model="evento.facebook"
+			class="form-control">
+	</div>
+	
+	<label class="control-label col-sm-2" for="inputInstagram">Instagram:</label>
+	<div class="col-sm-10">
+		<input id="rol" placeholder="Instagram" ng-model="evento.instagram"
 			class="form-control">
 	</div>
 
@@ -95,13 +107,6 @@
 			</p>
 		</div>
 	</div> 
-
-	<label class="control-label col-sm-2">Imagen:</label>
-	<div class="col-sm-2">
-		<input name="file" type="file" file-model="myFile"/>
-
-	</div>
-	
 	
 	
 	<div class="col-sm-2">

@@ -37,24 +37,17 @@ angular.module('pruebaAngularApp', ['ui.router','ui.bootstrap','satellizer'])
     	url:'/',
 		templateUrl : 'views/login.html',
 		controller : 'AdminCtrl'
-	}).state('formAltaEventoMulti', {
+	})
+	.state('main', {
+    	url:'/main',
+		templateUrl : 'views/main.html',
+		controller : 'AdminCtrl'
+	})
+	.state('formAltaEventoMulti', {
 		url:'/altaEventoMultiDeportivo',
 		templateUrl : 'views/formAltaEventoMulti.html',
-		controller : 'EventoMultiCtrl',
-		resolve: { 
-		    	dataTenant:function(dataFactory,$stateParams) {
-	    			/***** ESTO ESTARÍA BUENO IMPLEMENTARLO EN UN UTIL O FUNCION ****/
-		    		
-		    		if(localStorage.getItem("tenantActual") == null || (JSON.parse(localStorage.getItem("tenantActual"))).nombre_url != $stateParams.tenant){
-
-		    			return dataFactory.getDataTenant($stateParams.tenant);
-		    			
-		    		}else{
-		    			return JSON.parse(localStorage.getItem("tenantActual"));
-		    		}
-		    		/**********************************************************/   
-		    	}  
-		    }	
+		controller : 'EventoMultiCtrl'
+	
 	})// nested states 
 	.state('formAltaEventoMulti.altaEvento', {
 		url:'/altaEvento',

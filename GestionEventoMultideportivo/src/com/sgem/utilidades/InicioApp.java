@@ -16,6 +16,7 @@ import com.sgem.dominio.Deportista;
 import com.sgem.dominio.EventoDeportivo;
 import com.sgem.dominio.EventoMultideportivo;
 import com.sgem.dominio.Organizador;
+import com.sgem.dominio.Pais;
 import com.sgem.dominio.TenantHandler;
 import com.sgem.dominio.Usuario;
 import com.sgem.persistencia.IDeportistaDAO;
@@ -190,7 +191,8 @@ IEventoDeportivoDAO  EventoDeportivoDAO;
 		}
 		
 		TenantHandler th = new TenantHandler();
-		EventoMultideportivo evento = new EventoMultideportivo("SOCHI", "sochi", "logo.jpg", new Date(), new Date(), "facebook/sochi", "#sochi", "youtube/sochi", "sochi.css");
+		Pais p = new Pais("Rusia","Sochi");	
+		EventoMultideportivo evento = new EventoMultideportivo("SOCHI", p , "logo.jpg", new Date(), new Date(), "facebook/sochi","Instagram/sochi", "#sochi", "youtube/sochi", "sochi.css");
 		List<EventoMultideportivo> listevento = new ArrayList<EventoMultideportivo>();
 		
 		

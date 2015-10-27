@@ -34,8 +34,8 @@ public class EventoMultideportivo implements Serializable{
 	@Column(name = "nombre", nullable = true)
 	private String nombre;
 	
-	@Column(name = "lugar", nullable = true)
-	private String lugar;
+	@OneToOne(targetEntity=Pais.class,cascade = CascadeType.ALL)
+	private Pais pais;
 	
 	@Column(name = "logo", nullable = true)
 	private String logo;
@@ -48,6 +48,9 @@ public class EventoMultideportivo implements Serializable{
 	
 	@Column(name = "facebook", nullable = true)
 	private String facebook;
+	
+	@Column(name = "instagram", nullable = true)
+	private String instagram;
 	
 	@Column(name = "hashtag", nullable = true)
 	private String Hashtag;
@@ -70,17 +73,18 @@ public class EventoMultideportivo implements Serializable{
 	
 	public EventoMultideportivo(){}
 
-	public EventoMultideportivo( String nombre, String lugar,
-			String logo, Date date, Date date2, String facebook,
+	public EventoMultideportivo( String nombre, Pais pais,
+			String logo, Date date, Date date2, String facebook,String instagram,
 			String hashtag, String canalYoutube, String css) {
 		
 		
 		this.nombre = nombre;
-		this.lugar = lugar;
+		this.pais = pais;
 		this.logo = logo;
 		this.fechaInicio = date;
 		this.fechaFin = date2;
 		this.facebook = facebook;
+		this.instagram = instagram;
 		this.Hashtag = hashtag;
 		this.canalYoutube = canalYoutube;
 		this.Css = css;
@@ -89,6 +93,14 @@ public class EventoMultideportivo implements Serializable{
 	
 	
 	
+	public String getInstagram() {
+		return instagram;
+	}
+
+	public void setInstagram(String instagram) {
+		this.instagram = instagram;
+	}
+
 	public TenantHandler getTenant() {
 		return tenantHandler;
 	}
@@ -115,12 +127,12 @@ public class EventoMultideportivo implements Serializable{
 		this.nombre = nombre;
 	}
 
-	public String getLugar() {
-		return lugar;
+	public Pais getPais() {
+		return pais;
 	}
 
-	public void setLugar(String lugar) {
-		this.lugar = lugar;
+	public void setPais(Pais pais) {
+		this.pais = pais;
 	}
 
 	public String getLogo() {

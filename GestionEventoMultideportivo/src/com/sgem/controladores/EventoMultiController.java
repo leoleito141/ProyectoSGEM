@@ -10,6 +10,7 @@ import com.sgem.datatypes.DataEvento;
 import com.sgem.datatypes.DataTenant;
 import com.sgem.dominio.EventoMultideportivo;
 import com.sgem.dominio.Organizador;
+import com.sgem.dominio.Pais;
 import com.sgem.dominio.TenantHandler;
 import com.sgem.persistencia.IEventoMultiDAO;
 import com.sgem.persistencia.IUsuarioDAO;
@@ -30,39 +31,33 @@ public class EventoMultiController implements IEventoMultiController {
 		
 		try {
 			TenantHandler th = new TenantHandler();
-			EventoMultideportivo evento = new EventoMultideportivo(dataEvento.getNombre(),dataEvento.getLugar(),dataEvento.getLogo(),dataEvento.getFechaInicio(),dataEvento.getFechaFin(),dataEvento.getFacebook(),
-					dataEvento.getHashtag(),dataEvento.getCanalYoutube(),dataEvento.getCss());
-			System.out.println("Entre alta eventoController :" +evento.toString());
+
+			Pais p = new Pais();
+			p.setPais(dataEvento.getDataPais().getPais());
+			p.setCiudad(dataEvento.getDataPais().getCiudad());
+			
+			EventoMultideportivo evento = new EventoMultideportivo(dataEvento.getNombre(),p,dataEvento.getLogo(),dataEvento.getFechaInicio(),dataEvento.getFechaFin(),dataEvento.getFacebook(),
+				dataEvento.getInstagram(),dataEvento.getHashtag(),dataEvento.getCanalYoutube(),dataEvento.getCss());
 			
 			List<EventoMultideportivo> listevento = new ArrayList<EventoMultideportivo>();
 			
 			Organizador org = new Organizador();
 			org.setEmail(dataEvento.getEmailOrganizador());
 			org.setPassword(dataEvento.getPasswordOrganizador());
-//			org.setTenantID(eventoGuardado.getTenant().getTenantID());
 			org.setEvento(evento);
 			evento.setOrganizador(org);
 			evento.setTenant(th);
 			listevento.add(evento);
-			th.setEventos(listevento);
-			
-			
-			
+			th.setEventos(listevento);			
 			EventoMultiDAO.guardarTenant(th);
-			
-//			EventoMultideportivo eventoGuardado = EventoMultiDAO.buscarEvento(evento.getNombre());
-			
-			
-//			usuarioDAO.guardarUsuario(org);
-//			EventoMultiDAO.guardarEvento(eventoGuardado);
-			
-			
+
+			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		// TODO Auto-generated method stub
-		return true;
+		
+		return false;
 	}
 
 

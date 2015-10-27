@@ -1,14 +1,15 @@
 'use strict';
 
 angular.module('pruebaAngularApp')
-  .controller('EventoMultiCtrl', ['$scope','dataFactory', function ($scope,dataFactory) {
+  .controller('EventoMultiCtrl', ['$scope','dataFactory','$state', function ($scope,dataFactory,$state) {
 	
 	  
 	  //hacemos de cuenta que somos organizadores
 	  
 	  
 	  $scope.evento={};
-	  console.log($scope.evento);
+	  $scope.pais={};
+	
 	  
 	  $scope.openInicio = function($eventInicio) {
 		    $scope.statusInicio.opened = true;
@@ -33,11 +34,17 @@ angular.module('pruebaAngularApp')
 	  
 	  
 	  $scope.altaEvento = function(){
-		  var file = $scope.myFile;
-
-		  dataFactory.altaEvento($scope.evento,file)
+		  var evento = $scope.evento;
+		  evento.dataPais = $scope.pais;
+		  console.log(evento);
+		  dataFactory.altaEvento(evento)
 	     	.then(function (data, status, headers, config) {
 	                 console.log(data);
+	                 if(data.status == "200"){
+		                 
+		                 $state.go('main');
+	                	 
+	                 }
 	                
 	                
 	            })
