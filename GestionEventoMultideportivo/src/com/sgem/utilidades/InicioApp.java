@@ -1,6 +1,8 @@
 package com.sgem.utilidades;
 
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,13 +17,17 @@ import com.sgem.dominio.ComiteOlimpico;
 import com.sgem.dominio.Deportista;
 import com.sgem.dominio.EventoDeportivo;
 import com.sgem.dominio.EventoMultideportivo;
+import com.sgem.dominio.HistorialLogin;
 import com.sgem.dominio.Organizador;
 import com.sgem.dominio.Pais;
 import com.sgem.dominio.TenantHandler;
 import com.sgem.dominio.Usuario;
+import com.sgem.dominio.UsuarioComun;
+import com.sgem.enums.Tipo;
 import com.sgem.persistencia.IDeportistaDAO;
 import com.sgem.persistencia.IEventoDeportivoDAO;
 import com.sgem.persistencia.IEventoMultiDAO;
+import com.sgem.persistencia.IHistorialLoginDAO;
 import com.sgem.persistencia.IUsuarioDAO;
 
 
@@ -39,6 +45,9 @@ IEventoMultiDAO  EventoMultiDAO;
 
 @EJB
 IEventoDeportivoDAO  EventoDeportivoDAO;
+
+@EJB
+IHistorialLoginDAO  HistorialLoginDAO;
 
 
    
@@ -202,9 +211,9 @@ IEventoDeportivoDAO  EventoDeportivoDAO;
 	//	Organizador org =(Organizador)UsuarioDAO.buscarUsuario(1,"dsa4");
 		
 		Organizador usuario4 = new Organizador();
-		usuario4.setEmail("organizador@gmail");
+		usuario4.setEmail("organizador@gmail.com");
 		usuario4.setPassword("123");
-		usuario4.setTenantID(th.getTenantID());
+		usuario4.setTenantID(1);
 		usuario4.setEvento(evento);
 		
 		evento.setOrganizador(usuario4);
@@ -234,6 +243,40 @@ IEventoDeportivoDAO  EventoDeportivoDAO;
 		EventoDeportivo Natacion3 = new EventoDeportivo(th.getTenantID(), "Natacion", "Posta 4x100", new Date(), new Date(), "Femenino", null, null, null);
 		EventoDeportivoDAO.guardarEventoDeportivo(Natacion3,evento);
 	
+		
+		
+		UsuarioComun u = new UsuarioComun();
+		u.setEmail("leo@gmail.com");
+		u.setPassword("123");
+		u.setTenantID(1);
+		UsuarioDAO.guardarUsuario(u);
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		
+		Date date1 = null,date2 = null,date3 = null,date4 = null,date5 = null,date6 = null,date7 = null,date8 = null;
+		
+		try {
+			date1 = formatter.parse("28/10/2015");
+			date2 = formatter.parse("30/10/2015");
+			date3 = formatter.parse("05/11/2015");
+			date4 = formatter.parse("15/11/2015");
+			date5 = formatter.parse("30/11/2015");
+			date6 = formatter.parse("02/12/2015");
+			date7 = formatter.parse("15/12/2015");
+			date8 = formatter.parse("25/12/2015");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, u,Tipo.LOGIN));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date2, u,Tipo.LOGIN));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date3, u,Tipo.LOGIN));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date4, u,Tipo.LOGIN));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date5, u,Tipo.LOGIN));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date6, u,Tipo.LOGIN));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date7, u,Tipo.LOGIN));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date8, u,Tipo.LOGIN));
     }
     
     

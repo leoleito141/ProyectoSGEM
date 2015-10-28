@@ -4,6 +4,8 @@ package com.sgem.controladores;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -17,16 +19,20 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 import org.jboss.resteasy.util.Base64;
 
 import com.sgem.datatypes.DataComite;
+import com.sgem.datatypes.DataHistorialLogin;
 import com.sgem.datatypes.DataNovedad;
 import com.sgem.datatypes.DataUsuario;
 import com.sgem.dominio.Admin;
 import com.sgem.dominio.ComiteOlimpico;
+import com.sgem.dominio.HistorialLogin;
 import com.sgem.dominio.Imagen;
 import com.sgem.dominio.Juez;
 import com.sgem.dominio.Novedad;
 import com.sgem.dominio.Organizador;
 import com.sgem.dominio.Usuario;
 import com.sgem.dominio.UsuarioComun;
+import com.sgem.enums.Tipo;
+import com.sgem.persistencia.IHistorialLoginDAO;
 import com.sgem.persistencia.IImagenDAO;
 import com.sgem.persistencia.INovedadDAO;
 import com.sgem.persistencia.IUsuarioDAO;
@@ -55,6 +61,9 @@ public class UsuarioController implements IUsuarioController {
 	
 	@EJB
 	private IImagenDAO ImagenDAO;
+	
+	@EJB
+	private IHistorialLoginDAO HistorialLoginDAO;
 	
 	@Override
 	public boolean guardarUsuario(DataUsuario dataUsuario) throws UsuarioYaExisteException, AplicacionException {
@@ -175,6 +184,7 @@ public class UsuarioController implements IUsuarioController {
 	public Token loginUsuario(DataUsuario dataUsuario) throws UsuarioNoEncontradoException, AplicacionException {
 		Token jwt = null;
 		String pass = "";
+		String tipoUsuario = "";
 		
 		Usuario u =	UsuarioDAO.buscarUsuario(dataUsuario.getTenantId(), dataUsuario.getEmail());				
 	
@@ -186,14 +196,23 @@ public class UsuarioController implements IUsuarioController {
 		
 		if( u != null && (u.getPassword().equalsIgnoreCase(pass)) ){// genero json web token.
 			
-			String tipoUsuario = u instanceof UsuarioComun ? USUARIO_COMUN : u instanceof ComiteOlimpico ? USUARIO_COMITE : u instanceof Organizador ? USUARIO_ORGANIZADOR : USUARIO_JUEZ;
+			tipoUsuario = u instanceof UsuarioComun ? USUARIO_COMUN : u instanceof ComiteOlimpico ? USUARIO_COMITE : u instanceof Organizador ? USUARIO_ORGANIZADOR : USUARIO_JUEZ;
 			DataUsuario du = convertir(u);
 			du.setTipoUsuario(tipoUsuario);
 			jwt = JWTUtil.generarToken(du);
 		}else{
 			throw new UsuarioNoEncontradoException("No se encuentra usuario con dichas credenciales");
 		}
-						
+
+		if(tipoUsuario.equals(USUARIO_COMUN)){
+			try {
+				HistorialLoginDAO.guardarHistorial(new HistorialLogin(dataUsuario.getTenantId(), new Date(), u,Tipo.LOGIN));
+			} catch (Exception e) {
+				e.printStackTrace();
+				return jwt;
+			}
+		}
+		
 		return jwt;
 	}
 
@@ -290,7 +309,45 @@ public class UsuarioController implements IUsuarioController {
 		
 		return (new Imagen(ImagenUtil.getMimeType(f), fileName,Integer.parseInt(tenantId)));
 		
-	}	
+	}
+
+	@Override
+	public boolean guardarEstado(DataHistorialLogin hl)	throws AplicacionException, UsuarioNoEncontradoException {
+		boolean guardo = false;
+
+		Usuario u = UsuarioDAO.buscarUsuario(hl.getTenantId(),hl.getEmailUsuario(), USUARIO_COMUN);
+		if (u != null) {
+			guardo = HistorialLoginDAO.guardarHistorial(new HistorialLogin(hl.getTenantId(), new Date(), u, Tipo.CIERRE_SESION));
+		} else {
+			throw new UsuarioNoEncontradoException("No se encuentra el usuario con email '"+ hl.getEmailUsuario() + "'");
+		}
+		return guardo;
+	}
+
+	@Override
+	public List<DataHistorialLogin> obtenerHistorial(Integer tenantId) throws AplicacionException {
+
+		try{
+			return convertir(HistorialLoginDAO.recuperarHistorial(tenantId));
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new AplicacionException("Error obteniendo historial.");
+		}
+	}
+	
+	public List<DataHistorialLogin> convertir(List<HistorialLogin> historial){
+		List<DataHistorialLogin> dataHistorial = new ArrayList<DataHistorialLogin>();
+		
+		for(int i = 0; i< historial.size(); i++){
+			DataHistorialLogin dl = new DataHistorialLogin(historial.get(i).getTenantId(), 
+														   historial.get(i).getFecha(), 
+														   historial.get(i).getUsuario().getEmail());
+			dataHistorial.add(dl);			
+		}
+		
+		return dataHistorial;		
+		
+	}
 
 }
 

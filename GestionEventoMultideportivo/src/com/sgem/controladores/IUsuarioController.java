@@ -7,9 +7,11 @@ import javax.ejb.Local;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 import com.sgem.datatypes.DataComite;
+import com.sgem.datatypes.DataHistorialLogin;
 import com.sgem.datatypes.DataNovedad;
 import com.sgem.datatypes.DataUsuario;
 import com.sgem.dominio.ComiteOlimpico;
+import com.sgem.dominio.HistorialLogin;
 import com.sgem.dominio.Imagen;
 import com.sgem.seguridad.excepciones.AplicacionException;
 import com.sgem.seguridad.excepciones.UsuarioNoEncontradoException;
@@ -26,5 +28,7 @@ public interface IUsuarioController {
 	public List<ComiteOlimpico> buscarComiteporPais(String pais, int tenantID);
 	public boolean guardarNovedad(DataNovedad dataNovedad) throws UsuarioNoEncontradoException, AplicacionException;
 	public Imagen subirImagen(MultipartFormDataInput input) throws AplicacionException;
+	public boolean guardarEstado(DataHistorialLogin hl) throws UsuarioNoEncontradoException, AplicacionException;
+	public List<DataHistorialLogin> obtenerHistorial(Integer tenantId) throws AplicacionException;
 
 }

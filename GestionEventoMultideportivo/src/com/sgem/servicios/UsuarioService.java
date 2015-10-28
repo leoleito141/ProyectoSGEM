@@ -3,6 +3,7 @@ package com.sgem.servicios;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
@@ -94,6 +95,26 @@ public class UsuarioService implements IUsuarioService{
 		} catch (AplicacionException e) {
 			return Response.serverError().build();
 		}	
+	}
+
+//	@Override
+//	public Response guardarEstado(DataHistorialLogin hl) {
+//		try {						
+//			return Response.ok(iuc.guardarEstado(hl)).build();	
+//		} catch (AplicacionException e) {
+//			return Response.serverError().build();
+//		} catch (UsuarioNoEncontradoException e) {
+//			return Response.status(Status.NOT_FOUND).build();	
+//		}	
+//	}
+
+	@Override
+	public Response obtenerHistorial(String tenantId) {
+		try {						
+			return Response.ok(iuc.obtenerHistorial(Integer.parseInt(tenantId))).build();	
+		} catch (AplicacionException e) {
+			return Response.serverError().build();
+		}
 	}
 	
 }
