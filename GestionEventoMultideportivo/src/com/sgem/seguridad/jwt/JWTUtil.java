@@ -1,15 +1,14 @@
 package com.sgem.seguridad.jwt;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.impl.crypto.MacProvider;
-
 import java.security.Key;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.sgem.datatypes.DataUsuario;
-import com.sgem.dominio.Usuario;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.impl.crypto.MacProvider;
 
 public class JWTUtil {
 
@@ -20,8 +19,6 @@ public class JWTUtil {
 		Map<String, Object> mapeo = new HashMap<String, Object>();
 		 
 		mapeo.put("dataUsuario", du);
-//		mapeo.put("rol", rol);
-
 //		String jwt = Jwts.builder().setPayload("tenant 1").signWith(SignatureAlgorithm.HS256, clave).compact();
 		String jwt = Jwts.builder().setClaims(mapeo).signWith(SignatureAlgorithm.HS256, clave).compact();
 		Token token = new Token();

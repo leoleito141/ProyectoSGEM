@@ -52,7 +52,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		List<Usuario> u = new ArrayList<Usuario>();
 		
 		try{
-			u = em.createQuery("SELECT u FROM Usuario u WHERE u.email = '"+email+"' AND u.tenantID != 0", Usuario.class).getResultList();			
+			u = em.createQuery("SELECT u FROM Usuario u WHERE u.email = '"+email+"' AND u.tenantID != 0 AND u.tenantID ="+tenantId, Usuario.class).getResultList();			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
