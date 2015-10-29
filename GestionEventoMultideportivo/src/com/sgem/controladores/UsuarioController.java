@@ -349,5 +349,50 @@ public class UsuarioController implements IUsuarioController {
 		
 	}
 
+	@Override
+	public boolean guardarJuez(DataUsuario usuario) {
+		
+		try {
+			boolean enviado = false;
+			boolean guardo = false;
+			Juez j = null;
+			
+			boolean existeJuez = UsuarioDAO.existeJuez(usuario.getTenantId(),usuario.getEmail());
+		
+			
+			// ANTES DE DAR DE ALTA, FIJARSE EN EL dataComite que viene, si ya existe uno con ese cod y ese pais 
+			// en ese tenant. 
+			
+			if((existeJuez == false)){
+			
+					j = new Juez();
+				
+					j.setEmail(usuario.getEmail());
+					j.setPassword(usuario.getPassword());
+					j.setTenantID(usuario.getTenantId());
+					
+					guardo = UsuarioDAO.guardarUsuario(j);
+		
+					if(guardo){
+						// Se debería enviar luego del guardar Usuario.. porque devuelve un booleano, si se pudo guardar enviar correo, sino no.
+						enviado = Correo.enviarMensajeConAuth("smtp.gmail.com", 587,"inmogrupo13@gmail.com", j.getEmail(),"inmobiliaria13", "Notificacion de contraseña", "Estimado Señor Juez : 	Su contraseña es:"+j.getPassword()+"");
+						
+					}else{
+						// controlar esto..
+					}
+					return guardo;
+			}else{ // ya existe CO con es codigo y pais no se guarda
+				
+				return false;
+			}		
+					
+					
+			}
+		 catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 }
 

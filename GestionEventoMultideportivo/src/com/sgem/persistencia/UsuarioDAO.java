@@ -146,6 +146,27 @@ public class UsuarioDAO implements IUsuarioDAO {
 		}
 		return false;
 
+	}
+
+	@Override
+	public boolean existeJuez(Integer tenantId, String email) {
+		List<Usuario> usuarios = null;
+		try{
+			usuarios = em.createQuery("SELECT u FROM Usuario u, Juez j WHERE u.id = j.id AND u.tenantID = '"+tenantId+"' AND u.email = '"+email+"'", Usuario.class).getResultList();
+			
+			
+		if( usuarios.isEmpty()){
+			
+			return false;
+		}else{
+			
+			return true;
+		}	
+			
+		}catch(NoResultException e){
+			e.printStackTrace();
+			return false;
+		}
 	}	
 
 }

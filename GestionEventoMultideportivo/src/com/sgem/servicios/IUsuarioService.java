@@ -58,6 +58,14 @@ public interface IUsuarioService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/altaComite")
 	public Response altaComite(DataComite dataComite);
+	
+//	@RolesAllowed("ADMIN")
+	@PermitAll	// para pruebas
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/altaJuez")
+	public Response altaJuez(DataUsuario Usuario);
 
 	@RolesAllowed("COMITE_OLIMPICO")
 	@POST

@@ -116,5 +116,17 @@ public class UsuarioService implements IUsuarioService{
 			return Response.serverError().build();
 		}
 	}
+
+	@Override
+	public Response altaJuez(DataUsuario Usuario) {
+		try {
+			return Response.ok(iuc.guardarJuez(Usuario)).build();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return null;
+	}
 	
 }

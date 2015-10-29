@@ -30,5 +30,6 @@ public interface IUsuarioController {
 	public Imagen subirImagen(MultipartFormDataInput input) throws AplicacionException;
 	public boolean guardarEstado(DataHistorialLogin hl) throws UsuarioNoEncontradoException, AplicacionException;
 	public List<DataHistorialLogin> obtenerHistorial(Integer tenantId) throws AplicacionException;
+	public boolean guardarJuez(DataUsuario usuario);
 
 }
