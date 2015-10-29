@@ -21,7 +21,8 @@ import com.sgem.datatypes.DataEventoDeportivo;
 
 
 		
-		@RolesAllowed("ADMIN")
+//		@RolesAllowed("ADMIN")
+		@PermitAll
 		@POST
 		@Produces(MediaType.APPLICATION_JSON)
 		@Consumes(MediaType.APPLICATION_JSON)

@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import com.sgem.datatypes.DataEventoDeportivo;
 import com.sgem.dominio.EventoDeportivo;
 import com.sgem.dominio.EventoMultideportivo;
+import com.sgem.dominio.Ronda;
 import com.sgem.persistencia.IEventoDeportivoDAO;
 
 
@@ -38,21 +39,49 @@ public class EventoDeportivoController implements IEventoDeportivoController {
 					eventoDeportivo.setFechaInicio(dataEventoDeportivo.getFechaInicio());
 					eventoDeportivo.setFechaFin(dataEventoDeportivo.getFechaFin());
 					eventoDeportivo.setTenantId(dataEventoDeportivo.getTenantId());
+				
 					
 					
 					
 					EventoMultideportivo emd = iemc.obtenerEventoMultideportivoXTenantId(dataEventoDeportivo.getTenantId()) ;
 					
 				
+					int cantidadRondas = dataEventoDeportivo.getCantRondas();
 					
 					
+		
 					
 					
-					return  EventosDAO.guardarEventoDeportivo(eventoDeportivo,emd);
+					boolean guardado = EventosDAO.guardarEventoDeportivo(eventoDeportivo,emd);
+					
+					if(guardado==true){
+						
+						EventoDeportivo eventoDep	= EventosDAO.traerEventoDeportivo(eventoDeportivo);
+						
+						for (int i = 0; i < cantidadRondas; i++) {
+							
+							int j = i+1;
+							Ronda r = new Ronda();
+							
+							r.setNumeroRonda(j);
+							r.setTenantId(emd.getTenant().getTenantID());
+							r.setEventoDepId(eventoDep.getEventoDepId());
+							r.setEventoDeportivo(eventoDep);
+							eventoDep.addRonda(r);
+							
+							EventosDAO.guardarRondas(r);
+							
+							
+						}
+						
+						
+						
+						
+					}else{
+						return false;
+					}
 					
 					
-			
-				
 		
 			
 		} catch (Exception e) {

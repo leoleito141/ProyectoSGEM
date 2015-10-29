@@ -19,6 +19,8 @@ public class DataEventoDeportivo{
 	
 //	@SerializedName(value="FechaFin")
 	private Date FechaFin;
+	
+	private int cantRondas;
 
 	public String getNombreDeporte() {
 		return nombreDeporte;
@@ -70,11 +72,21 @@ public class DataEventoDeportivo{
 		this.tenantId = tenantId;
 	}
 
+	
+	
+	public int getCantRondas() {
+		return cantRondas;
+	}
+
+	public void setCantRondas(int cantRondas) {
+		this.cantRondas = cantRondas;
+	}
+
 	public String toString() {
 		return "DataUsuario [nombreDeporte=" + nombreDeporte + ", nombreDisciplina=" + nombreDisciplina
 				+ ", tenantId=" + tenantId
 				+ ", sexo=" + sexo + ", FechaInicio=" + FechaInicio
-				+ ", FechaFin=" + FechaFin +  "]";
+				+ ", FechaFin=" + FechaFin + ", cantRondas=" +cantRondas+"]";
 	}
 	
 }

@@ -60,7 +60,12 @@ public class EventoDeportivo implements Serializable{
 	private Set<Deportista> deportistas;
 	*/
 	
-	public EventoDeportivo(){}
+
+	
+	public EventoDeportivo(){
+		
+		this.ronda = new HashSet<Ronda>();
+	}
 	
 	public EventoDeportivo(int tenantId, String nombreDeporte, String disciplina,
 			Date fechaInicio, Date fechaFin, String sexo, EventoMultideportivo eventoMultideportivo,
@@ -74,7 +79,7 @@ public class EventoDeportivo implements Serializable{
 		this.sexo = sexo;
 		this.eventoMultideportivo = eventoMultideportivo;
 		this.Competencia = competencia;
-		this.ronda = ronda;
+		this.ronda = new HashSet<Ronda>();
 	//	this.deportistas= deportistas;
 	}
 
@@ -92,6 +97,12 @@ public class EventoDeportivo implements Serializable{
 
 	public void setRonda(Set<Ronda> ronda) {
 		this.ronda = ronda;
+	}
+	
+	
+	public void addRonda(Ronda ronda) {
+		this.ronda.add(ronda);
+		
 	}
 
 	public int getEventoDepId() {
@@ -157,6 +168,8 @@ public class EventoDeportivo implements Serializable{
 	public void setEventoMultideportivo(EventoMultideportivo eventoMultideportivo) {
 		this.eventoMultideportivo = eventoMultideportivo;
 	}
+	
+	
 
 	/*public Set<Deportista> getDeportistas() {
 		return deportistas;

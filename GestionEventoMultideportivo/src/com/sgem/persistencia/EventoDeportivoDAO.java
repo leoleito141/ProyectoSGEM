@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import com.sgem.dominio.ComiteOlimpico;
 import com.sgem.dominio.EventoDeportivo;
 import com.sgem.dominio.EventoMultideportivo;
+import com.sgem.dominio.Ronda;
 import com.sgem.dominio.Usuario;
 
 
@@ -120,6 +121,48 @@ public class EventoDeportivoDAO implements IEventoDeportivoDAO {
 		}
 		
 		return null;
+		
+	}
+
+
+
+	@Override
+	public EventoDeportivo traerEventoDeportivo(EventoDeportivo eventoDeportivo) {
+		
+					EventoDeportivo ed = null;
+				
+				
+				try{
+					
+					 
+					ed= em.createQuery("SELECT ed FROM EventoDeportivo ed WHERE ed.tenantId = "+eventoDeportivo.getTenantId()+" AND ed.sexo = '"+eventoDeportivo.getSexo()+"' AND ed.nombreDeporte = '"+eventoDeportivo.getNombreDeporte()+"'AND ed.disciplina = '"+eventoDeportivo.getDisciplina()+"'", EventoDeportivo.class).getSingleResult();
+					 
+					 return ed;
+				
+					
+				}catch(NoResultException e){
+					e.printStackTrace();
+					return null;
+				}
+		
+		
+		
+	}
+
+
+
+	@Override
+	public boolean guardarRondas(Ronda r) {
+		
+		try {
+			em.persist(r);
+			return true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+		
 		
 	}
 		
