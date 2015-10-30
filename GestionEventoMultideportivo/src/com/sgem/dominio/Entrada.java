@@ -35,6 +35,9 @@ public class Entrada implements Serializable{
 		@Column(name = "numeroAsiento", nullable = false)
 		private int numeroAsiento;
 		
+		@Column(name = "vendida", nullable = false)
+		private boolean vendida;
+		
 		@ManyToOne	
 		private Competencia competencia;
 		
@@ -50,7 +53,7 @@ public class Entrada implements Serializable{
 		
 		
 
-		public Entrada(int tenantId, Date fecha, float precioEntrada, int numeroAsiento, Competencia competencia,
+		public Entrada(int tenantId, Date fecha, float precioEntrada, int numeroAsiento, boolean vendida, Competencia competencia,
 				UsuarioComun usuarioComun) {
 			super();
 			this.tenantId = tenantId;
@@ -58,6 +61,7 @@ public class Entrada implements Serializable{
 			this.precioEntrada = precioEntrada;
 			this.numeroAsiento = numeroAsiento;
 			this.competencia = competencia;
+			this.vendida = vendida;
 			UsuarioComun = usuarioComun;
 		}
 
@@ -117,6 +121,18 @@ public class Entrada implements Serializable{
 
 		public void setUsuarioComun(UsuarioComun usuarioComun) {
 			UsuarioComun = usuarioComun;
+		}
+
+
+
+		public boolean isVendida() {
+			return vendida;
+		}
+
+
+
+		public void setVendida(boolean vendida) {
+			this.vendida = vendida;
 		}
 		
 		

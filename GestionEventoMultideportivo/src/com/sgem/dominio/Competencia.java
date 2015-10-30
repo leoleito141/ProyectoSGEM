@@ -44,6 +44,9 @@ public class Competencia implements Serializable{
 	@Column(name = "cantEntradas", nullable = false)
 	private int cantEntradas;
 	
+	@Column(name = "finalizada", nullable = false)
+	private boolean finalizada;
+	
 	
 	@ManyToOne	
 	private EventoDeportivo eventoDeportivo;
@@ -73,7 +76,7 @@ public class Competencia implements Serializable{
 	}
 	
 	
-	public Competencia(int tenantId, Date fecha, String Estadio,float precioEntrada, int cantEntradas,
+	public Competencia(int tenantId, Date fecha, String Estadio,float precioEntrada, boolean finalizada,int cantEntradas,
 			EventoDeportivo eventoDeportivo, Juez juez, Ronda ronda, Resultado resultado,
 			Set<Deportista> deportistas, Set<Entrada> entradas) {
 		
@@ -88,6 +91,7 @@ public class Competencia implements Serializable{
 		this.juez = juez;
 		this.ronda = ronda;
 		this.resultado = resultado;
+		this.finalizada = finalizada;
 		this.deportistas = new HashSet<Deportista>();
 		this.entradas = new HashSet<Entrada>();
 	}
@@ -201,6 +205,16 @@ public class Competencia implements Serializable{
 
 	public void setEstadio(String estadio) {
 		this.estadio = estadio;
+	}
+
+
+	public boolean isFinalizada() {
+		return finalizada;
+	}
+
+
+	public void setFinalizada(boolean finalizada) {
+		this.finalizada = finalizada;
 	}
 	
 
