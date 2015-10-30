@@ -165,6 +165,25 @@ public class EventoDeportivoDAO implements IEventoDeportivoDAO {
 		
 		
 	}
+
+
+
+	@Override
+	public List<Integer> listarRondas(int tenantID, String nombreDeporte, String sexo, String nombreDisciplina) {
+		
+		List<Integer> rondas = null;
+		
+		try {
+			
+			rondas = em.createQuery("SELECT r.numeroRonda FROM EventoDeportivo ed, Ronda r WHERE ed.tenantId = '"+tenantID+"' AND r.EventoDepId = ed.EventoDepId AND r.tenantId = '"+tenantID+"' AND ed.sexo = '"+sexo+"' AND ed.nombreDeporte = '"+nombreDeporte+"' AND ed.disciplina = '"+nombreDisciplina+"'", Integer.class).getResultList();;
+			 
+			 return rondas;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 		
 		
 		

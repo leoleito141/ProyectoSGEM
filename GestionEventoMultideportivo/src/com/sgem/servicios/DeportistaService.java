@@ -33,6 +33,19 @@ public Response guardarDeportista(DataDeportista dataDeportista) {
 }
 
 
+@Override
+public Response listarDeportistas(int tenantID, String sexo, String nombreDeporte, String nombreDisciplina) {
+	try {
+		return Response.ok(idc.listarDeportistas(tenantID,nombreDeporte,sexo,nombreDisciplina)).build();
+
+	} catch (Exception e) {
+		e.printStackTrace();
+
+	}
+	return null;
+}
+
+
 
 
 

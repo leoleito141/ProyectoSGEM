@@ -59,6 +59,21 @@ private IEventoDeportivoController iec;
 	}
 
 
+	@Override
+	public Response listarRondas(int tenantID, String sexo, String nombreDeporte, String nombreDisciplina) {
+		try {
+			return Response.ok(iec.listarRondas(tenantID,nombreDeporte,sexo,nombreDisciplina)).build();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		
+		
+		return null;
+	}
+
+
 
 
 

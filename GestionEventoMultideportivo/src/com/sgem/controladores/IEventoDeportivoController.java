@@ -18,4 +18,6 @@ public interface IEventoDeportivoController {
 
 	List<EventoDeportivo> buscarEventosDeportivos(Integer tenantId, String deporte, List<String> disciplinas, String sexo);
 
+	List <Integer> listarRondas(int tenantID, String nombreDeporte, String sexo, String nombreDisciplina);
+
 }

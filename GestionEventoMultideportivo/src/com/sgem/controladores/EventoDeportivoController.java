@@ -142,5 +142,18 @@ public class EventoDeportivoController implements IEventoDeportivoController {
 		}
 		return null;
 	}
+
+	@Override
+	public List<Integer> listarRondas(int tenantID, String nombreDeporte, String sexo, String nombreDisciplina) {
+		try {
+			
+			return EventosDAO.listarRondas(tenantID,nombreDeporte,sexo,nombreDisciplina);
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;	
+		
+	}
 	
 }

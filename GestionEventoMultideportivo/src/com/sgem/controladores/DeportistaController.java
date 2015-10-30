@@ -65,6 +65,27 @@ public class DeportistaController implements IDeportistaController {
 		}
 		return false;
 	}
+
+	@Override
+	public List<Deportista> listarDeportistas(int tenantID, String nombreDeporte, String sexo, String nombreDisciplina) {
+		try {
+			
+			List<Deportista> ld = new ArrayList<Deportista>();
+			
+				
+				ld = DeportistaDAO.listarDeportistas(tenantID, nombreDeporte, sexo, nombreDisciplina);
+				
+				
+				return ld;
+				
+			
+			
+			
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+	}
 	
 	
 	

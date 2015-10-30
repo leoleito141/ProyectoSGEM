@@ -19,5 +19,6 @@ public interface IEventoDeportivoDAO {
 	public Integer traerIDEventoDeportivo(Integer tenantId, String deporte, String disciplina, String sexo);
 	public EventoDeportivo traerEventoDeportivo(EventoDeportivo eventoDeportivo);
 	public boolean guardarRondas(Ronda ronda);
+	public List<Integer> listarRondas(int tenantID, String nombreDeporte, String sexo, String nombreDisciplina);
 	
 }

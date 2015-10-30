@@ -160,9 +160,9 @@ IHistorialLoginDAO  HistorialLoginDAO;
 		System.out.println("obtuve el usuario "+u2.getEmail()+" "+u2.getId());
 		System.out.println(" y es "+u2.soy());
 		
-		Deportista d = new Deportista(1, "Juan", "Perez",new Date(), "Masulino",null,null);			
-		Deportista d1 = new Deportista(1, "Jose", "Lopez",new Date(), "Masulino",null,null);		
-		Deportista d2 = new Deportista(1, "Pedro", "Fernandez",new Date(), "Masulino",null,null);			
+		Deportista d = new Deportista(1, "Juan", "Perez",new Date(), "Masculino",null,null);			
+		Deportista d1 = new Deportista(1, "Jose", "Lopez",new Date(), "Masculino",null,null);		
+		Deportista d2 = new Deportista(1, "Pedro", "Fernandez",new Date(), "Masculino",null,null);			
 		Deportista d3 = new Deportista(1, "Debo", "Rodriguez",new Date(), "Femenino",null,null);			
 
 		
@@ -237,7 +237,7 @@ IHistorialLoginDAO  HistorialLoginDAO;
 		EventoDeportivo Natacion1 = new EventoDeportivo(th.getTenantID(), "Natacion", "100M Libres", new Date(), new Date(), "Femenino", null, null, null);
 		EventoDeportivoDAO.guardarEventoDeportivo(Natacion1,evento);
 		
-		EventoDeportivo Natacion2 = new EventoDeportivo(th.getTenantID(), "Natacion", "200M Mariposa", new Date(), new Date(), "Femenino", null, null, null);
+		EventoDeportivo Natacion2 = new EventoDeportivo(th.getTenantID(), "Natacion", "200M Mariposa", new Date(), new Date(), "Masculino", null, null, null);
 		EventoDeportivoDAO.guardarEventoDeportivo(Natacion2,evento);
 		
 		EventoDeportivo Natacion3 = new EventoDeportivo(th.getTenantID(), "Natacion", "Posta 4x100", new Date(), new Date(), "Femenino", null, null, null);
