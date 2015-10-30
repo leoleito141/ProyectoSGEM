@@ -10,5 +10,6 @@ import com.sgem.dominio.HistorialLogin;
 public interface IHistorialLoginDAO {
 
 	public boolean guardarHistorial(HistorialLogin hl);
-	public List<HistorialLogin> recuperarHistorial(int tenantId);
+	public List<Object> recuperarHistorial(int tenantId);
+	public Integer obtenerCantidadRegistrados(Integer tenantId);
 }

@@ -118,6 +118,15 @@ public class UsuarioService implements IUsuarioService{
 	}
 
 	@Override
+	public Response obtenerCantidadRegistrados(String tenantId) {
+		try {						
+			return Response.ok(iuc.cantidadRegistrados(Integer.parseInt(tenantId))).build();	
+		} catch (AplicacionException e) {
+			return Response.serverError().build();
+		}
+	}
+
+	@Override
 	public Response altaJuez(DataUsuario Usuario) {
 		try {
 			return Response.ok(iuc.guardarJuez(Usuario)).build();
@@ -128,5 +137,6 @@ public class UsuarioService implements IUsuarioService{
 		}
 		return null;
 	}
+
 	
 }

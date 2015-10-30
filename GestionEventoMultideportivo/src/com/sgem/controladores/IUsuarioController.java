@@ -31,5 +31,6 @@ public interface IUsuarioController {
 	public boolean guardarEstado(DataHistorialLogin hl) throws UsuarioNoEncontradoException, AplicacionException;
 	public List<DataHistorialLogin> obtenerHistorial(Integer tenantId) throws AplicacionException;
 	public boolean guardarJuez(DataUsuario usuario);
+	public Integer cantidadRegistrados(Integer tenantId) throws AplicacionException;
 
 }
