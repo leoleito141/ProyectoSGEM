@@ -1,7 +1,12 @@
 package com.sgem.dominio;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,14 +23,21 @@ public class Juez extends Usuario {
 	@Column(name = "apellido", nullable = false)
 	private String apellido;
 	
+	@OneToMany(fetch = FetchType.EAGER,mappedBy = "juez") 
+	private Set<Competencia> Competencia= new HashSet<Competencia>();
 	
-	public Juez(){}
-	public Juez(String email, String facebook, String twitter, String canalYoutube, String nombre, String apellido, Integer edad, Integer cedula, String password,int tenantid) 
+	
+	public Juez(){
+		
+		this.Competencia = new HashSet<Competencia>();
+	}
+	public Juez(String email, String facebook, String twitter, String canalYoutube, String nombre, String apellido, Integer edad, Integer cedula, String password,int tenantid, Set<Competencia> competencias) 
 	{
 		
 		super(email, facebook, twitter, canalYoutube, password,tenantid);
 		this.nombre = nombre;
 		this.apellido = apellido;
+		this.Competencia = new HashSet<Competencia>();
 				
 	}
 	
@@ -43,6 +55,18 @@ public class Juez extends Usuario {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
+	public Set<Competencia> getCompetencia() {
+		return Competencia;
+	}
+	public void setCompetencia(Set<Competencia> competencia) {
+		Competencia = competencia;
+	}
+	
+	public void addCompetencia(Competencia comp) {
+		this.Competencia.add(comp);
+		
+	}
+	
 	@Override
 	public  String soy(){			
 		return TIPO;

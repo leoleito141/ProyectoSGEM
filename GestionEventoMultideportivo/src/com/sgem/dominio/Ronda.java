@@ -38,7 +38,8 @@ public class Ronda implements Serializable{
 	@ManyToOne	
 	private EventoDeportivo eventoDeportivo;
 	
-	
+	@OneToMany(fetch = FetchType.EAGER,mappedBy = "ronda") 
+	private Set<Competencia> Competencia= new HashSet<Competencia>();
 	
 
 	public int getRondaId() {

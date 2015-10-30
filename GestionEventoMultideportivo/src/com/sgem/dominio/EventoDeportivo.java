@@ -65,11 +65,13 @@ public class EventoDeportivo implements Serializable{
 	public EventoDeportivo(){
 		
 		this.ronda = new HashSet<Ronda>();
+		this.Competencia = new HashSet<Competencia>();
+		
 	}
 	
 	public EventoDeportivo(int tenantId, String nombreDeporte, String disciplina,
 			Date fechaInicio, Date fechaFin, String sexo, EventoMultideportivo eventoMultideportivo,
-			Set<com.sgem.dominio.Competencia> competencia, Set<Ronda> ronda) {
+			Set<Competencia> competencia, Set<Ronda> ronda) {
 		super();
 		this.tenantId = tenantId;
 		this.nombreDeporte = nombreDeporte;
@@ -78,8 +80,9 @@ public class EventoDeportivo implements Serializable{
 		this.fechaFin = fechaFin;
 		this.sexo = sexo;
 		this.eventoMultideportivo = eventoMultideportivo;
-		this.Competencia = competencia;
+		this.Competencia = new HashSet<Competencia>();
 		this.ronda = new HashSet<Ronda>();
+		
 	//	this.deportistas= deportistas;
 	}
 
@@ -89,6 +92,10 @@ public class EventoDeportivo implements Serializable{
 
 	public void setCompetencia(Set<Competencia> competencia) {
 		Competencia = competencia;
+	}
+	
+	public void addCompetencia(Competencia competencia) {
+		this.Competencia.add(competencia);
 	}
 
 	public Set<Ronda> getRonda() {
@@ -171,14 +178,6 @@ public class EventoDeportivo implements Serializable{
 	
 	
 
-	/*public Set<Deportista> getDeportistas() {
-		return deportistas;
-	}
 
-	public void setDeportistas(Set<Deportista> deportistas) {
-		this.deportistas = deportistas;
-	}
-	
-*/
 	
 }

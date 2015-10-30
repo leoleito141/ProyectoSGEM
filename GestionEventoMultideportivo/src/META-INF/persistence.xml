@@ -18,7 +18,10 @@
 	<class>com.sgem.dominio.Competencia</class>
 	<class>com.sgem.dominio.Novedad</class>
 	<class>com.sgem.dominio.Imagen</class>
-	<class>com.sgem.dominio.HistorialLogin</class>	
+	<class>com.sgem.dominio.HistorialLogin</class>
+	<class>com.sgem.dominio.Resultado</class>
+	<class>com.sgem.dominio.Estadistica</class>
+	<class>com.sgem.dominio.Entrada</class>	
 	
 	<properties>
 		<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
