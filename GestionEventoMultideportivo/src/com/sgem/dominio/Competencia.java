@@ -34,6 +34,10 @@ public class Competencia implements Serializable{
 	@Column(name = "fecha", nullable = false)
 	private Date fecha;
 	
+	
+	@Column(name = "estadio", nullable = false)
+	private String estadio;
+	
 	@Column(name = "precioEntrada", nullable = false)
 	private float precioEntrada;
 	
@@ -69,7 +73,7 @@ public class Competencia implements Serializable{
 	}
 	
 	
-	public Competencia(int tenantId, Date fecha, float precioEntrada, int cantEntradas,
+	public Competencia(int tenantId, Date fecha, String Estadio,float precioEntrada, int cantEntradas,
 			EventoDeportivo eventoDeportivo, Juez juez, Ronda ronda, Resultado resultado,
 			Set<Deportista> deportistas, Set<Entrada> entradas) {
 		
@@ -77,6 +81,7 @@ public class Competencia implements Serializable{
 		
 		this.tenantId = tenantId;
 		this.fecha = fecha;
+		this.estadio = Estadio;
 		this.precioEntrada = precioEntrada;
 		this.cantEntradas = cantEntradas;
 		this.eventoDeportivo = eventoDeportivo;
@@ -186,6 +191,16 @@ public class Competencia implements Serializable{
 	public void addEntrada(Entrada entrada) {
 		this.entradas.add(entrada);
 		
+	}
+
+
+	public String getEstadio() {
+		return estadio;
+	}
+
+
+	public void setEstadio(String estadio) {
+		this.estadio = estadio;
 	}
 	
 
