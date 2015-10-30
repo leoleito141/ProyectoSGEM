@@ -4,6 +4,7 @@ package com.sgem.controladores;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -204,11 +205,10 @@ public class UsuarioController implements IUsuarioController {
 			throw new UsuarioNoEncontradoException("No se encuentra usuario con dichas credenciales");
 		}
 
-		if(tipoUsuario.equals(USUARIO_COMUN)){
+		if(!tipoUsuario.equals(USUARIO_ORGANIZADOR)){
 			try {
 				HistorialLoginDAO.guardarHistorial(new HistorialLogin(dataUsuario.getTenantId(), new Date(), u,Tipo.LOGIN));
 			} catch (Exception e) {
-				e.printStackTrace();
 				return jwt;
 			}
 		}
@@ -315,12 +315,12 @@ public class UsuarioController implements IUsuarioController {
 	public boolean guardarEstado(DataHistorialLogin hl)	throws AplicacionException, UsuarioNoEncontradoException {
 		boolean guardo = false;
 
-		Usuario u = UsuarioDAO.buscarUsuario(hl.getTenantId(),hl.getEmailUsuario(), USUARIO_COMUN);
-		if (u != null) {
-			guardo = HistorialLoginDAO.guardarHistorial(new HistorialLogin(hl.getTenantId(), new Date(), u, Tipo.CIERRE_SESION));
-		} else {
-			throw new UsuarioNoEncontradoException("No se encuentra el usuario con email '"+ hl.getEmailUsuario() + "'");
-		}
+//		Usuario u = UsuarioDAO.buscarUsuario(hl.getTenantId(),hl.getEmailUsuario(), USUARIO_COMUN);
+//		if (u != null) {
+//			guardo = HistorialLoginDAO.guardarHistorial(new HistorialLogin(hl.getTenantId(), new Date(), u, Tipo.CIERRE_SESION));
+//		} else {
+//			throw new UsuarioNoEncontradoException("No se encuentra el usuario con email '"+ hl.getEmailUsuario() + "'");
+//		}
 		return guardo;
 	}
 
@@ -328,25 +328,39 @@ public class UsuarioController implements IUsuarioController {
 	public List<DataHistorialLogin> obtenerHistorial(Integer tenantId) throws AplicacionException {
 
 		try{
-			return convertir(HistorialLoginDAO.recuperarHistorial(tenantId));
+			return convertir(tenantId,HistorialLoginDAO.recuperarHistorial(tenantId));
 		}catch(Exception e){
 			e.printStackTrace();
 			throw new AplicacionException("Error obteniendo historial.");
 		}
 	}
 	
-	public List<DataHistorialLogin> convertir(List<HistorialLogin> historial){
+	public List<DataHistorialLogin> convertir(int tenantId, List<Object> historial) {
 		List<DataHistorialLogin> dataHistorial = new ArrayList<DataHistorialLogin>();
-		
-		for(int i = 0; i< historial.size(); i++){
-			DataHistorialLogin dl = new DataHistorialLogin(historial.get(i).getTenantId(), 
-														   historial.get(i).getFecha(), 
-														   historial.get(i).getUsuario().getEmail());
-			dataHistorial.add(dl);			
+
+		for (int i = 0; i < historial.size(); i++) {
+				DataHistorialLogin dl = new DataHistorialLogin(
+										tenantId,
+										(Integer) ((Object[]) historial.get(i))[0], // mes
+										(Integer) ((Object[]) historial.get(i))[1], // anio
+										((BigInteger) ((Object[]) historial.get(i))[2]).intValue(), // comunes
+										((BigInteger) ((Object[]) historial.get(i))[3]).intValue(), // comites
+										((BigInteger) ((Object[]) historial.get(i))[4]).intValue()); // jueces
+				
+			dataHistorial.add(dl);
 		}
-		
-		return dataHistorial;		
-		
+
+		return dataHistorial;
+
+	}	
+
+	@Override
+	public Integer cantidadRegistrados(Integer tenantId) throws AplicacionException {
+		try{
+			return HistorialLoginDAO.obtenerCantidadRegistrados(tenantId);
+		}catch(Exception e){
+			throw new AplicacionException("Error obteniendo cantidad de usuarios registrados.");
+		}
 	}
 
 	@Override
@@ -393,6 +407,7 @@ public class UsuarioController implements IUsuarioController {
 			return false;
 		}
 	}
+
 
 }
 

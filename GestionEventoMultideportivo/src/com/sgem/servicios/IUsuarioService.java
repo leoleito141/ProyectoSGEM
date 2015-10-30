@@ -93,4 +93,10 @@ public interface IUsuarioService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/obtenerHistorial/{tenantId}")
 	public Response obtenerHistorial(@PathParam("tenantId") String tenantId);
+	
+	@RolesAllowed("ORGANIZADOR")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/obtenerCantidadRegistrados/{tenantId}")
+	public Response obtenerCantidadRegistrados(@PathParam("tenantId") String tenantId);
 }
