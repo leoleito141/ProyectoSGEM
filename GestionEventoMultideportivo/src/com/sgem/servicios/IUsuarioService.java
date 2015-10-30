@@ -99,4 +99,15 @@ public interface IUsuarioService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/obtenerCantidadRegistrados/{tenantId}")
 	public Response obtenerCantidadRegistrados(@PathParam("tenantId") String tenantId);
+	
+
+	//@RolesAllowed("ORGANIZADOR")
+	@PermitAll	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/listarJueces/{tenantId}")
+	public Response listarJueces(@PathParam("tenantId") Integer tenantId);
+	
+	
+	
 }

@@ -138,5 +138,17 @@ public class UsuarioService implements IUsuarioService{
 		return null;
 	}
 
+	@Override
+	public Response listarJueces(Integer tenantId) {
+		try {
+			return Response.ok(iuc.listarJueces(tenantId)).build();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return null;
+	}
+
 	
 }

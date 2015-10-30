@@ -20,11 +20,14 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 import org.jboss.resteasy.util.Base64;
 
 import com.sgem.datatypes.DataComite;
+import com.sgem.datatypes.DataDeportista;
 import com.sgem.datatypes.DataHistorialLogin;
+import com.sgem.datatypes.DataJuez;
 import com.sgem.datatypes.DataNovedad;
 import com.sgem.datatypes.DataUsuario;
 import com.sgem.dominio.Admin;
 import com.sgem.dominio.ComiteOlimpico;
+import com.sgem.dominio.Deportista;
 import com.sgem.dominio.HistorialLogin;
 import com.sgem.dominio.Imagen;
 import com.sgem.dominio.Juez;
@@ -384,6 +387,8 @@ public class UsuarioController implements IUsuarioController {
 					j.setEmail(usuario.getEmail());
 					j.setPassword(usuario.getPassword());
 					j.setTenantID(usuario.getTenantId());
+					j.setApellido(usuario.getApellido());
+					j.setNombre(usuario.getNombre());
 					
 					guardo = UsuarioDAO.guardarUsuario(j);
 		
@@ -408,6 +413,36 @@ public class UsuarioController implements IUsuarioController {
 		}
 	}
 
+	@Override
+	public List<DataJuez> listarJueces(Integer tenantId) {
+		try {
+				
+			return convertirJueces(UsuarioDAO.listarJueces(tenantId));
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	
+	public List<DataJuez> convertirJueces(List<Juez> usuario){
+		List<DataJuez> dataJuez = new ArrayList<DataJuez>();
+		
+		for(int i = 0; i< usuario.size(); i++){
+			DataJuez u = new DataJuez();
+					
+			u.setNombre(usuario.get(i).getNombre());
+			u.setApellido(usuario.get(i).getApellido());
+			
+
+			dataJuez.add(u);			
+		}
+		
+		return dataJuez;		
+		
+	}
+	
 
 }
 

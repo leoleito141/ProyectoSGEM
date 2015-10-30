@@ -7,6 +7,7 @@ import javax.ejb.Local;
 import com.sgem.datatypes.DataUsuario;
 import com.sgem.dominio.Admin;
 import com.sgem.dominio.ComiteOlimpico;
+import com.sgem.dominio.Juez;
 import com.sgem.dominio.Organizador;
 import com.sgem.dominio.Usuario;
 import com.sgem.dominio.UsuarioComun;
@@ -23,6 +24,7 @@ public interface IUsuarioDAO {
 	public boolean existePais(int tenantId, String pais);
 	public List<ComiteOlimpico> buscarComiteporPais(String pais, int tenantID);
 	public boolean existeJuez(Integer tenantId, String email);
+	public List<Juez> listarJueces(Integer tenantId);
 	
 	
 }

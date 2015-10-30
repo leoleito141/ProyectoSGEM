@@ -18,8 +18,10 @@ import com.sgem.dominio.Deportista;
 import com.sgem.dominio.EventoDeportivo;
 import com.sgem.dominio.EventoMultideportivo;
 import com.sgem.dominio.HistorialLogin;
+import com.sgem.dominio.Juez;
 import com.sgem.dominio.Organizador;
 import com.sgem.dominio.Pais;
+import com.sgem.dominio.Ronda;
 import com.sgem.dominio.TenantHandler;
 import com.sgem.dominio.Usuario;
 import com.sgem.dominio.UsuarioComun;
@@ -152,52 +154,7 @@ IHistorialLoginDAO  HistorialLoginDAO;
 		UsuarioDAO.guardarUsuario(comite);			
 //			UsuarioDAO.guardarUsuario(usuario3); 
 	//	UsuarioDAO.guardarUsuario(usuario4); 
-   
-		System.out.println("Alta de 4 usuarios completa");
-			
-		System.out.println("Obtengo el usuario dsa2");			
-		ComiteOlimpico u2 = (ComiteOlimpico) UsuarioDAO.buscarUsuario(1,"cou@gmail.com");
-		System.out.println("obtuve el usuario "+u2.getEmail()+" "+u2.getId());
-		System.out.println(" y es "+u2.soy());
 		
-		Deportista d = new Deportista(1, "Juan", "Perez",new Date(), "Masculino",null,null);			
-		Deportista d1 = new Deportista(1, "Jose", "Lopez",new Date(), "Masculino",null,null);		
-		Deportista d2 = new Deportista(1, "Pedro", "Fernandez",new Date(), "Masculino",null,null);			
-		Deportista d3 = new Deportista(1, "Debo", "Rodriguez",new Date(), "Femenino",null,null);			
-
-		
-
-		
-		d.setComiteOlimpico(u2);
-		d1.setComiteOlimpico(u2);
-		d2.setComiteOlimpico(u2);
-		d3.setComiteOlimpico(u2);
-		
-		u2.agregarDeportista(d);
-		u2.agregarDeportista(d1);
-		u2.agregarDeportista(d2);
-		u2.agregarDeportista(d3);
-		
-		DeportistaDAO.guardarDeportista(d);
-		DeportistaDAO.guardarDeportista(d1);
-		DeportistaDAO.guardarDeportista(d2);
-		DeportistaDAO.guardarDeportista(d3);
-		
-		System.out.println("Guarde deportistas");
-
-		 
-		System.out.println("BuscoLista");
-		ComiteOlimpico co = null;
-		
-		co = (ComiteOlimpico) UsuarioDAO.buscarUsuario(1,"cou@gmail.com");
-		
-		if(co != null){
-			for (Deportista dep : co.getDeportistas()) {
-				System.out.println(dep.getNombre());
-			}
-		}else{
-			System.out.println("No se encontro al usuario con email: "+co.getEmail());
-		}
 		
 		TenantHandler th = new TenantHandler();
 		Pais p = new Pais("Rusia","Sochi");	
@@ -242,7 +199,106 @@ IHistorialLoginDAO  HistorialLoginDAO;
 		
 		EventoDeportivo Natacion3 = new EventoDeportivo(th.getTenantID(), "Natacion", "Posta 4x100", new Date(), new Date(), "Femenino", null, null, null);
 		EventoDeportivoDAO.guardarEventoDeportivo(Natacion3,evento);
+		
+		EventoDeportivo Natacion4 = new EventoDeportivo(th.getTenantID(), "Natacion", "Posta 4x100", new Date(), new Date(), "Masculino", null, null, null);
+		EventoDeportivoDAO.guardarEventoDeportivo(Natacion4,evento);
+		
+		
+
+		EventoDeportivo eventoDep	= EventoDeportivoDAO.traerEventoDeportivo(Natacion2);
 	
+		for (int i = 0; i < 4; i++) {
+			
+			int j = i+1;
+			Ronda r = new Ronda();
+			
+			r.setNumeroRonda(j);
+			r.setTenantId(eventoDep.getTenantId());
+			r.setEventoDepId(eventoDep.getEventoDepId());
+			r.setEventoDeportivo(eventoDep);
+			eventoDep.addRonda(r);
+			
+			EventoDeportivoDAO.guardarRondas(r);
+			
+			
+		}
+		
+   
+		System.out.println("Alta de 4 usuarios completa");
+			
+		System.out.println("Obtengo el usuario dsa2");			
+		ComiteOlimpico u2 = (ComiteOlimpico) UsuarioDAO.buscarUsuario(1,"cou@gmail.com");
+		System.out.println("obtuve el usuario "+u2.getEmail()+" "+u2.getId());
+		System.out.println(" y es "+u2.soy());
+		
+		Deportista d = new Deportista(1, "Juan", "Perez",new Date(), "Masculino",null,null);			
+		Deportista d1 = new Deportista(1, "Jose", "Lopez",new Date(), "Masculino",null,null);		
+		Deportista d2 = new Deportista(1, "Pedro", "Fernandez",new Date(), "Masculino",null,null);			
+		Deportista d3 = new Deportista(1, "Debo", "Rodriguez",new Date(), "Femenino",null,null);			
+
+		
+		d.addEventoDeportivo(eventoDep);
+		d1.addEventoDeportivo(eventoDep);
+		d2.addEventoDeportivo(eventoDep);
+		
+		d.setComiteOlimpico(u2);
+		d1.setComiteOlimpico(u2);
+		d2.setComiteOlimpico(u2);
+		d3.setComiteOlimpico(u2);
+		
+		u2.agregarDeportista(d);
+		u2.agregarDeportista(d1);
+		u2.agregarDeportista(d2);
+		u2.agregarDeportista(d3);
+		
+		
+		
+		DeportistaDAO.guardarDeportista(d);
+		DeportistaDAO.guardarDeportista(d1);
+		DeportistaDAO.guardarDeportista(d2);
+		DeportistaDAO.guardarDeportista(d3);
+		
+		System.out.println("Guarde deportistas");
+
+		
+		
+		Juez j = new Juez();
+		
+		j.setEmail("juez1@gmail.com");
+		j.setPassword("123");
+		j.setTenantID(1);
+		j.setApellido("Ricchi");
+		j.setNombre("Fernando");
+		
+		UsuarioDAO.guardarUsuario(j);
+		
+		Juez j1 = new Juez();
+		
+		j1.setEmail("juez2@gmail.com");
+		j1.setPassword("123");
+		j1.setTenantID(1);
+		j1.setApellido("Larrionda");
+		j1.setNombre("Jorge");
+		
+		UsuarioDAO.guardarUsuario(j1);
+		
+		 
+		System.out.println("BuscoLista");
+		ComiteOlimpico co = null;
+		
+		co = (ComiteOlimpico) UsuarioDAO.buscarUsuario(1,"cou@gmail.com");
+		
+		if(co != null){
+			for (Deportista dep : co.getDeportistas()) {
+				System.out.println(dep.getNombre());
+			}
+		}else{
+			System.out.println("No se encontro al usuario con email: "+co.getEmail());
+		}
+		
+		
+		
+		
 		
 		
 		UsuarioComun u = new UsuarioComun();

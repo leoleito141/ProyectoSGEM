@@ -8,7 +8,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
+import com.sgem.datatypes.DataUsuario;
 import com.sgem.dominio.ComiteOlimpico;
+import com.sgem.dominio.Juez;
 import com.sgem.dominio.Organizador;
 import com.sgem.dominio.Usuario;
 import com.sgem.dominio.UsuarioComun;
@@ -166,6 +168,24 @@ public class UsuarioDAO implements IUsuarioDAO {
 		}catch(NoResultException e){
 			e.printStackTrace();
 			return false;
+		}
+	}
+
+	@Override
+	public List<Juez> listarJueces(Integer tenantId) {
+		
+		
+	List<Juez> jueces = null;
+		
+		try {
+			
+			jueces = em.createQuery("SELECT j FROM Usuario u, Juez j WHERE u.id = j.id AND u.tenantID = '"+tenantId+"'", Juez.class).getResultList();;
+			 
+			 return jueces;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
 	}	
 
