@@ -7,9 +7,11 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import com.sgem.datatypes.DataDeportista;
+import com.sgem.datatypes.DataHistorialLogin;
 import com.sgem.dominio.ComiteOlimpico;
 import com.sgem.dominio.Deportista;
 import com.sgem.dominio.EventoDeportivo;
+import com.sgem.dominio.HistorialLogin;
 import com.sgem.persistencia.IDeportistaDAO;
 
 
@@ -67,18 +69,14 @@ public class DeportistaController implements IDeportistaController {
 	}
 
 	@Override
-	public List<Deportista> listarDeportistas(int tenantID, String nombreDeporte, String sexo, String nombreDisciplina) {
+	public List<DataDeportista> listarDeportistas(int tenantID, String nombreDeporte, String sexo, String nombreDisciplina) {
 		try {
 			
-			List<Deportista> ld = new ArrayList<Deportista>();
+			
 			
 				
-				ld = DeportistaDAO.listarDeportistas(tenantID, nombreDeporte, sexo, nombreDisciplina);
+				return convertir(DeportistaDAO.listarDeportistas(tenantID, nombreDeporte, sexo, nombreDisciplina));
 				
-				
-				return ld;
-				
-			
 			
 			
 			}catch (Exception e) {
@@ -88,5 +86,22 @@ public class DeportistaController implements IDeportistaController {
 	}
 	
 	
+	
+	public List<DataDeportista> convertir(List<Deportista> deportista){
+		List<DataDeportista> dataDeportista = new ArrayList<DataDeportista>();
+		
+		for(int i = 0; i< deportista.size(); i++){
+			DataDeportista ddep = new DataDeportista();
+					
+			ddep.setNombre(deportista.get(i).getNombre());
+			ddep.setApellido(deportista.get(i).getApellido());
+			ddep.setPais(deportista.get(i).getComiteOlimpico().getPais());
+
+			dataDeportista.add(ddep);			
+		}
+		
+		return dataDeportista;		
+		
+	}
 	
 }

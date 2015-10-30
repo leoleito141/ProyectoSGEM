@@ -12,7 +12,7 @@ public interface IDeportistaController {
 
 	boolean guardarDeportista(DataDeportista dataDeportista);
 
-	List<Deportista> listarDeportistas(int tenantID, String nombreDeporte, String sexo, String nombreDisciplina);
+	List<DataDeportista> listarDeportistas(int tenantID, String nombreDeporte, String sexo, String nombreDisciplina);
 
 
 }

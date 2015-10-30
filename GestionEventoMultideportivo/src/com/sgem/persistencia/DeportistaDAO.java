@@ -34,7 +34,7 @@ public class DeportistaDAO implements IDeportistaDAO {
 	public List<Deportista> listarDeportistas(int tenantID, String nombreDeporte, String sexo, String nombreDisciplina) {
 		
 		try{
-			List<Deportista> deportistas = em.createNativeQuery("SELECT d.Nombre, d.Apellido FROM EventoDeportivo ed, Deportista d, deportista_eventodeportivo de WHERE ed.tenant_ID = '1' AND d.tenantId = '1' AND ed.sexo = 'Masculino' AND ed.nombreDeporte = 'Natacion' AND  ed.disciplina = '200M Mariposa' AND de.Deportista_deportistaID = d.deportistaID AND de.eventoDep_EventoDepId = ed.EventoDepIdAND d.Sexo = 'Masculino' ;",Deportista.class).getResultList();;
+			List<Deportista> deportistas = em.createNativeQuery("SELECT d.* FROM EventoDeportivo ed, Deportista d, deportista_eventodeportivo de WHERE ed.tenant_ID = '"+tenantID+"' AND d.tenantId = '"+tenantID+"' AND ed.sexo = '"+sexo+"' AND ed.nombreDeporte = '"+nombreDeporte+"' AND  ed.disciplina = '"+nombreDisciplina+"' AND de.Deportista_deportistaID = d.deportistaID AND de.eventoDep_EventoDepId = ed.EventoDepId AND d.Sexo = '"+sexo+"';",Deportista.class).getResultList();;
 			
 
 			return deportistas;
