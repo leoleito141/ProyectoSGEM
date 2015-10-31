@@ -23,6 +23,10 @@ public class CompetenciaController implements ICompetenciaController {
 	@Override
 	public Boolean guardarCompetencia(DataCompetencia dataCompetencia) {
 		
+		
+		
+		System.out.println(dataCompetencia);
+		
 		return null;
 	}
 	
