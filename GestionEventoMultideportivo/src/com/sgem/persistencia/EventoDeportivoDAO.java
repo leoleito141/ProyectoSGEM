@@ -196,7 +196,7 @@ public class EventoDeportivoDAO implements IEventoDeportivoDAO {
 		try{
 			
 			 
-			r = em.createQuery("SELECT r FROM Ronda r ed WHERE r.tenantId = "+tenantID+" AND r.EventoDepId = '"+idEventoDep+"' AND r.numeroRonda = '"+numeroRonda+"'", Ronda.class).getSingleResult();
+			r = em.createQuery("SELECT r FROM Ronda r  WHERE r.tenantId = "+tenantID+" AND r.EventoDepId = '"+idEventoDep+"' AND r.numeroRonda = '"+numeroRonda+"'", Ronda.class).getSingleResult();
 			 
 			 return r;
 		

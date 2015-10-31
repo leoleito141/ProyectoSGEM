@@ -14,5 +14,5 @@ public interface IDeportistaController {
 
 	List<DataDeportista> listarDeportistas(int tenantID, String nombreDeporte, String sexo, String nombreDisciplina);
 
-
+	public List<Deportista> listarDeportistas(List<DataDeportista> deportistas);
 }

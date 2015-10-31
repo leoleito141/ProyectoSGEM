@@ -18,6 +18,8 @@ public interface IDeportistaDAO {
 
 	public List<Deportista> listarDeportistas(int tenantID, String nombreDeporte, String sexo,
 			String nombreDisciplina);
+
+	public Deportista buscarDeportista(int idDeportista);
 	
 	
 		

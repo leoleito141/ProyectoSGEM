@@ -1,31 +1,31 @@
 package com.sgem.persistencia;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
-import com.sgem.dominio.Competencia;
+import com.sgem.dominio.Entrada;
+
 
 @Stateless
-public class CompetenciaDAO implements ICompetenciaDAO{
-
+public class EntradaDAO implements IEntradaDAO {
+		
 	@PersistenceContext(unitName = "GestionEventoMultideportivo")
 	private EntityManager em;
-	
-	@Override
-	public boolean guardarCompetencia(Competencia c) {
-		boolean guardo = false;
-		
+
+	public void guardarEntrada(Entrada entrada) {
+
 		try {
-			em.persist(c);
-			guardo = true;
+			em.persist(entrada);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return guardo; 
+			
 		}
-		return guardo;
-
+		
 	}
-
-
 }

@@ -7,6 +7,8 @@ import java.util.List;
 public class DataDeportista {
 
 	private Integer tenantId;
+	
+	private Integer deportistaID;
 
 	private String nombre;
 
@@ -60,6 +62,30 @@ public class DataDeportista {
 	public void setTenantId(Integer tenantId) {
 		this.tenantId = tenantId;
 	}
+
+     
+	
+	
+	public Integer getDeportistaID() {
+		return deportistaID;
+	}
+
+
+
+
+
+
+
+
+	public void setDeportistaID(Integer deportID) {
+		deportistaID = deportID;
+	}
+
+
+
+
+
+
 
 
 	public String getNombre() {
@@ -130,13 +156,21 @@ public class DataDeportista {
 	public void setDisciplinas(List<String> disciplinas) {
 		this.disciplinas = disciplinas;
 	}
-	
+
+
+
+
+
+
+
+
+	@Override
 	public String toString() {
-		return "DataDeportista [deporte=" + deporte + ", disciplina=" + disciplinas
-				+ ", tenantId=" + tenantId
-				+ ", sexo=" + sexo + ", fechaNac=" + fechaNac
-				+ ", nombre=" + nombre + ",  apellido=" + apellido + ",  pais=" + pais + "]";
+		return "DataDeportista [tenantId=" + tenantId + ", deportistaID=" + deportistaID + ", nombre=" + nombre
+				+ ", apellido=" + apellido + ", sexo=" + sexo + ", fechaNac=" + fechaNac + ", pais=" + pais
+				+ ", deporte=" + deporte + ", disciplinas=" + disciplinas + "]";
 	}
+	
 	
 	
 }

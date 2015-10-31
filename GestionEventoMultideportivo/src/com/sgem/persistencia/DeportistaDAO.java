@@ -47,6 +47,20 @@ public class DeportistaDAO implements IDeportistaDAO {
 		
 	}
 
+	@Override
+	public Deportista buscarDeportista(int idDeportista) {
+		
+		
+		try {
+			
+			return em.find(Deportista.class, idDeportista);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	
 
 }

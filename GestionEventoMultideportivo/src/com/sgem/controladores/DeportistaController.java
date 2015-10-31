@@ -92,6 +92,8 @@ public class DeportistaController implements IDeportistaController {
 			ddep.setNombre(deportista.get(i).getNombre());
 			ddep.setApellido(deportista.get(i).getApellido());
 			ddep.setPais(deportista.get(i).getComiteOlimpico().getPais());
+			ddep.setDeportistaID(deportista.get(i).getDeportistaID());
+			
 
 			dataDeportista.add(ddep);			
 		}
@@ -100,6 +102,30 @@ public class DeportistaController implements IDeportistaController {
 		
 	}
 	
+	
+	@Override
+	public List<Deportista> listarDeportistas(List<DataDeportista> deportistas) {
+		try {
+					
+			List<Deportista> listaDeportistas = new ArrayList<Deportista>();
+			
+			for(int i = 0; i< deportistas.size(); i++){
+				
+				Deportista d = new Deportista();
+				
+				d = DeportistaDAO.buscarDeportista(deportistas.get(i).getDeportistaID());
+				
+				listaDeportistas.add(d);
+				
+			} 
+				
+			return listaDeportistas;
+				
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+	}
 	
 	
 	
