@@ -27,4 +27,5 @@ public interface IUsuarioDAO {
 	public List<Juez> listarJueces(Integer tenantId);
 	
 	
+	
 }

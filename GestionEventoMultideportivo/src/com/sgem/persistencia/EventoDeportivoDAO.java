@@ -184,6 +184,30 @@ public class EventoDeportivoDAO implements IEventoDeportivoDAO {
 		}
 		return null;
 	}
+
+
+
+	@Override
+	public Ronda traerRonda(int tenantID, int idEventoDep, int numeroRonda) {
+		
+		Ronda r = null;
+		
+		
+		try{
+			
+			 
+			r = em.createQuery("SELECT r FROM Ronda r ed WHERE r.tenantId = "+tenantID+" AND r.EventoDepId = '"+idEventoDep+"' AND r.numeroRonda = '"+numeroRonda+"'", Ronda.class).getSingleResult();
+			 
+			 return r;
+		
+			
+		}catch(NoResultException e){
+			e.printStackTrace();
+			return null;
+		}
+
+		
+	}
 		
 		
 		

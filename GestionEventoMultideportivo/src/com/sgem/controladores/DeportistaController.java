@@ -71,14 +71,10 @@ public class DeportistaController implements IDeportistaController {
 	@Override
 	public List<DataDeportista> listarDeportistas(int tenantID, String nombreDeporte, String sexo, String nombreDisciplina) {
 		try {
-			
-			
-			
-				
+					
 				return convertir(DeportistaDAO.listarDeportistas(tenantID, nombreDeporte, sexo, nombreDisciplina));
 				
-			
-			
+				
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -103,5 +99,8 @@ public class DeportistaController implements IDeportistaController {
 		return dataDeportista;		
 		
 	}
+	
+	
+	
 	
 }

@@ -434,6 +434,8 @@ public class UsuarioController implements IUsuarioController {
 					
 			u.setNombre(usuario.get(i).getNombre());
 			u.setApellido(usuario.get(i).getApellido());
+			u.setTenantId(usuario.get(i).getTenantID());
+			u.setEmail(usuario.get(i).getEmail());
 			
 
 			dataJuez.add(u);			
@@ -442,7 +444,11 @@ public class UsuarioController implements IUsuarioController {
 		return dataJuez;		
 		
 	}
-	
 
+	
+	
+	
+	
+	
 }
 

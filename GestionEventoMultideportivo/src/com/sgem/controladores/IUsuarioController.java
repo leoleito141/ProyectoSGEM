@@ -15,6 +15,7 @@ import com.sgem.dominio.ComiteOlimpico;
 import com.sgem.dominio.HistorialLogin;
 import com.sgem.dominio.Imagen;
 import com.sgem.dominio.Juez;
+import com.sgem.dominio.Usuario;
 import com.sgem.seguridad.excepciones.AplicacionException;
 import com.sgem.seguridad.excepciones.UsuarioNoEncontradoException;
 import com.sgem.seguridad.excepciones.UsuarioYaExisteException;
@@ -35,5 +36,5 @@ public interface IUsuarioController {
 	public boolean guardarJuez(DataUsuario usuario);
 	public Integer cantidadRegistrados(Integer tenantId) throws AplicacionException;
 	public List<DataJuez> listarJueces(Integer tenantId);
-
+	
 }

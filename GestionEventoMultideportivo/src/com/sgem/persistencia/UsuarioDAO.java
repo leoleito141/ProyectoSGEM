@@ -187,6 +187,8 @@ public class UsuarioDAO implements IUsuarioDAO {
 			e.printStackTrace();
 			return null;
 		}
-	}	
+	}
+
+	
 
 }
