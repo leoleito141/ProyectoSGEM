@@ -30,6 +30,13 @@ public interface ICompetenciaService {
 		@Consumes(MediaType.APPLICATION_JSON)
 		@Path("/guardarCompetencia")
 		public Response guardarCompetencia(DataCompetencia datos);
+		
+		
+		@PermitAll
+		@GET
+		@Produces(MediaType.APPLICATION_JSON)
+		@Path("/listarCompetenciasPorRonda/{tenantID}/{sexo}/{nombreDeporte}/{nombreDisciplina}/{ronda}")
+		public Response listarCompetenciasPorRonda(@PathParam("tenantID") int tenantID, @PathParam("sexo") String sexo,  @PathParam("nombreDeporte") String nombreDeporte,@PathParam("nombreDisciplina") String nombreDisciplina, @PathParam("ronda") int ronda);
 	
 	
 	

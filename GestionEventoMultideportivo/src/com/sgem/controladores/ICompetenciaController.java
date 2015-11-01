@@ -13,6 +13,8 @@ public interface ICompetenciaController {
 
 	Boolean guardarCompetencia(DataCompetencia dataCompetencia);
 
+	List<DataCompetencia> listarCompetenciasPorRonda(int tenantID, String nombreDeporte, String sexo, String nombreDisciplina, int ronda);
+
 	
 }
 

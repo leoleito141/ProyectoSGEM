@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 
 import com.sgem.datatypes.DataCompetencia;
 import com.sgem.datatypes.DataDeportista;
+import com.sgem.datatypes.DataJuez;
 import com.sgem.dominio.ComiteOlimpico;
 import com.sgem.dominio.Competencia;
 import com.sgem.dominio.Deportista;
@@ -113,6 +114,42 @@ public class CompetenciaController implements ICompetenciaController {
 			
 		
 		
+	}
+
+	@Override
+	public List<DataCompetencia> listarCompetenciasPorRonda(int tenantID, String nombreDeporte, String sexo,String nombreDisciplina, int ronda) {
+		try {
+			
+			int idEventoDep = EventosDeportivosDAO.traerIDEventoDeportivo(tenantID, nombreDeporte, nombreDisciplina, sexo);
+			
+			return convertirListaCompetencias(CompetenciaDAO.listarCompetenciasPorRonda(tenantID, idEventoDep , ronda));
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private List<DataCompetencia> convertirListaCompetencias(List<Competencia> competencia) {
+		
+		
+			List<DataCompetencia> dataCompetencia = new ArrayList<DataCompetencia>();
+			
+			for(int i = 0; i< competencia.size(); i++){
+				DataCompetencia c = new DataCompetencia();
+						
+				c.setTenantId(competencia.get(i).getTenantId());
+				c.setEstadio(competencia.get(i).getEstadio());
+				c.setCantEntradas(competencia.get(i).getCantEntradas());
+				c.setFecha(competencia.get(i).getFecha());
+				c.setPrecioEntrada(competencia.get(i).getPrecioEntrada());
+				
+
+				dataCompetencia.add(c);			
+			}
+		
+		
+		return dataCompetencia;
 	}
 	
 	

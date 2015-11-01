@@ -30,6 +30,17 @@ public Response guardarCompetencia(DataCompetencia dataCompetencia) {
 }
 
 	
+@Override
+public Response listarCompetenciasPorRonda(int tenantID, String sexo, String nombreDeporte, String nombreDisciplina,int ronda) {
+	try {
+		return Response.ok(icc.listarCompetenciasPorRonda(tenantID,nombreDeporte,sexo,nombreDisciplina,ronda)).build();
+
+	} catch (Exception e) {
+		e.printStackTrace();
+
+	}
+	return null;
+}
 	
 
 
