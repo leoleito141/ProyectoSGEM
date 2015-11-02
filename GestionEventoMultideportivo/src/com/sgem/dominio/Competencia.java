@@ -44,6 +44,9 @@ public class Competencia implements Serializable{
 	@Column(name = "cantEntradas", nullable = false)
 	private int cantEntradas;
 	
+	@Column(name = "entradasVendidas", nullable = false)
+	private int entradasVendidas;
+	
 	@Column(name = "finalizada", nullable = false)
 	private boolean finalizada;
 	
@@ -77,7 +80,7 @@ public class Competencia implements Serializable{
 	
 	
 	public Competencia(int tenantId, Date fecha, String Estadio,float precioEntrada, boolean finalizada,int cantEntradas,
-			EventoDeportivo eventoDeportivo, Juez juez, Ronda ronda, Resultado resultado,
+			EventoDeportivo eventoDeportivo, Juez juez, Ronda ronda, Resultado resultado,int entradasVendidas,
 			Set<Deportista> deportistas, Set<Entrada> entradas) {
 		
 		//super();
@@ -87,6 +90,7 @@ public class Competencia implements Serializable{
 		this.estadio = Estadio;
 		this.precioEntrada = precioEntrada;
 		this.cantEntradas = cantEntradas;
+		this.entradasVendidas = entradasVendidas;
 		this.eventoDeportivo = eventoDeportivo;
 		this.juez = juez;
 		this.ronda = ronda;
@@ -215,6 +219,16 @@ public class Competencia implements Serializable{
 
 	public void setFinalizada(boolean finalizada) {
 		this.finalizada = finalizada;
+	}
+
+
+	public int getEntradasVendidas() {
+		return entradasVendidas;
+	}
+
+
+	public void setEntradasVendidas(int entradasVendidas) {
+		this.entradasVendidas = entradasVendidas;
 	}
 	
 

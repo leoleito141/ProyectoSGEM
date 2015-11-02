@@ -24,6 +24,8 @@ public class DataCompetencia {
 	
 	private int tenantId;
 	
+	private int idCompetencia;
+	
 	private Date fecha;
 	
 	private String estadio;
@@ -31,6 +33,8 @@ public class DataCompetencia {
 	private float precioEntrada;
 	
 	private int cantEntradas;
+	
+	private int entradasVendidas;
 	
 	private String nombreDeporte;
 	
@@ -50,7 +54,7 @@ public class DataCompetencia {
 	
 
 	public DataCompetencia(int tenantId, Date fecha, String estadio, float precioEntrada, int cantEntradas,
-			String nombreDeporte, String nombreDisciplina, String sexo, DataJuez juez, int ronda,
+			String nombreDeporte, String nombreDisciplina, String sexo, DataJuez juez, int ronda,int entradasVendidas,
 			List<DataDeportista> deportistas) {
 		super();
 		this.tenantId = tenantId;
@@ -62,6 +66,7 @@ public class DataCompetencia {
 		this.nombreDisciplina = nombreDisciplina;
 		this.sexo = sexo;
 		this.juez = juez;
+		this.entradasVendidas = entradasVendidas;
 		this.ronda = ronda;
 		this.deportistas = deportistas;
 	}
@@ -160,13 +165,52 @@ public class DataCompetencia {
 
 
 
+	public int getIdCompetencia() {
+		return idCompetencia;
+	}
+
+
+
+
+	public void setIdCompetencia(int idCompetencia) {
+		this.idCompetencia = idCompetencia;
+	}
+
+
+
+
+	public int getEntradasVendidas() {
+		return entradasVendidas;
+	}
+
+
+
+
+	public void setEntradasVendidas(int entradasVendidas) {
+		this.entradasVendidas = entradasVendidas;
+	}
+
+
+
+
 	@Override
 	public String toString() {
-		return "DataCompetencia [tenantId=" + tenantId + ", fecha=" + fecha + ", estadio=" + estadio
-				+ ", precioEntrada=" + precioEntrada + ", cantEntradas=" + cantEntradas + ", nombreDeporte="
-				+ nombreDeporte + ", nombreDisciplina=" + nombreDisciplina + ", sexo=" + sexo + ", juez=" + juez
-				+ ", ronda=" + ronda + ", deportistas=" + deportistas + "]";
+		return "DataCompetencia [tenantId=" + tenantId + ", idCompetencia=" + idCompetencia + ", fecha=" + fecha
+				+ ", estadio=" + estadio + ", precioEntrada=" + precioEntrada + ", cantEntradas=" + cantEntradas
+				+ ", entradasVendidas=" + entradasVendidas + ", nombreDeporte=" + nombreDeporte + ", nombreDisciplina="
+				+ nombreDisciplina + ", sexo=" + sexo + ", juez=" + juez + ", ronda=" + ronda + ", deportistas="
+				+ deportistas + "]";
 	}
+
+
+
+
+
+
+
+
+
+	
 	
 	
 	

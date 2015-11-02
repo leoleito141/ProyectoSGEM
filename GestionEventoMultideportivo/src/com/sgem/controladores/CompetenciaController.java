@@ -76,6 +76,7 @@ public class CompetenciaController implements ICompetenciaController {
 	
 		competencia.setTenantId(dataCompetencia.getTenantId());
 		competencia.setCantEntradas(dataCompetencia.getCantEntradas());
+		competencia.setEntradasVendidas(0);
 		competencia.setEstadio(dataCompetencia.getEstadio());
 		competencia.setFecha(dataCompetencia.getFecha());
 		competencia.setPrecioEntrada(dataCompetencia.getPrecioEntrada());
@@ -143,7 +144,8 @@ public class CompetenciaController implements ICompetenciaController {
 				c.setCantEntradas(competencia.get(i).getCantEntradas());
 				c.setFecha(competencia.get(i).getFecha());
 				c.setPrecioEntrada(competencia.get(i).getPrecioEntrada());
-				
+				c.setIdCompetencia(competencia.get(i).getCompetenciaId());
+				c.setEntradasVendidas(competencia.get(i).getEntradasVendidas());
 
 				dataCompetencia.add(c);			
 			}
