@@ -1,6 +1,7 @@
 package com.sgem.utilidades;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,6 +13,9 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import org.jboss.resteasy.util.Base64;
+
+import com.sgem.datatypes.DataUsuario;
 import com.sgem.dominio.Admin;
 import com.sgem.dominio.ComiteOlimpico;
 import com.sgem.dominio.Deportista;
@@ -31,6 +35,8 @@ import com.sgem.persistencia.IEventoDeportivoDAO;
 import com.sgem.persistencia.IEventoMultiDAO;
 import com.sgem.persistencia.IHistorialLoginDAO;
 import com.sgem.persistencia.IUsuarioDAO;
+import com.sgem.seguridad.jwt.JWTUtil;
+import com.sgem.seguridad.jwt.Token;
 
 
 @WebListener
@@ -333,10 +339,23 @@ IHistorialLoginDAO  HistorialLoginDAO;
 		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date6, u,Tipo.LOGIN));
 		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date7, u,Tipo.LOGIN));
 		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date8, u,Tipo.LOGIN));
+
+//		Token jwt = JWTUtil.generarToken( new DataUsuario(1, "mail@gmail.com", "f", "t", "y", "usuario", "data", 1,12345678, "123", "UsuarioComun"));
+//	
+//		String[] partes = (jwt.getToken()).split("\\.");
+//		
+//		try {
+//			String payload = new String(Base64.decode(partes[1]));
+//			System.out.println(payload);
+//			JsonObject newObj = new JsonParser().parse(payload).getAsJsonObject();
+			
+
+//		Map<String, Object> body = new HashMap<String, Object>();
+//		
+//		body = JWTUtil.getBody(jwt.getToken());
+//		String iss = (String) body.get(JWTUtil.BODY_ISS);
+//		Integer exp = (Integer) body.get(JWTUtil.BODY_EXP);
+		
     }
     
-    
-    
-    
-
 }

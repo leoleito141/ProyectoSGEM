@@ -1,32 +1,35 @@
 package com.sgem.datatypes;
 
+public class DataComite {
 
-public class DataComite{
-	
-//	Ver bien desp si crear un data por rol.
-	
-//	@Expose(serialize = false, deserialize = false)
-//	@SerializedName(value="Email")
 	private String email;
-	
-//	@SerializedName(value="Password")
+
 	private String password;
-	
-	
-//	@SerializedName(value="codigo")
+
 	private String codigo;
-	
-//	@SerializedName(value="pais")
+
 	private String pais;
-	
-	
-//	@SerializedName(value="Facebook")
+
 	private String facebook;
-	
-//	@SerializedName(value="Twitter")
+
 	private String twitter;
 	
-	
+	private String tipoUsuario;
+
+	public DataComite() {}
+
+	public DataComite(String email, String password, String codigo, String pais, String facebook, String twitter,
+			int tenantId) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.codigo = codigo;
+		this.pais = pais;
+		this.facebook = facebook;
+		this.twitter = twitter;
+		this.tenantId = tenantId;
+	}
+
 	private int tenantId;
 
 	public String getEmail() {
@@ -76,8 +79,7 @@ public class DataComite{
 	public void setTwitter(String twitter) {
 		this.twitter = twitter;
 	}
-	
-	
+
 	public int getTenantId() {
 		return tenantId;
 	}
@@ -86,12 +88,19 @@ public class DataComite{
 		this.tenantId = tenantId;
 	}
 
-	public String toString() {
-		return "DataUsuario [email=" + email + ", facebook=" + facebook
-				+ ", tenantId=" + tenantId
-				+ ", twitter=" + twitter + ", pais=" + pais
-				+ ", codigo=" + codigo + ",  password=" + password
-				+  "]";
+	public String getTipoUsuario() {
+		return tipoUsuario;
 	}
-	
+
+	public void setTipoUsuario(String tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
+	}
+
+	@Override
+	public String toString() {
+		return "DataComite [email=" + email + ", password=" + password + ", codigo=" + codigo + ", pais=" + pais
+				+ ", facebook=" + facebook + ", twitter=" + twitter + ", tipoUsuario=" + tipoUsuario + ", tenantId="
+				+ tenantId + "]";
+	}
+
 }

@@ -201,16 +201,24 @@ public class UsuarioController implements IUsuarioController {
 		if( u != null && (u.getPassword().equalsIgnoreCase(pass)) ){// genero json web token.
 			
 			tipoUsuario = u instanceof UsuarioComun ? USUARIO_COMUN : u instanceof ComiteOlimpico ? USUARIO_COMITE : u instanceof Organizador ? USUARIO_ORGANIZADOR : USUARIO_JUEZ;
-			DataUsuario du = convertir(u);
-			du.setTipoUsuario(tipoUsuario);
-			jwt = JWTUtil.generarToken(du);
+			
+			if(tipoUsuario == USUARIO_COMITE){
+				DataComite dc = new DataComite(u.getEmail(),"",((ComiteOlimpico)u).getCodigo(),((ComiteOlimpico)u).getPais(),u.getFacebook(),u.getTwitter(),u.getTenantID());
+				dc.setTipoUsuario(tipoUsuario);
+				jwt = JWTUtil.generarToken(dc);
+
+			}else{				
+				DataUsuario du = convertir(u);
+				du.setTipoUsuario(tipoUsuario);
+				jwt = JWTUtil.generarToken(du);
+			}
 		}else{
 			throw new UsuarioNoEncontradoException("No se encuentra usuario con dichas credenciales");
 		}
 
 		if(!tipoUsuario.equals(USUARIO_ORGANIZADOR)){
 			try {
-				HistorialLoginDAO.guardarHistorial(new HistorialLogin(dataUsuario.getTenantId(), new Date(), u,Tipo.LOGIN));
+				HistorialLoginDAO.guardarHistorial(new HistorialLogin(u.getTenantID(), new Date(), u,Tipo.LOGIN));
 			} catch (Exception e) {
 				return jwt;
 			}

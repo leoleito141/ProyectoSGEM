@@ -1,9 +1,5 @@
 package com.sgem.seguridad;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureException;
-
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -24,6 +20,11 @@ import org.jboss.resteasy.core.ServerResponse;
 
 import com.sgem.seguridad.jwt.JWTUtil;
 
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureException;
+
 
 /**
  * Este interceptador verifica el accesso con JWT, a nivel de permisos basado en roles 
@@ -37,6 +38,7 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
     private static final String ROL_PROPERTY = "Rol";
     private static final String AUTHENTICATION_SCHEME = "Bearer";
     private static final ServerResponse ACCESS_DENIED = new ServerResponse("Access denied for this resource", 401, new Headers<Object>());
+    private static final ServerResponse ACCESS_EXPIRED = new ServerResponse("Sesión expirada, inicie sesión nuevamente", 498, new Headers<Object>());
     private static final ServerResponse ACCESS_FORBIDDEN = new ServerResponse("Nobody can access this resource", 403, new Headers<Object>());
     private static final ServerResponse SERVER_ERROR = new ServerResponse("INTERNAL SERVER ERROR", 500, new Headers<Object>());
      	    
@@ -94,6 +96,9 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
 	                 return;
 	            } catch(MalformedJwtException e){
 	            	 requestContext.abortWith(SERVER_ERROR);
+	                 return;
+	            } catch(ExpiredJwtException e){
+	            	 requestContext.abortWith(ACCESS_EXPIRED);
 	                 return;
 	            }	            	        
             }          	
