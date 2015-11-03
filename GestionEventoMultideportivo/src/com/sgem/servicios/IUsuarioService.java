@@ -51,13 +51,20 @@ public interface IUsuarioService {
 	@Path("/loginUsuario")
 	public Response loginUsuario(DataUsuario dataUsuario);
 
-	//	@RolesAllowed("ADMIN")
-	@PermitAll	// para pruebas
+	@RolesAllowed("ORGANIZADOR")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/altaComite")
 	public Response altaComite(DataComite dataComite);
+	
+	@RolesAllowed("ORGANIZADOR")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes("multipart/form-data")
+	@Path("/subirImagenComite")
+	public Response subirImagenComite(MultipartFormDataInput input);
+	
 	
 //	@RolesAllowed("ADMIN")
 	@PermitAll	// para pruebas
@@ -78,8 +85,8 @@ public interface IUsuarioService {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes("multipart/form-data")
-	@Path("/subirImagen")
-	public Response subirImagen(MultipartFormDataInput input);
+	@Path("/subirImagenNovedad")
+	public Response subirImagenNovedad(MultipartFormDataInput input);
 	
 //	@RolesAllowed("ORGANIZADOR")
 //	@POST

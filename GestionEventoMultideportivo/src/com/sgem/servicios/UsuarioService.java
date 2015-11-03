@@ -64,18 +64,24 @@ public class UsuarioService implements IUsuarioService{
 	}	
 	
 	@Override
-	public Response altaComite(DataComite dataComite) {
-
+	public Response altaComite(DataComite dataComite) {		
 		try {
 			return Response.ok(iuc.guardarComite(dataComite)).build();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		}
-		return null;
-
+		} catch (UsuarioYaExisteException e) {
+			return Response.status(Status.FOUND).entity(new Boolean(false)).build();
+		} catch (AplicacionException e) {
+			return Response.serverError().build();
+		}		
 	}	
+	
+	@Override
+	public Response subirImagenComite(MultipartFormDataInput input) {
+		try {						
+			return Response.ok(iuc.subirImagenComite(input)).build();	
+		} catch (AplicacionException e) {
+			return Response.serverError().build();
+		}	
+	}
 
 	@Override
 	public Response guardarNovedad(DataNovedad dataNovedad) {
@@ -89,9 +95,9 @@ public class UsuarioService implements IUsuarioService{
 	}
 	
 	@Override
-	public Response subirImagen(MultipartFormDataInput input) {		
+	public Response subirImagenNovedad(MultipartFormDataInput input) {		
 		try {						
-			return Response.ok(iuc.subirImagen(input)).build();	
+			return Response.ok(iuc.subirImagenNovedad(input)).build();	
 		} catch (AplicacionException e) {
 			return Response.serverError().build();
 		}	
@@ -142,13 +148,13 @@ public class UsuarioService implements IUsuarioService{
 	public Response listarJueces(Integer tenantId) {
 		try {
 			return Response.ok(iuc.listarJueces(tenantId)).build();
-
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		}
 		return null;
 	}
+
+	
 
 	
 }

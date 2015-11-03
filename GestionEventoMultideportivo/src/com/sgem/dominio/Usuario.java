@@ -70,7 +70,7 @@ public abstract class Usuario implements Serializable {
 		this.tenantID=tenantid;
 	}
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 

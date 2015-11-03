@@ -13,6 +13,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
+
 import com.sgem.datatypes.DataDeportista;
 import com.sgem.datatypes.DataEventoDeportivo;
 
@@ -37,7 +39,13 @@ import com.sgem.datatypes.DataEventoDeportivo;
 		@Path("/listarDeportistas/{tenantID}/{sexo}/{selectDeportes}/{selectDisciplinas}")
 		public Response  listarDeportistas(@PathParam("tenantID") int tenantID, @PathParam("sexo") String sexo,  @PathParam("selectDeportes") String nombreDeporte,@PathParam("selectDisciplinas") String nombreDisciplina);
 	
-	
+		@RolesAllowed("COMITE_OLIMPICO")
+		@POST
+		@Produces(MediaType.APPLICATION_JSON)
+		@Consumes("multipart/form-data")
+		@Path("/subirImagenDeportista")
+		public Response subirImagenDeportista(MultipartFormDataInput input);
+		
 		
 	}
 	

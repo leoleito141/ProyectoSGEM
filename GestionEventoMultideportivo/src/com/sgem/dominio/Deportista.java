@@ -11,61 +11,62 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Deportista")
-public class Deportista implements Serializable{
-	
+@Table(name = "Deportista")
+public class Deportista implements Serializable {
+
 	private static final long serialVersionUID = -2107719096745478082L;
-	
-	@Id 
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int deportistaID;
-	
+
 	@Column(name = "TenantID", nullable = false)
 	private int tenantID;
-	
+
 	@Column(name = "Nombre", nullable = false)
 	private String nombre;
-	
+
 	@Column(name = "Apellido", nullable = false)
 	private String apellido;
-	
+
 	@Column(name = "FechaNac", nullable = false)
 	private Date fechaNac;
-	
+
 	@Column(name = "Sexo", nullable = false)
 	private String Sexo;
-	
-	@ManyToOne	
+
+	@ManyToOne
 	private ComiteOlimpico comiteOlimpico;
-	
-	@ManyToMany( fetch = FetchType.EAGER)
-	private Set <EventoDeportivo> eventoDep;
-	
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	private Set<EventoDeportivo> eventoDep;
+
+	@OneToOne(fetch = FetchType.LAZY)
+	private Imagen foto;
+
 	/*
-	@ManyToMany
-	@JoinTable(
-	      name="Depor-EventoDep",
-	      joinColumns={@JoinColumn(name="DepId", referencedColumnName="deportistaID")},
-	      inverseJoinColumns={@JoinColumn(name="EventoDepId", referencedColumnName="EventoDepId")})
-	  private Set <EventoDeportivo> eventoDep;
-	
-	*/
-	public Deportista(){
+	 * @ManyToMany
+	 * 
+	 * @JoinTable( name="Depor-EventoDep",
+	 * joinColumns={@JoinColumn(name="DepId",
+	 * referencedColumnName="deportistaID")},
+	 * inverseJoinColumns={@JoinColumn(name="EventoDepId",
+	 * referencedColumnName="EventoDepId")}) private Set <EventoDeportivo>
+	 * eventoDep;
+	 */
+	public Deportista() {
 		this.eventoDep = new HashSet<EventoDeportivo>();
 	}
-	
-	
 
 	public Deportista(int tenantID, String nombre, String apellido,
-			Date fechaNac, String sexo, Set <EventoDeportivo> eventoDep, ComiteOlimpico comiteOlimpico ) {
-	//	super ();
+			Date fechaNac, String sexo, Set<EventoDeportivo> eventoDep,
+			ComiteOlimpico comiteOlimpico, Imagen foto) {
 		
 		this.tenantID = tenantID;
 		this.nombre = nombre;
@@ -75,6 +76,7 @@ public class Deportista implements Serializable{
 		this.comiteOlimpico = comiteOlimpico;
 		this.eventoDep = eventoDep;
 		this.eventoDep = new HashSet<EventoDeportivo>();
+		this.foto = foto;
 	}
 
 	public int getDeportistaID() {
@@ -116,8 +118,6 @@ public class Deportista implements Serializable{
 	public void setSexo(String sexo) {
 		Sexo = sexo;
 	}
-	
-	
 
 	public String getApellido() {
 		return apellido;
@@ -142,10 +142,18 @@ public class Deportista implements Serializable{
 	public void setEventoDep(Set<EventoDeportivo> eventoDep) {
 		this.eventoDep = eventoDep;
 	}
-	
+
 	public void addEventoDeportivo(EventoDeportivo edep) {
 		this.eventoDep.add(edep);
-		
+
+	}
+
+	public Imagen getFoto() {
+		return foto;
+	}
+
+	public void setFoto(Imagen foto) {
+		this.foto = foto;
 	}
 
 }

@@ -27,10 +27,11 @@ public interface IUsuarioController {
 	public boolean guardarUsuario(DataUsuario dataUsuario) throws UsuarioYaExisteException, AplicacionException;
 	public Token loginAdmin(DataUsuario dataUsuario) throws UsuarioNoEncontradoException, AplicacionException;
 	public Token loginUsuario(DataUsuario dataUsuario) throws UsuarioNoEncontradoException, AplicacionException;
-	public boolean guardarComite(DataComite dataComite);
+	public boolean guardarComite(DataComite dataComite) throws UsuarioYaExisteException, AplicacionException;
+	public Imagen subirImagenComite(MultipartFormDataInput input) throws AplicacionException;
 	public List<ComiteOlimpico> buscarComiteporPais(String pais, int tenantID);
 	public boolean guardarNovedad(DataNovedad dataNovedad) throws UsuarioNoEncontradoException, AplicacionException;
-	public Imagen subirImagen(MultipartFormDataInput input) throws AplicacionException;
+	public Imagen subirImagenNovedad(MultipartFormDataInput input) throws AplicacionException;
 	public boolean guardarEstado(DataHistorialLogin hl) throws UsuarioNoEncontradoException, AplicacionException;
 	public List<DataHistorialLogin> obtenerHistorial(Integer tenantId) throws AplicacionException;
 	public boolean guardarJuez(DataUsuario usuario);

@@ -100,9 +100,6 @@ public class EventoMultiDAO implements IEventoMultiDAO {
 		
 		try{
 			maxTenant = (int) em.createQuery("SELECT max(th.tenantId) FROM TenantHandler th").getSingleResult();
-
-			return maxTenant;
-			
 		}catch(Exception e){
 			e.printStackTrace();
 		}

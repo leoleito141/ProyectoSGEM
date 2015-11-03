@@ -1,5 +1,6 @@
 package com.sgem.persistencia;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,12 +9,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
-import com.sgem.datatypes.DataUsuario;
 import com.sgem.dominio.ComiteOlimpico;
 import com.sgem.dominio.Juez;
 import com.sgem.dominio.Organizador;
 import com.sgem.dominio.Usuario;
-import com.sgem.dominio.UsuarioComun;
 
 @Stateless
 public class UsuarioDAO implements IUsuarioDAO {
@@ -187,6 +186,17 @@ public class UsuarioDAO implements IUsuarioDAO {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	@Override
+	public int obtenerMaximoComite() {
+		int maxComite = 0;		
+		try{
+			maxComite = ((BigInteger) em.createNativeQuery("SELECT GEN_VAL from id_gen").getSingleResult()).intValue();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return maxComite;
 	}
 
 	

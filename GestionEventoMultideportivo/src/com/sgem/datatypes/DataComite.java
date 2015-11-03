@@ -15,11 +15,16 @@ public class DataComite {
 	private String twitter;
 	
 	private String tipoUsuario;
+	
+	private DataImagen logo;
+	
+	private int tenantId;
+	private int comiteId;
 
 	public DataComite() {}
 
-	public DataComite(String email, String password, String codigo, String pais, String facebook, String twitter,
-			int tenantId) {
+	public DataComite(String email, String password, String codigo,
+			String pais, String facebook, String twitter, int tenantId,int comiteId) {
 		super();
 		this.email = email;
 		this.password = password;
@@ -28,9 +33,8 @@ public class DataComite {
 		this.facebook = facebook;
 		this.twitter = twitter;
 		this.tenantId = tenantId;
+		this.comiteId = comiteId;
 	}
-
-	private int tenantId;
 
 	public String getEmail() {
 		return email;
@@ -80,14 +84,6 @@ public class DataComite {
 		this.twitter = twitter;
 	}
 
-	public int getTenantId() {
-		return tenantId;
-	}
-
-	public void setTenantId(int tenantId) {
-		this.tenantId = tenantId;
-	}
-
 	public String getTipoUsuario() {
 		return tipoUsuario;
 	}
@@ -96,11 +92,27 @@ public class DataComite {
 		this.tipoUsuario = tipoUsuario;
 	}
 
-	@Override
-	public String toString() {
-		return "DataComite [email=" + email + ", password=" + password + ", codigo=" + codigo + ", pais=" + pais
-				+ ", facebook=" + facebook + ", twitter=" + twitter + ", tipoUsuario=" + tipoUsuario + ", tenantId="
-				+ tenantId + "]";
+	public DataImagen getLogo() {
+		return logo;
 	}
 
+	public void setLogo(DataImagen logo) {
+		this.logo = logo;
+	}
+
+	public int getTenantId() {
+		return tenantId;
+	}
+
+	public void setTenantId(int tenantId) {
+		this.tenantId = tenantId;
+	}
+
+	public int getComiteId() {
+		return comiteId;
+	}
+
+	public void setComiteId(int comiteId) {
+		this.comiteId = comiteId;
+	}
 }

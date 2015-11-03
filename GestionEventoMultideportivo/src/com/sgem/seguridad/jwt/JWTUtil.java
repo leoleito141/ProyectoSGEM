@@ -1,21 +1,18 @@
 package com.sgem.seguridad.jwt;
 
+import io.jsonwebtoken.Jwt;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.impl.crypto.MacProvider;
+
 import java.security.Key;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.sgem.controladores.UsuarioController;
 import com.sgem.datatypes.DataComite;
 import com.sgem.datatypes.DataUsuario;
-
-import io.jsonwebtoken.Jwt;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.impl.crypto.MacProvider;
 
 public class JWTUtil {
 	

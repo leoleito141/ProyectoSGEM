@@ -19,6 +19,8 @@ public class ImagenUtil {
 	
 	private static final String FILE_PATH = "C:\\Users\\USUARIO\\git\\ProyectoSGEM\\GestionEventoMultideportivo\\WebContent\\resources\\defecto\\img\\";
 	private static final String NOVEDADES_DIR = "novedades";
+	private static final String COMITE_DIR = "comite_olimpico";
+	private static final String DEPORTISTAS_DIR = "deportistas";
 	
 	public static String getFileName(MultivaluedMap<String, String> header, String tenantId) {
 
@@ -51,13 +53,52 @@ public class ImagenUtil {
 		}
 		return "unknown";
 	}
+	
+	public static String getComiteFilePath(MultivaluedMap<String, String> header, String tenantId, String comiteId) {
+		
+		String[] contentDisposition = header.getFirst("Content-Disposition").split(";");
+		
+		for (String filename : contentDisposition) {
+			if ((filename.trim().startsWith("filename"))) {
 
+				String[] name = filename.split("=");
+				
+				String finalFileName = name[1].trim().replaceAll("\"", "");
+				return FILE_PATH +"Tenant"+tenantId+"\\"+COMITE_DIR+comiteId+"\\"+finalFileName;
+			}
+		}
+		return "unknown";
+	}
+
+	public static String getDeportistaFilePath(MultivaluedMap<String, String> header, String tenantId, String comiteId) {
+		String[] contentDisposition = header.getFirst("Content-Disposition").split(";");
+		
+		for (String filename : contentDisposition) {
+			if ((filename.trim().startsWith("filename"))) {
+
+				String[] name = filename.split("=");
+				
+				String finalFileName = name[1].trim().replaceAll("\"", "");
+				return FILE_PATH +"Tenant"+tenantId+"\\"+COMITE_DIR+comiteId+"\\"+DEPORTISTAS_DIR+"\\"+finalFileName;
+			}
+		}
+		return "unknown";
+	}
+	
 	public static String getDirectoryName(String tenantId) {
 		return FILE_PATH +"Tenant"+tenantId;
 	}
 	
 	public static String getNovedadDirectoryName(String tenantId) {
 		return FILE_PATH +"Tenant"+tenantId+"\\"+NOVEDADES_DIR+"\\";
+	}
+	
+	public static String getComiteDirectoryName(String tenantId, String comiteId) {
+		return FILE_PATH +"Tenant"+tenantId+"\\"+COMITE_DIR+comiteId+"\\";
+	}
+	
+	public static String getDeportistaDirectoryName(String tenantId, String comiteId) {
+		return FILE_PATH +"Tenant"+tenantId+"\\"+COMITE_DIR+comiteId+"\\"+DEPORTISTAS_DIR +"\\";
 	}
 	
 	public static File writeFile(byte[] content, String filename, String dir ) throws IOException {
@@ -93,4 +134,5 @@ public class ImagenUtil {
 		return file.delete();	
 		
 	}
+
 }
