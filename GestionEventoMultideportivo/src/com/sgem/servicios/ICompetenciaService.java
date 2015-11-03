@@ -38,6 +38,13 @@ public interface ICompetenciaService {
 		@Path("/listarCompetenciasPorRonda/{tenantID}/{sexo}/{nombreDeporte}/{nombreDisciplina}/{ronda}")
 		public Response listarCompetenciasPorRonda(@PathParam("tenantID") int tenantID, @PathParam("sexo") String sexo,  @PathParam("nombreDeporte") String nombreDeporte,@PathParam("nombreDisciplina") String nombreDisciplina, @PathParam("ronda") int ronda);
 	
+		@PermitAll
+		@GET
+		@Produces(MediaType.APPLICATION_JSON)
+		@Path("/obtenerPrecio/{tenantID}/{idCompetencia}")
+		public Response obtenerPrecio(@PathParam("tenantID") int tenantID, @PathParam("idCompetencia") int idCompetencia);
+	
+		
 	
 	
 }

@@ -41,6 +41,22 @@ public Response listarCompetenciasPorRonda(int tenantID, String sexo, String nom
 	}
 	return null;
 }
+
+
+@Override
+public Response obtenerPrecio(int tenantID, int idCompetencia) {
+	try {
+		return Response.ok(icc.obtenerPrecio(tenantID,idCompetencia)).build();
+
+	} catch (Exception e) {
+		e.printStackTrace();
+
+	}
+	return null;
+}
+
+
+
 	
 
 

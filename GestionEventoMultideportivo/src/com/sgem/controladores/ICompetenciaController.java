@@ -15,6 +15,10 @@ public interface ICompetenciaController {
 
 	List<DataCompetencia> listarCompetenciasPorRonda(int tenantID, String nombreDeporte, String sexo, String nombreDisciplina, int ronda);
 
+	float obtenerPrecio(int tenantID, int idCompetencia);
+
+	
+
 	
 }
 

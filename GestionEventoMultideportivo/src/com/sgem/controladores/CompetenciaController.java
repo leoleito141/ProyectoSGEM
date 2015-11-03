@@ -153,6 +153,22 @@ public class CompetenciaController implements ICompetenciaController {
 		
 		return dataCompetencia;
 	}
+
+	@Override
+	public float obtenerPrecio(int tenantID, int idCompetencia) {
+		float precio = 0;
+	try {
+			
+			 precio = CompetenciaDAO.obtenerPrecio(tenantID, idCompetencia);
+			
+			} catch (Exception e) {
+			e.printStackTrace();
+		}
+				
+		return precio;
+	}
+
+	
 	
 	
 	

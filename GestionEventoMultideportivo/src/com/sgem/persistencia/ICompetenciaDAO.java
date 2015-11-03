@@ -14,6 +14,8 @@ public interface ICompetenciaDAO {
 
 	public boolean guardarCompetencia(Competencia c);
 	public List<Competencia> listarCompetenciasPorRonda(int tenantID, int idEventoDeportivo,int ronda);
+	public float obtenerPrecio(int tenantID, int idCompetencia);
+	
 
 
 	
