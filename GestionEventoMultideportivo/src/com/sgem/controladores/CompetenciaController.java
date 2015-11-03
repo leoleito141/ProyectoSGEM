@@ -8,6 +8,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import com.sgem.datatypes.DataCompetencia;
+import com.sgem.datatypes.DataCompraEntrada;
 import com.sgem.datatypes.DataDeportista;
 import com.sgem.datatypes.DataJuez;
 import com.sgem.dominio.ComiteOlimpico;
@@ -18,6 +19,7 @@ import com.sgem.dominio.EventoDeportivo;
 import com.sgem.dominio.Juez;
 import com.sgem.dominio.Ronda;
 import com.sgem.dominio.Usuario;
+import com.sgem.dominio.UsuarioComun;
 import com.sgem.persistencia.ICompetenciaDAO;
 import com.sgem.persistencia.IDeportistaDAO;
 import com.sgem.persistencia.IEntradaDAO;
@@ -166,6 +168,41 @@ public class CompetenciaController implements ICompetenciaController {
 		}
 				
 		return precio;
+	}
+
+	@Override
+	public boolean comprarEntradas(DataCompraEntrada datos) {
+		
+		String mail = datos.getMail();
+		int cantEntradas = datos.getCantEntradas();
+		int tenantId = datos.getTenantId();
+		int idCompetencia = datos.getIdCompetencia();
+		
+		UsuarioComun u = (UsuarioComun) UsuarioDAO.buscarUsuario(tenantId, mail, "UsuarioComun");
+		
+		Competencia c = CompetenciaDAO.buscarCompetencia(tenantId, idCompetencia);
+		
+		List<Entrada> entradas = EntradaDAO.listarEntradas(tenantId, idCompetencia);
+		
+		
+		int entradasActuales = c.getEntradasVendidas();
+		
+		int entradasConCompra = entradasActuales + cantEntradas;
+		
+		c.setEntradasVendidas(entradasConCompra);
+		
+		for(int i = 0; i< cantEntradas; i++){
+					entradas.get(i).setUsuarioComun(u);
+					entradas.get(i).setVendida(true);	
+					
+					u.addEntrada(entradas.get(i));
+		}
+		
+		
+
+		return EntradaDAO.guardarCompra(u,c);
+				
+				
 	}
 
 	

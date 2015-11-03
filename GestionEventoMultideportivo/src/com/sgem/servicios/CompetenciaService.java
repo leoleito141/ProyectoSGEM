@@ -6,6 +6,7 @@ import javax.ws.rs.core.Response;
 
 import com.sgem.controladores.ICompetenciaController;
 import com.sgem.datatypes.DataCompetencia;
+import com.sgem.datatypes.DataCompraEntrada;
 
 
 
@@ -53,6 +54,21 @@ public Response obtenerPrecio(int tenantID, int idCompetencia) {
 
 	}
 	return null;
+}
+
+
+@Override
+public Response comprarEntradas(DataCompraEntrada datos) {
+	
+	try {
+		return Response.ok(icc.comprarEntradas(datos)).build();
+
+	} catch (Exception e) {
+		e.printStackTrace();
+
+	}
+	return null;
+	
 }
 
 

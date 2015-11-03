@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 import com.sgem.datatypes.DataCompetencia;
+import com.sgem.datatypes.DataCompraEntrada;
 import com.sgem.datatypes.DataEventoDeportivo;
 import com.sgem.dominio.EventoDeportivo;
 
@@ -16,6 +17,8 @@ public interface ICompetenciaController {
 	List<DataCompetencia> listarCompetenciasPorRonda(int tenantID, String nombreDeporte, String sexo, String nombreDisciplina, int ronda);
 
 	float obtenerPrecio(int tenantID, int idCompetencia);
+
+	boolean comprarEntradas(DataCompraEntrada datos);
 
 	
 

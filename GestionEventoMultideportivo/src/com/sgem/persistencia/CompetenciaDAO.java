@@ -11,6 +11,7 @@ import com.sgem.datatypes.DataCompetencia;
 import com.sgem.dominio.Competencia;
 import com.sgem.dominio.Juez;
 import com.sgem.dominio.Usuario;
+import com.sgem.dominio.UsuarioComun;
 
 @Stateless
 public class CompetenciaDAO implements ICompetenciaDAO{
@@ -70,7 +71,22 @@ public class CompetenciaDAO implements ICompetenciaDAO{
 	}
 
 	
+	@Override
+	public Competencia buscarCompetencia(int tenantID, int idCompetencia) {
+		Competencia c = new Competencia ();
+			
+		try{
+		
+		return c = em.createQuery("SELECT c FROM Competencia c WHERE c.tenantId = '"+tenantID+"' AND c.CompetenciaId='"+idCompetencia+"'", Competencia.class).getSingleResult();			
+	
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return c;
+		
+	}
 
+	
 	
 
 

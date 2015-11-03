@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 import com.sgem.datatypes.DataCompetencia;
+import com.sgem.datatypes.DataCompraEntrada;
 
 
 @RequestScoped
@@ -45,6 +46,13 @@ public interface ICompetenciaService {
 		public Response obtenerPrecio(@PathParam("tenantID") int tenantID, @PathParam("idCompetencia") int idCompetencia);
 	
 		
+//		@RolesAllowed("USUARIO_COMUN")
+			@PermitAll
+			@POST
+			@Produces(MediaType.APPLICATION_JSON)
+			@Consumes(MediaType.APPLICATION_JSON)
+			@Path("/comprarEntradas")
+			public Response comprarEntradas(DataCompraEntrada datos);
 	
 	
 }
