@@ -188,25 +188,25 @@ IHistorialLoginDAO  HistorialLoginDAO;
 		
 		EventoMultiDAO.guardarTenant(th);
 
-		EventoDeportivo futbol = new EventoDeportivo(th.getTenantID(), "Futbol", null, new Date(), new Date(), "Masculino", null, null, null);
+		EventoDeportivo futbol = new EventoDeportivo(th.getTenantID(), "Futbol", null, new Date(), new Date(), "Masculino", null, null, null,"colectivo");
 		EventoDeportivoDAO.guardarEventoDeportivo(futbol,evento);
 		
-		EventoDeportivo basket = new EventoDeportivo(th.getTenantID(), "Basket", null, new Date(), new Date(), "Masculino", null, null, null);
+		EventoDeportivo basket = new EventoDeportivo(th.getTenantID(), "Basket", null, new Date(), new Date(), "Masculino", null, null, null,"colectivo");
 		EventoDeportivoDAO.guardarEventoDeportivo(basket,evento);
 		
-		EventoDeportivo basketF = new EventoDeportivo(th.getTenantID(), "Basket", null, new Date(), new Date(), "Femenino", null, null, null);
+		EventoDeportivo basketF = new EventoDeportivo(th.getTenantID(), "Basket", null, new Date(), new Date(), "Femenino", null, null, null,"colectivo");
 		EventoDeportivoDAO.guardarEventoDeportivo(basketF,evento);
 		
-		EventoDeportivo Natacion1 = new EventoDeportivo(th.getTenantID(), "Natacion", "100M Libres", new Date(), new Date(), "Femenino", null, null, null);
+		EventoDeportivo Natacion1 = new EventoDeportivo(th.getTenantID(), "Natacion", "100M Libres", new Date(), new Date(), "Femenino", null, null, null,"individual");
 		EventoDeportivoDAO.guardarEventoDeportivo(Natacion1,evento);
 		
-		EventoDeportivo Natacion2 = new EventoDeportivo(th.getTenantID(), "Natacion", "200M Mariposa", new Date(), new Date(), "Masculino", null, null, null);
+		EventoDeportivo Natacion2 = new EventoDeportivo(th.getTenantID(), "Natacion", "200M Mariposa", new Date(), new Date(), "Masculino", null, null, null,"individual");
 		EventoDeportivoDAO.guardarEventoDeportivo(Natacion2,evento);
 		
-		EventoDeportivo Natacion3 = new EventoDeportivo(th.getTenantID(), "Natacion", "Posta 4x100", new Date(), new Date(), "Femenino", null, null, null);
+		EventoDeportivo Natacion3 = new EventoDeportivo(th.getTenantID(), "Natacion", "Posta 4x100", new Date(), new Date(), "Femenino", null, null, null,"individual");
 		EventoDeportivoDAO.guardarEventoDeportivo(Natacion3,evento);
 		
-		EventoDeportivo Natacion4 = new EventoDeportivo(th.getTenantID(), "Natacion", "Posta 4x100", new Date(), new Date(), "Masculino", null, null, null);
+		EventoDeportivo Natacion4 = new EventoDeportivo(th.getTenantID(), "Natacion", "Posta 4x100", new Date(), new Date(), "Masculino", null, null, null,"individual");
 		EventoDeportivoDAO.guardarEventoDeportivo(Natacion4,evento);
 		
 		

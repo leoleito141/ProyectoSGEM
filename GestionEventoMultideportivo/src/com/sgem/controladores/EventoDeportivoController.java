@@ -39,7 +39,7 @@ public class EventoDeportivoController implements IEventoDeportivoController {
 					eventoDeportivo.setFechaInicio(dataEventoDeportivo.getFechaInicio());
 					eventoDeportivo.setFechaFin(dataEventoDeportivo.getFechaFin());
 					eventoDeportivo.setTenantId(dataEventoDeportivo.getTenantId());
-				
+					eventoDeportivo.setTipo(dataEventoDeportivo.getTipo());
 					
 					
 					

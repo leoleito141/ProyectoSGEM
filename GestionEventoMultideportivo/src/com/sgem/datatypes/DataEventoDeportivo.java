@@ -22,6 +22,9 @@ public class DataEventoDeportivo{
 	
 	private int cantRondas;
 
+	
+	private String tipo;
+	
 	public String getNombreDeporte() {
 		return nombreDeporte;
 	}
@@ -82,11 +85,24 @@ public class DataEventoDeportivo{
 		this.cantRondas = cantRondas;
 	}
 
-	public String toString() {
-		return "DataUsuario [nombreDeporte=" + nombreDeporte + ", nombreDisciplina=" + nombreDisciplina
-				+ ", tenantId=" + tenantId
-				+ ", sexo=" + sexo + ", FechaInicio=" + FechaInicio
-				+ ", FechaFin=" + FechaFin + ", cantRondas=" +cantRondas+"]";
+	
+	
+	
+	public String getTipo() {
+		return tipo;
 	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	@Override
+	public String toString() {
+		return "DataEventoDeportivo [tenantId=" + tenantId + ", nombreDeporte=" + nombreDeporte + ", nombreDisciplina="
+				+ nombreDisciplina + ", sexo=" + sexo + ", FechaInicio=" + FechaInicio + ", FechaFin=" + FechaFin
+				+ ", cantRondas=" + cantRondas + ", tipo=" + tipo + "]";
+	}
+
+	
 	
 }
