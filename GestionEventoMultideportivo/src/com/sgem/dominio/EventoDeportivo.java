@@ -44,6 +44,10 @@ public class EventoDeportivo implements Serializable{
 	@Column(name = "sexo", nullable = false)
 	private String sexo;
 	
+	@Column(name = "tipo", nullable = false)
+	private String tipo;
+	
+	
 	@ManyToOne	
 	private EventoMultideportivo eventoMultideportivo;
 
@@ -71,7 +75,7 @@ public class EventoDeportivo implements Serializable{
 	
 	public EventoDeportivo(int tenantId, String nombreDeporte, String disciplina,
 			Date fechaInicio, Date fechaFin, String sexo, EventoMultideportivo eventoMultideportivo,
-			Set<Competencia> competencia, Set<Ronda> ronda) {
+			Set<Competencia> competencia, Set<Ronda> ronda, String tipo) {
 		super();
 		this.tenantId = tenantId;
 		this.nombreDeporte = nombreDeporte;
@@ -79,6 +83,7 @@ public class EventoDeportivo implements Serializable{
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.sexo = sexo;
+		this.tipo = tipo;
 		this.eventoMultideportivo = eventoMultideportivo;
 		this.Competencia = new HashSet<Competencia>();
 		this.ronda = new HashSet<Ronda>();
@@ -174,6 +179,14 @@ public class EventoDeportivo implements Serializable{
 
 	public void setEventoMultideportivo(EventoMultideportivo eventoMultideportivo) {
 		this.eventoMultideportivo = eventoMultideportivo;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 	
 	
