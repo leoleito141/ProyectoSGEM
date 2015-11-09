@@ -37,6 +37,9 @@ public class EventoMultideportivo implements Serializable{
 	@OneToOne(targetEntity=Pais.class,cascade = CascadeType.ALL)
 	private Pais pais;
 	
+	@Column(name = "banner", nullable = true)
+	private Imagen banner;
+
 	@Column(name = "logo", nullable = true)
 	private String logo;
 	
@@ -133,6 +136,14 @@ public class EventoMultideportivo implements Serializable{
 
 	public void setPais(Pais pais) {
 		this.pais = pais;
+	}
+	
+	public Imagen getBanner() {
+		return banner;
+	}
+
+	public void setBanner(Imagen banner) {
+		this.banner = banner;
 	}
 
 	public String getLogo() {

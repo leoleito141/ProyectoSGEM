@@ -19,6 +19,7 @@ import javax.ws.rs.core.Response.Status;
 
 
 
+
 import org.apache.commons.io.IOUtils;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
@@ -27,9 +28,11 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 
 
+
 import com.sgem.controladores.IEventoMultiController;
 import com.sgem.datatypes.DataEvento;
 import com.sgem.datatypes.DataTenant;
+import com.sgem.seguridad.excepciones.AplicacionException;
 
 @Stateless
 public class EventoMultiService implements IEventoMultiService{
@@ -116,6 +119,15 @@ public class EventoMultiService implements IEventoMultiService{
 		
 		
 	}
+	
+	@Override
+	public Response subirImagenBanner(MultipartFormDataInput input) {		
+		try {						
+			return Response.ok(iemc.subirImagenBanner(input)).build();	
+		} catch (AplicacionException e) {
+			return Response.serverError().build();
+		}	
+	}
 
 	@Override
 	public Response subirImagen(MultipartFormDataInput input) {
@@ -145,10 +157,7 @@ public class EventoMultiService implements IEventoMultiService{
 			//constructs upload file path
 			fileName = FILE_PATH +"Tenant"+proxTenant+"\\"+fileName;
 			String dir =FILE_PATH +"Tenant"+proxTenant;
-			System.out.println(" nombre file:   "+ fileName);
 			writeFile(bytes,fileName,dir);
-				
-			System.out.println("Done");
 
 		  } catch (IOException e) {
 			e.printStackTrace();

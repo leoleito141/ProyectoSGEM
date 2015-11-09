@@ -67,6 +67,15 @@ public interface IEventoMultiService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/obtenerDataTenant/{tenant}")
 	public Response obtenerDataTenant(@PathParam("tenant") String tenant);
+	
+	
+	//@RolesAllowed("COMITE_OLIMPICO")
+	@PermitAll	
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes("multipart/form-data")
+	@Path("/subirImagenBanner")
+	public Response subirImagenBanner(MultipartFormDataInput input);
 
 		
 }

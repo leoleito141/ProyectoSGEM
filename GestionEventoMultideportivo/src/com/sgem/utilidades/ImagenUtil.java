@@ -17,10 +17,12 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 public class ImagenUtil {
 	
-	private static final String FILE_PATH = "C:\\Users\\USUARIO\\git\\ProyectoSGEM\\GestionEventoMultideportivo\\WebContent\\resources\\defecto\\img\\";
+	private static final String FILE_PATH = "C:\\Users\\Maxi\\Github\\ProyectoSGEM\\GestionEventoMultideportivo\\WebContent\\resources\\defecto\\img\\";
+
 	private static final String NOVEDADES_DIR = "novedades";
 	private static final String COMITE_DIR = "comite_olimpico";
 	private static final String DEPORTISTAS_DIR = "deportistas";
+	private static final String BANNER_DIR = "banner";
 	
 	public static String getFileName(MultivaluedMap<String, String> header, String tenantId) {
 
@@ -85,6 +87,21 @@ public class ImagenUtil {
 		return "unknown";
 	}
 	
+	public static String getBannerFilePath(MultivaluedMap<String, String> header, String tenantId) {
+		String[] contentDisposition = header.getFirst("Content-Disposition").split(";");
+		
+		for (String filename : contentDisposition) {
+			if ((filename.trim().startsWith("filename"))) {
+
+				String[] name = filename.split("=");
+				
+				String finalFileName = name[1].trim().replaceAll("\"", "");
+				return FILE_PATH +"Tenant"+tenantId+"\\"+BANNER_DIR+"\\"+finalFileName;
+			}
+		}
+		return "unknown";
+	}
+	
 	public static String getDirectoryName(String tenantId) {
 		return FILE_PATH +"Tenant"+tenantId;
 	}
@@ -99,6 +116,10 @@ public class ImagenUtil {
 	
 	public static String getDeportistaDirectoryName(String tenantId, String comiteId) {
 		return FILE_PATH +"Tenant"+tenantId+"\\"+COMITE_DIR+comiteId+"\\"+DEPORTISTAS_DIR +"\\";
+	}
+	
+	public static String getBannerDirectoryName(String tenantId) {
+		return FILE_PATH +"Tenant"+tenantId+"\\"+BANNER_DIR+"\\";
 	}
 	
 	public static File writeFile(byte[] content, String filename, String dir ) throws IOException {
@@ -134,5 +155,9 @@ public class ImagenUtil {
 		return file.delete();	
 		
 	}
+
+	
+
+	
 
 }
