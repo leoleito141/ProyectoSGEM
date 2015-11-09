@@ -40,7 +40,7 @@ public class RondaDAO implements IRondaDAO {
 		
 		Ronda r = null;		
 		try{	
-			r = em.createQuery("SELECT r FROM Ronda r  WHERE r.tenantId = "+tenantID+" AND r.EventoDepId = '"+idEventoDep+"' AND r.numeroRonda = '"+numeroRonda+"'", Ronda.class).getSingleResult();
+			r = em.createQuery("SELECT r FROM Ronda r  WHERE r.tenantId = "+tenantID+" AND r.eventoDeportivo = '"+idEventoDep+"' AND r.numeroRonda = '"+numeroRonda+"'", Ronda.class).getSingleResult();
 			return r;
 		}catch(NoResultException e){
 			e.printStackTrace();

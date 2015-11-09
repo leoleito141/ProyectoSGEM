@@ -161,7 +161,7 @@ public class EventoDeportivoDAO implements IEventoDeportivoDAO {
 		
 		try {
 			
-			rondas = em.createQuery("SELECT r.numeroRonda FROM EventoDeportivo ed, Ronda r WHERE ed.tenantId = '"+tenantID+"' AND r.EventoDepId = ed.EventoDepId AND r.tenantId = '"+tenantID+"' AND ed.sexo = '"+sexo+"' AND ed.nombreDeporte = '"+nombreDeporte+"' AND ed.disciplina = '"+nombreDisciplina+"'", Integer.class).getResultList();;
+			rondas = em.createQuery("SELECT r.numeroRonda FROM EventoDeportivo ed, Ronda r WHERE ed.tenantId = '"+tenantID+"' AND r.eventoDeportivo = ed.EventoDepId AND r.tenantId = '"+tenantID+"' AND ed.sexo = '"+sexo+"' AND ed.nombreDeporte = '"+nombreDeporte+"' AND ed.disciplina = '"+nombreDisciplina+"'", Integer.class).getResultList();;
 			 
 			 return rondas;
 			

@@ -46,7 +46,7 @@ public class CompetenciaDAO implements ICompetenciaDAO{
 		
 		try {
 			
-			competencias = em.createQuery("SELECT c FROM Competencia c, Ronda r WHERE r.tenantId = c.tenantId AND r.rondaId = c.ronda AND c.finalizada='"+false+"' AND r.numeroRonda = '"+ronda+"' AND r.EventoDepId = '"+idEventoDep+"'", Competencia.class).getResultList();
+			competencias = em.createQuery("SELECT c FROM Competencia c, Ronda r WHERE r.tenantId = c.tenantId AND r.rondaId = c.ronda AND c.finalizada='"+false+"' AND r.numeroRonda = '"+ronda+"' AND r.eventoDeportivo = '"+idEventoDep+"'", Competencia.class).getResultList();
 			 
 			 return competencias;
 			
