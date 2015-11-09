@@ -61,6 +61,17 @@ public class DeportistaDAO implements IDeportistaDAO {
 		return null;
 	}
 
+	@Override
+	public boolean modificarDeportista(Deportista deportista) {
+		try {
+			em.merge(deportista);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}		
+	}
+
 	
 
 }

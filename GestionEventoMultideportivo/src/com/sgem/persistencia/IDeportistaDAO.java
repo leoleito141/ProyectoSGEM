@@ -20,7 +20,7 @@ public interface IDeportistaDAO {
 			String nombreDisciplina);
 
 	public Deportista buscarDeportista(int idDeportista);
-	
+	public boolean modificarDeportista(Deportista deportista);
 	
 		
 	

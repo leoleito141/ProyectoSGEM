@@ -29,8 +29,9 @@ import com.sgem.datatypes.DataEventoDeportivo;
 		@Path("/altaEventoDeportivo")
 		public Response guardarEventoDeportivo(DataEventoDeportivo datos);
 		
-//		@RolesAllowed("COMITE_OLIMPICO")
-		@PermitAll
+////		@RolesAllowed("COMITE_OLIMPICO")
+//		@PermitAll
+		@RolesAllowed("USUARIO_COMUN")
 		@GET
 		@Produces(MediaType.APPLICATION_JSON)
 		@Path("/listarDeportes/{tenantID}/{sexo}")

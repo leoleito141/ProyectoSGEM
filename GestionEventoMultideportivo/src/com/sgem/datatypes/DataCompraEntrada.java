@@ -1,7 +1,5 @@
 package com.sgem.datatypes;
 
-import java.util.Date;
-import java.util.List;
 
 public class DataCompraEntrada {
 	

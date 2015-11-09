@@ -12,10 +12,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
-
 import com.sgem.datatypes.DataCompetencia;
 import com.sgem.datatypes.DataCompraEntrada;
+import com.sgem.datatypes.DataResultado;
 
 
 @RequestScoped
@@ -25,33 +24,45 @@ public interface ICompetenciaService {
 
 	
 //	@RolesAllowed("ORGANIZADOR")
-		@PermitAll
-		@POST
-		@Produces(MediaType.APPLICATION_JSON)
-		@Consumes(MediaType.APPLICATION_JSON)
-		@Path("/guardarCompetencia")
-		public Response guardarCompetencia(DataCompetencia datos);
-		
-		
-		@PermitAll
-		@GET
-		@Produces(MediaType.APPLICATION_JSON)
-		@Path("/listarCompetenciasPorRonda/{tenantID}/{sexo}/{nombreDeporte}/{nombreDisciplina}/{ronda}")
-		public Response listarCompetenciasPorRonda(@PathParam("tenantID") int tenantID, @PathParam("sexo") String sexo,  @PathParam("nombreDeporte") String nombreDeporte,@PathParam("nombreDisciplina") String nombreDisciplina, @PathParam("ronda") int ronda);
+	@PermitAll
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/guardarCompetencia")
+	public Response guardarCompetencia(DataCompetencia datos);
 	
-		@PermitAll
-		@GET
-		@Produces(MediaType.APPLICATION_JSON)
-		@Path("/obtenerPrecio/{tenantID}/{idCompetencia}")
-		public Response obtenerPrecio(@PathParam("tenantID") int tenantID, @PathParam("idCompetencia") int idCompetencia);
 	
-		
-		@RolesAllowed("USUARIO_COMUN")
-		@POST
-		@Produces(MediaType.APPLICATION_JSON)
-		@Consumes(MediaType.APPLICATION_JSON)
-		@Path("/comprarEntradas")
-		public Response comprarEntradas(DataCompraEntrada datos);
+	@PermitAll
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/listarCompetenciasPorRonda/{tenantID}/{sexo}/{nombreDeporte}/{nombreDisciplina}/{ronda}")
+	public Response listarCompetenciasPorRonda(@PathParam("tenantID") int tenantID, @PathParam("sexo") String sexo,  @PathParam("nombreDeporte") String nombreDeporte,@PathParam("nombreDisciplina") String nombreDisciplina, @PathParam("ronda") int ronda);
 
+	@PermitAll
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/obtenerPrecio/{tenantID}/{idCompetencia}")
+	public Response obtenerPrecio(@PathParam("tenantID") int tenantID, @PathParam("idCompetencia") int idCompetencia);
+
+	
+	@RolesAllowed("USUARIO_COMUN")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/comprarEntradas")
+	public Response comprarEntradas(DataCompraEntrada datos);
+
+	@RolesAllowed("JUEZ")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/listarCompetenciasPendientes/{tenantID}/{juezID}")
+	public Response listarCompetenciasPendientes(@PathParam("tenantID") int tenantID, @PathParam("juezID") int juezID);
+
+	@PermitAll
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/guardarResultado")
+	public Response guardarResultado(DataResultado resultado);
 	
 }

@@ -50,9 +50,6 @@ public class EventoDeportivo implements Serializable{
 	
 	@ManyToOne	
 	private EventoMultideportivo eventoMultideportivo;
-
-	@OneToMany(fetch = FetchType.EAGER,mappedBy = "eventoDeportivo") 
-	private Set<Competencia> Competencia= new HashSet<Competencia>();
 	
 	@OneToMany(fetch = FetchType.EAGER,mappedBy = "eventoDeportivo") 
 	private Set<Ronda> ronda= new HashSet<Ronda>();
@@ -69,13 +66,12 @@ public class EventoDeportivo implements Serializable{
 	public EventoDeportivo(){
 		
 		this.ronda = new HashSet<Ronda>();
-		this.Competencia = new HashSet<Competencia>();
+//		this.Competencia = new HashSet<Competencia>();
 		
 	}
 	
 	public EventoDeportivo(int tenantId, String nombreDeporte, String disciplina,
-			Date fechaInicio, Date fechaFin, String sexo, EventoMultideportivo eventoMultideportivo,
-			Set<Competencia> competencia, Set<Ronda> ronda, String tipo) {
+			Date fechaInicio, Date fechaFin, String sexo, EventoMultideportivo eventoMultideportivo, Set<Ronda> ronda, String tipo) {
 		super();
 		this.tenantId = tenantId;
 		this.nombreDeporte = nombreDeporte;
@@ -85,23 +81,22 @@ public class EventoDeportivo implements Serializable{
 		this.sexo = sexo;
 		this.tipo = tipo;
 		this.eventoMultideportivo = eventoMultideportivo;
-		this.Competencia = new HashSet<Competencia>();
 		this.ronda = new HashSet<Ronda>();
 		
 	//	this.deportistas= deportistas;
 	}
 
-	public Set<Competencia> getCompetencia() {
-		return Competencia;
-	}
-
-	public void setCompetencia(Set<Competencia> competencia) {
-		Competencia = competencia;
-	}
-	
-	public void addCompetencia(Competencia competencia) {
-		this.Competencia.add(competencia);
-	}
+//	public Set<Competencia> getCompetencia() {
+//		return Competencia;
+//	}
+//
+//	public void setCompetencia(Set<Competencia> competencia) {
+//		Competencia = competencia;
+//	}
+//	
+//	public void addCompetencia(Competencia competencia) {
+//		this.Competencia.add(competencia);
+//	}
 
 	public Set<Ronda> getRonda() {
 		return ronda;

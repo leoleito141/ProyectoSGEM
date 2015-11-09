@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.sgem.datatypes.DataComite;
+import com.sgem.datatypes.DataJuez;
 import com.sgem.datatypes.DataUsuario;
 
 public class JWTUtil {
@@ -38,6 +39,8 @@ public class JWTUtil {
 		
 		if(du instanceof DataComite){
 			claims.put("dataUsuario", (DataComite) du);
+		}else if (du instanceof DataJuez){
+			claims.put("dataUsuario", (DataJuez) du);
 		}else{
 			claims.put("dataUsuario", (DataUsuario) du);			
 		}

@@ -1,13 +1,18 @@
 package com.sgem.persistencia;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TemporalType;
+import javax.persistence.criteria.CriteriaBuilder;
 
 import com.sgem.datatypes.DataCompetencia;
+import com.sgem.datatypes.DataJuez;
 import com.sgem.dominio.Competencia;
 import com.sgem.dominio.Juez;
 import com.sgem.dominio.Usuario;
@@ -41,7 +46,7 @@ public class CompetenciaDAO implements ICompetenciaDAO{
 		
 		try {
 			
-			competencias = em.createQuery("SELECT c FROM Competencia c, Ronda r WHERE r.tenantId = c.tenantId AND r.rondaId = c.ronda AND c.finalizada='"+false+"' AND r.numeroRonda = '"+ronda+"' AND r.EventoDepId = '"+idEventoDep+"'", Competencia.class).getResultList();;
+			competencias = em.createQuery("SELECT c FROM Competencia c, Ronda r WHERE r.tenantId = c.tenantId AND r.rondaId = c.ronda AND c.finalizada='"+false+"' AND r.numeroRonda = '"+ronda+"' AND r.EventoDepId = '"+idEventoDep+"'", Competencia.class).getResultList();
 			 
 			 return competencias;
 			
@@ -84,6 +89,37 @@ public class CompetenciaDAO implements ICompetenciaDAO{
 		}
 		return c;
 		
+	}
+
+	@Override
+	public List<Competencia> listarCompetenciasPendientes(int tenantID,	int juezID) {		
+		List<Competencia> competencias = null;			
+		
+		try {			
+			competencias = em.createQuery("SELECT c "
+										+ "FROM Competencia c "
+										+ "WHERE c.fecha < :fecha AND c.finalizada='"+false+"' "
+										+ "AND c.tenantId = '"+tenantID+"' AND c.juez.id = "+juezID, Competencia.class)
+							  .setParameter("fecha", new Date(), TemporalType.DATE)
+							  .getResultList();
+		} catch (Exception e) {
+			return null;
+		}
+		 return competencias;
+	}
+
+	@Override
+	public boolean modificarCompetencia(Competencia c) {
+		boolean modifico = false;
+		
+		try {
+			em.merge(c);
+			modifico = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return modifico; 
+		}
+		return modifico;
 	}
 
 	
