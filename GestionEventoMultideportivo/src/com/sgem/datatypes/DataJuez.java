@@ -1,38 +1,33 @@
 package com.sgem.datatypes;
 
-import java.util.Date;
-import java.util.List;
 
-public class DataJuez {
-	
-	
-	
+public class DataJuez {	
+		
 	private String email;
 	
-//	@SerializedName(value="Password")
 	private String password;
 	
-	
-//	@SerializedName(value="codigo")
 	private String nombre;
 	
-//	@SerializedName(value="pais")
 	private String apellido;
 	
+	private String tipoUsuario;
 	
 	private int tenantId;
-
 	
+	private int usuarioId;
+
 	public DataJuez(){}
 
-	public DataJuez(Integer tenantId, String nombre, String apellido, String password, String email) {
+	public DataJuez(Integer tenantId, String nombre, String apellido, String password, String email,String tipoUsuario, int usuarioId) {
 		super();
 		this.tenantId = tenantId;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.password = password;
 		this.email = email;
-		
+		this.tipoUsuario = tipoUsuario;
+		this.usuarioId = usuarioId;
 	}
 
 	public String getEmail() {
@@ -83,11 +78,23 @@ public class DataJuez {
 	public void setTenantId(int tenantId) {
 		this.tenantId = tenantId;
 	}
-	
-	public String toString() {
-		return "DataUsuario [email=" + email + ", nombre=" + nombre
-				+ ", tenantId=" + tenantId
-				+ ", apellido=" + apellido + "]";
+
+	public String getTipoUsuario() {
+		return tipoUsuario;
 	}
+
+	public void setTipoUsuario(String tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
+	}
+
+	public int getUsuarioId() {
+		return usuarioId;
+	}
+
+	public void setUsuarioId(int usuarioId) {
+		this.usuarioId = usuarioId;
+	}
+	
+	
 
 }

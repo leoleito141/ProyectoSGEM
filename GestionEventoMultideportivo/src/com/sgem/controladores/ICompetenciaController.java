@@ -6,21 +6,24 @@ import javax.ejb.Local;
 
 import com.sgem.datatypes.DataCompetencia;
 import com.sgem.datatypes.DataCompraEntrada;
-import com.sgem.datatypes.DataEventoDeportivo;
-import com.sgem.dominio.EventoDeportivo;
+import com.sgem.datatypes.DataJuez;
+import com.sgem.datatypes.DataResultado;
+import com.sgem.seguridad.excepciones.AplicacionException;
 
 @Local
 public interface ICompetenciaController {
 
-	Boolean guardarCompetencia(DataCompetencia dataCompetencia);
+	public Boolean guardarCompetencia(DataCompetencia dataCompetencia);
 
-	List<DataCompetencia> listarCompetenciasPorRonda(int tenantID, String nombreDeporte, String sexo, String nombreDisciplina, int ronda);
+	public List<DataCompetencia> listarCompetenciasPorRonda(int tenantID, String nombreDeporte, String sexo, String nombreDisciplina, int ronda);
 
-	float obtenerPrecio(int tenantID, int idCompetencia);
+	public float obtenerPrecio(int tenantID, int idCompetencia);
 
-	boolean comprarEntradas(DataCompraEntrada datos);
+	public boolean comprarEntradas(DataCompraEntrada datos);
 
-	
+	public List<DataCompetencia> listarCompetenciasPendientes(int tenantID, int juezID) throws AplicacionException;
+
+	public boolean guardarResultado(DataResultado resultado) throws AplicacionException;
 
 	
 }

@@ -29,8 +29,8 @@ public class Ronda implements Serializable{
 	@Column(name = "tenant_ID", nullable = true)
 	private int tenantId;
 	
-	@Column(name = "EventoDepId", nullable = true)
-	private int EventoDepId;
+//	@Column(name = "EventoDepId", nullable = true)
+//	private int EventoDepId;
 	
 	@Column(name = "numeroRonda", nullable = true)
 	private int numeroRonda;
@@ -40,7 +40,18 @@ public class Ronda implements Serializable{
 	
 	@OneToMany(fetch = FetchType.EAGER,mappedBy = "ronda") 
 	private Set<Competencia> Competencia= new HashSet<Competencia>();
+
+	public Ronda(){}
 	
+	public Ronda(int tenantId, int numeroRonda,
+			EventoDeportivo eventoDeportivo,
+			Set<com.sgem.dominio.Competencia> competencia) {
+		this.tenantId = tenantId;
+//		this.EventoDepId = eventoDepId;
+		this.numeroRonda = numeroRonda;
+		this.eventoDeportivo = eventoDeportivo;
+		this.Competencia = competencia;
+	}
 
 	public int getRondaId() {
 		return rondaId;
@@ -58,13 +69,13 @@ public class Ronda implements Serializable{
 		this.tenantId = tenantId;
 	}
 
-	public int getEventoDepId() {
-		return EventoDepId;
-	}
-
-	public void setEventoDepId(int eventoDepId) {
-		EventoDepId = eventoDepId;
-	}
+//	public int getEventoDepId() {
+//		return EventoDepId;
+//	}
+//
+//	public void setEventoDepId(int eventoDepId) {
+//		EventoDepId = eventoDepId;
+//	}
 
 	public int getNumeroRonda() {
 		return numeroRonda;
@@ -82,11 +93,13 @@ public class Ronda implements Serializable{
 		this.eventoDeportivo = eventoDeportivo;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public Set<Competencia> getCompetencia() {
+		return Competencia;
 	}
 
-
+	public void setCompetencia(Set<Competencia> competencia) {
+		Competencia = competencia;
+	}
 	
 }
 

@@ -256,12 +256,14 @@ public class UsuarioController implements IUsuarioController {
 			
 			tipoUsuario = u instanceof UsuarioComun ? USUARIO_COMUN : u instanceof ComiteOlimpico ? USUARIO_COMITE : u instanceof Organizador ? USUARIO_ORGANIZADOR : USUARIO_JUEZ;
 			
-			if(tipoUsuario == USUARIO_COMITE){
-				DataComite dc = new DataComite(u.getEmail(),"",((ComiteOlimpico)u).getCodigo(),((ComiteOlimpico)u).getPais(),u.getFacebook(),u.getTwitter(),u.getTenantID(),u.getId().intValue());
-				dc.setTipoUsuario(tipoUsuario);
+			if(tipoUsuario.equals(USUARIO_COMITE)){
+				DataComite dc = new DataComite(u.getEmail(),"",((ComiteOlimpico)u).getCodigo(),((ComiteOlimpico)u).getPais(),u.getFacebook(),u.getTwitter(),u.getTenantID(),u.getId().intValue(),tipoUsuario);
 				jwt = JWTUtil.generarToken(dc);
 
-			}else{				
+			} else if(tipoUsuario.equals(USUARIO_JUEZ)){				
+				DataJuez dj = new DataJuez(u.getTenantID(),((Juez)u).getNombre(),((Juez)u).getApellido(),"",u.getEmail(),tipoUsuario,u.getId().intValue());
+				jwt = JWTUtil.generarToken(dj);
+			} else { 	// organizador es muy parecido por ahora...			
 				DataUsuario du = convertir(u);
 				du.setTipoUsuario(tipoUsuario);
 				jwt = JWTUtil.generarToken(du);
@@ -375,7 +377,7 @@ public class UsuarioController implements IUsuarioController {
 		return (new Imagen(ImagenUtil.getMimeType(f), fileName,Integer.parseInt(tenantId)));
 		
 	}
-
+ 
 	@Override
 	public boolean guardarEstado(DataHistorialLogin hl)	throws AplicacionException, UsuarioNoEncontradoException {
 		boolean guardo = false;
@@ -391,7 +393,6 @@ public class UsuarioController implements IUsuarioController {
 
 	@Override
 	public List<DataHistorialLogin> obtenerHistorial(Integer tenantId) throws AplicacionException {
-
 		try{
 			return convertir(tenantId,HistorialLoginDAO.recuperarHistorial(tenantId));
 		}catch(Exception e){
@@ -400,7 +401,7 @@ public class UsuarioController implements IUsuarioController {
 		}
 	}
 	
-	public List<DataHistorialLogin> convertir(int tenantId, List<Object> historial) {
+	private List<DataHistorialLogin> convertir(int tenantId, List<Object> historial) {
 		List<DataHistorialLogin> dataHistorial = new ArrayList<DataHistorialLogin>();
 
 		for (int i = 0; i < historial.size(); i++) {

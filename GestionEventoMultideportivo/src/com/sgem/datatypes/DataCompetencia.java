@@ -1,62 +1,45 @@
 package com.sgem.datatypes;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-
-import com.sgem.dominio.Deportista;
-import com.sgem.dominio.Entrada;
-import com.sgem.dominio.EventoDeportivo;
-import com.sgem.dominio.Juez;
-import com.sgem.dominio.Resultado;
-import com.sgem.dominio.Ronda;
 
 public class DataCompetencia {
-	
+
 	private int tenantId;
-	
+
 	private int idCompetencia;
-	
+
 	private Date fecha;
-	
+
 	private String estadio;
-	
+
 	private float precioEntrada;
-	
+
 	private int cantEntradas;
-	
+
 	private int entradasVendidas;
-	
+
 	private String nombreDeporte;
-	
+
 	private String nombreDisciplina;
-	
+
+	private String tipoDeporte;
+
 	private String sexo;
 
 	private DataJuez juez;
-	
+
 	private int ronda;
-	
+
 	private List<DataDeportista> deportistas;
 	
-	public DataCompetencia(){}
-	
-	
-	
+	private boolean finalizada;
 
-	public DataCompetencia(int tenantId, Date fecha, String estadio, float precioEntrada, int cantEntradas,
-			String nombreDeporte, String nombreDisciplina, String sexo, DataJuez juez, int ronda,int entradasVendidas,
+	public DataCompetencia() {}
+
+	public DataCompetencia(int tenantId, Date fecha, String estadio,float precioEntrada, int cantEntradas, String nombreDeporte,
+			String nombreDisciplina, String tipoDeporte, String sexo,DataJuez juez, int ronda, int entradasVendidas,boolean finalizada,
 			List<DataDeportista> deportistas) {
-		super();
 		this.tenantId = tenantId;
 		this.fecha = fecha;
 		this.estadio = estadio;
@@ -64,15 +47,14 @@ public class DataCompetencia {
 		this.cantEntradas = cantEntradas;
 		this.nombreDeporte = nombreDeporte;
 		this.nombreDisciplina = nombreDisciplina;
+		this.tipoDeporte = tipoDeporte;
 		this.sexo = sexo;
 		this.juez = juez;
 		this.entradasVendidas = entradasVendidas;
 		this.ronda = ronda;
+		this.finalizada = finalizada;
 		this.deportistas = deportistas;
 	}
-
-
-
 
 	public int getTenantId() {
 		return tenantId;
@@ -130,6 +112,14 @@ public class DataCompetencia {
 		this.nombreDisciplina = nombreDisciplina;
 	}
 
+	public String getTipoDeporte() {
+		return tipoDeporte;
+	}
+
+	public void setTipoDeporte(String tipoDeporte) {
+		this.tipoDeporte = tipoDeporte;
+	}
+
 	public String getSexo() {
 		return sexo;
 	}
@@ -153,6 +143,14 @@ public class DataCompetencia {
 	public void setRonda(int ronda) {
 		this.ronda = ronda;
 	}
+	
+	public boolean isFinalizada() {
+		return finalizada;
+	}
+
+	public void setFinalizada(boolean finalizada) {
+		this.finalizada = finalizada;
+	}
 
 	public List<DataDeportista> getDeportistas() {
 		return deportistas;
@@ -162,57 +160,33 @@ public class DataCompetencia {
 		this.deportistas = deportistas;
 	}
 
-
-
-
 	public int getIdCompetencia() {
 		return idCompetencia;
 	}
-
-
-
 
 	public void setIdCompetencia(int idCompetencia) {
 		this.idCompetencia = idCompetencia;
 	}
 
-
-
-
 	public int getEntradasVendidas() {
 		return entradasVendidas;
 	}
-
-
-
 
 	public void setEntradasVendidas(int entradasVendidas) {
 		this.entradasVendidas = entradasVendidas;
 	}
 
-
-
-
 	@Override
 	public String toString() {
-		return "DataCompetencia [tenantId=" + tenantId + ", idCompetencia=" + idCompetencia + ", fecha=" + fecha
-				+ ", estadio=" + estadio + ", precioEntrada=" + precioEntrada + ", cantEntradas=" + cantEntradas
-				+ ", entradasVendidas=" + entradasVendidas + ", nombreDeporte=" + nombreDeporte + ", nombreDisciplina="
-				+ nombreDisciplina + ", sexo=" + sexo + ", juez=" + juez + ", ronda=" + ronda + ", deportistas="
-				+ deportistas + "]";
+		return "DataCompetencia [tenantId=" + tenantId + ", idCompetencia="
+				+ idCompetencia + ", fecha=" + fecha + ", estadio=" + estadio
+				+ ", precioEntrada=" + precioEntrada + ", cantEntradas="
+				+ cantEntradas + ", entradasVendidas=" + entradasVendidas
+				+ ", nombreDeporte=" + nombreDeporte + ", nombreDisciplina="
+				+ nombreDisciplina + ", tipoDeporte=" + tipoDeporte + ", sexo="
+				+ sexo + ", juez=" + juez + ", ronda=" + ronda
+				+ ", deportistas=" + deportistas + ", finalizada=" + finalizada
+				+ "]";
 	}
-
-
-
-
-
-
-
-
-
-	
-	
-	
-	
 
 }

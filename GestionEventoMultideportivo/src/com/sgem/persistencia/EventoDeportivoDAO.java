@@ -134,10 +134,15 @@ public class EventoDeportivoDAO implements IEventoDeportivoDAO {
 				
 				try{
 					
+					String sql = "SELECT ed "
+				 				+ "FROM EventoDeportivo ed "
+				 				+ "WHERE ed.tenantId = "+eventoDeportivo.getTenantId()+" AND ed.sexo = '"+eventoDeportivo.getSexo()+
+				 				"' AND ed.nombreDeporte = '"+eventoDeportivo.getNombreDeporte()+"'";
+					sql+= eventoDeportivo.getDisciplina() != null ? "AND ed.disciplina = '"+eventoDeportivo.getDisciplina()+"'" : "";
 					 
-					ed= em.createQuery("SELECT ed FROM EventoDeportivo ed WHERE ed.tenantId = "+eventoDeportivo.getTenantId()+" AND ed.sexo = '"+eventoDeportivo.getSexo()+"' AND ed.nombreDeporte = '"+eventoDeportivo.getNombreDeporte()+"'AND ed.disciplina = '"+eventoDeportivo.getDisciplina()+"'", EventoDeportivo.class).getSingleResult();
+					ed= em.createQuery(sql, EventoDeportivo.class).getSingleResult();
 					 
-					 return ed;
+					return ed;
 				
 					
 				}catch(NoResultException e){
@@ -149,25 +154,6 @@ public class EventoDeportivoDAO implements IEventoDeportivoDAO {
 		
 	}
 
-
-
-	@Override
-	public boolean guardarRondas(Ronda r) {
-		
-		try {
-			em.persist(r);
-			return true;
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return false;
-		
-		
-	}
-
-
-
 	@Override
 	public List<Integer> listarRondas(int tenantID, String nombreDeporte, String sexo, String nombreDisciplina) {
 		
@@ -175,7 +161,7 @@ public class EventoDeportivoDAO implements IEventoDeportivoDAO {
 		
 		try {
 			
-			rondas = em.createQuery("SELECT r.numeroRonda FROM EventoDeportivo ed, Ronda r WHERE ed.tenantId = '"+tenantID+"' AND r.EventoDepId = ed.EventoDepId AND r.tenantId = '"+tenantID+"' AND ed.sexo = '"+sexo+"' AND ed.nombreDeporte = '"+nombreDeporte+"' AND ed.disciplina = '"+nombreDisciplina+"'", Integer.class).getResultList();;
+			rondas = em.createQuery("SELECT r.numeroRonda FROM EventoDeportivo ed, Ronda r WHERE ed.tenantId = '"+tenantID+"' AND r.eventoDeportivo = ed.EventoDepId AND r.tenantId = '"+tenantID+"' AND ed.sexo = '"+sexo+"' AND ed.nombreDeporte = '"+nombreDeporte+"' AND ed.disciplina = '"+nombreDisciplina+"'", Integer.class).getResultList();;
 			 
 			 return rondas;
 			
@@ -185,33 +171,6 @@ public class EventoDeportivoDAO implements IEventoDeportivoDAO {
 		return null;
 	}
 
-
-
-	@Override
-	public Ronda traerRonda(int tenantID, int idEventoDep, int numeroRonda) {
-		
-		Ronda r = null;
-		
-		
-		try{
-			
-			 
-			r = em.createQuery("SELECT r FROM Ronda r  WHERE r.tenantId = "+tenantID+" AND r.EventoDepId = '"+idEventoDep+"' AND r.numeroRonda = '"+numeroRonda+"'", Ronda.class).getSingleResult();
-			 
-			 return r;
-		
-			
-		}catch(NoResultException e){
-			e.printStackTrace();
-			return null;
-		}
-
-		
-	}
-		
-		
-		
-	
 
 
 }

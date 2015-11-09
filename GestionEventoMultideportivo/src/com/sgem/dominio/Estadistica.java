@@ -31,95 +31,72 @@ private static final long serialVersionUID = -6321506554036389023L;
 	private int posicion;
 	
 	@Column(name = "participante", nullable = true)
-	private int participante;
+	private String participante;
 	
 	@Column(name = "datoInformativo", nullable = true)
-	private int datoInformativo;
-	
-	
+	private String datoInformativo;
+		
 	@ManyToOne	
 	private Resultado resultado;
 
-
+		
+	public Estadistica() {}
 	
-	
-	
-	public Estadistica() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-
-	public Estadistica(int tenantId, int posicion, int participante, int datoInformativo, Resultado resultado) {
-		super();
+	public Estadistica(int tenantId, int posicion,
+			String participante, String datoInformativo, Resultado resultado) {
 		this.tenantId = tenantId;
 		this.posicion = posicion;
 		this.participante = participante;
 		this.datoInformativo = datoInformativo;
 		this.resultado = resultado;
 	}
-
 
 	public int getEstadisticaId() {
 		return estadisticaId;
 	}
 
-
 	public void setEstadisticaId(int estadisticaId) {
 		this.estadisticaId = estadisticaId;
 	}
-
 
 	public int getTenantId() {
 		return tenantId;
 	}
 
-
 	public void setTenantId(int tenantId) {
 		this.tenantId = tenantId;
 	}
-
 
 	public int getPosicion() {
 		return posicion;
 	}
 
-
 	public void setPosicion(int posicion) {
 		this.posicion = posicion;
 	}
 
-
-	public int getParticipante() {
+	public String getParticipante() {
 		return participante;
 	}
 
-
-	public void setParticipante(int participante) {
+	public void setParticipante(String participante) {
 		this.participante = participante;
 	}
 
-
-	public int getDatoInformativo() {
+	public String getDatoInformativo() {
 		return datoInformativo;
 	}
 
-
-	public void setDatoInformativo(int datoInformativo) {
+	public void setDatoInformativo(String datoInformativo) {
 		this.datoInformativo = datoInformativo;
 	}
-
 
 	public Resultado getResultado() {
 		return resultado;
 	}
 
-
 	public void setResultado(Resultado resultado) {
 		this.resultado = resultado;
 	}
-	
-	
-	
 
 }

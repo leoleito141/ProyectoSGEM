@@ -47,6 +47,9 @@ public class Deportista implements Serializable {
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<EventoDeportivo> eventoDep;
 
+	@ManyToMany(fetch = FetchType.EAGER)
+	private Set<Competencia> competencias;
+	
 	@OneToOne(fetch = FetchType.LAZY)
 	private Imagen foto;
 
@@ -62,12 +65,12 @@ public class Deportista implements Serializable {
 	 */
 	public Deportista() {
 		this.eventoDep = new HashSet<EventoDeportivo>();
+		this.competencias = new HashSet<Competencia>();
 	}
 
 	public Deportista(int tenantID, String nombre, String apellido,
-			Date fechaNac, String sexo, Set<EventoDeportivo> eventoDep,
-			ComiteOlimpico comiteOlimpico, Imagen foto) {
-		
+			Date fechaNac, String sexo, Set<EventoDeportivo> eventoDep,Set<Competencia> competencias,
+			ComiteOlimpico comiteOlimpico, Imagen foto) {		
 		this.tenantID = tenantID;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -75,7 +78,7 @@ public class Deportista implements Serializable {
 		this.Sexo = sexo;
 		this.comiteOlimpico = comiteOlimpico;
 		this.eventoDep = eventoDep;
-		this.eventoDep = new HashSet<EventoDeportivo>();
+		this.competencias = competencias;
 		this.foto = foto;
 	}
 
@@ -147,6 +150,14 @@ public class Deportista implements Serializable {
 		this.eventoDep.add(edep);
 
 	}
+	
+	public Set<Competencia> getCompetencias() {
+		return competencias;
+	}
+
+	public void setCompetencias(Set<Competencia> competencias) {
+		this.competencias = competencias;
+	}
 
 	public Imagen getFoto() {
 		return foto;
@@ -154,6 +165,10 @@ public class Deportista implements Serializable {
 
 	public void setFoto(Imagen foto) {
 		this.foto = foto;
+	}
+
+	public void addCompetencia(Competencia c) {
+		this.competencias.add(c);
 	}
 
 }

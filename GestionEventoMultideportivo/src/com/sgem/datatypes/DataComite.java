@@ -24,7 +24,7 @@ public class DataComite {
 	public DataComite() {}
 
 	public DataComite(String email, String password, String codigo,
-			String pais, String facebook, String twitter, int tenantId,int comiteId) {
+			String pais, String facebook, String twitter, int tenantId,int comiteId, String tipoUsuario) {
 		super();
 		this.email = email;
 		this.password = password;
@@ -34,6 +34,7 @@ public class DataComite {
 		this.twitter = twitter;
 		this.tenantId = tenantId;
 		this.comiteId = comiteId;
+		this.tipoUsuario = tipoUsuario; 
 	}
 
 	public String getEmail() {

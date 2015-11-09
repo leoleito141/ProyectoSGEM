@@ -3,15 +3,16 @@ package com.sgem.controladores;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+
 import com.sgem.datatypes.DataEventoDeportivo;
 import com.sgem.dominio.EventoDeportivo;
 import com.sgem.dominio.EventoMultideportivo;
 import com.sgem.dominio.Ronda;
 import com.sgem.persistencia.IEventoDeportivoDAO;
+import com.sgem.persistencia.IRondaDAO;
 
 
 @Stateless
@@ -19,6 +20,9 @@ public class EventoDeportivoController implements IEventoDeportivoController {
 
 	@EJB
 	private IEventoDeportivoDAO EventosDAO;
+	
+	@EJB
+	private IRondaDAO RondaDAO;
 	
 	@EJB
 	private IEventoMultiController  iemc;
@@ -39,7 +43,7 @@ public class EventoDeportivoController implements IEventoDeportivoController {
 					eventoDeportivo.setFechaInicio(dataEventoDeportivo.getFechaInicio());
 					eventoDeportivo.setFechaFin(dataEventoDeportivo.getFechaFin());
 					eventoDeportivo.setTenantId(dataEventoDeportivo.getTenantId());
-				
+					eventoDeportivo.setTipo(dataEventoDeportivo.getTipo());
 					
 					
 					
@@ -65,11 +69,11 @@ public class EventoDeportivoController implements IEventoDeportivoController {
 							
 							r.setNumeroRonda(j);
 							r.setTenantId(emd.getTenant().getTenantID());
-							r.setEventoDepId(eventoDep.getEventoDepId());
+//							r.setEventoDepId(eventoDep.getEventoDepId());
 							r.setEventoDeportivo(eventoDep);
 							eventoDep.addRonda(r);
 							
-							EventosDAO.guardarRondas(r);
+							RondaDAO.guardarRonda(r);
 							
 							
 						}
