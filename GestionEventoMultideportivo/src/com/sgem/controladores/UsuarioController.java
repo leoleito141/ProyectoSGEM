@@ -22,6 +22,7 @@ import org.jboss.resteasy.util.Base64;
 
 import com.sgem.datatypes.DataComite;
 import com.sgem.datatypes.DataHistorialLogin;
+import com.sgem.datatypes.DataImagen;
 import com.sgem.datatypes.DataJuez;
 import com.sgem.datatypes.DataNovedad;
 import com.sgem.datatypes.DataUsuario;
@@ -295,7 +296,7 @@ public class UsuarioController implements IUsuarioController {
 			
 			if(ImagenDAO.guardarImagen(i)){			
 		
-				Novedad n = new Novedad(dataNovedad.getTitulo(), dataNovedad.getDescripcion(), dataNovedad.getColumna(), comite,i);
+				Novedad n = new Novedad(dataNovedad.getTitulo(), dataNovedad.getDescripcion(), dataNovedad.getColumna(), comite,i,dataNovedad.getImagen().getTenantId());
 				guardo = NovedadDAO.guardarNovedad(n);
 
 				if(!guardo){
@@ -506,6 +507,40 @@ public class UsuarioController implements IUsuarioController {
 		
 		return dataJuez;		
 		
+	}
+	@Override
+
+	public List<DataNovedad> getNovedadesPrincipales(int tenantid) {
+		
+		List<Novedad> novedades = NovedadDAO.getNovedades(tenantid);
+		return convertirListaDataNovedad(novedades);
+		
+	}
+	private List<DataNovedad> convertirListaDataNovedad(List<Novedad> aux){
+		
+		List<DataNovedad> nov = new ArrayList<DataNovedad>();
+		if((aux != null)&&(!(aux.isEmpty()))){
+			for (Novedad n : aux) {
+				
+				DataImagen di = getDataImagen( n.getImagen());
+				DataNovedad dn = getDataNovedad(n,di);
+				nov.add(dn);
+			}		
+			return nov;
+		}else {
+			return new ArrayList<DataNovedad>();
+		}
+		
+	}
+	private DataImagen getDataImagen(Imagen i){
+		
+		DataImagen di = new DataImagen(i.getMime(),i.getRuta(),i.getTenantId());
+		return di ;
+	}
+	private DataNovedad getDataNovedad(Novedad n, DataImagen di){
+		
+		DataNovedad dn = new DataNovedad(n.getTitulo(),n.getDescripcion(),n.getColumna(),n.getTenantID(),"",di);
+		return dn;
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.sgem.persistencia;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 import com.sgem.datatypes.DataUsuario;
@@ -13,5 +15,5 @@ import com.sgem.dominio.Usuario;
 public interface INovedadDAO {
 
 	public boolean guardarNovedad(Novedad n);
-	
+	public List<Novedad> getNovedades(int tenantID);
 }

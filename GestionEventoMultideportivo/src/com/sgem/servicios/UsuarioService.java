@@ -153,7 +153,16 @@ public class UsuarioService implements IUsuarioService{
 		}
 		return null;
 	}
-
+	@Override
+	public Response getNovedad(String tenantId) {
+		try {			
+			
+			return Response.ok(iuc.getNovedadesPrincipales(Integer.parseInt( tenantId))).build();	
+		
+		} catch (Exception e) {
+			return Response.serverError().build();
+		}	
+	}
 	
 
 	

@@ -17,7 +17,7 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 public class ImagenUtil {
 	
-	private static final String FILE_PATH = "C:\\Users\\Maxi\\Github\\ProyectoSGEM\\GestionEventoMultideportivo\\WebContent\\resources\\defecto\\img\\";
+	private static final String FILE_PATH = "C:\\Users\\BeFx\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\";
 
 	private static final String NOVEDADES_DIR = "novedades";
 	private static final String COMITE_DIR = "comite_olimpico";

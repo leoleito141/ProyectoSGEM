@@ -115,6 +115,11 @@ public interface IUsuarioService {
 	@Path("/listarJueces/{tenantId}")
 	public Response listarJueces(@PathParam("tenantId") Integer tenantId);
 	
-	
+	@PermitAll
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/getNovedades/{tenantId}")
+	public Response getNovedad(@PathParam("tenantId") String tenantId);
 	
 }
