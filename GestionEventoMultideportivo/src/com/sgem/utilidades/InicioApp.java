@@ -74,7 +74,7 @@ public class InicioApp implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent arg0) {
         System.out.println("");
-        System.out.println("Iniciando aplicacion--------Ver: utiles.InicioApp");
+        System.out.println("Iniciando aplicacion--------Ver: com.sgem.utilidades.InicioApp");
         System.out.println("*****************************");
         System.out.println("******* Test mensajes *******");
         System.out.println("*****************************");
@@ -86,7 +86,7 @@ public class InicioApp implements ServletContextListener {
 		System.out.println("Mi ip: " + miIp);
 		
 		File file = new File("C:\\Windows\\System32\\drivers\\etc\\hosts");
-		System.out.println("Path : " + file.getAbsolutePath());
+//		System.out.println("Path : " + file.getAbsolutePath());
 				
 		String ipVieja = IpUtil.verificarIp(file,miIp);
 		if(!ipVieja.isEmpty()){

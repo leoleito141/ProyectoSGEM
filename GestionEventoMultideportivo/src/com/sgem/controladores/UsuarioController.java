@@ -229,15 +229,53 @@ public class UsuarioController implements IUsuarioController {
 	}
 
 	@Override
-	public List<ComiteOlimpico> buscarComiteporPais(String pais, int tenantID) {		
-		try{
-			return UsuarioDAO.buscarComiteporPais(pais, tenantID);
-		}catch(Exception e){
-			e.printStackTrace();
+	public Token loginAndroid(DataUsuario dataUsuario) throws UsuarioNoEncontradoException, AplicacionException {
+		Token jwt = null;
+		String pass = "";
+		
+		Usuario u =	UsuarioDAO.buscarUsuario(dataUsuario.getTenantId(), dataUsuario.getEmail(), UsuarioComun.class.getSimpleName());				
+	
+		try {
+			pass = new String(Base64.decode(dataUsuario.getPassword()));
+		} catch (IOException e) {
+			throw new AplicacionException("Error al obtener contrasenia del usuario");
+		}		
+		
+		if( u != null && (u.getPassword().equalsIgnoreCase(pass)) ){// genero json web token.
+			DataUsuario du = convertir(u);
+			du.setTipoUsuario(USUARIO_COMUN);
+			jwt = JWTUtil.generarToken(du);		
+		}else{
+			throw new UsuarioNoEncontradoException("No se encuentra usuario con dichas credenciales");
 		}
-		return null;
+
+		return jwt;
 	}
 
+	@Override
+	public Token loginIonic(DataJuez dataJuez) throws UsuarioNoEncontradoException, AplicacionException {
+		Token jwt = null;
+		String pass = "";
+		
+		Juez j = (Juez) UsuarioDAO.buscarUsuario(dataJuez.getTenantId(), dataJuez.getEmail(), Juez.class.getSimpleName());				
+	
+		try {
+			pass = new String(Base64.decode(dataJuez.getPassword()));
+		} catch (IOException e) {
+			throw new AplicacionException("Error al obtener contrasenia del usuario");
+		}		
+		
+		if( j != null && (j.getPassword().equalsIgnoreCase(pass)) ){// genero json web token.
+			DataJuez dj = new DataJuez(j.getTenantID(),((Juez)j).getNombre(),((Juez)j).getApellido(),"",j.getEmail(),USUARIO_JUEZ,j.getId().intValue());;
+			dj.setTipoUsuario(USUARIO_JUEZ);
+			jwt = JWTUtil.generarToken(dj);		
+		}else{
+			throw new UsuarioNoEncontradoException("No se encuentra usuario con dichas credenciales");
+		}
+
+		return jwt;
+	}
+	
 	@Override
 	public Token loginUsuario(DataUsuario dataUsuario) throws UsuarioNoEncontradoException, AplicacionException {
 		Token jwt = null;
@@ -283,6 +321,16 @@ public class UsuarioController implements IUsuarioController {
 		return jwt;
 	}
 
+	@Override
+	public List<ComiteOlimpico> buscarComiteporPais(String pais, int tenantID) {		
+		try{
+			return UsuarioDAO.buscarComiteporPais(pais, tenantID);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	@Override
 	public boolean guardarNovedad(DataNovedad dataNovedad) throws UsuarioNoEncontradoException, AplicacionException {
 		
@@ -507,6 +555,7 @@ public class UsuarioController implements IUsuarioController {
 		return dataJuez;		
 		
 	}
+
 
 }
 

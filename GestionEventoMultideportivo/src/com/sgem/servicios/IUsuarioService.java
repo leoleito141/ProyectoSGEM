@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 import com.sgem.datatypes.DataComite;
-import com.sgem.datatypes.DataHistorialLogin;
+import com.sgem.datatypes.DataJuez;
 import com.sgem.datatypes.DataNovedad;
 import com.sgem.datatypes.DataUsuario;
 
@@ -36,13 +36,20 @@ public interface IUsuarioService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/loginAdmin")
 	public Response loginAdmin(DataUsuario dataUsuario);
-	
-	@RolesAllowed("VISITANTE")
+		
+	@PermitAll
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/usuarios")
-	public Response guardarUsuario(DataUsuario dataUsuario);
+	@Path("/loginAndroid")
+	public Response loginAndroid(DataUsuario dataUsuario);
+	
+	@PermitAll
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/loginIonic")
+	public Response loginIonic(DataJuez dataJuez);
 	
 	@PermitAll
 	@POST
@@ -51,6 +58,13 @@ public interface IUsuarioService {
 	@Path("/loginUsuario")
 	public Response loginUsuario(DataUsuario dataUsuario);
 
+	@RolesAllowed("VISITANTE")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/usuarios")
+	public Response guardarUsuario(DataUsuario dataUsuario);
+	
 	@RolesAllowed("ORGANIZADOR")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)

@@ -26,6 +26,8 @@ public interface IUsuarioController {
 	
 	public boolean guardarUsuario(DataUsuario dataUsuario) throws UsuarioYaExisteException, AplicacionException;
 	public Token loginAdmin(DataUsuario dataUsuario) throws UsuarioNoEncontradoException, AplicacionException;
+	public Token loginAndroid(DataUsuario dataUsuario) throws UsuarioNoEncontradoException, AplicacionException;
+	public Token loginIonic(DataJuez dataJuez) throws UsuarioNoEncontradoException, AplicacionException;
 	public Token loginUsuario(DataUsuario dataUsuario) throws UsuarioNoEncontradoException, AplicacionException;
 	public boolean guardarComite(DataComite dataComite) throws UsuarioYaExisteException, AplicacionException;
 	public Imagen subirImagenComite(MultipartFormDataInput input) throws AplicacionException;
