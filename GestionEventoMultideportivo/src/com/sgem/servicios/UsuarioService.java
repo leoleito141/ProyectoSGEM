@@ -11,6 +11,7 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 import com.sgem.controladores.IUsuarioController;
 import com.sgem.datatypes.DataComite;
+import com.sgem.datatypes.DataJuez;
 import com.sgem.datatypes.DataNovedad;
 import com.sgem.datatypes.DataUsuario;
 import com.sgem.seguridad.excepciones.AplicacionException;
@@ -40,16 +41,27 @@ public class UsuarioService implements IUsuarioService{
 			return Response.serverError().build();
 		}
 	}
-	
+		
 	@Override
-	public Response guardarUsuario(DataUsuario dataUsuario) {
-		try {						
-			return Response.ok(iuc.guardarUsuario(dataUsuario)).build();				
-		} catch (UsuarioYaExisteException e) {
-			return Response.status(Status.FOUND).entity(new Boolean(false)).build();
+	public Response loginAndroid(DataUsuario dataUsuario) {
+		try{
+			return Response.ok(iuc.loginAndroid(dataUsuario)).build();
+		}catch(UsuarioNoEncontradoException e){
+			return Response.status(Status.NOT_FOUND).build();	
 		} catch (AplicacionException e) {
 			return Response.serverError().build();
-		}
+		}	
+	}
+
+	@Override
+	public Response loginIonic(DataJuez dataJuez) {
+		try{
+			return Response.ok(iuc.loginIonic(dataJuez)).build();
+		}catch(UsuarioNoEncontradoException e){
+			return Response.status(Status.NOT_FOUND).build();	
+		} catch (AplicacionException e) {
+			return Response.serverError().build();
+		}	
 	}
 	
 	@Override
@@ -62,6 +74,17 @@ public class UsuarioService implements IUsuarioService{
 			return Response.serverError().build();
 		}	
 	}	
+	
+	@Override
+	public Response guardarUsuario(DataUsuario dataUsuario) {
+		try {						
+			return Response.ok(iuc.guardarUsuario(dataUsuario)).build();				
+		} catch (UsuarioYaExisteException e) {
+			return Response.status(Status.FOUND).entity(new Boolean(false)).build();
+		} catch (AplicacionException e) {
+			return Response.serverError().build();
+		}
+	}
 	
 	@Override
 	public Response altaComite(DataComite dataComite) {		
@@ -153,6 +176,7 @@ public class UsuarioService implements IUsuarioService{
 		}
 		return null;
 	}
+
 	@Override
 	public Response getNovedad(String tenantId) {
 		try {			
@@ -163,7 +187,7 @@ public class UsuarioService implements IUsuarioService{
 			return Response.serverError().build();
 		}	
 	}
-	
+
 
 	
 }

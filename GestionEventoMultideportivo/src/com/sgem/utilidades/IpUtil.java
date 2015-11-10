@@ -56,8 +56,8 @@ public class IpUtil {
 		        String line = scanner.nextLine();
 		        lineNum++;
 		        if(line.contains("sgem-eventos.com")) { 
-		            System.out.println("Esta en la linea nro: " +lineNum);
-		            System.out.println(line.toString().trim());
+//		            System.out.println("Esta en la linea nro: " +lineNum);
+//		            System.out.println(line.toString().trim());
 		            
 		            ip = (line.toString().trim().substring(0,line.toString().trim().indexOf(' ')+1)).trim();
 		            String host = (line.toString().trim().substring(line.toString().trim().indexOf(' ')+1)).trim();
