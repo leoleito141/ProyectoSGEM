@@ -233,7 +233,7 @@ public class UsuarioController implements IUsuarioController {
 		Token jwt = null;
 		String pass = "";
 		
-		Usuario u =	UsuarioDAO.buscarUsuario(dataUsuario.getTenantId(), dataUsuario.getEmail(), UsuarioComun.class.getSimpleName());				
+		UsuarioComun u =	(UsuarioComun) UsuarioDAO.buscarUsuario(dataUsuario.getTenantId(), dataUsuario.getEmail(), UsuarioComun.class.getSimpleName());				
 	
 		try {
 			pass = new String(Base64.decode(dataUsuario.getPassword()));
