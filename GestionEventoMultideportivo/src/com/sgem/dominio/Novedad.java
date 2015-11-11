@@ -27,6 +27,11 @@ public class Novedad implements Serializable{
 
 	@Column(name = "titulo", nullable = false)
 	private String titulo;
+	
+	@Column(name = "tenantID", nullable = false)
+	private int tenantID;
+
+	
 
 	@Column(name = "descripcion", nullable = false)
 	private String descripcion;
@@ -46,12 +51,13 @@ public class Novedad implements Serializable{
 	public Novedad(){}
 	
 	public Novedad(String titulo, String descripcion, int columna,
-			ComiteOlimpico comite_olimpico,Imagen imagen) {
+			ComiteOlimpico comite_olimpico,Imagen imagen,int tenantID) {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.columna = columna;
 		this.comite_olimpico = comite_olimpico;
 		this.imagen = imagen;
+		this.tenantID = tenantID;
 	}
 
 	public int getNovedadID() {
@@ -100,6 +106,14 @@ public class Novedad implements Serializable{
 
 	public void setImagen(Imagen imagen) {
 		this.imagen = imagen;
+	}
+
+	public int getTenantID() {
+		return tenantID;
+	}
+
+	public void setTenantID(int tenantID) {
+		this.tenantID = tenantID;
 	}
 
 }
