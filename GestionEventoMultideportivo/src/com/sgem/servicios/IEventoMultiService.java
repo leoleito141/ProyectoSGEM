@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 import com.sgem.datatypes.DataEvento;
+import com.sgem.datatypes.DataNovedad;
 
 
 @RequestScoped
@@ -74,8 +75,17 @@ public interface IEventoMultiService {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes("multipart/form-data")
-	@Path("/subirImagenBanner")
-	public Response subirImagenBanner(MultipartFormDataInput input);
+	@Path("/subirImagenConfiguracion")
+	public Response subirImagenConfiguracion(MultipartFormDataInput input);
+	
+	//@RolesAllowed("COMITE_OLIMPICO")
+	@PermitAll	
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/configuracion")
+	public Response guardarConfiguracion(DataEvento datosEvento);
+
 
 		
 }

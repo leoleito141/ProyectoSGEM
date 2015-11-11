@@ -5,29 +5,25 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-import java.util.Map;
 
 import javax.activation.MimetypesFileTypeMap;
 import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.Response;
 
 import org.apache.commons.io.IOUtils;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
-import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
+
+import com.sgem.dominio.Imagen;
+import com.sgem.seguridad.excepciones.AplicacionException;
 
 public class ImagenUtil {
 	
 
-	private static final String FILE_PATH = "C:\\Users\\BeFx\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\";
-
-
-	// -Dimg.folder=C:\Users\USUARIO\git\ProyectoSGEM\GestionEventoMultideportivo\WebContent\resources\defecto\img\\" program argument en servidor.
-//	private static final String FILE_PATH = System.getProperties().getProperty("img.folder").trim();
+	private static final String FILE_PATH = System.getProperties().getProperty("img.folder").trim();
 
 	private static final String NOVEDADES_DIR = "novedades";
 	private static final String COMITE_DIR = "comite_olimpico";
 	private static final String DEPORTISTAS_DIR = "deportistas";
-	private static final String BANNER_DIR = "banner";
+	private static final String CONFIGURACION_DIR = "configuracion";
 	
 	public static String getFileName(MultivaluedMap<String, String> header, String tenantId) {
 
@@ -91,8 +87,8 @@ public class ImagenUtil {
 		}
 		return "unknown";
 	}
-	
-	public static String getBannerFilePath(MultivaluedMap<String, String> header, String tenantId) {
+		
+	public static String getConfigFilePath(MultivaluedMap<String, String> header, String tenantId) {
 		String[] contentDisposition = header.getFirst("Content-Disposition").split(";");
 		
 		for (String filename : contentDisposition) {
@@ -101,7 +97,7 @@ public class ImagenUtil {
 				String[] name = filename.split("=");
 				
 				String finalFileName = name[1].trim().replaceAll("\"", "");
-				return FILE_PATH +"Tenant"+tenantId+"\\"+BANNER_DIR+"\\"+finalFileName;
+				return FILE_PATH +"Tenant"+tenantId+"\\"+CONFIGURACION_DIR+"\\"+finalFileName;
 			}
 		}
 		return "unknown";
@@ -123,8 +119,8 @@ public class ImagenUtil {
 		return FILE_PATH +"Tenant"+tenantId+"\\"+COMITE_DIR+comiteId+"\\"+DEPORTISTAS_DIR +"\\";
 	}
 	
-	public static String getBannerDirectoryName(String tenantId) {
-		return FILE_PATH +"Tenant"+tenantId+"\\"+BANNER_DIR+"\\";
+	public static String getConfigDirectoryName(String tenantId) {
+		return FILE_PATH +"Tenant"+tenantId+"\\"+CONFIGURACION_DIR+"\\";
 	}
 	
 	public static File writeFile(byte[] content, String filename, String dir ) throws IOException {
@@ -161,7 +157,34 @@ public class ImagenUtil {
 		
 	}
 
+	public static Imagen salvarImagen(List<InputPart> inputParts, String tenantId) throws AplicacionException{
+		String fileName ="";
+		File f = null;
+		try {
+				
+			for (InputPart inputPart : inputParts) {		
+				
+				MultivaluedMap<String, String> header = inputPart.getHeaders();
+				
+				fileName = ImagenUtil.getConfigFilePath(header,tenantId);
 	
+				InputStream inputStream = inputPart.getBody(InputStream.class,null);				
+	
+				byte [] bytes = IOUtils.toByteArray(inputStream);
+				
+				String dir = ImagenUtil.getConfigDirectoryName(tenantId);
+				
+				f = writeFile(bytes,fileName,dir);			
+			}
+		}catch (IOException e) {
+			throw new AplicacionException("Error al subir la imagen");
+		}			
+		
+		Imagen image = new Imagen(getMimeType(f), fileName,Integer.parseInt(tenantId)); 
+		
+		return image;
+	} 
+
 
 	
 

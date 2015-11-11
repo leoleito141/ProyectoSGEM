@@ -38,7 +38,13 @@ public class EventoMultideportivo implements Serializable{
 	private Pais pais;
 	
 	@Column(name = "banner", nullable = true)
-	private Imagen banner;
+	private Imagen imagenBanner;
+	
+	@Column(name = "fondo", nullable = true)
+	private Imagen imagenFondo;
+	
+	@Column(name = "pagina", nullable = true)
+	private Imagen imagenPagina;
 
 	@Column(name = "logo", nullable = true)
 	private String logo;
@@ -139,11 +145,11 @@ public class EventoMultideportivo implements Serializable{
 	}
 	
 	public Imagen getBanner() {
-		return banner;
+		return imagenBanner;
 	}
 
 	public void setBanner(Imagen banner) {
-		this.banner = banner;
+		this.imagenBanner = banner;
 	}
 
 	public String getLogo() {
@@ -212,6 +218,22 @@ public class EventoMultideportivo implements Serializable{
 
 	public Set<EventoDeportivo> getDeportes() {
 		return deportes;
+	}
+
+	public Imagen getImagenFondo() {
+		return imagenFondo;
+	}
+
+	public void setImagenFondo(Imagen imagenFondo) {
+		this.imagenFondo = imagenFondo;
+	}
+
+	public Imagen getImagenPagina() {
+		return imagenPagina;
+	}
+
+	public void setImagenPagina(Imagen imagenPagina) {
+		this.imagenPagina = imagenPagina;
 	}
 
 	public void setDeportes(Set<EventoDeportivo> deportes) {

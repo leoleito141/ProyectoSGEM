@@ -13,26 +13,15 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-
-
-
-
-
-
-
 import org.apache.commons.io.IOUtils;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
-
-
-
-
-
 
 import com.sgem.controladores.IEventoMultiController;
 import com.sgem.datatypes.DataEvento;
 import com.sgem.datatypes.DataTenant;
 import com.sgem.seguridad.excepciones.AplicacionException;
+import com.sgem.seguridad.excepciones.UsuarioNoEncontradoException;
 
 @Stateless
 public class EventoMultiService implements IEventoMultiService{
@@ -121,9 +110,9 @@ public class EventoMultiService implements IEventoMultiService{
 	}
 	
 	@Override
-	public Response subirImagenBanner(MultipartFormDataInput input) {		
+	public Response subirImagenConfiguracion(MultipartFormDataInput input) {		
 		try {						
-			return Response.ok(iemc.subirImagenBanner(input)).build();	
+			return Response.ok(iemc.subirImagenConfiguracion(input)).build();	
 		} catch (AplicacionException e) {
 			return Response.serverError().build();
 		}	
@@ -219,6 +208,15 @@ public class EventoMultiService implements IEventoMultiService{
 		fop.flush();
 		fop.close();
 
+	}
+
+	@Override
+	public Response guardarConfiguracion(DataEvento datosEvento) {
+		try {						
+			return Response.ok(iemc.guardarConfiguracion(datosEvento)).build();					
+		} catch (AplicacionException e) {
+			return Response.serverError().build();
+		}
 	}
 	
 	

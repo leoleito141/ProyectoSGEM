@@ -3,7 +3,9 @@ package com.sgem.datatypes;
 import java.util.Date;
 
 public class DataEvento {
-
+	
+	private int tenantId;
+	
 	private String nombre;
 	
 	private int anio;
@@ -31,6 +33,20 @@ public class DataEvento {
 	private String passwordOrganizador;
 	
 	private DataPais pais;
+	
+	private DataImagen banner;
+	
+	private DataImagen fondo;
+	
+	private DataImagen pagina;
+	
+	public int getTenantId() {
+		return tenantId;
+	}
+
+	public void setTenantId(int tenantId) {
+		this.tenantId = tenantId;
+	}
 
 
 	public String getNombre() {
@@ -204,14 +220,33 @@ public class DataEvento {
 		return passwordOrganizador;
 	}
 
-
-
-
 	public void setPasswordOrganizador(String passwordOrganizador) {
 		this.passwordOrganizador = passwordOrganizador;
 	}
+	
+	public DataImagen getBanner() {
+		return banner;
+	}
 
+	public void setBanner(DataImagen banner) {
+		this.banner = banner;
+	}
 
+	public DataImagen getFondo() {
+		return fondo;
+	}
+
+	public void setFondo(DataImagen fondo) {
+		this.fondo = fondo;
+	}
+
+	public DataImagen getPagina() {
+		return pagina;
+	}
+
+	public void setPagina(DataImagen pagina) {
+		this.pagina = pagina;
+	}
 
 
 	@Override
@@ -221,7 +256,7 @@ public class DataEvento {
 				+ ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", facebook="
 				+ facebook +",instagram="+ instagram + ", twitter=" + twitter + ", canalYoutube=" + canalYoutube
 				+ ", hashtag=" + hashtag + ", css="+ css + ", emailOrganizador=" + emailOrganizador
-				+ ", passwordOrganizador=" + passwordOrganizador +"]";
+				+ ", passwordOrganizador=" + passwordOrganizador + ", imagenBanner="+ banner+ ", imagenFondo="+ fondo +", imagenPagina="+pagina + "]";
 	}
 	
 	

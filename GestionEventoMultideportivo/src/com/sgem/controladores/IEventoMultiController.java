@@ -1,5 +1,7 @@
 package com.sgem.controladores;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
@@ -17,6 +19,7 @@ public interface IEventoMultiController {
 	public DataTenant obtenerDataTenant(String tenant);
 	public EventoMultideportivo obtenerEventoMultideportivoXTenantId(int tenantId);
 	public String obtenerProximoTenant();
-	public Imagen subirImagenBanner(MultipartFormDataInput input) throws AplicacionException;
+	public List<Imagen> subirImagenConfiguracion(MultipartFormDataInput input) throws AplicacionException;
+	public boolean guardarConfiguracion(DataEvento datosEvento) throws AplicacionException;
 
 }
