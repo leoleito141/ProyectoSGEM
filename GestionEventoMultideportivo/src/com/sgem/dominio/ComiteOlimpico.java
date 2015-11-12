@@ -24,19 +24,25 @@ public class ComiteOlimpico extends Usuario{
 	@Column(name = "cod_comite_olimpico", nullable = false)
 	private String codigo;
 	
+	@Column(name = "paypal")
+	private String paypal;
+	
 	@OneToOne(fetch=FetchType.LAZY)
 	private Imagen logo;	
+	
+	
 		
 	@OneToMany(fetch = FetchType.EAGER,mappedBy = "comiteOlimpico") 
 	 private Set<Deportista> Deportistas= new HashSet<Deportista>();
 	
 	public ComiteOlimpico(){}
-	public ComiteOlimpico(String email, String facebook, String codigo, String pais,String twitter, String canalYoutube,String password,int tenantid,Imagen logo) 
+	public ComiteOlimpico(String email, String facebook, String codigo, String pais,String twitter, String canalYoutube,String password,int tenantid,Imagen logo,String paypal) 
 	{		
 		super(email, facebook, twitter, canalYoutube, password,tenantid);
 		this.codigo = codigo;
 		this.pais = pais;
 		this.logo = logo;
+		this.paypal = paypal;
 	}
 
 	public String soy() {
@@ -73,6 +79,14 @@ public class ComiteOlimpico extends Usuario{
 	public void setLogo(Imagen logo) {
 		this.logo = logo;
 	}
+	
+	public String getPaypal() {
+		return paypal;
+	}
+	public void setPaypal(String paypal) {
+		this.paypal = paypal;
+	}
+	
 	public void agregarDeportista(Deportista d) {
 
 		if (this.Deportistas != null)

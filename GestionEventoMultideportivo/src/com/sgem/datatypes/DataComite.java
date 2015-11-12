@@ -14,6 +14,8 @@ public class DataComite {
 
 	private String twitter;
 	
+	private String paypal;
+	
 	private String tipoUsuario;
 	
 	private DataImagen logo;
@@ -24,7 +26,7 @@ public class DataComite {
 	public DataComite() {}
 
 	public DataComite(String email, String password, String codigo,
-			String pais, String facebook, String twitter, int tenantId,int comiteId, String tipoUsuario) {
+			String pais, String facebook, String twitter, String paypal,int tenantId,int comiteId, String tipoUsuario) {
 		super();
 		this.email = email;
 		this.password = password;
@@ -34,7 +36,8 @@ public class DataComite {
 		this.twitter = twitter;
 		this.tenantId = tenantId;
 		this.comiteId = comiteId;
-		this.tipoUsuario = tipoUsuario; 
+		this.tipoUsuario = tipoUsuario;
+		this.paypal = paypal;
 	}
 
 	public String getEmail() {
@@ -116,4 +119,13 @@ public class DataComite {
 	public void setComiteId(int comiteId) {
 		this.comiteId = comiteId;
 	}
+
+	public String getPaypal() {
+		return paypal;
+	}
+
+	public void setPaypal(String paypal) {
+		this.paypal = paypal;
+	}
+	
 }

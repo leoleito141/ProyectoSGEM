@@ -18,6 +18,12 @@ import com.sgem.seguridad.excepciones.AplicacionException;
 public class ImagenUtil {
 	
 
+
+//	private static final String FILE_PATH = "C:\\Users\\BeFx\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\";
+
+
+	// -Dimg.folder=C:\Users\USUARIO\git\ProyectoSGEM\GestionEventoMultideportivo\WebContent\resources\defecto\img\\" program argument en servidor.
+
 	private static final String FILE_PATH = System.getProperties().getProperty("img.folder").trim();
 
 	private static final String NOVEDADES_DIR = "novedades";
