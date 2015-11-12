@@ -182,10 +182,12 @@ public class EventoMultiController implements IEventoMultiController {
 	public boolean guardarConfiguracion(DataEvento datosEvento) throws AplicacionException {
 		
 
-		
+		System.out.println(datosEvento);
+	
+
 		boolean guardo = false;
 		EventoMultideportivo eventoMulti = (EventoMultideportivo)EventoMultiDAO.traerEventoMulti(datosEvento.getTenantId());		
-		
+		System.out.println(eventoMulti);
 		if(eventoMulti != null){
 		
 			Imagen banner = new Imagen(datosEvento.getBanner().getMime(), datosEvento.getBanner().getRuta(), datosEvento.getBanner().getTenantId());
@@ -193,10 +195,13 @@ public class EventoMultiController implements IEventoMultiController {
 			Imagen pagina = new Imagen(datosEvento.getPagina().getMime(), datosEvento.getPagina().getRuta(), datosEvento.getPagina().getTenantId());
 
 			if(imagenDAO.guardarImagen(banner) && imagenDAO.guardarImagen(fondo) && imagenDAO.guardarImagen(pagina) ){			
-		
+				
+				
 				eventoMulti.setBanner(banner);
 				eventoMulti.setImagenFondo(fondo);
 				eventoMulti.setImagenPagina(pagina);
+				
+				EventoMultiDAO.guardarConfiguracion(eventoMulti);
 
 				guardo=true;
 				

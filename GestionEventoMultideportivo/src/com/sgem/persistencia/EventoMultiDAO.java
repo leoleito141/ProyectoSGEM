@@ -30,6 +30,19 @@ public class EventoMultiDAO implements IEventoMultiDAO {
 		return false;
 
 	}
+	
+	public boolean guardarConfiguracion(EventoMultideportivo evento) {
+
+		try {
+			em.merge(evento);
+			return true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+
+	}
 		
 	public EventoMultideportivo buscarEvento(String nombre) {
 		try{

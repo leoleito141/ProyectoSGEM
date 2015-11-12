@@ -37,13 +37,13 @@ public class EventoMultideportivo implements Serializable{
 	@OneToOne(targetEntity=Pais.class,cascade = CascadeType.ALL)
 	private Pais pais;
 	
-	@Column(name = "banner", nullable = true)
+	@OneToOne(fetch=FetchType.LAZY)
 	private Imagen imagenBanner;
 	
-	@Column(name = "fondo", nullable = true)
+	@OneToOne(fetch=FetchType.LAZY)
 	private Imagen imagenFondo;
 	
-	@Column(name = "pagina", nullable = true)
+	@OneToOne(fetch=FetchType.LAZY)
 	private Imagen imagenPagina;
 
 	@Column(name = "logo", nullable = true)
