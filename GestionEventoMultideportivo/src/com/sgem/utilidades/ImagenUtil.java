@@ -18,11 +18,11 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 public class ImagenUtil {
 	
 
-	private static final String FILE_PATH = "C:\\Users\\BeFx\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\";
+//	private static final String FILE_PATH = "C:\\Users\\BeFx\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\";
 
 
 	// -Dimg.folder=C:\Users\USUARIO\git\ProyectoSGEM\GestionEventoMultideportivo\WebContent\resources\defecto\img\\" program argument en servidor.
-//	private static final String FILE_PATH = System.getProperties().getProperty("img.folder").trim();
+	private static final String FILE_PATH = System.getProperties().getProperty("img.folder").trim();
 
 	private static final String NOVEDADES_DIR = "novedades";
 	private static final String COMITE_DIR = "comite_olimpico";

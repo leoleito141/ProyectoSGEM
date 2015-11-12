@@ -121,6 +121,7 @@ public class UsuarioController implements IUsuarioController {
 				co.setPassword(dataComite.getPassword());
 				co.setCodigo(dataComite.getCodigo());
 				co.setTenantID(dataComite.getTenantId());
+				co.setPaypal(dataComite.getPaypal());
 				co.setLogo(logo);
 				
 				guardo = UsuarioDAO.guardarUsuario(co);
@@ -296,7 +297,7 @@ public class UsuarioController implements IUsuarioController {
 			tipoUsuario = u instanceof UsuarioComun ? USUARIO_COMUN : u instanceof ComiteOlimpico ? USUARIO_COMITE : u instanceof Organizador ? USUARIO_ORGANIZADOR : USUARIO_JUEZ;
 			
 			if(tipoUsuario.equals(USUARIO_COMITE)){
-				DataComite dc = new DataComite(u.getEmail(),"",((ComiteOlimpico)u).getCodigo(),((ComiteOlimpico)u).getPais(),u.getFacebook(),u.getTwitter(),u.getTenantID(),u.getId().intValue(),tipoUsuario);
+				DataComite dc = new DataComite(u.getEmail(),"",((ComiteOlimpico)u).getCodigo(),((ComiteOlimpico)u).getPais(),u.getFacebook(),u.getTwitter(),((ComiteOlimpico)u).getPaypal(),u.getTenantID(),u.getId().intValue(),tipoUsuario);
 				jwt = JWTUtil.generarToken(dc);
 
 			} else if(tipoUsuario.equals(USUARIO_JUEZ)){				
