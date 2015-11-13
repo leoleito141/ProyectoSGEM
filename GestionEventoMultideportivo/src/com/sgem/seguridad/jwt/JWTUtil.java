@@ -48,8 +48,7 @@ public class JWTUtil {
 		//Expiracion
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date());
-	//	calendar.add(Calendar.HOUR, 1);		
-		calendar.add(Calendar.MINUTE, 1);
+		calendar.add(Calendar.HOUR, 1);	
 		
 		String jwt = Jwts.builder().setHeader(headers).setClaims(claims).setExpiration(calendar.getTime()).signWith(SignatureAlgorithm.HS256, clave).compact();
 		Token token = new Token();
