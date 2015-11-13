@@ -9,7 +9,7 @@ public class DataEstadistica {
 	
 	private int posicion;
 	
-	private String participante;
+	private DataDeportista deportista;
 	
 	private String datoInformativo;
 		
@@ -18,11 +18,11 @@ public class DataEstadistica {
 	public DataEstadistica(){}
 	
 	public DataEstadistica(int estadisticaId, int tenantId, int posicion,
-			String participante, String datoInformativo, int resultadoId) {
+			DataDeportista deportista, String datoInformativo, int resultadoId) {
 		this.estadisticaId = estadisticaId;
 		this.tenantId = tenantId;
 		this.posicion = posicion;
-		this.participante = participante;
+		this.deportista = deportista;
 		this.datoInformativo = datoInformativo;
 		this.resultadoId = resultadoId;
 	}
@@ -51,12 +51,12 @@ public class DataEstadistica {
 		this.posicion = posicion;
 	}
 
-	public String getParticipante() {
-		return participante;
+	public DataDeportista getDeportista() {
+		return deportista;
 	}
 
-	public void setParticipante(String participante) {
-		this.participante = participante;
+	public void setDeportista(DataDeportista deportista) {
+		this.deportista = deportista;
 	}
 
 	public String getDatoInformativo() {

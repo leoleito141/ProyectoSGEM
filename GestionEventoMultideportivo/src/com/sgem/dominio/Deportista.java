@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -50,6 +51,9 @@ public class Deportista implements Serializable {
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Competencia> competencias;
 	
+	@OneToMany(fetch = FetchType.EAGER)
+	private Set<Estadistica> estadisticas;
+	
 	@OneToOne(fetch = FetchType.LAZY)
 	private Imagen foto;
 
@@ -70,7 +74,7 @@ public class Deportista implements Serializable {
 
 	public Deportista(int tenantID, String nombre, String apellido,
 			Date fechaNac, String sexo, Set<EventoDeportivo> eventoDep,Set<Competencia> competencias,
-			ComiteOlimpico comiteOlimpico, Imagen foto) {		
+			ComiteOlimpico comiteOlimpico,Set<Estadistica> estadisticas, Imagen foto) {		
 		this.tenantID = tenantID;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -79,6 +83,7 @@ public class Deportista implements Serializable {
 		this.comiteOlimpico = comiteOlimpico;
 		this.eventoDep = eventoDep;
 		this.competencias = competencias;
+		this.estadisticas = estadisticas;
 		this.foto = foto;
 	}
 
@@ -159,6 +164,14 @@ public class Deportista implements Serializable {
 		this.competencias = competencias;
 	}
 
+	public Set<Estadistica> getEstadisticas() {
+		return estadisticas;
+	}
+
+	public void setEstadisticas(Set<Estadistica> estadisticas) {
+		this.estadisticas = estadisticas;
+	}
+
 	public Imagen getFoto() {
 		return foto;
 	}
@@ -169,6 +182,10 @@ public class Deportista implements Serializable {
 
 	public void addCompetencia(Competencia c) {
 		this.competencias.add(c);
+	}
+
+	public void addEstadistica(Estadistica estadistica) {
+		this.estadisticas.add(estadistica);		
 	}
 
 }

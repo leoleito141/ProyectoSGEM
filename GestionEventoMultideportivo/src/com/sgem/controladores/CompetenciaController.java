@@ -271,10 +271,17 @@ public class CompetenciaController implements ICompetenciaController {
 		
 		Set<Estadistica> estadisticas = new HashSet<Estadistica>();
 		for(DataEstadistica e : resultado.getEstadisticas()){
-			Estadistica estadistica = convertirEstadistica(e);
+			Deportista deportista = DeportistaDAO.buscarDeportista(e.getDeportista().getDeportistaID());
+			Estadistica estadistica = convertirEstadistica(e,deportista);
+			
 			if (!EstadisticaDAO.guardarEstadistica(estadistica)) {
 				throw new AplicacionException("Error al guardar el resultado. Error al guardar estadistica");
 			} 			
+			
+			deportista.addEstadistica(estadistica);
+			if (!DeportistaDAO.modificarDeportista(deportista)){
+				throw new AplicacionException("Error al guardar el deportista. Error al guardar estadistica");
+			} 
 			estadisticas.add(estadistica);
 		}
 		
@@ -299,9 +306,8 @@ public class CompetenciaController implements ICompetenciaController {
 		
 	}
 
-	private Estadistica convertirEstadistica(DataEstadistica e) {		
-		return new Estadistica(e.getTenantId(), e.getPosicion(), e.getParticipante(), e.getDatoInformativo(), null);	
-	
+	private Estadistica convertirEstadistica(DataEstadistica e,Deportista deportista) {			
+		return new Estadistica(e.getTenantId(),e.getPosicion(),e.getDatoInformativo(),deportista,null);	
 	}
 	
 }

@@ -38,7 +38,7 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
     private static final String ROL_PROPERTY = "Rol";
     private static final String AUTHENTICATION_SCHEME = "Bearer";
     private static final ServerResponse ACCESS_DENIED = new ServerResponse("Access denied for this resource", 401, new Headers<Object>());
-    private static final ServerResponse ACCESS_EXPIRED = new ServerResponse("Sesion expirada, inicie sesi�n nuevamente", 498, new Headers<Object>());
+    private static final ServerResponse ACCESS_EXPIRED = new ServerResponse("Sesion expirada, inicie sesion nuevamente", 498, new Headers<Object>());
     private static final ServerResponse ACCESS_FORBIDDEN = new ServerResponse("Nobody can access this resource", 403, new Headers<Object>());
     private static final ServerResponse SERVER_ERROR = new ServerResponse("INTERNAL SERVER ERROR", 500, new Headers<Object>());
      	    

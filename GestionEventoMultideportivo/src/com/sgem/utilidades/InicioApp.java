@@ -20,6 +20,7 @@ import com.sgem.dominio.ComiteOlimpico;
 import com.sgem.dominio.Competencia;
 import com.sgem.dominio.Deportista;
 import com.sgem.dominio.Entrada;
+import com.sgem.dominio.Estadistica;
 import com.sgem.dominio.EventoDeportivo;
 import com.sgem.dominio.EventoMultideportivo;
 import com.sgem.dominio.HistorialLogin;
@@ -261,17 +262,17 @@ public class InicioApp implements ServletContextListener {
 		System.out.println("obtuve el usuario "+comiteUruguayo.getEmail()+" "+comiteUruguayo.getId());
 		System.out.println(" y es "+comiteUruguayo.soy());
 		
-		Deportista du = new Deportista(1, "Negro", "Jefe",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null, null);			
-		Deportista du1 = new Deportista(1, "Diego", "Forlan",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null, null);		
-		Deportista du2 = new Deportista(1, "Luis", "Suarez",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null, null);			
-		Deportista du3 = new Deportista(1, "Martin", "Caceres",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null, null);	
-		Deportista du4 = new Deportista(1, "Debo", "Rodriguez",new Date(), "Femenino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null, null);	
+		Deportista du = new Deportista(1, "Negro", "Jefe",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);			
+		Deportista du1 = new Deportista(1, "Diego", "Forlan",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);		
+		Deportista du2 = new Deportista(1, "Luis", "Suarez",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);			
+		Deportista du3 = new Deportista(1, "Martin", "Caceres",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista du4 = new Deportista(1, "Debo", "Rodriguez",new Date(), "Femenino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
 		
-		Deportista da = new Deportista(1, "Diego Armando", "Maradona",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null, null);			
-		Deportista da1 = new Deportista(1, "La Brujita", "Veron",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null, null);		
-		Deportista da2 = new Deportista(1, "El raton", "Ayala",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null, null);	
-		Deportista da3 = new Deportista(1, "Javier", "Mascherano",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null, null);	
-		Deportista da4 = new Deportista(1, "Lionel", "Messi",new Date(), "Femenino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null, null);		
+		Deportista da = new Deportista(1, "Diego Armando", "Maradona",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);			
+		Deportista da1 = new Deportista(1, "La Brujita", "Veron",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);		
+		Deportista da2 = new Deportista(1, "El raton", "Ayala",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista da3 = new Deportista(1, "Javier", "Mascherano",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista da4 = new Deportista(1, "Lionel", "Messi",new Date(), "Femenino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);		
 
 		
 		du.addEventoDeportivo(eventoDep);
