@@ -85,16 +85,17 @@ public class EventoMultiService implements IEventoMultiService{
 //		
 //	}
 	
-	@Override
+
+@Override
 	public Response obtenerDataTenant(String tenant) {
 		
-		DataTenant dt = new DataTenant();
+		DataEvento de = new DataEvento();
 		
 		try{
 			
-			dt = iemc.obtenerDataTenant(tenant);
+			de = iemc.obtenerDataTenant(tenant);
 			
-			if(dt == null)
+			if(de == null)
 				return Response.status(Status.NOT_FOUND).build();
 			
 		}catch(Exception e){
@@ -103,7 +104,7 @@ public class EventoMultiService implements IEventoMultiService{
 		
 		
 		return Response
-				.ok(dt)
+				.ok(de)
 				.build();
 		
 		

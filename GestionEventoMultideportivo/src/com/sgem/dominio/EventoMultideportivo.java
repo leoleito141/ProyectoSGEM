@@ -46,7 +46,7 @@ public class EventoMultideportivo implements Serializable{
 	@OneToOne(fetch=FetchType.LAZY)
 	private Imagen imagenPagina;
 
-	@Column(name = "logo", nullable = true)
+	@Column(name = "logo", nullable = true) ///// Borrarlo!
 	private String logo;
 	
 	@Column(name = "fecha_inicio", nullable = true)
@@ -58,17 +58,36 @@ public class EventoMultideportivo implements Serializable{
 	@Column(name = "facebook", nullable = true)
 	private String facebook;
 	
+	@Column(name = "widget_facebook", nullable = true)
+	private String widget_facebook;
+	
 	@Column(name = "instagram", nullable = true)
 	private String instagram;
 	
+	@Column(name = "widget_instagram", nullable = true)
+	private String widget_instagram;
+	
+	@Column(name = "twitter", nullable = true)
+	private String twitter;
+		
 	@Column(name = "hashtag", nullable = true)
 	private String Hashtag;
 	
-	@Column(name = "canal_youtube", nullable = true)
+	@Column(name = "canalYoutube", nullable = true)
 	private String canalYoutube;
 	
-	@Column(name = "css", nullable = true)
+	@Column(name = "widget_twitter", nullable = true)
+	private String widget_twitter;	
+	
+	@Column(name = "css", nullable = true) ////// BORRAR!
 	private String Css;
+	
+	@Column(name = "colorFondo", nullable = true)
+	private String colorFondo;
+	
+	@Column(name = "colorNoticias", nullable = true)
+	private String colorNoticias;
+	
 	
 	@OneToOne(targetEntity=Organizador.class,mappedBy="evento",cascade = CascadeType.ALL)
 	private Organizador organizador;
@@ -99,33 +118,13 @@ public class EventoMultideportivo implements Serializable{
 		this.Css = css;
 
 	}
-	
-	
-	
-	public String getInstagram() {
-		return instagram;
-	}
-
-	public void setInstagram(String instagram) {
-		this.instagram = instagram;
-	}
-
-	public TenantHandler getTenant() {
-		return tenantHandler;
-	}
-
-	
-	public void setTenant(TenantHandler tenant) {
-		    this.tenantHandler = tenant;
-		
-    }
 
 	public int getEventoId() {
 		return EventoId;
 	}
 
 	public void setEventoId(int eventoId) {
-		this.EventoId = eventoId;
+		EventoId = eventoId;
 	}
 
 	public String getNombre() {
@@ -143,21 +142,29 @@ public class EventoMultideportivo implements Serializable{
 	public void setPais(Pais pais) {
 		this.pais = pais;
 	}
-	
-	public Imagen getBanner() {
+
+	public Imagen getImagenBanner() {
 		return imagenBanner;
 	}
 
-	public void setBanner(Imagen banner) {
-		this.imagenBanner = banner;
+	public void setImagenBanner(Imagen imagenBanner) {
+		this.imagenBanner = imagenBanner;
 	}
 
-	public String getLogo() {
-		return logo;
+	public Imagen getImagenFondo() {
+		return imagenFondo;
 	}
 
-	public void setLogo(String logo) {
-		this.logo = logo;
+	public void setImagenFondo(Imagen imagenFondo) {
+		this.imagenFondo = imagenFondo;
+	}
+
+	public Imagen getImagenPagina() {
+		return imagenPagina;
+	}
+
+	public void setImagenPagina(Imagen imagenPagina) {
+		this.imagenPagina = imagenPagina;
 	}
 
 	public Date getFechaInicio() {
@@ -184,6 +191,38 @@ public class EventoMultideportivo implements Serializable{
 		this.facebook = facebook;
 	}
 
+	public String getWidget_facebook() {
+		return widget_facebook;
+	}
+
+	public void setWidget_facebook(String widget_facebook) {
+		this.widget_facebook = widget_facebook;
+	}
+
+	public String getInstagram() {
+		return instagram;
+	}
+
+	public void setInstagram(String instagram) {
+		this.instagram = instagram;
+	}
+
+	public String getWidget_instagram() {
+		return widget_instagram;
+	}
+
+	public void setWidget_instagram(String widget_instagram) {
+		this.widget_instagram = widget_instagram;
+	}
+
+	public String getTwitter() {
+		return twitter;
+	}
+
+	public void setTwitter(String twitter) {
+		this.twitter = twitter;
+	}
+
 	public String getHashtag() {
 		return Hashtag;
 	}
@@ -200,12 +239,28 @@ public class EventoMultideportivo implements Serializable{
 		this.canalYoutube = canalYoutube;
 	}
 
-	public String getCss() {
-		return Css;
+	public String getWidget_twitter() {
+		return widget_twitter;
 	}
 
-	public void setCss(String css) {
-		Css = css;
+	public void setWidget_twitter(String widget_twitter) {
+		this.widget_twitter = widget_twitter;
+	}
+
+	public String getColorFondo() {
+		return colorFondo;
+	}
+
+	public void setColorFondo(String colorFondo) {
+		this.colorFondo = colorFondo;
+	}
+
+	public String getColorNoticias() {
+		return colorNoticias;
+	}
+
+	public void setColorNoticias(String colorNoticias) {
+		this.colorNoticias = colorNoticias;
 	}
 
 	public Organizador getOrganizador() {
@@ -220,34 +275,17 @@ public class EventoMultideportivo implements Serializable{
 		return deportes;
 	}
 
-	public Imagen getImagenFondo() {
-		return imagenFondo;
-	}
-
-	public void setImagenFondo(Imagen imagenFondo) {
-		this.imagenFondo = imagenFondo;
-	}
-
-	public Imagen getImagenPagina() {
-		return imagenPagina;
-	}
-
-	public void setImagenPagina(Imagen imagenPagina) {
-		this.imagenPagina = imagenPagina;
-	}
-
 	public void setDeportes(Set<EventoDeportivo> deportes) {
 		this.deportes = deportes;
 	}
-	
-	public void agregarEventos(EventoDeportivo ed) {
 
-		if (this.deportes == null)
-			this.deportes = new HashSet<EventoDeportivo>();
-
-		this.deportes.add(ed);
-
+	public TenantHandler getTenantHandler() {
+		return tenantHandler;
 	}
-	
+
+	public void setTenantHandler(TenantHandler tenantHandler) {
+		this.tenantHandler = tenantHandler;
+	}
+		
 	
 }

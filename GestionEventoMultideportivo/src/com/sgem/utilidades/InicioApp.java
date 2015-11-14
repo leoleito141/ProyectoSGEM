@@ -178,8 +178,8 @@ public class InicioApp implements ServletContextListener {
 		
 		
 		TenantHandler th = new TenantHandler();
-		Pais p = new Pais("Rusia","Sochi");	
-		EventoMultideportivo evento = new EventoMultideportivo("SOCHI", p , "logo.jpg", new Date(), new Date(), "facebook/sochi","Instagram/sochi", "#sochi", "youtube/sochi", "sochi.css");
+		Pais p = new Pais("Brasil","Rio2016");	
+		EventoMultideportivo evento = new EventoMultideportivo("Rio2016", p , "logo.jpg", new Date(), new Date(), "facebook/Rio2016","Instagram/Rio2016", "#Rio2016", "youtube/Rio2016", "Rio2016.css");
 		List<EventoMultideportivo> listevento = new ArrayList<EventoMultideportivo>();
 		
 		
@@ -195,7 +195,7 @@ public class InicioApp implements ServletContextListener {
 		usuario4.setEvento(evento);
 		
 		evento.setOrganizador(usuario4);
-		evento.setTenant(th);
+		evento.setTenantHandler(th);
 		listevento.add(evento);
 		th.setEventos(listevento);
 		

@@ -16,6 +16,7 @@ import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 import com.sgem.datatypes.DataEvento;
+import com.sgem.datatypes.DataImagen;
 import com.sgem.datatypes.DataTenant;
 import com.sgem.dominio.ComiteOlimpico;
 import com.sgem.dominio.EventoMultideportivo;
@@ -65,7 +66,7 @@ public class EventoMultiController implements IEventoMultiController {
 			org.setPassword(dataEvento.getPasswordOrganizador());
 			org.setEvento(evento);
 			evento.setOrganizador(org);
-			evento.setTenant(th);
+			evento.setTenantHandler(th);
 			listevento.add(evento);
 			th.setEventos(listevento);			
 			EventoMultiDAO.guardarTenant(th);
@@ -81,18 +82,34 @@ public class EventoMultiController implements IEventoMultiController {
 
 
 	@Override
-	public DataTenant obtenerDataTenant(String tenant) {
+	public DataEvento obtenerDataTenant(String tenant) {
 
-		DataTenant dt = null;
+		DataEvento dt = null;
 		EventoMultideportivo e;
 		try {
 			e = EventoMultiDAO.obtenerDataTenant(tenant);
 			
-			dt = new DataTenant();
+			dt = new DataEvento();			
+			dt.setTenantId(e.getTenantHandler().getTenantID());
+			
+			
+			dt.setFacebook(e.getFacebook());
+			dt.setCanalYoutube(e.getCanalYoutube());
+			dt.setInstagram(e.getInstagram());
+			dt.setTwitter(e.getTwitter());
+			
 			dt.setNombre_url(e.getNombre());
-			dt.setTenantId(e.getTenant().getTenantID());
-			dt.setLogin_back_img(e.getLogo());
-			dt.setRegistro_back_img(e.getLogo());
+			DataImagen fotoBanner = e.getImagenBanner()!=null ? getDataImagen(e.getImagenBanner()): null;
+			DataImagen fotoFondo = e.getImagenFondo() !=null ? getDataImagen(e.getImagenFondo()):null;
+			DataImagen fotoLogo = e.getImagenPagina()!=null ? getDataImagen(e.getImagenPagina()):null;			
+					
+			dt.setBanner(fotoBanner);
+			dt.setFondo(fotoFondo);
+			dt.setPagina(fotoLogo);
+			
+			dt.setColorFondo(e.getColorFondo());
+			dt.setColorNews(e.getColorNoticias());
+			
 						
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -100,6 +117,12 @@ public class EventoMultiController implements IEventoMultiController {
 
 		return dt;
 
+	}
+
+private DataImagen getDataImagen(Imagen i){
+		
+		DataImagen di = new DataImagen(i.getMime(),i.getRuta(),i.getTenantId());
+		return di ;
 	}
 	
 	
@@ -197,7 +220,7 @@ public class EventoMultiController implements IEventoMultiController {
 			if(imagenDAO.guardarImagen(banner) && imagenDAO.guardarImagen(fondo) && imagenDAO.guardarImagen(pagina) ){			
 				
 				
-				eventoMulti.setBanner(banner);
+				eventoMulti.setImagenBanner(banner);
 				eventoMulti.setImagenFondo(fondo);
 				eventoMulti.setImagenPagina(pagina);
 				

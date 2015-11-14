@@ -16,7 +16,7 @@ import com.sgem.seguridad.excepciones.AplicacionException;
 public interface IEventoMultiController {
 	
 	public boolean guardarEventoMultideportivo(DataEvento dataEvento);
-	public DataTenant obtenerDataTenant(String tenant);
+	public DataEvento obtenerDataTenant(String tenant);
 	public EventoMultideportivo obtenerEventoMultideportivoXTenantId(int tenantId);
 	public String obtenerProximoTenant();
 	public List<Imagen> subirImagenConfiguracion(MultipartFormDataInput input) throws AplicacionException;

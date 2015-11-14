@@ -68,7 +68,7 @@ public class EventoDeportivoController implements IEventoDeportivoController {
 							Ronda r = new Ronda();
 							
 							r.setNumeroRonda(j);
-							r.setTenantId(emd.getTenant().getTenantID());
+							r.setTenantId(emd.getTenantHandler().getTenantID());
 //							r.setEventoDepId(eventoDep.getEventoDepId());
 							r.setEventoDeportivo(eventoDep);
 							eventoDep.addRonda(r);

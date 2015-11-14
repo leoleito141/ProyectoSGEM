@@ -20,6 +20,8 @@ public class DataEvento {
 	
 	private String instagram;
 
+	private String nombre_url;
+	
 	private String twitter;
 
 	private String canalYoutube;
@@ -31,6 +33,10 @@ public class DataEvento {
 	private String emailOrganizador;
 	
 	private String passwordOrganizador;
+	
+	private String colorFondo;
+	
+	private String colorNews;
 	
 	private DataPais pais;
 	
@@ -55,6 +61,30 @@ public class DataEvento {
 
 
 
+
+	public String getColorFondo() {
+		return colorFondo;
+	}
+
+	public void setColorFondo(String colorFondo) {
+		this.colorFondo = colorFondo;
+	}
+
+	public String getColorNews() {
+		return colorNews;
+	}
+
+	public void setColorNews(String colorNews) {
+		this.colorNews = colorNews;
+	}
+
+	public DataPais getPais() {
+		return pais;
+	}
+
+	public void setPais(DataPais pais) {
+		this.pais = pais;
+	}
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
@@ -247,12 +277,21 @@ public class DataEvento {
 	public void setPagina(DataImagen pagina) {
 		this.pagina = pagina;
 	}
+	
+	
 
+	public String getNombre_url() {
+		return nombre_url;
+	}
+
+	public void setNombre_url(String nombre_url) {
+		this.nombre_url = nombre_url;
+	}
 
 	@Override
 	public String toString() {
 		return "DataEvento [nombre=" + nombre + ", lugar=" + pais
-				+ ", aÃ±o=" + anio + ", logo=" + logo
+				+ ", año=" + anio + ", logo=" + logo
 				+ ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", facebook="
 				+ facebook +",instagram="+ instagram + ", twitter=" + twitter + ", canalYoutube=" + canalYoutube
 				+ ", hashtag=" + hashtag + ", css="+ css + ", emailOrganizador=" + emailOrganizador
