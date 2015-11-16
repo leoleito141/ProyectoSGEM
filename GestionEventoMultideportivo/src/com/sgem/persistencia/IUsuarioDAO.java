@@ -21,8 +21,8 @@ public interface IUsuarioDAO {
 	public Usuario buscarAdmin(String email, String clase);
 	public boolean guardarOrganizador(Organizador org);
 	public boolean existeCodigoCO(int tenantId, String codigo);
-	public boolean existePais(int tenantId, String pais);
-	public List<ComiteOlimpico> buscarComiteporPais(String pais, int tenantID);
+	public boolean existePais(int paisID,int tenantId);
+	public List<ComiteOlimpico> buscarComiteporPais(int paisID, int tenantID);
 	public boolean existeJuez(Integer tenantId, String email);
 	public List<Juez> listarJueces(Integer tenantId);
 	public int obtenerMaximoComite();

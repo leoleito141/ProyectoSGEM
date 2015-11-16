@@ -127,18 +127,20 @@ public class InicioApp implements ServletContextListener {
 		admin.setTenantID(0);			
 			
 		comite1 = new ComiteOlimpico();
-		((ComiteOlimpico)comite1).setPais("Uruguay"); // para evitar esto, se declara a usuario2 como: 
+		Pais p = new Pais("Uruguay","Montevideo");
+		((ComiteOlimpico)comite1).setPais(p); // para evitar esto, se declara a usuario2 como: 
 													   //ComiteOlimpico usuario 2 = new ComiteOlimpico();
 		((ComiteOlimpico)comite1).setCodigo("COU");
 		comite1.setEmail("cou@gmail.com");
 		comite1.setCanalYoutube("uruguay");
 		comite1.setTwitter("uruguay");
-		comite1.setFacebook("Comit� Ol�mpico Uruguayo");
+		comite1.setFacebook("Comite Olimpico Uruguayo");
 		comite1.setPassword("cou123");
 		comite1.setTenantID(1);			
 		
 		comite2 = new ComiteOlimpico();
-		((ComiteOlimpico)comite2).setPais("Argentina"); 
+		Pais p2 = new Pais("Argentina","Buenos Aires");
+		((ComiteOlimpico)comite2).setPais(p2); 
 		((ComiteOlimpico)comite2).setCodigo("COA");
 		comite2.setEmail("coa@gmail.com");
 		comite2.setCanalYoutube("uruguay");
@@ -178,8 +180,8 @@ public class InicioApp implements ServletContextListener {
 		
 		
 		TenantHandler th = new TenantHandler();
-		Pais p = new Pais("Brasil","Rio2016");	
-		EventoMultideportivo evento = new EventoMultideportivo("Rio2016", p , "logo.jpg", new Date(), new Date(), "facebook/Rio2016","Instagram/Rio2016", "#Rio2016", "youtube/Rio2016", "Rio2016.css");
+		Pais p3 = new Pais("Brasil","Rio2016");	
+		EventoMultideportivo evento = new EventoMultideportivo("Rio2016", p3 , "logo.jpg", new Date(), new Date(), "facebook/Rio2016","Instagram/Rio2016", "#Rio2016", "youtube/Rio2016", "Rio2016.css");
 		List<EventoMultideportivo> listevento = new ArrayList<EventoMultideportivo>();
 		
 		

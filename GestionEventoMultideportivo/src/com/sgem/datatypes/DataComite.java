@@ -8,7 +8,7 @@ public class DataComite {
 
 	private String codigo;
 
-	private String pais;
+	private DataPais pais;
 
 	private String facebook;
 
@@ -26,7 +26,7 @@ public class DataComite {
 	public DataComite() {}
 
 	public DataComite(String email, String password, String codigo,
-			String pais, String facebook, String twitter, String paypal,int tenantId,int comiteId, String tipoUsuario) {
+			DataPais pais, String facebook, String twitter, String paypal,int tenantId,int comiteId, String tipoUsuario) {
 		super();
 		this.email = email;
 		this.password = password;
@@ -64,11 +64,11 @@ public class DataComite {
 		this.codigo = codigo;
 	}
 
-	public String getPais() {
+	public DataPais getDataPais() {
 		return pais;
 	}
 
-	public void setPais(String pais) {
+	public void setDataPais(DataPais pais) {
 		this.pais = pais;
 	}
 

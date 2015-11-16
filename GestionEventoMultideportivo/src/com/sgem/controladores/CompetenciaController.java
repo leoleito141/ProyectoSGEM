@@ -15,6 +15,7 @@ import com.sgem.datatypes.DataDeportista;
 import com.sgem.datatypes.DataEstadistica;
 import com.sgem.datatypes.DataImagen;
 import com.sgem.datatypes.DataJuez;
+import com.sgem.datatypes.DataPais;
 import com.sgem.datatypes.DataResultado;
 import com.sgem.dominio.Competencia;
 import com.sgem.dominio.Deportista;
@@ -203,7 +204,7 @@ public class CompetenciaController implements ICompetenciaController {
 			di = new DataImagen("","", 1);
 		}
 		
-		String pais = d.getComiteOlimpico().getPais();
+		DataPais pais = new DataPais(d.getComiteOlimpico().getPais().getPaisID(), d.getComiteOlimpico().getPais().getPais(),  d.getComiteOlimpico().getPais().getCiudad());
 		
 		return new DataDeportista(d.getTenantID(),d.getDeportistaID(),d.getNombre(),d.getApellido(),d.getSexo(),
 								  d.getFechaNac(),pais,deporte,new ArrayList<String>(), di);

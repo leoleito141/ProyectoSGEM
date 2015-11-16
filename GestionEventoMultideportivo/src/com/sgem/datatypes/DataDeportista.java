@@ -17,7 +17,7 @@ public class DataDeportista {
 
 	private Date fechaNac;
 
-	private String pais;
+	private DataPais pais;
 
 	private String deporte;
 
@@ -29,7 +29,7 @@ public class DataDeportista {
 
 	public DataDeportista(Integer tenantId, Integer deportistaID,
 			String nombre, String apellido, String sexo, Date fechaNac,
-			String pais, String deporte, List<String> disciplinas,
+			DataPais pais, String deporte, List<String> disciplinas,
 			DataImagen foto) {
 		super();
 		this.tenantId = tenantId;
@@ -92,11 +92,11 @@ public class DataDeportista {
 		this.fechaNac = fechaNac;
 	}
 
-	public String getPais() {
+	public DataPais getPais() {
 		return pais;
 	}
 
-	public void setPais(String pais) {
+	public void setPais(DataPais pais) {
 		this.pais = pais;
 	}
 

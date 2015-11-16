@@ -23,14 +23,12 @@ import com.sgem.datatypes.DataEventoDeportivo;
 	public interface IDeportistaService {
 
 
-	//	@RolesAllowed("COMITE_OLIMPICO")
-		@PermitAll
+		@RolesAllowed("COMITE_OLIMPICO")
 		@POST
 		@Produces(MediaType.APPLICATION_JSON)
 		@Consumes(MediaType.APPLICATION_JSON)
 		@Path("/altaDeportista")
 		public Response guardarDeportista(DataDeportista datos);
-		
 		
 		
 		@PermitAll

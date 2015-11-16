@@ -32,7 +32,18 @@ angular.module('pruebaAngularApp')
 			    startingDay: 1
 			  };
 	  
-	  
+	 ////////////////////////////////Date timepiquer example/////////// 
+	  $scope.$on('$viewContentLoaded' , function(){
+          $('#datetimepicker1').datetimepicker({
+        	  
+        	});
+         
+
+	  });
+     
+	  $scope.prueba={};
+	  console.log($scope.prueba);
+	  /////////////////////////////////////////////////////////////////
 	  $scope.altaEvento = function(){
 		  var evento = $scope.evento;
 		  evento.dataPais = $scope.pais;

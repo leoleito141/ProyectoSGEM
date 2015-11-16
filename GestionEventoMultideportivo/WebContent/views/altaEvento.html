@@ -10,6 +10,22 @@
 	border-radius: 32px;
 	color: black;
 }
+
+.form-horizontal {
+   width:500px;
+}
+
+.datetime-picker-dropdown {
+  
+}
+
+.datetime-picker-dropdown > li.date-picker-menu div > table .btn-default {
+  border: 0;
+}
+
+.datetime-picker-dropdown > li.time-picker-menu div > table {
+  
+}
 </style>
 
 
@@ -115,6 +131,27 @@
 			class="glyphicon glyphicon-circle-arrow-right"></span>
 		</a>
 	</div>
+	
+	
+	
+   
+  <div class="container">
+    <div class="row">
+        <div class='col-sm-6'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" ng-model="prueba" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+
 
 
 </div>

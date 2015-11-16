@@ -31,7 +31,7 @@ public interface IUsuarioController {
 	public Token loginUsuario(DataUsuario dataUsuario) throws UsuarioNoEncontradoException, AplicacionException;
 	public boolean guardarComite(DataComite dataComite) throws UsuarioYaExisteException, AplicacionException;
 	public Imagen subirImagenComite(MultipartFormDataInput input) throws AplicacionException;
-	public List<ComiteOlimpico> buscarComiteporPais(String pais, int tenantID);
+	public List<ComiteOlimpico> buscarComiteporPais(int paisID, int tenantID);
 	public boolean guardarNovedad(DataNovedad dataNovedad) throws UsuarioNoEncontradoException, AplicacionException;
 	public Imagen subirImagenNovedad(MultipartFormDataInput input) throws AplicacionException;
 	public boolean guardarEstado(DataHistorialLogin hl) throws UsuarioNoEncontradoException, AplicacionException;

@@ -99,10 +99,10 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 
 	@Override
-	public boolean existePais(int tenantId, String pais) {
+	public boolean existePais(int paisID, int tenantId) {
 		List<Usuario> usuarios = null;
 		try{
-			usuarios = em.createQuery("SELECT u FROM Usuario u, ComiteOlimpico co WHERE u.id = co.id AND u.tenantID = '"+tenantId+"' AND co.pais = '"+pais+"'", Usuario.class).getResultList();
+			usuarios = em.createQuery("SELECT u FROM Usuario u, ComiteOlimpico co WHERE u.id = co.id AND u.tenantID = '"+tenantId+"' AND co.pais = '"+paisID+"'", Usuario.class).getResultList();
 			
 			System.out.println(usuarios);
 			
@@ -121,14 +121,11 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 
 	@Override
-	public List<ComiteOlimpico> buscarComiteporPais(String pais, int TenantID) {
+	public List<ComiteOlimpico> buscarComiteporPais(int paisID, int TenantID) {
 		List<ComiteOlimpico> co = null;
 		try{
-			co = em.createQuery("SELECT co FROM Usuario u, ComiteOlimpico co WHERE u.id = co.id AND u.tenantID = '"+TenantID+"' AND co.pais = '"+pais+"'", ComiteOlimpico.class).getResultList();;
-			
-			
-			
-			
+			co = em.createQuery("SELECT co FROM Usuario u, ComiteOlimpico co, Pais p WHERE p.paisID = "+paisID+" AND u.id = co.id AND u.tenantID = '"+TenantID+"' AND p.paisID = co.pais", ComiteOlimpico.class).getResultList();;
+						
 		}catch(NoResultException e){
 			e.printStackTrace();
 			return null;

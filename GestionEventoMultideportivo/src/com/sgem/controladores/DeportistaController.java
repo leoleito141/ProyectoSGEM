@@ -16,6 +16,7 @@ import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 import com.sgem.datatypes.DataDeportista;
+import com.sgem.datatypes.DataPais;
 import com.sgem.dominio.ComiteOlimpico;
 import com.sgem.dominio.Deportista;
 import com.sgem.dominio.EventoDeportivo;
@@ -58,7 +59,7 @@ public class DeportistaController implements IDeportistaController {
 			deportista.setTenantID(dataDeportista.getTenantId());
 			deportista.setFoto(foto);
 			
-			List<ComiteOlimpico>  comiteOlimpico = iuc.buscarComiteporPais(dataDeportista.getPais(),dataDeportista.getTenantId());
+			List<ComiteOlimpico>  comiteOlimpico = iuc.buscarComiteporPais(dataDeportista.getPais().getPaisID(),dataDeportista.getTenantId());
 			
 			deportista.setComiteOlimpico(comiteOlimpico.get(0));
 			
@@ -109,7 +110,7 @@ public class DeportistaController implements IDeportistaController {
 					
 			ddep.setNombre(deportista.get(i).getNombre());
 			ddep.setApellido(deportista.get(i).getApellido());
-			ddep.setPais(deportista.get(i).getComiteOlimpico().getPais());
+			ddep.setPais( new DataPais(deportista.get(i).getComiteOlimpico().getPais().getPaisID(), deportista.get(i).getComiteOlimpico().getPais().getPais(), deportista.get(i).getComiteOlimpico().getPais().getCiudad() ) );
 			ddep.setDeportistaID(deportista.get(i).getDeportistaID());
 			
 

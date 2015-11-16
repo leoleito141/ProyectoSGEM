@@ -25,6 +25,7 @@ import com.sgem.datatypes.DataHistorialLogin;
 import com.sgem.datatypes.DataImagen;
 import com.sgem.datatypes.DataJuez;
 import com.sgem.datatypes.DataNovedad;
+import com.sgem.datatypes.DataPais;
 import com.sgem.datatypes.DataUsuario;
 import com.sgem.dominio.Admin;
 import com.sgem.dominio.ComiteOlimpico;
@@ -33,6 +34,7 @@ import com.sgem.dominio.Imagen;
 import com.sgem.dominio.Juez;
 import com.sgem.dominio.Novedad;
 import com.sgem.dominio.Organizador;
+import com.sgem.dominio.Pais;
 import com.sgem.dominio.Usuario;
 import com.sgem.dominio.UsuarioComun;
 import com.sgem.enums.Tipo;
@@ -103,21 +105,24 @@ public class UsuarioController implements IUsuarioController {
 		ComiteOlimpico co = null;		
 		
 		boolean existeCodigoCO = UsuarioDAO.existeCodigoCO(dataComite.getTenantId(),dataComite.getCodigo());
-		boolean existePais = UsuarioDAO.existePais(dataComite.getTenantId(),dataComite.getPais());
+		boolean existePais = UsuarioDAO.existePais(dataComite.getDataPais().getPaisID(),dataComite.getTenantId());
 		
 		if((existeCodigoCO == false)&&(existePais==false)){
+			
 			
 			Imagen logo = new Imagen(dataComite.getLogo().getMime(), dataComite.getLogo().getRuta(), dataComite.getLogo().getTenantId());
 					
 			if(ImagenDAO.guardarImagen(logo)){		
-				
+				Pais p = new Pais();
+				p.setPais(dataComite.getDataPais().getPais());
+				p.setCiudad(dataComite.getDataPais().getCiudad());
 				co = new ComiteOlimpico();
 			
 				co.setEmail(dataComite.getEmail());
 				co.setTwitter(dataComite.getTwitter());
 				co.setFacebook(dataComite.getFacebook());
 				co.setPassword(dataComite.getPassword());
-				co.setPais(dataComite.getPais());
+				co.setPais(p);
 				co.setPassword(dataComite.getPassword());
 				co.setCodigo(dataComite.getCodigo());
 				co.setTenantID(dataComite.getTenantId());
@@ -128,7 +133,7 @@ public class UsuarioController implements IUsuarioController {
 	
 				if(guardo){
 					try {
-						if(Correo.enviarMensajeConAuth("smtp.gmail.com", 587,"inmogrupo13@gmail.com", co.getEmail(),"inmobiliaria13", "Notificacion de contraseña", "Estimado Comite Olimpico Nacional de "+co.getPais()+":Su contraseña es:"+co.getPassword()+"")){
+						if(Correo.enviarMensajeConAuth("smtp.gmail.com", 587,"inmogrupo13@gmail.com", co.getEmail(),"inmobiliaria13", "Notificacion de contraseï¿½a", "Estimado Comite Olimpico Nacional de "+co.getPais()+":Su contraseï¿½a es:"+co.getPassword()+"")){
 							System.out.println("Correo enviado con exito!");
 						}else{
 							System.out.println("Error - Correo no enviado");
@@ -297,7 +302,7 @@ public class UsuarioController implements IUsuarioController {
 			tipoUsuario = u instanceof UsuarioComun ? USUARIO_COMUN : u instanceof ComiteOlimpico ? USUARIO_COMITE : u instanceof Organizador ? USUARIO_ORGANIZADOR : USUARIO_JUEZ;
 			
 			if(tipoUsuario.equals(USUARIO_COMITE)){
-				DataComite dc = new DataComite(u.getEmail(),"",((ComiteOlimpico)u).getCodigo(),((ComiteOlimpico)u).getPais(),u.getFacebook(),u.getTwitter(),((ComiteOlimpico)u).getPaypal(),u.getTenantID(),u.getId().intValue(),tipoUsuario);
+				DataComite dc = new DataComite(u.getEmail(),"",((ComiteOlimpico)u).getCodigo(),new DataPais(((ComiteOlimpico)u).getPais().getPaisID(),((ComiteOlimpico)u).getPais().getPais(),((ComiteOlimpico)u).getPais().getCiudad()),u.getFacebook(),u.getTwitter(),((ComiteOlimpico)u).getPaypal(),u.getTenantID(),u.getId().intValue(),tipoUsuario);
 				jwt = JWTUtil.generarToken(dc);
 
 			} else if(tipoUsuario.equals(USUARIO_JUEZ)){				
@@ -324,9 +329,9 @@ public class UsuarioController implements IUsuarioController {
 	}
 
 	@Override
-	public List<ComiteOlimpico> buscarComiteporPais(String pais, int tenantID) {		
+	public List<ComiteOlimpico> buscarComiteporPais(int paisID, int tenantID) {		
 		try{
-			return UsuarioDAO.buscarComiteporPais(pais, tenantID);
+			return UsuarioDAO.buscarComiteporPais(paisID, tenantID);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -506,8 +511,8 @@ public class UsuarioController implements IUsuarioController {
 					guardo = UsuarioDAO.guardarUsuario(j);
 		
 					if(guardo){
-						// Se debería enviar luego del guardar Usuario.. porque devuelve un booleano, si se pudo guardar enviar correo, sino no.
-						enviado = Correo.enviarMensajeConAuth("smtp.gmail.com", 587,"inmogrupo13@gmail.com", j.getEmail(),"inmobiliaria13", "Notificacion de contraseña", "Estimado Señor Juez : 	Su contraseña es:"+j.getPassword()+"");
+						// Se deberï¿½a enviar luego del guardar Usuario.. porque devuelve un booleano, si se pudo guardar enviar correo, sino no.
+						enviado = Correo.enviarMensajeConAuth("smtp.gmail.com", 587,"inmogrupo13@gmail.com", j.getEmail(),"inmobiliaria13", "Notificacion de contraseï¿½a", "Estimado Seï¿½or Juez : 	Su contraseï¿½a es:"+j.getPassword()+"");
 						
 					}else{
 						// controlar esto..

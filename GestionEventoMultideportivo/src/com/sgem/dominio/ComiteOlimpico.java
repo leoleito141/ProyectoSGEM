@@ -18,8 +18,8 @@ public class ComiteOlimpico extends Usuario{
 	
 	private static final long serialVersionUID = -5284790408432089498L;
 	
-	@Column(name = "pais", nullable = false)
-	private String pais;	
+	@OneToOne(targetEntity=Pais.class,cascade = CascadeType.ALL)
+	private Pais pais;	
 	
 	@Column(name = "cod_comite_olimpico", nullable = false)
 	private String codigo;
@@ -36,7 +36,7 @@ public class ComiteOlimpico extends Usuario{
 	 private Set<Deportista> Deportistas= new HashSet<Deportista>();
 	
 	public ComiteOlimpico(){}
-	public ComiteOlimpico(String email, String facebook, String codigo, String pais,String twitter, String canalYoutube,String password,int tenantid,Imagen logo,String paypal) 
+	public ComiteOlimpico(String email, String facebook, String codigo, Pais pais,String twitter, String canalYoutube,String password,int tenantid,Imagen logo,String paypal) 
 	{		
 		super(email, facebook, twitter, canalYoutube, password,tenantid);
 		this.codigo = codigo;
@@ -50,11 +50,11 @@ public class ComiteOlimpico extends Usuario{
 		return "ComiteOlimpico";
 	}
 
-	public String getPais() {
+	public Pais getPais() {
 		return pais;
 	}
 
-	public void setPais(String pais) {
+	public void setPais(Pais pais) {
 		this.pais = pais;
 	}
 

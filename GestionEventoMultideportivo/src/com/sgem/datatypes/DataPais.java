@@ -1,14 +1,24 @@
 package com.sgem.datatypes;
 
 public class DataPais {
+	private int paisID;
 	private String pais;
 	private String ciudad;
 	
 	public DataPais(){}
 	
-	public DataPais(String pais, String ciudad){
+	public DataPais(int paisID,String pais, String ciudad){
+		this.paisID = paisID;
 		this.pais=pais;
 		this.ciudad= ciudad;		
+	}
+	
+	public int getPaisID() {
+		return paisID;
+	}
+
+	public void setPaisID(int paisID) {
+		this.paisID = paisID;
 	}
 
 	public String getPais() {
