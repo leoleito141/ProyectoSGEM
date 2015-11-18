@@ -105,7 +105,7 @@ public class UsuarioController implements IUsuarioController {
 		ComiteOlimpico co = null;		
 		
 		boolean existeCodigoCO = UsuarioDAO.existeCodigoCO(dataComite.getTenantId(),dataComite.getCodigo());
-		boolean existePais = UsuarioDAO.existePais(dataComite.getDataPais().getPaisID(),dataComite.getTenantId());
+		boolean existePais = UsuarioDAO.existePais(dataComite.getPais().getPaisID(),dataComite.getTenantId());
 		
 		if((existeCodigoCO == false)&&(existePais==false)){
 			
@@ -114,8 +114,8 @@ public class UsuarioController implements IUsuarioController {
 					
 			if(ImagenDAO.guardarImagen(logo)){		
 				Pais p = new Pais();
-				p.setPais(dataComite.getDataPais().getPais());
-				p.setCiudad(dataComite.getDataPais().getCiudad());
+				p.setPais(dataComite.getPais().getPais());
+				p.setCiudad(dataComite.getPais().getCiudad());
 				co = new ComiteOlimpico();
 			
 				co.setEmail(dataComite.getEmail());
@@ -614,7 +614,7 @@ public class UsuarioController implements IUsuarioController {
 			
 			c.setCodigo(comites.get(i).getCodigo());
 			c.setComiteId(comites.get(i).getId().intValue());
-			c.setDataPais(new DataPais(comites.get(i).getPais().getPaisID(),comites.get(i).getPais().getPais(),comites.get(i).getPais().getCiudad()));
+			c.setPais(new DataPais(comites.get(i).getPais().getPaisID(),comites.get(i).getPais().getPais(),comites.get(i).getPais().getCiudad()));
 			c.setEmail(comites.get(i).getEmail());
 			c.setFacebook(comites.get(i).getFacebook());
 			c.setLogo(new DataImagen(comites.get(i).getLogo().getMime(),comites.get(i).getLogo().getRuta(),comites.get(i).getLogo().getTenantId()));

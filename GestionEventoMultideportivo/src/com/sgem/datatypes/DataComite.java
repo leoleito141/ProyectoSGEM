@@ -64,11 +64,11 @@ public class DataComite {
 		this.codigo = codigo;
 	}
 
-	public DataPais getDataPais() {
+	public DataPais getPais() {
 		return pais;
 	}
 
-	public void setDataPais(DataPais pais) {
+	public void setPais(DataPais pais) {
 		this.pais = pais;
 	}
 
