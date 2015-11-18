@@ -195,7 +195,16 @@ public class UsuarioService implements IUsuarioService{
 			return Response.serverError().build();
 		}
 	}
-
+	@Override
+	public Response getNoved(String idnovedad) {
+	try {			
+				
+			return Response.ok(iuc.getNovedad(Integer.parseInt(idnovedad))).build();	
+			
+		} catch (Exception e) {
+			return Response.serverError().build();
+		}	
+	}
 
 	
 }

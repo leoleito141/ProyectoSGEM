@@ -2,6 +2,7 @@ package com.sgem.datatypes;
 
 public class DataNovedad {
 
+	private int id;
 	private String titulo;
 	private String descripcion;
 	private int columna;
@@ -19,6 +20,14 @@ public class DataNovedad {
 		this.tenantId = tenantId;
 		this.emailComiteOlimpico = emailComiteOlimpico;
 		this.imagen = imagen;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getTitulo() {

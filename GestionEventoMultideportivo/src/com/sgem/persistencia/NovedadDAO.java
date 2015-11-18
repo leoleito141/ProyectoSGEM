@@ -42,6 +42,20 @@ public class NovedadDAO implements INovedadDAO {
 		
 		
 	}
+	@Override
+	public Novedad getNovedad(int idnovedad) {
+	try {
+				
+		
+		Novedad novedad = em.find(Novedad.class, idnovedad);
+		
+		return novedad;
+
+	} catch (Exception e) {
+		e.printStackTrace();
+		return null;
+	}
+	}
 
 	
 
