@@ -25,6 +25,7 @@ public interface IUsuarioDAO {
 	public List<ComiteOlimpico> buscarComiteporPais(int paisID, int tenantID);
 	public boolean existeJuez(Integer tenantId, String email);
 	public List<Juez> listarJueces(Integer tenantId);
+	public List<ComiteOlimpico> listarComitesOlimpicos(Integer tenantID);
 	public int obtenerMaximoComite();
 	
 	

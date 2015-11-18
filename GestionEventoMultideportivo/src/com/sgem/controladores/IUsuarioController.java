@@ -39,6 +39,7 @@ public interface IUsuarioController {
 	public boolean guardarJuez(DataUsuario usuario);
 	public Integer cantidadRegistrados(Integer tenantId) throws AplicacionException;
 	public List<DataJuez> listarJueces(Integer tenantId);
-	List<DataNovedad> getNovedadesPrincipales(int tenantid);
+	public List<DataNovedad> getNovedadesPrincipales(int tenantid);
+	public List<DataComite> listarComitesOlimpicos(Integer tenantID) throws AplicacionException;
 	
 }

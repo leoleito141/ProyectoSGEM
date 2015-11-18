@@ -3,7 +3,6 @@ package com.sgem.servicios;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
@@ -186,6 +185,15 @@ public class UsuarioService implements IUsuarioService{
 		} catch (Exception e) {
 			return Response.serverError().build();
 		}	
+	}
+
+	@Override
+	public Response listarComitesOlimpicos(Integer tenantID) {
+		try {
+			return Response.ok(iuc.listarComitesOlimpicos(tenantID)).build();
+		} catch (AplicacionException e) {
+			return Response.serverError().build();
+		}
 	}
 
 

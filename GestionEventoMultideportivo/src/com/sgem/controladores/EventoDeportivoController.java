@@ -13,6 +13,7 @@ import com.sgem.dominio.EventoMultideportivo;
 import com.sgem.dominio.Ronda;
 import com.sgem.persistencia.IEventoDeportivoDAO;
 import com.sgem.persistencia.IRondaDAO;
+import com.sgem.seguridad.excepciones.AplicacionException;
 
 
 @Stateless
@@ -159,7 +160,36 @@ public class EventoDeportivoController implements IEventoDeportivoController {
 		return null;	
 		
 	}
-	
+
+	@Override
+	public List<DataEventoDeportivo> listarDeportes(int tenantID) throws AplicacionException {
+		try {				
+			return convertirEventosDeportivos(EventosDAO.listarDeportes(tenantID));		
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new AplicacionException("Error al obtener eventos deportivos",e);
+		}
+	}
+
+	private List<DataEventoDeportivo> convertirEventosDeportivos(List<EventoDeportivo> deportes) {
+		List<DataEventoDeportivo> listaDeportas = new ArrayList<DataEventoDeportivo>();
+		
+		for(int i = 0; i< deportes.size(); i++){
+			DataEventoDeportivo ed = new DataEventoDeportivo();
+							
+			ed.setCantRondas(deportes.get(i).getRonda().size());
+			ed.setFechaFin(deportes.get(i).getFechaFin());
+			ed.setFechaInicio(deportes.get(i).getFechaInicio());
+			ed.setNombreDeporte(deportes.get(i).getNombreDeporte());
+			ed.setNombreDisciplina(deportes.get(i).getDisciplina() == null ? "" : deportes.get(i).getDisciplina() );
+			ed.setSexo(deportes.get(i).getSexo());
+			ed.setTenantId(deportes.get(i).getTenantId());
+			ed.setTipo(deportes.get(i).getTipo());
+			
+			listaDeportas.add(ed);			
+		}		
+		return listaDeportas;		
+	}
 	
 	
 }

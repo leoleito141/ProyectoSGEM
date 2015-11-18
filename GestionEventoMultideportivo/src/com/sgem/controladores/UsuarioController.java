@@ -597,6 +597,37 @@ public class UsuarioController implements IUsuarioController {
 		return dn;
 	}
 
+	@Override
+	public List<DataComite> listarComitesOlimpicos(Integer tenantID) throws AplicacionException {
+		try {			
+			return convertirComitesOlimpicos(UsuarioDAO.listarComitesOlimpicos(tenantID));		
+		} catch(Exception e){
+			e.printStackTrace();
+			throw new AplicacionException("Error obteniendo comites olimpicos.");
+		}
+	}
+	private List<DataComite> convertirComitesOlimpicos(List<ComiteOlimpico> comites){
+		List<DataComite> listaComites = new ArrayList<DataComite>();
+		
+		for(int i = 0; i< comites.size(); i++){
+			DataComite c = new DataComite();
+			
+			c.setCodigo(comites.get(i).getCodigo());
+			c.setComiteId(comites.get(i).getId().intValue());
+			c.setDataPais(new DataPais(comites.get(i).getPais().getPaisID(),comites.get(i).getPais().getPais(),comites.get(i).getPais().getCiudad()));
+			c.setEmail(comites.get(i).getEmail());
+			c.setFacebook(comites.get(i).getFacebook());
+			c.setLogo(new DataImagen(comites.get(i).getLogo().getMime(),comites.get(i).getLogo().getRuta(),comites.get(i).getLogo().getTenantId()));
+			c.setPassword("");
+			c.setPaypal("");
+			c.setTenantId(comites.get(i).getTenantID());
+			c.setTipoUsuario(USUARIO_COMITE);
+			c.setTwitter(comites.get(i).getTwitter());			
+
+			listaComites.add(c);			
+		}		
+		return listaComites;		
+	}
 
 }
 

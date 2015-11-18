@@ -7,11 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
-import com.sgem.dominio.ComiteOlimpico;
 import com.sgem.dominio.EventoDeportivo;
 import com.sgem.dominio.EventoMultideportivo;
-import com.sgem.dominio.Ronda;
-import com.sgem.dominio.Usuario;
 
 
 @Stateless
@@ -169,6 +166,20 @@ public class EventoDeportivoDAO implements IEventoDeportivoDAO {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+
+
+	@Override
+	public List<EventoDeportivo> listarDeportes(int tenantID) {
+		List<EventoDeportivo> deportes = null;		
+		try {			
+			 deportes = em.createQuery("SELECT ed FROM EventoDeportivo ed WHERE ed.tenantId = "+tenantID, EventoDeportivo.class).getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return deportes;
+		}
+		return deportes;
 	}
 
 

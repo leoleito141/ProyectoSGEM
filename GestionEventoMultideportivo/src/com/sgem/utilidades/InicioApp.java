@@ -24,6 +24,7 @@ import com.sgem.dominio.Estadistica;
 import com.sgem.dominio.EventoDeportivo;
 import com.sgem.dominio.EventoMultideportivo;
 import com.sgem.dominio.HistorialLogin;
+import com.sgem.dominio.Imagen;
 import com.sgem.dominio.Juez;
 import com.sgem.dominio.Organizador;
 import com.sgem.dominio.Pais;
@@ -38,6 +39,7 @@ import com.sgem.persistencia.IEntradaDAO;
 import com.sgem.persistencia.IEventoDeportivoDAO;
 import com.sgem.persistencia.IEventoMultiDAO;
 import com.sgem.persistencia.IHistorialLoginDAO;
+import com.sgem.persistencia.IImagenDAO;
 import com.sgem.persistencia.IRondaDAO;
 import com.sgem.persistencia.IUsuarioDAO;
 
@@ -68,6 +70,9 @@ public class InicioApp implements ServletContextListener {
 	
 	@EJB
 	private IEntradaDAO EntradaDAO;
+	
+	@EJB
+	private IImagenDAO ImagenDAO;
 		
     @Override
     public void contextDestroyed(ServletContextEvent arg0) {}
@@ -138,6 +143,11 @@ public class InicioApp implements ServletContextListener {
 		comite1.setPassword("cou123");
 		comite1.setTenantID(1);			
 		
+		Imagen i1 = new Imagen("image/jpeg", "C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\comite_olimpico2\\cou.jpg", 1);
+		ImagenDAO.guardarImagen(i1);
+		
+		((ComiteOlimpico)comite1).setLogo(i1);		
+		
 		comite2 = new ComiteOlimpico();
 		Pais p2 = new Pais("Argentina","Buenos Aires");
 		((ComiteOlimpico)comite2).setPais(p2); 
@@ -149,6 +159,10 @@ public class InicioApp implements ServletContextListener {
 		comite2.setPassword("coa123");
 		comite2.setTenantID(1);			
 		
+		Imagen i2 = new Imagen("image/jpeg", "C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\comite_olimpico3\\coa.jpg", 1);
+		ImagenDAO.guardarImagen(i2);
+		
+		((ComiteOlimpico)comite2).setLogo(i2);
 //			usuario3 = new Admin();
 //			usuario3.setNombre("dsa3");
 //			usuario3.setApellido("dsa3");

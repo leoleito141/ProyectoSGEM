@@ -1,8 +1,6 @@
 	package com.sgem.servicios;
 
-	
-	import javax.annotation.security.PermitAll;
-import javax.annotation.security.RolesAllowed;
+import javax.annotation.security.PermitAll;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -35,20 +33,26 @@ import com.sgem.datatypes.DataEventoDeportivo;
 		@GET
 		@Produces(MediaType.APPLICATION_JSON)
 		@Path("/listarDeportes/{tenantID}/{sexo}")
-		public Response  listarDeportes(@PathParam("tenantID") int tenantID, @PathParam("sexo") String sexo);
+		public Response listarDeportes(@PathParam("tenantID") int tenantID, @PathParam("sexo") String sexo);
 		
 		
 		@PermitAll
 		@GET
 		@Produces(MediaType.APPLICATION_JSON)
 		@Path("/listarDisciplinas/{tenantID}/{sexo}/{selectDeportes}")
-		public Response  listarDisciplinas(@PathParam("tenantID") int tenantID, @PathParam("sexo") String sexo,  @PathParam("selectDeportes") String nombreDeporte);
+		public Response listarDisciplinas(@PathParam("tenantID") int tenantID, @PathParam("sexo") String sexo,  @PathParam("selectDeportes") String nombreDeporte);
 		
 		@PermitAll
 		@GET
 		@Produces(MediaType.APPLICATION_JSON)
 		@Path("/listarRondas/{tenantID}/{sexo}/{selectDeportes}/{selectDisciplinas}")
-		public Response  listarRondas(@PathParam("tenantID") int tenantID, @PathParam("sexo") String sexo,  @PathParam("selectDeportes") String nombreDeporte,@PathParam("selectDisciplinas") String nombreDisciplina);
+		public Response listarRondas(@PathParam("tenantID") int tenantID, @PathParam("sexo") String sexo,  @PathParam("selectDeportes") String nombreDeporte,@PathParam("selectDisciplinas") String nombreDisciplina);
+		
+		@PermitAll
+		@GET
+		@Produces(MediaType.APPLICATION_JSON)
+		@Path("/listarDeportes/{tenantID}")
+		public Response listarDeportes(@PathParam("tenantID") int tenantID);
 		
 	}
 	

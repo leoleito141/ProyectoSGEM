@@ -7,6 +7,7 @@ import javax.ws.rs.core.Response;
 
 import com.sgem.controladores.IEventoDeportivoController;
 import com.sgem.datatypes.DataEventoDeportivo;
+import com.sgem.seguridad.excepciones.AplicacionException;
 
 
 @Stateless
@@ -71,6 +72,15 @@ private IEventoDeportivoController iec;
 		
 		
 		return null;
+	}
+
+	@Override
+	public Response listarDeportes(int tenantID){
+		try {
+			return Response.ok(iec.listarDeportes(tenantID)).build();
+		} catch (AplicacionException e) {
+			return Response.serverError().build();
+		}
 	}
 
 

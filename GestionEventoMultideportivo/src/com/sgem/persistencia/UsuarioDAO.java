@@ -196,6 +196,18 @@ public class UsuarioDAO implements IUsuarioDAO {
 		return maxComite;
 	}
 
+	@Override
+	public List<ComiteOlimpico> listarComitesOlimpicos(Integer tenantID) {
+		List<ComiteOlimpico> comites = null;		
+		try {			
+			comites = em.createQuery("SELECT c FROM Usuario u, ComiteOlimpico c WHERE u.id = c.id AND u.tenantID = '"+tenantID+"'", ComiteOlimpico.class).getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return comites;
+		}
+		return comites;
+	}
+
 	
 
 }
