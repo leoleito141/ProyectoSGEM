@@ -17,7 +17,7 @@ public class DataDeportista {
 
 	private Date fechaNac;
 
-	private DataPais pais;
+	private DataComite comite;
 
 	private String deporte;
 
@@ -29,7 +29,7 @@ public class DataDeportista {
 
 	public DataDeportista(Integer tenantId, Integer deportistaID,
 			String nombre, String apellido, String sexo, Date fechaNac,
-			DataPais pais, String deporte, List<String> disciplinas,
+			DataComite comite, String deporte, List<String> disciplinas,
 			DataImagen foto) {
 		super();
 		this.tenantId = tenantId;
@@ -38,7 +38,7 @@ public class DataDeportista {
 		this.apellido = apellido;
 		this.sexo = sexo;
 		this.fechaNac = fechaNac;
-		this.pais = pais;
+		this.comite = comite;
 		this.deporte = deporte;
 		this.disciplinas = disciplinas;
 		this.foto = foto;
@@ -92,12 +92,12 @@ public class DataDeportista {
 		this.fechaNac = fechaNac;
 	}
 
-	public DataPais getPais() {
-		return pais;
+	public DataComite getComite() {
+		return comite;
 	}
 
-	public void setPais(DataPais pais) {
-		this.pais = pais;
+	public void setComite(DataComite comite) {
+		this.comite = comite;
 	}
 
 	public String getDeporte() {
@@ -126,11 +126,10 @@ public class DataDeportista {
 
 	@Override
 	public String toString() {
-		return "DataDeportista [tenantId=" + tenantId + ", deportistaID="
-				+ deportistaID + ", nombre=" + nombre + ", apellido="
-				+ apellido + ", sexo=" + sexo + ", fechaNac=" + fechaNac
-				+ ", pais=" + pais + ", deporte=" + deporte + ", disciplinas="
-				+ disciplinas + ", foto=" + foto + "]";
+		return "DataDeportista [tenantId=" + tenantId + ", deportistaID=" + deportistaID + ", nombre=" + nombre
+				+ ", apellido=" + apellido + ", sexo=" + sexo + ", fechaNac=" + fechaNac + ", comite=" + comite
+				+ ", deporte=" + deporte + ", disciplinas=" + disciplinas + ", foto=" + foto + "]";
 	}
 
+	
 }

@@ -9,6 +9,7 @@ import java.util.Set;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import com.sgem.datatypes.DataComite;
 import com.sgem.datatypes.DataCompetencia;
 import com.sgem.datatypes.DataCompraEntrada;
 import com.sgem.datatypes.DataDeportista;
@@ -204,10 +205,12 @@ public class CompetenciaController implements ICompetenciaController {
 			di = new DataImagen("","", 1);
 		}
 		
-		DataPais pais = new DataPais(d.getComiteOlimpico().getPais().getPaisID(), d.getComiteOlimpico().getPais().getPais(),  d.getComiteOlimpico().getPais().getCiudad());
-		
+		DataPais pais = new DataPais(d.getComiteOlimpico().getPais().getPaisID(), d.getComiteOlimpico().getPais().getPais(), d.getComiteOlimpico().getPais().getCiudad());
+		DataComite dc = new DataComite(d.getComiteOlimpico().getEmail(), "", d.getComiteOlimpico().getCodigo(),
+				pais, d.getComiteOlimpico().getFacebook(), d.getComiteOlimpico().getTwitter(), d.getComiteOlimpico().getPaypal(), 
+				d.getComiteOlimpico().getTenantID(),d.getComiteOlimpico().getId().intValue(), UsuarioController.USUARIO_COMITE);
 		return new DataDeportista(d.getTenantID(),d.getDeportistaID(),d.getNombre(),d.getApellido(),d.getSexo(),
-								  d.getFechaNac(),pais,deporte,new ArrayList<String>(), di);
+								  d.getFechaNac(),dc,deporte,new ArrayList<String>(), di);
 	}
 
 	@Override

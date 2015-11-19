@@ -148,4 +148,12 @@ public interface IUsuarioService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/getNovedad/{idnovedad}")
 	public Response getNoved(@PathParam("idnovedad") String idnovedad);
+	
+	@PermitAll
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/obtenerComite/{tenantID}/{usuarioID}")
+	public Response obtenerComiteOlimpico(@PathParam("tenantID") int tenantID, @PathParam("usuarioID") int usuarioID);
+	
 }

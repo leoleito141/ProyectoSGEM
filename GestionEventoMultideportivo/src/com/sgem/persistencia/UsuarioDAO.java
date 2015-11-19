@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
+import com.sgem.datatypes.DataComite;
 import com.sgem.dominio.ComiteOlimpico;
 import com.sgem.dominio.Juez;
 import com.sgem.dominio.Organizador;
@@ -206,6 +207,19 @@ public class UsuarioDAO implements IUsuarioDAO {
 			return comites;
 		}
 		return comites;
+	}
+
+	@Override
+	public ComiteOlimpico obtenerComite(int tenantID, int usuarioID) {		
+		List<ComiteOlimpico> co = new ArrayList<ComiteOlimpico>();
+		
+		try{
+			co = em.createQuery("SELECT c FROM Usuario u, ComiteOlimpico c WHERE u.id = c.id AND u.tenantID = '"+tenantID+"' AND u.id = "+usuarioID, ComiteOlimpico.class).getResultList();			
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}		
+		return (co.isEmpty() ? null : co.get(0));		
 	}
 
 	

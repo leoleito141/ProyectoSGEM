@@ -3,6 +3,7 @@ package com.sgem.controladores;
 import java.util.List;
 
 import javax.ejb.Local;
+import javax.ws.rs.core.Response.ResponseBuilder;
 
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
@@ -42,5 +43,7 @@ public interface IUsuarioController {
 	public List<DataNovedad> getNovedadesPrincipales(int tenantid);
 	public List<DataComite> listarComitesOlimpicos(Integer tenantID) throws AplicacionException;
 	public DataNovedad getNovedad(int idnovedad);
+	public DataComite obtenerComite(int tenantid, int usuarioID) throws AplicacionException;
+	
 	
 }

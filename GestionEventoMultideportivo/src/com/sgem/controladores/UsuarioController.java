@@ -647,5 +647,20 @@ public class UsuarioController implements IUsuarioController {
 		return null;
 	}
 
+	@Override
+	public DataComite obtenerComite(int tenantid, int usuarioID) throws AplicacionException {
+		try 
+		{
+			List<ComiteOlimpico> co = new ArrayList<ComiteOlimpico>();
+			co.add(UsuarioDAO.obtenerComite(tenantid,usuarioID));
+			return convertirComitesOlimpicos(co).get(0);
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new AplicacionException("Error al obtener comite Olimpico",e);
+		}
+	}
+
 }
 

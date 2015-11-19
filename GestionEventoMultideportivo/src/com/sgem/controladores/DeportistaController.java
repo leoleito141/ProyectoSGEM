@@ -15,6 +15,7 @@ import org.apache.commons.io.IOUtils;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
+import com.sgem.datatypes.DataComite;
 import com.sgem.datatypes.DataDeportista;
 import com.sgem.datatypes.DataPais;
 import com.sgem.dominio.ComiteOlimpico;
@@ -59,7 +60,7 @@ public class DeportistaController implements IDeportistaController {
 			deportista.setTenantID(dataDeportista.getTenantId());
 			deportista.setFoto(foto);
 			
-			List<ComiteOlimpico>  comiteOlimpico = iuc.buscarComiteporPais(dataDeportista.getPais().getPaisID(),dataDeportista.getTenantId());
+			List<ComiteOlimpico>  comiteOlimpico = iuc.buscarComiteporPais(dataDeportista.getComite().getPais().getPaisID(),dataDeportista.getTenantId());
 			
 			deportista.setComiteOlimpico(comiteOlimpico.get(0));
 			
@@ -110,7 +111,11 @@ public class DeportistaController implements IDeportistaController {
 					
 			ddep.setNombre(deportista.get(i).getNombre());
 			ddep.setApellido(deportista.get(i).getApellido());
-			ddep.setPais( new DataPais(deportista.get(i).getComiteOlimpico().getPais().getPaisID(), deportista.get(i).getComiteOlimpico().getPais().getPais(), deportista.get(i).getComiteOlimpico().getPais().getCiudad() ) );
+			DataComite dc = new DataComite(deportista.get(i).getComiteOlimpico().getEmail(), "", deportista.get(i).getComiteOlimpico().getCodigo(),
+					new DataPais(deportista.get(i).getComiteOlimpico().getPais().getPaisID(), deportista.get(i).getComiteOlimpico().getPais().getPais(), deportista.get(i).getComiteOlimpico().getPais().getCiudad()),
+					deportista.get(i).getComiteOlimpico().getFacebook(), deportista.get(i).getComiteOlimpico().getTwitter(), deportista.get(i).getComiteOlimpico().getPaypal(), deportista.get(i).getComiteOlimpico().getTenantID(),
+					deportista.get(i).getComiteOlimpico().getId().intValue(), UsuarioController.USUARIO_COMITE);
+			ddep.setComite(dc);
 			ddep.setDeportistaID(deportista.get(i).getDeportistaID());
 			
 

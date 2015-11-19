@@ -205,6 +205,15 @@ public class UsuarioService implements IUsuarioService{
 			return Response.serverError().build();
 		}	
 	}
+	
+	@Override
+	public Response obtenerComiteOlimpico(int tenantid, int usuarioID) {
+		try {
+			return Response.ok(iuc.obtenerComite(tenantid, usuarioID)).build();
+		} catch (AplicacionException e) {
+			return Response.serverError().build();
+		}
+	}
 
 	
 }
