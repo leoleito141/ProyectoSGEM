@@ -41,5 +41,6 @@ public interface IUsuarioController {
 	public List<DataJuez> listarJueces(Integer tenantId);
 	public List<DataNovedad> getNovedadesPrincipales(int tenantid);
 	public List<DataComite> listarComitesOlimpicos(Integer tenantID) throws AplicacionException;
+	public DataNovedad getNovedad(int idnovedad);
 	
 }

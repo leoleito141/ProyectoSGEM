@@ -628,6 +628,24 @@ public class UsuarioController implements IUsuarioController {
 		}		
 		return listaComites;		
 	}
+	
+	@Override
+	public DataNovedad getNovedad(int idnovedad) {
+		try 
+		{
+			Novedad novedad = NovedadDAO.getNovedad(idnovedad);
+			DataImagen di = getDataImagen( novedad.getImagen());
+			DataNovedad dn = getDataNovedad(novedad,di);
+			
+			return dn;
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		return null;
+	}
 
 }
 

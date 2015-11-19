@@ -224,6 +224,11 @@ private DataImagen getDataImagen(Imagen i){
 				eventoMulti.setImagenFondo(fondo);
 				eventoMulti.setImagenPagina(pagina);
 				
+				if(datosEvento.getColorFondo()!=null)
+				eventoMulti.setColorFondo(datosEvento.getColorFondo());
+				if(datosEvento.getColorNews()!=null)
+				eventoMulti.setColorNoticias(datosEvento.getColorNews());
+				
 				EventoMultiDAO.guardarConfiguracion(eventoMulti);
 
 				guardo=true;

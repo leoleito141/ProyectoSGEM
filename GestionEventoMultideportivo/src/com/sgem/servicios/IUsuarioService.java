@@ -142,4 +142,10 @@ public interface IUsuarioService {
 	@Path("/listarComitesOlimpicos/{tenantID}")
 	public Response listarComitesOlimpicos(@PathParam("tenantID") Integer tenantID);
 	
+	@PermitAll
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/getNovedad/{idnovedad}")
+	public Response getNoved(@PathParam("idnovedad") String idnovedad);
 }

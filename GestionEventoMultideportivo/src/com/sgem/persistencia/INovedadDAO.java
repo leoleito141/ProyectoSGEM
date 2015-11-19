@@ -16,4 +16,5 @@ public interface INovedadDAO {
 
 	public boolean guardarNovedad(Novedad n);
 	public List<Novedad> getNovedades(int tenantID);
+	public Novedad getNovedad(int idnovedad);
 }
