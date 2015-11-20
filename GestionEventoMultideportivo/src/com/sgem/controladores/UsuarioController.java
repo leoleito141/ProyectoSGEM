@@ -564,12 +564,23 @@ public class UsuarioController implements IUsuarioController {
 	}
 	@Override
 
-	public List<DataNovedad> getNovedadesPrincipales(int tenantid) {
+	public List<DataNovedad> getNovedadesPrincipales(int tenantID) {
 		
-		List<Novedad> novedades = NovedadDAO.getNovedades(tenantid);
+		List<Novedad> novedades = NovedadDAO.getNovedades(tenantID);
 		return convertirListaDataNovedad(novedades);
 		
 	}
+	
+	@Override
+	public List<DataNovedad> getNovedadesComite(Integer tenantID, Integer comiteID) throws AplicacionException {
+		try {		
+			return convertirListaDataNovedad(NovedadDAO.getNovedadesComite(tenantID,comiteID));
+		} catch(Exception e){
+			e.printStackTrace();
+			throw new AplicacionException("Error obteniendo novedades para el comite con id: "+comiteID);
+		}
+	}
+	
 	private List<DataNovedad> convertirListaDataNovedad(List<Novedad> aux){
 		
 		List<DataNovedad> nov = new ArrayList<DataNovedad>();

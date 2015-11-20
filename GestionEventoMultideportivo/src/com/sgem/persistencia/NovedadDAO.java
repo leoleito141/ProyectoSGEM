@@ -42,6 +42,20 @@ public class NovedadDAO implements INovedadDAO {
 		
 		
 	}
+	
+	@Override
+	public List<Novedad> getNovedadesComite(Integer tenantID, Integer comiteID) {		
+		List<Novedad> novedades= new ArrayList<Novedad>();
+		try {			
+			novedades =  em.createQuery("SELECT e FROM Novedad e WHERE e.tenantID = '"+tenantID+"' AND comite_olimpico = "+comiteID, Novedad.class).getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return novedades;
+	}
+
+	
 	@Override
 	public Novedad getNovedad(int idnovedad) {
 	try {
@@ -56,7 +70,5 @@ public class NovedadDAO implements INovedadDAO {
 		return null;
 	}
 	}
-
 	
-
 }

@@ -186,6 +186,15 @@ public class UsuarioService implements IUsuarioService{
 			return Response.serverError().build();
 		}	
 	}
+	
+	@Override
+	public Response getNovedadesComite(Integer tenantID,Integer comiteID) {
+		try {		
+			return Response.ok(iuc.getNovedadesComite(tenantID,comiteID)).build();		
+		} catch (AplicacionException e) {
+			return Response.serverError().build();
+		}
+	}
 
 	@Override
 	public Response listarComitesOlimpicos(Integer tenantID) {

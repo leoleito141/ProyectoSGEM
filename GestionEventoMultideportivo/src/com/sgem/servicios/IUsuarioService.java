@@ -136,6 +136,13 @@ public interface IUsuarioService {
 	@Path("/getNovedades/{tenantId}")
 	public Response getNovedad(@PathParam("tenantId") String tenantId);
 	
+	@PermitAll
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/getNovedadesComite/{tenantID}/{comiteID}")
+	public Response getNovedadesComite(@PathParam("tenantID") Integer tenantId,@PathParam("comiteID") Integer comiteID);
+	
 	@PermitAll	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
