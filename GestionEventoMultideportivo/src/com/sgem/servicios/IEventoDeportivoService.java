@@ -1,6 +1,7 @@
 	package com.sgem.servicios;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -11,6 +12,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.sgem.datatypes.DataBusquedaDeportista;
 import com.sgem.datatypes.DataEventoDeportivo;
 
 	@RequestScoped
@@ -53,6 +55,20 @@ import com.sgem.datatypes.DataEventoDeportivo;
 		@Produces(MediaType.APPLICATION_JSON)
 		@Path("/listarDeportes/{tenantID}")
 		public Response listarDeportes(@PathParam("tenantID") int tenantID);
+
+		@RolesAllowed("USUARIO_COMUN")
+		@GET
+		@Produces(MediaType.APPLICATION_JSON)
+		@Path("/listarFiltroDeportista/{tenantID}/{sexo}")
+		public Response  listarFiltroDeportista(@PathParam("tenantID") int tenantID, @PathParam("sexo") String sexo);
+	
+		@RolesAllowed("USUARIO_COMUN")
+		@POST
+		@Produces(MediaType.APPLICATION_JSON)
+		@Consumes(MediaType.APPLICATION_JSON)
+		@Path("/buscarDesportistas")
+		public Response  buscarDesportistas(DataBusquedaDeportista databusqueda);
+	
 		
 	}
 	

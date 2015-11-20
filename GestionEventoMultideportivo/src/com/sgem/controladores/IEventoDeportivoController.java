@@ -4,7 +4,10 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import com.sgem.datatypes.DataBusquedaDeportista;
+import com.sgem.datatypes.DataDeportista;
 import com.sgem.datatypes.DataEventoDeportivo;
+import com.sgem.dominio.Deportista;
 import com.sgem.dominio.EventoDeportivo;
 import com.sgem.seguridad.excepciones.AplicacionException;
 
@@ -22,5 +25,10 @@ public interface IEventoDeportivoController {
 	public List <Integer> listarRondas(int tenantID, String nombreDeporte, String sexo, String nombreDisciplina);
 
 	public List<DataEventoDeportivo> listarDeportes(int tenantID) throws AplicacionException;
+
+	DataBusquedaDeportista listarFiltroDeportista(int tenantID,String sexo);
+
+
+	List<DataDeportista> buscarDesportistas(DataBusquedaDeportista databusqueda);
 
 }

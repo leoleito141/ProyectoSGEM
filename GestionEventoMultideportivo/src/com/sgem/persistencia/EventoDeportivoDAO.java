@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
+import com.sgem.dominio.Deportista;
 import com.sgem.dominio.EventoDeportivo;
 import com.sgem.dominio.EventoMultideportivo;
 
@@ -182,6 +183,72 @@ public class EventoDeportivoDAO implements IEventoDeportivoDAO {
 		return deportes;
 	}
 
+@Override
+	public List<EventoDeportivo> listarEventoDeportivo(int tenantID,String sexo) {
+		List<EventoDeportivo> eventosDeportivos = null;
 
+		
+		try {
+			
+			eventosDeportivos = em.createQuery("SELECT ed FROM EventoDeportivo ed WHERE ed.tenantId = "+tenantID+" AND ed.sexo = '"+sexo+"'", EventoDeportivo.class).getResultList();
+			 System.out.println(eventosDeportivos);
+			 return eventosDeportivos;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+
+		return null;
+	}
+
+
+
+	@Override
+	public List<String> listarPaises() {
+		List<String> paises = null;
+		
+		try {
+			
+			paises = em.createQuery("SELECT pais.pais FROM Pais pais", String.class).getResultList();;
+			 System.out.println(paises);
+			 return paises;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
+
+	@Override
+	public List<Deportista> listarDeportistas(int tenantId,
+			String nombreDeportista, String deporte, String disciplina,String pais, String sexo) {
+		
+		List<Deportista> dep = null;
+		try {
+			
+			 dep = em.createNativeQuery("SELECT d.* FROM EventoDeportivo ed, Deportista d, "+
+					" deportista_eventodeportivo de, ComiteOlimpico co, Pais p "+
+					" WHERE ed.tenant_ID = "+tenantId+
+					" AND d.tenantId = "+tenantId+" AND ed.sexo = '"+sexo+
+					"' AND ed.nombreDeporte = '"   + deporte   +
+					"' AND  ed.disciplina = '"     +disciplina +
+					"' AND de.Deportista_deportistaID = d.deportistaID "+
+				    "AND de.eventoDep_EventoDepId = ed.EventoDepId AND d.Sexo = '"+sexo+
+					"' AND co.id = d.comiteOlimpico_id AND co.pais_paisID = p.paisID "+
+					" AND p.pais = '"+ pais+"' AND d.Nombre LIKE :nombreDeportista "+
+					";",Deportista.class).setParameter("nombreDeportista",  nombreDeportista+"%")
+					.getResultList();
+			
+			
+			return dep;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }
