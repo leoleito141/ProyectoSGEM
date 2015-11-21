@@ -17,6 +17,7 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 import com.sgem.datatypes.DataComite;
 import com.sgem.datatypes.DataDeportista;
+import com.sgem.datatypes.DataImagen;
 import com.sgem.datatypes.DataPais;
 import com.sgem.dominio.ComiteOlimpico;
 import com.sgem.dominio.Deportista;
@@ -107,16 +108,22 @@ public class DeportistaController implements IDeportistaController {
 		List<DataDeportista> dataDeportista = new ArrayList<DataDeportista>();
 		
 		for(int i = 0; i< deportista.size(); i++){
-			DataDeportista ddep = new DataDeportista();
-					
-			ddep.setNombre(deportista.get(i).getNombre());
-			ddep.setApellido(deportista.get(i).getApellido());
-			DataComite dc = new DataComite(deportista.get(i).getComiteOlimpico().getEmail(), "", deportista.get(i).getComiteOlimpico().getCodigo(),
-					new DataPais(deportista.get(i).getComiteOlimpico().getPais().getPaisID(), deportista.get(i).getComiteOlimpico().getPais().getPais(), deportista.get(i).getComiteOlimpico().getPais().getCiudad()),
-					deportista.get(i).getComiteOlimpico().getFacebook(), deportista.get(i).getComiteOlimpico().getTwitter(), deportista.get(i).getComiteOlimpico().getPaypal(), deportista.get(i).getComiteOlimpico().getTenantID(),
-					deportista.get(i).getComiteOlimpico().getId().intValue(), UsuarioController.USUARIO_COMITE);
-			ddep.setComite(dc);
-			ddep.setDeportistaID(deportista.get(i).getDeportistaID());
+			Deportista d = deportista.get(i);
+			
+			DataImagen di;
+
+			if(d.getFoto() != null){			
+				di = new DataImagen(d.getFoto().getMime(), d.getFoto().getRuta(), d.getFoto().getTenantId());
+			}else{
+				di = new DataImagen("","", 1);
+			}
+			
+			DataPais pais = new DataPais(d.getComiteOlimpico().getPais().getPaisID(), d.getComiteOlimpico().getPais().getPais(), d.getComiteOlimpico().getPais().getCiudad());
+			DataComite dc = new DataComite(d.getComiteOlimpico().getEmail(), "", d.getComiteOlimpico().getCodigo(),
+					pais, d.getComiteOlimpico().getFacebook(), d.getComiteOlimpico().getTwitter(), d.getComiteOlimpico().getPaypal(), 
+					d.getComiteOlimpico().getTenantID(),d.getComiteOlimpico().getId().intValue(), UsuarioController.USUARIO_COMITE);
+			DataDeportista ddep  = new DataDeportista(d.getTenantID(),d.getDeportistaID(),d.getNombre(),d.getApellido(),d.getSexo(),
+									  d.getFechaNac(),dc,"",new ArrayList<String>(), di);
 			
 
 			dataDeportista.add(ddep);			
@@ -190,7 +197,15 @@ public class DeportistaController implements IDeportistaController {
 		return (new Imagen(ImagenUtil.getMimeType(f), fileName,Integer.parseInt(tenantId)));
 		
 	}
-	
-	
+
+	@Override
+	public List<DataDeportista> listarDeportistasPorComite(int tenantID, int comiteID) throws AplicacionException {
+		try {
+			return convertir(DeportistaDAO.listarDeportistasPorComite(tenantID,comiteID));
+		}catch (Exception e){
+			e.printStackTrace();
+			throw new AplicacionException("Error al obtener deportistas");
+		}
+	}
 	
 }

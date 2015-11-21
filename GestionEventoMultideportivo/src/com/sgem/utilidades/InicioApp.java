@@ -141,6 +141,7 @@ public class InicioApp implements ServletContextListener {
 		comite1.setTwitter("uruguay");
 		comite1.setFacebook("Comite Olimpico Uruguayo");
 		comite1.setPassword("cou123");
+		((ComiteOlimpico)comite1).setPaypal("N28JFDC8R7MEQ");
 		comite1.setTenantID(1);			
 		
 		Imagen i1 = new Imagen("image/jpeg", "C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\comite_olimpico2\\cou.jpg", 1);

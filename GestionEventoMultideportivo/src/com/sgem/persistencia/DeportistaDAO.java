@@ -1,16 +1,13 @@
 package com.sgem.persistencia;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.sgem.datatypes.DataDeportista;
-import com.sgem.dominio.Admin;
 import com.sgem.dominio.Deportista;
-import com.sgem.dominio.Organizador;
-import com.sgem.dominio.Usuario;
 
 @Stateless
 public class DeportistaDAO implements IDeportistaDAO {
@@ -70,6 +67,18 @@ public class DeportistaDAO implements IDeportistaDAO {
 			e.printStackTrace();
 			return false;
 		}		
+	}
+
+	@Override
+	public List<Deportista> listarDeportistasPorComite(int tenantID, int comiteID) {
+		List<Deportista> deportistas = new ArrayList<Deportista>();
+		try{
+			deportistas = em.createQuery("SELECT d FROM Deportista d WHERE d.tenantID ="+tenantID+" AND d.comiteOlimpico = "+comiteID,Deportista.class).getResultList();
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+		return deportistas;
 	}
 
 	

@@ -21,4 +21,6 @@ public interface IDeportistaController {
 	public List<Deportista> listarDeportistas(List<DataDeportista> deportistas);
 
 	public Imagen subirImagenDeportista(MultipartFormDataInput input) throws AplicacionException;
+
+	public List<DataDeportista> listarDeportistasPorComite(int tenantID, int comiteID) throws AplicacionException;
 }

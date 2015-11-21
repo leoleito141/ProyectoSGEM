@@ -48,6 +48,15 @@ private IDeportistaController idc;
 		}
 		return null;
 	}
+
+	@Override
+	public Response listarDeportistasPorComite(int tenantID, int comiteID) {
+		try {
+			return Response.ok(idc.listarDeportistasPorComite(tenantID,comiteID)).build();
+		} catch (AplicacionException e) {
+			return Response.serverError().build();
+		}
+	}
 	
 
 }
