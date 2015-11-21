@@ -116,7 +116,7 @@ public class InicioApp implements ServletContextListener {
         Usuario admin = null;
         Usuario comite1 = null;
         Usuario comite2 = null;
-//		Usuario usuario3 = null;
+		Usuario comite3 = null;
 //		Usuario usuario4 = null;
 
 		admin = new Admin();
@@ -135,7 +135,7 @@ public class InicioApp implements ServletContextListener {
 		Pais p = new Pais("Uruguay","Montevideo");
 		((ComiteOlimpico)comite1).setPais(p); // para evitar esto, se declara a usuario2 como: 
 													   //ComiteOlimpico usuario 2 = new ComiteOlimpico();
-		((ComiteOlimpico)comite1).setCodigo("COU");
+		((ComiteOlimpico)comite1).setCodigo("URU");
 		comite1.setEmail("cou@gmail.com");
 		comite1.setCanalYoutube("uruguay");
 		comite1.setTwitter("uruguay");
@@ -151,7 +151,7 @@ public class InicioApp implements ServletContextListener {
 		comite2 = new ComiteOlimpico();
 		Pais p2 = new Pais("Argentina","Buenos Aires");
 		((ComiteOlimpico)comite2).setPais(p2); 
-		((ComiteOlimpico)comite2).setCodigo("COA");
+		((ComiteOlimpico)comite2).setCodigo("ARG");
 		comite2.setEmail("coa@gmail.com");
 		comite2.setCanalYoutube("uruguay");
 		comite2.setTwitter("uruguay");
@@ -163,6 +163,24 @@ public class InicioApp implements ServletContextListener {
 		ImagenDAO.guardarImagen(i2);
 		
 		((ComiteOlimpico)comite2).setLogo(i2);
+		
+		
+		comite3 = new ComiteOlimpico();
+		Pais p4 = new Pais("Brasil","Rio de Janeiro");
+		((ComiteOlimpico)comite3).setPais(p4); 
+		((ComiteOlimpico)comite3).setCodigo("BRA");
+		comite3.setEmail("cobra@gmail.com");
+		comite3.setCanalYoutube("brasil");
+		comite3.setTwitter("brasiltw");
+		comite3.setFacebook("FacebookBrasil");
+		comite3.setPassword("123");
+		comite3.setTenantID(1);			
+		
+		Imagen i3 = new Imagen("image/jpeg", "C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\comite_olimpico8\\cobra.jpg", 1);
+		ImagenDAO.guardarImagen(i3);
+		
+		((ComiteOlimpico)comite3).setLogo(i3);
+		
 //			usuario3 = new Admin();
 //			usuario3.setNombre("dsa3");
 //			usuario3.setApellido("dsa3");
@@ -189,6 +207,7 @@ public class InicioApp implements ServletContextListener {
 		UsuarioDAO.guardarUsuario(admin);  
 		UsuarioDAO.guardarUsuario(comite1);	
 		UsuarioDAO.guardarUsuario(comite2);	
+		UsuarioDAO.guardarUsuario(comite3);	
 //			UsuarioDAO.guardarUsuario(usuario3); 
 	//	UsuarioDAO.guardarUsuario(usuario4); 
 		
