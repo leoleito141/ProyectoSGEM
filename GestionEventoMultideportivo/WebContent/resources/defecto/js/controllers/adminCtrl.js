@@ -4,7 +4,11 @@ angular.module('pruebaAngularApp')
   .controller('AdminCtrl', ['$scope','$auth','$state','dataFactory', function ($scope, $auth, $state, dataFactory) {
 
    $scope.usuario={};
-   		
+   
+   $('.carousel').carousel({
+	    interval: 5000 //changes the speed
+	})
+	
    $scope.loginAdmin = function () {
 	   $scope.cargando = true; 	     
    	   setTimeout( function(){	
