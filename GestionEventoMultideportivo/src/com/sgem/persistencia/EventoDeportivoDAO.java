@@ -191,7 +191,7 @@ public class EventoDeportivoDAO implements IEventoDeportivoDAO {
 		try {
 			
 			eventosDeportivos = em.createQuery("SELECT ed FROM EventoDeportivo ed WHERE ed.tenantId = "+tenantID+" AND ed.sexo = '"+sexo+"'", EventoDeportivo.class).getResultList();
-			 System.out.println(eventosDeportivos);
+			 
 			 return eventosDeportivos;
 			
 		} catch (Exception e) {
@@ -229,18 +229,36 @@ public class EventoDeportivoDAO implements IEventoDeportivoDAO {
 		List<Deportista> dep = null;
 		try {
 			
-			 dep = em.createNativeQuery("SELECT d.* FROM EventoDeportivo ed, Deportista d, "+
-					" deportista_eventodeportivo de, ComiteOlimpico co, Pais p "+
-					" WHERE ed.tenant_ID = "+tenantId+
-					" AND d.tenantId = "+tenantId+" AND ed.sexo = '"+sexo+
-					"' AND ed.nombreDeporte = '"   + deporte   +
-					"' AND  ed.disciplina = '"     +disciplina +
-					"' AND de.Deportista_deportistaID = d.deportistaID "+
-				    "AND de.eventoDep_EventoDepId = ed.EventoDepId AND d.Sexo = '"+sexo+
-					"' AND co.id = d.comiteOlimpico_id AND co.pais_paisID = p.paisID "+
-					" AND p.pais = '"+ pais+"' AND d.Nombre LIKE :nombreDeportista "+
-					";",Deportista.class).setParameter("nombreDeportista",  nombreDeportista+"%")
-					.getResultList();
+			if(nombreDeportista != null){
+				dep = em.createNativeQuery("SELECT d.* FROM EventoDeportivo ed, Deportista d, "+
+						" deportista_eventodeportivo de, ComiteOlimpico co, Pais p "+
+						" WHERE ed.tenant_ID = "+tenantId+
+						" AND d.tenantId = "+tenantId+" AND ed.sexo = '"+sexo+
+						"' AND ed.nombreDeporte = '"   + deporte   +
+						"' AND  ed.disciplina = '"     +disciplina +
+						"' AND de.Deportista_deportistaID = d.deportistaID "+
+					    "AND de.eventoDep_EventoDepId = ed.EventoDepId AND d.Sexo = '"+sexo+
+						"' AND co.id = d.comiteOlimpico_id AND co.pais_paisID = p.paisID "+
+						" AND p.pais = '"+ pais+"' AND d.Nombre LIKE :nombreDeportista "+
+						";",Deportista.class).setParameter("nombreDeportista",  nombreDeportista+"%")
+						.getResultList();
+			}else{
+				dep = em.createNativeQuery("SELECT d.* FROM EventoDeportivo ed, Deportista d, "+
+						" deportista_eventodeportivo de, ComiteOlimpico co, Pais p "+
+						" WHERE ed.tenant_ID = "+tenantId+
+						" AND d.tenantId = "+tenantId+" AND ed.sexo = '"+sexo+
+						"' AND ed.nombreDeporte = '"   + deporte   +
+						"' AND  ed.disciplina = '"     +disciplina +
+						"' AND de.Deportista_deportistaID = d.deportistaID "+
+					    "AND de.eventoDep_EventoDepId = ed.EventoDepId AND d.Sexo = '"+sexo+
+						"' AND co.id = d.comiteOlimpico_id AND co.pais_paisID = p.paisID "+
+						" AND p.pais = '"+ pais+"'"  +
+						";",Deportista.class).getResultList();
+				
+				
+				
+			}
+			 
 			
 			
 			return dep;

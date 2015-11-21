@@ -18,10 +18,12 @@ public class DataDeportista {
 	private Date fechaNac;
 
 	private DataComite comite;
+	
+	private List<DataCompetencia> listcompetencias;
 
-	private String deporte;
+	private List<DataEstadistica> listestadisticas;
 
-	private List<String> disciplinas;
+	private List<DataEventoDeportivo> listeventodeportivo;
 
 	private DataImagen foto;
 
@@ -29,9 +31,8 @@ public class DataDeportista {
 
 	public DataDeportista(Integer tenantId, Integer deportistaID,
 			String nombre, String apellido, String sexo, Date fechaNac,
-			DataComite comite, String deporte, List<String> disciplinas,
-			DataImagen foto) {
-		super();
+			DataComite comite, DataImagen foto) {
+		
 		this.tenantId = tenantId;
 		this.deportistaID = deportistaID;
 		this.nombre = nombre;
@@ -39,8 +40,6 @@ public class DataDeportista {
 		this.sexo = sexo;
 		this.fechaNac = fechaNac;
 		this.comite = comite;
-		this.deporte = deporte;
-		this.disciplinas = disciplinas;
 		this.foto = foto;
 	}
 
@@ -100,20 +99,30 @@ public class DataDeportista {
 		this.comite = comite;
 	}
 
-	public String getDeporte() {
-		return deporte;
+	
+
+	public List<DataCompetencia> getListcompetencias() {
+		return listcompetencias;
 	}
 
-	public void setDeporte(String deporte) {
-		this.deporte = deporte;
+	public void setListcompetencias(List<DataCompetencia> listcompetencias) {
+		this.listcompetencias = listcompetencias;
 	}
 
-	public List<String> getDisciplinas() {
-		return disciplinas;
+	public List<DataEstadistica> getListestadisticas() {
+		return listestadisticas;
 	}
 
-	public void setDisciplinas(List<String> disciplinas) {
-		this.disciplinas = disciplinas;
+	public void setListestadisticas(List<DataEstadistica> listestadisticas) {
+		this.listestadisticas = listestadisticas;
+	}
+
+	public List<DataEventoDeportivo> getListeventodeportivo() {
+		return listeventodeportivo;
+	}
+
+	public void setListeventodeportivo(List<DataEventoDeportivo> listeventodeportivo) {
+		this.listeventodeportivo = listeventodeportivo;
 	}
 
 	public DataImagen getFoto() {
@@ -128,7 +137,7 @@ public class DataDeportista {
 	public String toString() {
 		return "DataDeportista [tenantId=" + tenantId + ", deportistaID=" + deportistaID + ", nombre=" + nombre
 				+ ", apellido=" + apellido + ", sexo=" + sexo + ", fechaNac=" + fechaNac + ", comite=" + comite
-				+ ", deporte=" + deporte + ", disciplinas=" + disciplinas + ", foto=" + foto + "]";
+				+ ", Listdeporte=" + listeventodeportivo + ", Listestadisticas=" + listestadisticas + ", foto=" + foto + "]";
 	}
 
 	
