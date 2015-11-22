@@ -118,15 +118,16 @@ public class DeportistaController implements IDeportistaController {
 				di = new DataImagen("","", 1);
 			}
 			
-		/*	DataPais pais = new DataPais(d.getComiteOlimpico().getPais().getPaisID(), d.getComiteOlimpico().getPais().getPais(), d.getComiteOlimpico().getPais().getCiudad());
+			DataPais pais = new DataPais(d.getComiteOlimpico().getPais().getPaisID(), d.getComiteOlimpico().getPais().getPais(), d.getComiteOlimpico().getPais().getCiudad());
 			DataComite dc = new DataComite(d.getComiteOlimpico().getEmail(), "", d.getComiteOlimpico().getCodigo(),
 					pais, d.getComiteOlimpico().getFacebook(), d.getComiteOlimpico().getTwitter(), d.getComiteOlimpico().getPaypal(), 
 					d.getComiteOlimpico().getTenantID(),d.getComiteOlimpico().getId().intValue(), UsuarioController.USUARIO_COMITE);
-			DataDeportista ddep  = new DataDeportista(d.getTenantID(),d.getDeportistaID(),d.getNombre(),d.getApellido(),d.getSexo(),
-									  d.getFechaNac(),dc,"",new ArrayList<String>(), di);
 			
+			DataDeportista ddep  = new DataDeportista(d.getTenantID(),d.getDeportistaID(),d.getNombre(),d.getApellido(),d.getSexo(),
+									  d.getFechaNac(),dc, di);
+		
 
-			dataDeportista.add(ddep);	*/		
+			dataDeportista.add(ddep);			
 		}
 		
 		return dataDeportista;		

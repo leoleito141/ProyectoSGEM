@@ -48,7 +48,7 @@ private DataDeportista convertirDeportista(Deportista d, String deporte) {
 			pais, d.getComiteOlimpico().getFacebook(), d.getComiteOlimpico().getTwitter(), d.getComiteOlimpico().getPaypal(), 
 			d.getComiteOlimpico().getTenantID(),d.getComiteOlimpico().getId().intValue(), UsuarioController.USUARIO_COMITE);
 	return new DataDeportista(d.getTenantID(),d.getDeportistaID(),d.getNombre(),d.getApellido(),d.getSexo(),
-							  d.getFechaNac(),dc,deporte,new ArrayList<String>(), di);
+							  d.getFechaNac(),dc,di);
 	}
 	@Override
 	public boolean guardarEventoDeportivo(DataEventoDeportivo dataEventoDeportivo) {

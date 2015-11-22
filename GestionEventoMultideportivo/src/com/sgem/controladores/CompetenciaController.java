@@ -210,7 +210,7 @@ public class CompetenciaController implements ICompetenciaController {
 				pais, d.getComiteOlimpico().getFacebook(), d.getComiteOlimpico().getTwitter(), d.getComiteOlimpico().getPaypal(), 
 				d.getComiteOlimpico().getTenantID(),d.getComiteOlimpico().getId().intValue(), UsuarioController.USUARIO_COMITE);
 		return new DataDeportista(d.getTenantID(),d.getDeportistaID(),d.getNombre(),d.getApellido(),d.getSexo(),
-								  d.getFechaNac(),dc,deporte,new ArrayList<String>(), di);
+								  d.getFechaNac(),dc,di);
 	}
 
 	@Override
