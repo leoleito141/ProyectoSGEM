@@ -65,7 +65,7 @@ public class DeportistaController implements IDeportistaController {
 			
 			deportista.setComiteOlimpico(comiteOlimpico.get(0));
 			
-			List<EventoDeportivo> eventosDep = iedc.buscarEventosDeportivos(dataDeportista.getTenantId(),dataDeportista.getDeporte(),dataDeportista.getDisciplinas(),dataDeportista.getSexo());
+			List<EventoDeportivo> eventosDep = iedc.buscarEventosDeportivos(dataDeportista.getListeventodeportivo());
 			
 			for (int i = 0; i < eventosDep.size(); i++) {
 				
@@ -118,7 +118,7 @@ public class DeportistaController implements IDeportistaController {
 				di = new DataImagen("","", 1);
 			}
 			
-			DataPais pais = new DataPais(d.getComiteOlimpico().getPais().getPaisID(), d.getComiteOlimpico().getPais().getPais(), d.getComiteOlimpico().getPais().getCiudad());
+		/*	DataPais pais = new DataPais(d.getComiteOlimpico().getPais().getPaisID(), d.getComiteOlimpico().getPais().getPais(), d.getComiteOlimpico().getPais().getCiudad());
 			DataComite dc = new DataComite(d.getComiteOlimpico().getEmail(), "", d.getComiteOlimpico().getCodigo(),
 					pais, d.getComiteOlimpico().getFacebook(), d.getComiteOlimpico().getTwitter(), d.getComiteOlimpico().getPaypal(), 
 					d.getComiteOlimpico().getTenantID(),d.getComiteOlimpico().getId().intValue(), UsuarioController.USUARIO_COMITE);
@@ -126,7 +126,7 @@ public class DeportistaController implements IDeportistaController {
 									  d.getFechaNac(),dc,"",new ArrayList<String>(), di);
 			
 
-			dataDeportista.add(ddep);			
+			dataDeportista.add(ddep);	*/		
 		}
 		
 		return dataDeportista;		

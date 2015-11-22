@@ -258,6 +258,33 @@ private DataDeportista convertirDeportista(Deportista d, String deporte) {
 		}
 		return null;	
 	}
+	@Override
+	public List<EventoDeportivo> buscarEventosDeportivos(List<DataEventoDeportivo> listeventodeportivo) {
+		try {
+			
+			List<EventoDeportivo> led = new ArrayList<EventoDeportivo>();
+			Integer idEventoDep = 0;
+			EventoDeportivo ed = null;
+			
+			for (int i = 0; i < listeventodeportivo.size(); i++) {
+				
+				DataEventoDeportivo evd =listeventodeportivo.get(i);
+				
+				idEventoDep = EventosDAO.traerIDEventoDeportivo(evd.getTenantId(), evd.getNombreDeporte(),evd.getNombreDisciplina(),evd.getSexo());
+				
+				ed = EventosDAO.traerEventoDeportivo(idEventoDep);
+				
+				led.add(ed);
+				
+				
+			}
+			
+			return led;
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+	}
 	
 	
 }

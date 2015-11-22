@@ -31,4 +31,6 @@ public interface IEventoDeportivoController {
 
 	List<DataDeportista> buscarDesportistas(DataBusquedaDeportista databusqueda);
 
+	List<EventoDeportivo> buscarEventosDeportivos(List<DataEventoDeportivo> listeventodeportivo);
+
 }
