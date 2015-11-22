@@ -2,47 +2,38 @@
 
 angular.module('pruebaAngularApp')
   .controller('EventoMultiCtrl', ['$scope','dataFactory','$state', function ($scope,dataFactory,$state) {
-	
-	  
-	  //hacemos de cuenta que somos organizadores
-	  
 	  
 	  $scope.evento={};
 	  $scope.pais={};
 	
 	  
-	  $scope.openInicio = function($eventInicio) {
-		    $scope.statusInicio.opened = true;
-		  };
-
-	  $scope.openFin = function($eventFin) {
-		    $scope.statusFin.opened = true;
-		  };
-	   
-	  $scope.statusInicio = {
-			    opened: false
-			  };
-	  
-	  $scope.statusFin = {
-			    opened: false
-			  };
-	  
-	  $scope.dateOptions = {
-			    formatYear: 'yy',
-			    startingDay: 1
-			  };
+	 
 	  
 	 ////////////////////////////////Date timepiquer example/////////// 
 	  $scope.$on('$viewContentLoaded' , function(){
-          $('#datetimepicker1').datetimepicker({
+          $('#datetimepicker2').datetimepicker({
+        	  locale: 'es'	 
         	  
         	});
-         
+          $("#datetimepicker2").on("dp.change", function (e) {
+        	  $scope.evento.fechaFin = e.date;
+              
+          });
+          $('#datetimepicker1').datetimepicker({
+        	  locale: 'es'
+        	  
+        	});
+          $("#datetimepicker1").on("dp.change", function (e) {
+        	  $scope.evento.fechaInicio = e.date;
+              
+          });
+          
+          
 
 	  });
      
-	  $scope.prueba={};
-	  console.log($scope.prueba);
+	 
+	
 	  /////////////////////////////////////////////////////////////////
 	  $scope.altaEvento = function(){
 		  var evento = $scope.evento;
