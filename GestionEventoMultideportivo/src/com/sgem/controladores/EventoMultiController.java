@@ -98,6 +98,13 @@ public class EventoMultiController implements IEventoMultiController {
 			dt.setInstagram(e.getInstagram());
 			dt.setTwitter(e.getTwitter());
 			
+			
+			dt.setWidgetFacebook(e.getWidget_facebook());
+			dt.setWidgetInstagram(e.getWidget_instagram());
+			dt.setWidgetTwitter(e.getWidget_twitter());
+			dt.setWidgetYoutube(e.getWidget_Youtube());
+			
+			
 			dt.setNombre_url(e.getNombre());
 			DataImagen fotoBanner = e.getImagenBanner()!=null ? getDataImagen(e.getImagenBanner()): null;
 			DataImagen fotoFondo = e.getImagenFondo() !=null ? getDataImagen(e.getImagenFondo()):null;
@@ -205,7 +212,7 @@ private DataImagen getDataImagen(Imagen i){
 	public boolean guardarConfiguracion(DataEvento datosEvento) throws AplicacionException {
 		
 
-		System.out.println(datosEvento);
+		//System.out.println(datosEvento);
 	
 
 		boolean guardo = false;
@@ -226,8 +233,21 @@ private DataImagen getDataImagen(Imagen i){
 				
 				if(datosEvento.getColorFondo()!=null)
 				eventoMulti.setColorFondo(datosEvento.getColorFondo());
+				
 				if(datosEvento.getColorNews()!=null)
 				eventoMulti.setColorNoticias(datosEvento.getColorNews());
+				
+				if(datosEvento.getWidgetFacebook()!=null)
+					eventoMulti.setWidget_facebook(datosEvento.getWidgetFacebook());
+				
+				if(datosEvento.getWidgetInstagram()!=null)
+					eventoMulti.setWidget_instagram(datosEvento.getWidgetInstagram());
+				
+				if(datosEvento.getWidgetTwitter()!=null)
+					eventoMulti.setWidget_twitter(datosEvento.getWidgetTwitter());
+				
+				if(datosEvento.getWidgetYoutube()!=null)
+					eventoMulti.setWidget_Youtube(datosEvento.getWidgetYoutube());
 				
 				EventoMultiDAO.guardarConfiguracion(eventoMulti);
 

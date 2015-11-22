@@ -18,6 +18,11 @@ public class DataEvento {
 	
 	private String facebook;
 	
+	private String widgetFacebook;
+	private String widgetInstagram;
+	private String widgetYoutube;
+	private String widgetTwitter;
+	
 	private String instagram;
 
 	private String nombre_url;
@@ -286,6 +291,38 @@ public class DataEvento {
 
 	public void setNombre_url(String nombre_url) {
 		this.nombre_url = nombre_url;
+	}
+
+	public String getWidgetFacebook() {
+		return widgetFacebook;
+	}
+
+	public void setWidgetFacebook(String widgetFacebook) {
+		this.widgetFacebook = widgetFacebook;
+	}
+
+	public String getWidgetInstagram() {
+		return widgetInstagram;
+	}
+
+	public void setWidgetInstagram(String widgetInstagram) {
+		this.widgetInstagram = widgetInstagram;
+	}
+
+	public String getWidgetYoutube() {
+		return widgetYoutube;
+	}
+
+	public void setWidgetYoutube(String widgetYoutube) {
+		this.widgetYoutube = widgetYoutube;
+	}
+
+	public String getWidgetTwitter() {
+		return widgetTwitter;
+	}
+
+	public void setWidgetTwitter(String widgetTwitter) {
+		this.widgetTwitter = widgetTwitter;
 	}
 
 	@Override

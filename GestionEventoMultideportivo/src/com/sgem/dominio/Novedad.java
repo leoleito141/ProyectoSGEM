@@ -30,10 +30,9 @@ public class Novedad implements Serializable{
 	
 	@Column(name = "tenantID", nullable = false)
 	private int tenantID;
-
 	
 
-	@Column(name = "descripcion", nullable = false)
+	@Column(name = "descripcion", nullable = false,length = 2000)
 	private String descripcion;
 	
 	@Column(name = "columna", nullable = false)

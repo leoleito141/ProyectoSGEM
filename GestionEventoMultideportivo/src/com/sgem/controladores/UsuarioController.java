@@ -605,6 +605,7 @@ public class UsuarioController implements IUsuarioController {
 	private DataNovedad getDataNovedad(Novedad n, DataImagen di){
 		
 		DataNovedad dn = new DataNovedad(n.getTitulo(),n.getDescripcion(),n.getColumna(),n.getTenantID(),"",di);
+		dn.setId(n.getNovedadID());
 		return dn;
 	}
 

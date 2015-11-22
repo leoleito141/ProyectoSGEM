@@ -76,6 +76,9 @@ public class EventoMultideportivo implements Serializable{
 	@Column(name = "canalYoutube", nullable = true)
 	private String canalYoutube;
 	
+	@Column(name = "widget_Youtube", nullable = true)
+	private String widget_Youtube;
+	
 	@Column(name = "widget_twitter", nullable = true)
 	private String widget_twitter;	
 	
@@ -285,6 +288,30 @@ public class EventoMultideportivo implements Serializable{
 
 	public void setTenantHandler(TenantHandler tenantHandler) {
 		this.tenantHandler = tenantHandler;
+	}
+
+	public String getLogo() {
+		return logo;
+	}
+
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
+
+	public String getWidget_Youtube() {
+		return widget_Youtube;
+	}
+
+	public void setWidget_Youtube(String widget_Youtube) {
+		this.widget_Youtube = widget_Youtube;
+	}
+
+	public String getCss() {
+		return Css;
+	}
+
+	public void setCss(String css) {
+		Css = css;
 	}
 		
 	
