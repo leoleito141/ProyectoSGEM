@@ -630,7 +630,7 @@ public class UsuarioController implements IUsuarioController {
 			c.setFacebook(comites.get(i).getFacebook());
 			c.setLogo(new DataImagen(comites.get(i).getLogo().getMime(),comites.get(i).getLogo().getRuta(),comites.get(i).getLogo().getTenantId()));
 			c.setPassword("");
-			c.setPaypal("");
+			c.setPaypal(comites.get(i).getPaypal());
 			c.setTenantId(comites.get(i).getTenantID());
 			c.setTipoUsuario(USUARIO_COMITE);
 			c.setTwitter(comites.get(i).getTwitter());			
