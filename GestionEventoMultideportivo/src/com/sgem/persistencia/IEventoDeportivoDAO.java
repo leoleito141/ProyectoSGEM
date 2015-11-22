@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import com.sgem.dominio.Deportista;
 import com.sgem.dominio.EventoDeportivo;
 import com.sgem.dominio.EventoMultideportivo;
 
@@ -20,7 +19,5 @@ public interface IEventoDeportivoDAO {
 	public EventoDeportivo traerEventoDeportivo(EventoDeportivo eventoDeportivo);
 	public List<Integer> listarRondas(int tenantID, String nombreDeporte, String sexo, String nombreDisciplina);	
 	
-	public List<EventoDeportivo> listarEventoDeportivo(int tenantID,String sexo);
-	public List<String> listarPaises();
-	public List<Deportista> listarDeportistas(int tenantId,String nombreDeportista, String deporte, String disciplina,String pais, String sexo);
+	
 }

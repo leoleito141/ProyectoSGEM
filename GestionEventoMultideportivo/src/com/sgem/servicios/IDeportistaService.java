@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
+import com.sgem.datatypes.DataBusquedaDeportista;
 import com.sgem.datatypes.DataDeportista;
 import com.sgem.datatypes.DataEventoDeportivo;
 
@@ -50,6 +51,19 @@ import com.sgem.datatypes.DataEventoDeportivo;
 		@Consumes("multipart/form-data")
 		@Path("/subirImagenDeportista")
 		public Response subirImagenDeportista(MultipartFormDataInput input);
+		
+		@RolesAllowed("USUARIO_COMUN")
+		@GET
+		@Produces(MediaType.APPLICATION_JSON)
+		@Path("/listarFiltroDeportista/{tenantID}/{sexo}")
+		public Response  listarFiltroDeportista(@PathParam("tenantID") int tenantID, @PathParam("sexo") String sexo);
+	
+		@RolesAllowed("USUARIO_COMUN")
+		@POST
+		@Produces(MediaType.APPLICATION_JSON)
+		@Consumes(MediaType.APPLICATION_JSON)
+		@Path("/buscarDesportistas")
+		public Response  buscarDesportistas(DataBusquedaDeportista databusqueda);
 		
 		
 	}

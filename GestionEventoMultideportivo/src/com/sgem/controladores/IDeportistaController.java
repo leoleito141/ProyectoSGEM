@@ -6,6 +6,7 @@ import javax.ejb.Local;
 
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
+import com.sgem.datatypes.DataBusquedaDeportista;
 import com.sgem.datatypes.DataDeportista;
 import com.sgem.dominio.Deportista;
 import com.sgem.dominio.Imagen;
@@ -23,4 +24,8 @@ public interface IDeportistaController {
 	public Imagen subirImagenDeportista(MultipartFormDataInput input) throws AplicacionException;
 
 	public List<DataDeportista> listarDeportistasPorComite(int tenantID, int comiteID) throws AplicacionException;
+	
+	public DataBusquedaDeportista listarFiltroDeportista(int tenantID,String sexo);
+	
+	public List<DataDeportista> buscarDesportistas(DataBusquedaDeportista databusqueda);
 }

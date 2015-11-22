@@ -1,7 +1,8 @@
 package com.sgem.datatypes;
 
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class DataDeportista {
 
@@ -19,15 +20,23 @@ public class DataDeportista {
 
 	private DataComite comite;
 	
-	private List<DataCompetencia> listcompetencias;
+	private Set<DataCompetencia> listcompetencias;
 
-	private List<DataEstadistica> listestadisticas;
+	private Set<DataEstadistica> listestadisticas;
 
-	private List<DataEventoDeportivo> listeventodeportivo;
+	private Set<DataEventoDeportivo> listeventodeportivo;
 
 	private DataImagen foto;
 
-	public DataDeportista() {}
+	public DataDeportista() {
+		
+		this.listcompetencias = new HashSet<DataCompetencia>();
+
+		this.listestadisticas = new HashSet<DataEstadistica>();
+
+		this.listeventodeportivo = new HashSet<DataEventoDeportivo>();
+
+	}
 
 	public DataDeportista(Integer tenantId, Integer deportistaID,
 			String nombre, String apellido, String sexo, Date fechaNac,
@@ -99,29 +108,27 @@ public class DataDeportista {
 		this.comite = comite;
 	}
 
-	
-
-	public List<DataCompetencia> getListcompetencias() {
+	public Set<DataCompetencia> getListcompetencias() {
 		return listcompetencias;
 	}
 
-	public void setListcompetencias(List<DataCompetencia> listcompetencias) {
+	public void setListcompetencias(Set<DataCompetencia> listcompetencias) {
 		this.listcompetencias = listcompetencias;
 	}
 
-	public List<DataEstadistica> getListestadisticas() {
+	public Set<DataEstadistica> getListestadisticas() {
 		return listestadisticas;
 	}
 
-	public void setListestadisticas(List<DataEstadistica> listestadisticas) {
+	public void setListestadisticas(Set<DataEstadistica> listestadisticas) {
 		this.listestadisticas = listestadisticas;
 	}
 
-	public List<DataEventoDeportivo> getListeventodeportivo() {
+	public Set<DataEventoDeportivo> getListeventodeportivo() {
 		return listeventodeportivo;
 	}
 
-	public void setListeventodeportivo(List<DataEventoDeportivo> listeventodeportivo) {
+	public void setListeventodeportivo(Set<DataEventoDeportivo> listeventodeportivo) {
 		this.listeventodeportivo = listeventodeportivo;
 	}
 

@@ -1,13 +1,11 @@
 package com.sgem.controladores;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.Local;
 
-import com.sgem.datatypes.DataBusquedaDeportista;
-import com.sgem.datatypes.DataDeportista;
 import com.sgem.datatypes.DataEventoDeportivo;
-import com.sgem.dominio.Deportista;
 import com.sgem.dominio.EventoDeportivo;
 import com.sgem.seguridad.excepciones.AplicacionException;
 
@@ -26,11 +24,6 @@ public interface IEventoDeportivoController {
 
 	public List<DataEventoDeportivo> listarDeportes(int tenantID) throws AplicacionException;
 
-	DataBusquedaDeportista listarFiltroDeportista(int tenantID,String sexo);
-
-
-	List<DataDeportista> buscarDesportistas(DataBusquedaDeportista databusqueda);
-
-	List<EventoDeportivo> buscarEventosDeportivos(List<DataEventoDeportivo> listeventodeportivo);
+	public List<EventoDeportivo> buscarEventosDeportivos(Set<DataEventoDeportivo> listeventodeportivo);
 
 }

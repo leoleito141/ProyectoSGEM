@@ -6,7 +6,6 @@ import javax.ejb.Stateless;
 import javax.ws.rs.core.Response;
 
 import com.sgem.controladores.IEventoDeportivoController;
-import com.sgem.datatypes.DataBusquedaDeportista;
 import com.sgem.datatypes.DataEventoDeportivo;
 import com.sgem.seguridad.excepciones.AplicacionException;
 
@@ -83,39 +82,6 @@ private IEventoDeportivoController iec;
 			return Response.serverError().build();
 		}
 	}
-	
-	
-	@Override
-	public Response listarFiltroDeportista(int tenantID, String sexo) {
-		try {
-			return Response.ok(iec.listarFiltroDeportista(tenantID, sexo)).build();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		}
-		return null;
-	}
-
-
-	@Override
-	public Response buscarDesportistas(DataBusquedaDeportista databusqueda) {
-
-		try {
-			
-			return Response.ok(iec.buscarDesportistas(databusqueda)).build();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-
-
-		}
-		return null;
-	}
-
-
-
-
 
 
 

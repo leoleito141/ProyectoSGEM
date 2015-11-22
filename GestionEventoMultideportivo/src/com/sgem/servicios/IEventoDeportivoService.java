@@ -56,18 +56,8 @@ import com.sgem.datatypes.DataEventoDeportivo;
 		@Path("/listarDeportes/{tenantID}")
 		public Response listarDeportes(@PathParam("tenantID") int tenantID);
 
-		@RolesAllowed("USUARIO_COMUN")
-		@GET
-		@Produces(MediaType.APPLICATION_JSON)
-		@Path("/listarFiltroDeportista/{tenantID}/{sexo}")
-		public Response  listarFiltroDeportista(@PathParam("tenantID") int tenantID, @PathParam("sexo") String sexo);
-	
-		@RolesAllowed("USUARIO_COMUN")
-		@POST
-		@Produces(MediaType.APPLICATION_JSON)
-		@Consumes(MediaType.APPLICATION_JSON)
-		@Path("/buscarDesportistas")
-		public Response  buscarDesportistas(DataBusquedaDeportista databusqueda);
+		
+		
 	
 		
 	}
