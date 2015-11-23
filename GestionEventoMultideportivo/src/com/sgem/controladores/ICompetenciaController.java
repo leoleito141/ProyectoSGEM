@@ -6,7 +6,6 @@ import javax.ejb.Local;
 
 import com.sgem.datatypes.DataCompetencia;
 import com.sgem.datatypes.DataCompraEntrada;
-import com.sgem.datatypes.DataJuez;
 import com.sgem.datatypes.DataResultado;
 import com.sgem.seguridad.excepciones.AplicacionException;
 
@@ -24,6 +23,8 @@ public interface ICompetenciaController {
 	public List<DataCompetencia> listarCompetenciasPendientes(int tenantID, int juezID) throws AplicacionException;
 
 	public boolean guardarResultado(DataResultado resultado) throws AplicacionException;
+
+	public List<DataCompetencia> listarCompetenciasPorDisciplina(int tenantID, String nombreDeporte, String nombreDisciplina, String sexo) throws AplicacionException;
 
 	
 }

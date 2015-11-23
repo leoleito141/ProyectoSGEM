@@ -59,6 +59,14 @@ public interface ICompetenciaService {
 	public Response listarCompetenciasPendientes(@PathParam("tenantID") int tenantID, @PathParam("juezID") int juezID);
 
 	@PermitAll
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/listarCompetenciasPorDisciplina/{tenantID}/{nombreDeporte}/{nombreDisciplina}/{sexo}")
+	public Response listarCompetenciasPorDisciplina(@PathParam("tenantID") int tenantID, @PathParam("nombreDeporte") String nombreDeporte,
+													@PathParam("nombreDisciplina") String nombreDisciplina, @PathParam("sexo") String sexo );
+
+	
+	@PermitAll
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)

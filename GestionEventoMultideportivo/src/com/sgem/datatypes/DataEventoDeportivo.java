@@ -5,23 +5,18 @@ import java.util.Date;
 public class DataEventoDeportivo{
 	
 	private int tenantId;
-//	@SerializedName(value="nombreDeporte")
+
 	private String nombreDeporte;
 	
-//	@SerializedName(value="nombreDisciplina")
 	private String nombreDisciplina;
 	
-//	@SerializedName(value="sexo")
 	private String sexo;
 	
-//	@SerializedName(value="FechaInicio")
 	private Date FechaInicio;
 	
-//	@SerializedName(value="FechaFin")
 	private Date FechaFin;
 	
 	private int cantRondas;
-
 	
 	private String tipo;
 	
@@ -65,8 +60,6 @@ public class DataEventoDeportivo{
 		FechaFin = fechaFin;
 	}
 	
-	
-	
 	public int getTenantId() {
 		return tenantId;
 	}
@@ -74,8 +67,6 @@ public class DataEventoDeportivo{
 	public void setTenantId(int tenantId) {
 		this.tenantId = tenantId;
 	}
-
-	
 	
 	public int getCantRondas() {
 		return cantRondas;
@@ -84,9 +75,6 @@ public class DataEventoDeportivo{
 	public void setCantRondas(int cantRondas) {
 		this.cantRondas = cantRondas;
 	}
-
-	
-	
 	
 	public String getTipo() {
 		return tipo;

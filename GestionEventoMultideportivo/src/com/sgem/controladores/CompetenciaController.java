@@ -162,41 +162,19 @@ public class CompetenciaController implements ICompetenciaController {
 			throw new AplicacionException("Error obteniendo competencias.");
 		}
 	}
-	private List<DataCompetencia> convertirListaCompetencias(List<Competencia> competencias) {
-			
+	
+	private List<DataCompetencia> convertirListaCompetencias(List<Competencia> competencias) {			
 		List<DataCompetencia> dataCompetencias = new ArrayList<DataCompetencia>();
 		
 		for(int i = 0; i< competencias.size(); i++){
-			DataCompetencia c = new DataCompetencia();
-			List<DataDeportista> deportistas = new ArrayList<DataDeportista>();
-							
-			for(Deportista d : competencias.get(i).getDeportistas()){
-				deportistas.add(convertirDeportista(d,competencias.get(i).getEventoDeportivo().getNombreDeporte()));
-			}		
-			
-			c.setDeportistas(deportistas);
-			c.setJuez(convertirJuez(competencias.get(i).getJuez()));
-			c.setNombreDeporte(competencias.get(i).getEventoDeportivo().getNombreDeporte());
-			c.setNombreDisciplina(competencias.get(i).getEventoDeportivo().getDisciplina());
-			c.setSexo(competencias.get(i).getEventoDeportivo().getSexo());
-			c.setRonda(competencias.get(i).getRonda().getNumeroRonda());
-			c.setTenantId(competencias.get(i).getTenantId());
-			c.setEstadio(competencias.get(i).getEstadio());
-			c.setCantEntradas(competencias.get(i).getCantEntradas());
-			c.setFecha(competencias.get(i).getFecha());
-			c.setPrecioEntrada(competencias.get(i).getPrecioEntrada());
-			c.setIdCompetencia(competencias.get(i).getCompetenciaId());
-			c.setEntradasVendidas(competencias.get(i).getEntradasVendidas());
-			c.setTipoDeporte(competencias.get(i).getEventoDeportivo().getTipo());
-			c.setFinalizada(competencias.get(i).isFinalizada());
+			DataCompetencia c = convertirCompetencia(competencias.get(i));
 			dataCompetencias.add(c);			
 		}
-		
 		
 		return dataCompetencias;
 	}
 
-	private DataDeportista convertirDeportista(Deportista d, String deporte) {		
+	private DataDeportista convertirDeportista(Deportista d) {		
 		DataImagen di;
 
 		if(d.getFoto() != null){			
@@ -313,6 +291,91 @@ public class CompetenciaController implements ICompetenciaController {
 
 	private Estadistica convertirEstadistica(DataEstadistica e,Deportista deportista) {			
 		return new Estadistica(e.getTenantId(),e.getPosicion(),e.getDatoInformativo(),deportista,null);	
+	}
+
+	@Override
+	public List<DataCompetencia> listarCompetenciasPorDisciplina(int tenantID, String nombreDeporte, String nombreDisciplina, String sexo) throws AplicacionException {
+		try{
+			return convertirListaCompetencias(CompetenciaDAO.listarCompetenciasPorDisciplina(tenantID,nombreDeporte,nombreDisciplina,sexo));
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new AplicacionException("Error obteniendo competencias.");
+		}
+	}
+
+	private List<DataResultado> convertirListaResultados(List<Resultado> resultados) {
+		List<DataResultado> dataResultados = new ArrayList<DataResultado>();
+				
+		for(int i = 0; i< resultados.size(); i++){
+			DataResultado dr = new DataResultado();
+			
+			dr.setResultadoId(resultados.get(i).getResultadoId());
+			dr.setTenantId(resultados.get(i).getTenantId());			
+			dr.setCompetencia(convertirCompetencia(resultados.get(i).getCompetencia()));
+			dr.setEstadisticas(convertirListaEstadisticas(resultados.get(i).getEstadisticas()));
+			
+			dataResultados.add(dr);			
+		}		
+		
+		return dataResultados;
+	}
+	
+	private List<DataEstadistica> convertirListaEstadisticas(Set<Estadistica> setEstadisticas) {
+		List<DataEstadistica> dataEstadisticas = new ArrayList<DataEstadistica>();
+		List<Estadistica> estadisticas = new ArrayList<Estadistica>();
+		
+		Iterator<Estadistica> it = estadisticas.iterator();
+		
+		while(it.hasNext()){
+			estadisticas.add(estadisticas.iterator().next());
+		}
+		
+		for(int i = 0; i< estadisticas.size(); i++){
+			DataEstadistica de = convertirEstadistica(estadisticas.get(i));
+			dataEstadisticas.add(de);			
+		}
+		
+		return dataEstadisticas;
+	}
+
+	private DataEstadistica convertirEstadistica(Estadistica estadistica) {
+		DataEstadistica de = new DataEstadistica();
+		
+		de.setDatoInformativo(estadistica.getDatoInformativo());
+		de.setDeportista(convertirDeportista(estadistica.getDeportista()));
+		de.setEstadisticaId(estadistica.getEstadisticaId());
+		de.setPosicion(estadistica.getPosicion());
+		de.setResultadoId(estadistica.getResultado().getResultadoId());
+		de.setTenantId(estadistica.getTenantId());
+		
+		return de;
+	}
+
+	public DataCompetencia convertirCompetencia(Competencia competencia){
+		DataCompetencia c = new DataCompetencia();
+		List<DataDeportista> deportistas = new ArrayList<DataDeportista>();
+						
+		for(Deportista d : competencia.getDeportistas()){
+			deportistas.add(convertirDeportista(d));
+		}		
+		
+		c.setDeportistas(deportistas);
+		c.setJuez(convertirJuez(competencia.getJuez()));
+		c.setNombreDeporte(competencia.getEventoDeportivo().getNombreDeporte());
+		c.setNombreDisciplina(competencia.getEventoDeportivo().getDisciplina());
+		c.setSexo(competencia.getEventoDeportivo().getSexo());
+		c.setRonda(competencia.getRonda().getNumeroRonda());
+		c.setTenantId(competencia.getTenantId());
+		c.setEstadio(competencia.getEstadio());
+		c.setCantEntradas(competencia.getCantEntradas());
+		c.setFecha(competencia.getFecha());
+		c.setPrecioEntrada(competencia.getPrecioEntrada());
+		c.setIdCompetencia(competencia.getCompetenciaId());
+		c.setEntradasVendidas(competencia.getEntradasVendidas());
+		c.setTipoDeporte(competencia.getEventoDeportivo().getTipo());
+		c.setFinalizada(competencia.isFinalizada());
+		
+		return c;
 	}
 	
 }

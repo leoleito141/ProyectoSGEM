@@ -3,20 +3,13 @@ package com.sgem.persistencia;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TemporalType;
-import javax.persistence.criteria.CriteriaBuilder;
 
-import com.sgem.datatypes.DataCompetencia;
-import com.sgem.datatypes.DataJuez;
 import com.sgem.dominio.Competencia;
-import com.sgem.dominio.Juez;
-import com.sgem.dominio.Usuario;
-import com.sgem.dominio.UsuarioComun;
 
 @Stateless
 public class CompetenciaDAO implements ICompetenciaDAO{
@@ -103,6 +96,7 @@ public class CompetenciaDAO implements ICompetenciaDAO{
 							  .setParameter("fecha", new Date(), TemporalType.DATE)
 							  .getResultList();
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 		 return competencias;
@@ -120,6 +114,24 @@ public class CompetenciaDAO implements ICompetenciaDAO{
 			return modifico; 
 		}
 		return modifico;
+	}
+
+	@Override
+	public List<Competencia> listarCompetenciasPorDisciplina(int tenantID, String nombreDeporte, String nombreDisciplina, String sexo) {
+		List<Competencia> competencias = null;			
+		
+		try {			
+			competencias = em.createQuery("SELECT c " + 
+										"FROM Competencia c,EventoDeportivo ed " + 
+										"WHERE c.eventoDeportivo = ed.EventoDepId AND ed.nombreDeporte = '"+nombreDeporte+"' " +
+										"AND ed.disciplina = '"+nombreDisciplina+"' AND ed.sexo = '"+sexo+"' " +
+										"AND c.tenantId = "+tenantID+" AND ed.tenantId = "+tenantID, Competencia.class)
+										.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return competencias;
+		}
+		return competencias;
 	}
 
 	

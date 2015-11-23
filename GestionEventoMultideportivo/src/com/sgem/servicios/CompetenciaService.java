@@ -92,6 +92,16 @@ public class CompetenciaService implements ICompetenciaService{
 			return Response.serverError().build();
 		}
 	}
+
+
+	@Override
+	public Response listarCompetenciasPorDisciplina(int tenantID, String nombreDeporte, String nombreDisciplina, String sexo) {
+		try {						
+			return Response.ok(icc.listarCompetenciasPorDisciplina(tenantID,nombreDeporte,nombreDisciplina,sexo)).build();	
+		} catch (AplicacionException e) {
+			return Response.serverError().build();
+		}
+	}
 	
 }
 

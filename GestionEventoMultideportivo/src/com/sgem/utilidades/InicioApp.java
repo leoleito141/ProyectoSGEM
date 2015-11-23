@@ -239,13 +239,13 @@ public class InicioApp implements ServletContextListener {
 		
 		EventoMultiDAO.guardarTenant(th);
 
-		EventoDeportivo futbol = new EventoDeportivo(th.getTenantID(), "Futbol", null, new Date(), new Date(), "Masculino",  null, null,"colectivo");
+		EventoDeportivo futbol = new EventoDeportivo(th.getTenantID(), "Futbol", "Futbol 11", new Date(), new Date(), "Masculino",  null, null,"colectivo");
 		EventoDeportivoDAO.guardarEventoDeportivo(futbol,evento);
 		
-		EventoDeportivo basket = new EventoDeportivo(th.getTenantID(), "Basket", null, new Date(), new Date(), "Masculino",  null, null,"colectivo");
+		EventoDeportivo basket = new EventoDeportivo(th.getTenantID(), "Basket", "5 x 5", new Date(), new Date(), "Masculino",  null, null,"colectivo");
 		EventoDeportivoDAO.guardarEventoDeportivo(basket,evento);
 		
-		EventoDeportivo basketF = new EventoDeportivo(th.getTenantID(), "Basket", null, new Date(), new Date(), "Femenino",  null, null,"colectivo");
+		EventoDeportivo basketF = new EventoDeportivo(th.getTenantID(), "Basket", "5 x 5", new Date(), new Date(), "Femenino",  null, null,"colectivo");
 		EventoDeportivoDAO.guardarEventoDeportivo(basketF,evento);
 		
 		EventoDeportivo Natacion1 = new EventoDeportivo(th.getTenantID(), "Natacion", "100M Libres", new Date(), new Date(), "Femenino",  null, null,"individual");
