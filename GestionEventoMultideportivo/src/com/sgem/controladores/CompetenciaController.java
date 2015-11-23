@@ -290,9 +290,6 @@ public class CompetenciaController implements ICompetenciaController {
 		}
 		
 		Competencia competencia = CompetenciaDAO.buscarCompetencia(resultado.getTenantId(), resultado.getCompetencia().getIdCompetencia());
-		competencia.setFinalizada(true);
-		
-		CompetenciaDAO.modificarCompetencia(competencia);
 		
 		Resultado r = new Resultado(resultado.getTenantId(), estadisticas, competencia);
 		guardo = ResultadoDAO.guardarResultado(r);
@@ -305,6 +302,10 @@ public class CompetenciaController implements ICompetenciaController {
 				throw new AplicacionException("Error al guardar el resultado. Error al guardar estadistica");
 			} 	
 		}
+				
+		competencia.setFinalizada(true);
+		competencia.setResultado(r);
+		CompetenciaDAO.modificarCompetencia(competencia);
 		
 		return guardo;
 		

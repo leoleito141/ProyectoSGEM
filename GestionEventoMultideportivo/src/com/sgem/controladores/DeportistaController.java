@@ -364,5 +364,15 @@ public class DeportistaController implements IDeportistaController {
 		}
 		return null;	
 	}
+
+	@Override
+	public List<DataDeportista> listarDeportistasPorEventoDeportivo(int tenantID, String nombreDeporte) throws AplicacionException {
+		try {
+			return convertir(DeportistaDAO.listarDeportistasPorEventoDeportivo(tenantID,nombreDeporte));
+		}catch (Exception e){
+			e.printStackTrace();
+			throw new AplicacionException("Error al obtener deportistas");
+		}
+	}
 	
 }

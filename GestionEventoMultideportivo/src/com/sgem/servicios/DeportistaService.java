@@ -85,6 +85,15 @@ private IDeportistaController idc;
 		}
 		return null;
 	}
+
+	@Override
+	public Response listarDeportistasPorEventoDeportivo(int tenantID, String nombreDeporte) {
+		try {
+			return Response.ok(idc.listarDeportistasPorEventoDeportivo(tenantID,nombreDeporte)).build();
+		} catch (AplicacionException e) {
+			return Response.serverError().build();
+		}
+	}
 	
 
 }

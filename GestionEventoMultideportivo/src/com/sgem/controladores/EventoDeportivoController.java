@@ -30,8 +30,6 @@ public class EventoDeportivoController implements IEventoDeportivoController {
 	@EJB
 	private IEventoMultiController  iemc;
 
-	
-	
 
 	@Override
 	public boolean guardarEventoDeportivo(DataEventoDeportivo dataEventoDeportivo) {
@@ -221,6 +219,16 @@ public class EventoDeportivoController implements IEventoDeportivoController {
 				e.printStackTrace();
 			}
 			return null;
+	}
+
+	@Override
+	public List<DataEventoDeportivo> listarDisciplinasEventoDeportivo(int tenantID, String nombreDeporte) throws AplicacionException {
+		try {				
+			return convertirEventosDeportivos(EventosDAO.listarDisciplinasEventoDeportivo(tenantID,nombreDeporte));		
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new AplicacionException("Error al obtener eventos deportivos",e);
+		}
 	}
 	
 	

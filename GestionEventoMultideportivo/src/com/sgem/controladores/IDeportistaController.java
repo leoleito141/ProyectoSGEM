@@ -28,4 +28,6 @@ public interface IDeportistaController {
 	public DataBusquedaDeportista listarFiltroDeportista(int tenantID,String sexo);
 	
 	public List<DataDeportista> buscarDesportistas(DataBusquedaDeportista databusqueda);
+
+	public List<DataDeportista> listarDeportistasPorEventoDeportivo(int tenantID, String nombreDeporte) throws AplicacionException;
 }

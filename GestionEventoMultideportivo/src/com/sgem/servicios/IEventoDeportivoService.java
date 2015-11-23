@@ -56,9 +56,12 @@ import com.sgem.datatypes.DataEventoDeportivo;
 		@Path("/listarDeportes/{tenantID}")
 		public Response listarDeportes(@PathParam("tenantID") int tenantID);
 
-		
-		
-	
+		@PermitAll
+		@GET
+		@Produces(MediaType.APPLICATION_JSON)
+		@Path("/listarDisciplinasEventoDeportivo/{tenantID}/{nombreDeporte}")
+		public Response listarDisciplinasEventoDeportivo(@PathParam("tenantID") int tenantID, @PathParam("nombreDeporte") String nombreDeporte);
+
 		
 	}
 	

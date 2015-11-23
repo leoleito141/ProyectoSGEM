@@ -44,7 +44,12 @@ import com.sgem.datatypes.DataEventoDeportivo;
 		@Path("/listarDeportistasPorComite/{tenantID}/{comiteID}")
 		public Response listarDeportistasPorComite(@PathParam("tenantID") int tenantID, @PathParam("comiteID") int comiteID);
 	
-		
+		@PermitAll
+		@GET
+		@Produces(MediaType.APPLICATION_JSON)
+		@Path("/listarDeportistasPorEventoDeportivo/{tenantID}/{nombreDeporte}")
+		public Response listarDeportistasPorEventoDeportivo(@PathParam("tenantID") int tenantID, @PathParam("nombreDeporte") String nombreDeporte);
+			
 		@RolesAllowed("COMITE_OLIMPICO")
 		@POST
 		@Produces(MediaType.APPLICATION_JSON)

@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+
 import com.sgem.dominio.EventoDeportivo;
 import com.sgem.dominio.EventoMultideportivo;
 
@@ -15,10 +16,7 @@ public class EventoDeportivoDAO implements IEventoDeportivoDAO {
 		
 	@PersistenceContext(unitName = "GestionEventoMultideportivo")
 	private EntityManager em;
-	
-	
-
-	
+		
 	public List<String> listarDeportes(int tenantID, String sexo) {
 		
 		List<String> deportes = null;
@@ -174,6 +172,20 @@ public class EventoDeportivoDAO implements IEventoDeportivoDAO {
 		List<EventoDeportivo> deportes = null;		
 		try {			
 			 deportes = em.createQuery("SELECT ed FROM EventoDeportivo ed WHERE ed.tenantId = "+tenantID, EventoDeportivo.class).getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return deportes;
+		}
+		return deportes;
+	}
+
+
+
+	@Override
+	public List<EventoDeportivo> listarDisciplinasEventoDeportivo(int tenantID,	String nombreDeporte){		
+		List<EventoDeportivo> deportes = null;		
+		try {			
+			 deportes = em.createQuery("SELECT ed FROM EventoDeportivo ed WHERE ed.tenantId = "+tenantID+" AND ed.nombreDeporte = '"+nombreDeporte+"'", EventoDeportivo.class).getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return deportes;

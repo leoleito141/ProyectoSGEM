@@ -26,4 +26,6 @@ public interface IEventoDeportivoController {
 
 	public List<EventoDeportivo> buscarEventosDeportivos(Set<DataEventoDeportivo> listeventodeportivo);
 
+	public List<DataEventoDeportivo> listarDisciplinasEventoDeportivo(int tenantID, String nombreDeporte) throws AplicacionException;
+
 }

@@ -83,7 +83,14 @@ private IEventoDeportivoController iec;
 		}
 	}
 
-
+	@Override
+	public Response listarDisciplinasEventoDeportivo(int tenantID, String nombreDeporte){
+		try {
+			return Response.ok(iec.listarDisciplinasEventoDeportivo(tenantID,nombreDeporte)).build();
+		} catch (AplicacionException e) {
+			return Response.serverError().build();
+		}
+	}
 
 
 

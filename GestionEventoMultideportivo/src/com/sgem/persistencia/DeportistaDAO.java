@@ -32,9 +32,7 @@ public class DeportistaDAO implements IDeportistaDAO {
 	public List<Deportista> listarDeportistas(int tenantID, String nombreDeporte, String sexo, String nombreDisciplina) {
 		
 		try{
-			List<Deportista> deportistas = em.createNativeQuery("SELECT d.* FROM EventoDeportivo ed, Deportista d, deportista_eventodeportivo de WHERE ed.tenant_ID = '"+tenantID+"' AND d.tenantId = '"+tenantID+"' AND ed.sexo = '"+sexo+"' AND ed.nombreDeporte = '"+nombreDeporte+"' AND  ed.disciplina = '"+nombreDisciplina+"' AND de.Deportista_deportistaID = d.deportistaID AND de.eventoDep_EventoDepId = ed.EventoDepId AND d.Sexo = '"+sexo+"';",Deportista.class).getResultList();;
-			
-
+			List<Deportista> deportistas = em.createNativeQuery("SELECT d.* FROM EventoDeportivo ed, Deportista d, deportista_eventodeportivo de WHERE ed.tenant_ID = '"+tenantID+"' AND d.tenantId = '"+tenantID+"' AND ed.sexo = '"+sexo+"' AND ed.nombreDeporte = '"+nombreDeporte+"' AND  ed.disciplina = '"+nombreDisciplina+"' AND de.Deportista_deportistaID = d.deportistaID AND de.eventoDep_EventoDepId = ed.EventoDepId AND d.Sexo = '"+sexo+"';",Deportista.class).getResultList();
 			return deportistas;
 			
 		}catch(Exception e){
@@ -164,6 +162,18 @@ public class DeportistaDAO implements IDeportistaDAO {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Override
+	public List<Deportista> listarDeportistasPorEventoDeportivo(int tenantID, String nombreDeporte) {
+		List<Deportista> deportistas = null;
+		try{
+			deportistas = em.createNativeQuery("SELECT d.* FROM EventoDeportivo ed, Deportista d, deportista_eventodeportivo de WHERE ed.tenant_ID = '"+tenantID+"' AND d.tenantId = '"+tenantID+"' AND ed.nombreDeporte = '"+nombreDeporte+"' AND de.Deportista_deportistaID = d.deportistaID AND de.eventoDep_EventoDepId = ed.EventoDepId;",Deportista.class).getResultList();	
+		}catch(Exception e){
+			e.printStackTrace();
+			return deportistas;
+		}		
+		return deportistas;
 	}
 
 	
