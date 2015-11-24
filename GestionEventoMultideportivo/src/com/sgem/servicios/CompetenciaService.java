@@ -102,6 +102,18 @@ public class CompetenciaService implements ICompetenciaService{
 			return Response.serverError().build();
 		}
 	}
+
+
+	@Override
+	public Response listarResultadosCompetencia(int tenantID, int competenciaID) {
+		try {
+		return Response.ok(icc.listarResultadosCompetencia(tenantID,competenciaID)).build();
+		} catch (Exception e) {
+			e.printStackTrace();
+	
+		}
+		return null;
+		}
 	
 }
 

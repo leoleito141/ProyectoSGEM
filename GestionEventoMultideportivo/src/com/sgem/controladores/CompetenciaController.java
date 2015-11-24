@@ -377,6 +377,27 @@ public class CompetenciaController implements ICompetenciaController {
 		
 		return c;
 	}
+
+	@Override
+	public DataResultado listarResultadosCompetencia(int tenantID, int competenciaID) {
+		
+		 return convertirResultado(ResultadoDAO.traerResultado(tenantID,competenciaID));
+		
+	}
+	
+	private DataResultado convertirResultado(Resultado r) {		
+	
+		DataResultado dr = new DataResultado();
+		
+		dr.setCompetencia(convertirCompetencia(r.getCompetencia()));
+		dr.setResultadoId(r.getResultadoId());
+		dr.setTenantId(r.getTenantId());
+		dr.setEstadisticas(convertirListaEstadisticas(r.getEstadisticas()));
+		
+		return dr;
+		
+	}
+	
 	
 }
 

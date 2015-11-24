@@ -10,4 +10,5 @@ public interface IResultadoDAO {
 	public boolean guardarResultado(Resultado r);
 	public Resultado buscarResultado(int tenantID, int idResultado);
 	public boolean modificarResultado(Resultado e);
+	public Resultado traerResultado(int tenantID, int competenciaID);
 }

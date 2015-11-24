@@ -73,4 +73,11 @@ public interface ICompetenciaService {
 	@Path("/guardarResultado")
 	public Response guardarResultado(DataResultado resultado);
 	
+	
+	@PermitAll
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/listarResultadosCompetencia/{tenantID}/{competenciaID}")
+	public Response listarResultadosCompetencia(@PathParam("tenantID") int tenantID, @PathParam("competenciaID") int competenciaID);
+
 }

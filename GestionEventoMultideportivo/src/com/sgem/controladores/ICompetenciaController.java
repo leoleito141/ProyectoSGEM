@@ -26,6 +26,8 @@ public interface ICompetenciaController {
 
 	public List<DataCompetencia> listarCompetenciasPorDisciplina(int tenantID, String nombreDeporte, String nombreDisciplina, String sexo) throws AplicacionException;
 
+	public DataResultado listarResultadosCompetencia(int tenantID, int competenciaID);
+
 	
 }
 
