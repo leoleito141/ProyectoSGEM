@@ -44,4 +44,26 @@ public class EstadisticaDAO implements IEstadisticaDAO {
 			return false;
 		}		
 	}
+
+	@Override
+	public Estadistica buscarEstadisticaPorPais(int tenantID, int competenciaID, int comiteID) {
+		Estadistica estadistica = null;
+		try{
+			String sql = "SELECT e. *" + 
+					     "FROM competencia c, competencia_deportista cd, deportista d, resultado r, estadistica e " +
+					 	 "WHERE c.CompetenciaId = "+competenciaID+" AND r.competencia_CompetenciaId = c.CompetenciaId " +
+						 "AND d.comiteOlimpico_id = "+comiteID+" AND cd.deportistas_deportistaID = d.deportistaID AND " +
+						 "c.CompetenciaId = cd.competencia_CompetenciaId AND e.deportista_deportistaID = d.deportistaID " +
+						 "AND e.resultado_resultadoId = r.resultadoId AND e.tenant_ID = "+tenantID+" AND c.tenant_ID = "+tenantID + " " + 
+						 "AND d.TenantID = "+tenantID+" " +
+						 "AND r.tenant_ID = "+tenantID+" " +
+						 "LIMIT 1";
+			
+			estadistica = (Estadistica) em.createNativeQuery(sql,Estadistica.class).getSingleResult();
+		}catch(Exception e){
+			e.printStackTrace();
+			return estadistica;
+		}
+		return estadistica;
+	}
 }

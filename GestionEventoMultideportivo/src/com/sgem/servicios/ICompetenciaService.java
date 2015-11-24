@@ -80,4 +80,10 @@ public interface ICompetenciaService {
 	@Path("/listarResultadosCompetencia/{tenantID}/{competenciaID}")
 	public Response listarResultadosCompetencia(@PathParam("tenantID") int tenantID, @PathParam("competenciaID") int competenciaID);
 
+	@PermitAll
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/listarEstadisticaPorPais/{tenantID}/{competenciaID}/{comiteID}")
+	public Response listarEstadisticaPorPais(@PathParam("tenantID") int tenantID, @PathParam("competenciaID") int competenciaID, @PathParam("comiteID") int comiteID);
+
 }

@@ -6,6 +6,7 @@ import javax.ejb.Local;
 
 import com.sgem.datatypes.DataCompetencia;
 import com.sgem.datatypes.DataCompraEntrada;
+import com.sgem.datatypes.DataEstadistica;
 import com.sgem.datatypes.DataResultado;
 import com.sgem.seguridad.excepciones.AplicacionException;
 
@@ -27,6 +28,8 @@ public interface ICompetenciaController {
 	public List<DataCompetencia> listarCompetenciasPorDisciplina(int tenantID, String nombreDeporte, String nombreDisciplina, String sexo) throws AplicacionException;
 
 	public DataResultado listarResultadosCompetencia(int tenantID, int competenciaID);
+
+	public DataEstadistica listarEstadisticaPorPais(int tenantID, int competenciaID, int comiteID) throws AplicacionException;
 
 	
 }

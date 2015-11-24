@@ -114,6 +114,16 @@ public class CompetenciaService implements ICompetenciaService{
 		}
 		return null;
 		}
+
+
+	@Override
+	public Response listarEstadisticaPorPais(int tenantID, int competenciaID, int comiteID) {
+		try {						
+			return Response.ok(icc.listarEstadisticaPorPais(tenantID,competenciaID,comiteID)).build();	
+		} catch (AplicacionException e) {
+			return Response.serverError().build();
+		}
+	}
 	
 }
 
