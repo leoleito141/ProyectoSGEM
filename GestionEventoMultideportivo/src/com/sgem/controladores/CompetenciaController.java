@@ -324,10 +324,10 @@ public class CompetenciaController implements ICompetenciaController {
 		List<DataEstadistica> dataEstadisticas = new ArrayList<DataEstadistica>();
 		List<Estadistica> estadisticas = new ArrayList<Estadistica>();
 		
-		Iterator<Estadistica> it = estadisticas.iterator();
+		Iterator<Estadistica> it = setEstadisticas.iterator();
 		
 		while(it.hasNext()){
-			estadisticas.add(estadisticas.iterator().next());
+			estadisticas.add(it.next());
 		}
 		
 		for(int i = 0; i< estadisticas.size(); i++){
