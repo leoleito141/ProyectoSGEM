@@ -1,29 +1,21 @@
 <style>
-.full button span {
-	background-color: limegreen;
-	border-radius: 32px;
-	color: black;
-}
 
-.partially button span {
-	background-color: orange;
-	border-radius: 32px;
-	color: black;
-}
 </style>
 
-
+<div class="center" style="background-color: rgba(255,255,255,0.95); color:black;border-radius:25px">
 <div class="page-header text-center">
 	<!-- the links to our nested states using relative paths -->
 	<!-- add the active class if the state matches our ui-sref -->
 	<div id="status-buttons" class="text-center">
-		<a ui-sref-active="active" ui-sref=".altaEvento"><span>1</span>
-			Administrador</a> <a ui-sref-active="active" ui-sref=".organizador"><span>2</span>
-			Organizador</a> 
+		<a ui-sref-active="active" class="coolbtn" ui-sref=".altaEvento"><img src="resources/defecto/img/1.png"/></a> 
+		<a ui-sref-active="active" class="coolbtn" ui-sref=".organizador"><img src="resources/defecto/img/2.png"/></a> 
 	</div>
-</div>
+	
+	</div>
+
 <form id="signup-form" role="form">
 	<!-- our nested state views will be injected here -->
 	<div id="form-views" ui-view></div>
 
 </form>
+</div>

@@ -8,6 +8,9 @@ angular.module('pruebaAngularApp')
   			background:"",
   			
   	};
+  	$('.carousel').carousel({
+	    interval: 5000 //changes the speed
+	})
   	console.log($scope.customStyle);
 
   	$scope.salir = function() {

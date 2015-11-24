@@ -6,7 +6,9 @@ angular.module('pruebaAngularApp')
 	  $scope.evento={};
 	  $scope.pais={};
 	
-	  
+	  $('.carousel').carousel({
+		    interval: 5000 //changes the speed
+		})
 	 
 	  
 	 ////////////////////////////////Date timepiquer example/////////// 

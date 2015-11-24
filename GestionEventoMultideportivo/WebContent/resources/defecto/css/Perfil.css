@@ -5,13 +5,7 @@
 
 
 }
-html, body  { height: 100%; width: 100%; margin: 0; 
-background-image: url('http://destinosa1.com/wp-content/uploads/2015/06/PlazaIndependencia21.jpg');
-    background-repeat: no-repeat;
-    background-size:cover;
-    background-attachment: fixed;
 
-}
 
 .FullHeight{
 	height: 100%;
@@ -105,4 +99,211 @@ background-image: url('http://destinosa1.com/wp-content/uploads/2015/06/PlazaInd
 @-webkit-keyframes slideInRight {
 	from 	{ -webkit-transform:translateX(200%); }
 	to 		{ -webkit-transform: translateX(0); }
+}
+.jumpbotrongb{
+	
+	
+	/*background-image: url('../img/jumpBG.jpg');*/
+	background-image: url('../img/bg2.jpg');
+/*	background-image: url('../img/bg1.jpg');*/
+	
+
+
+}
+.footer, .push {
+    height: 300px; /* .push must be the same height as .footer */
+}
+
+.coolbtn {
+	margin-right: 15px;
+	margin-bottom: 15px;
+	width: 40px;
+	height: 40px;
+	display: inline-block;
+	position: relative;
+	line-height: 64px;
+	background-color: #eaeaea;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#f6f6f6), to(#eaeaea));
+	background-image: -webkit-linear-gradient(top, #f6f6f6, #eaeaea);
+	background-image: -moz-linear-gradient(top, #f6f6f6, #eaeaea); 
+	background-image: -ms-linear-gradient(top, #f6f6f6, #eaeaea); 
+	background-image: -o-linear-gradient(top, #f6f6f6, #eaeaea);
+	background-image: linear-gradient(top, #f6f6f6, #eaeaea);
+	-moz-border-radius: 32px;
+	-webkit-border-radius: 32px;
+	border-radius: 32px;
+	-moz-box-shadow: 0 1px 1px rgba(0, 0, 0, .25), 0 2px 3px rgba(0, 0, 0, .1);
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .25), 0 2px 3px rgba(0, 0, 0, .1);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .25), 0 2px 3px rgba(0, 0, 0, .1);
+}
+
+.coolbtn:active {
+	top: 1px;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#eaeaea), to(#f6f6f6));
+	background-image: -webkit-linear-gradient(top, #eaeaea, #f6f6f6);
+	background-image: -moz-linear-gradient(top, #eaeaea, #f6f6f6); 
+	background-image: -ms-linear-gradient(top, #eaeaea, #f6f6f6); 
+	background-image: -o-linear-gradient(top, #eaeaea, #f6f6f6);
+	background-image: linear-gradient(top, #eaeaea, #f6f6f6);
+}
+
+.coolbtn::before{
+	content: '';
+	position: absolute;
+	z-index: -1;
+	top: -8px;
+	right: -8px;
+	bottom: -8px;
+	left: -8px;
+	background-color: #eaeaea;
+	-moz-border-radius: 140px;
+	-webkit-border-radius: 140px;
+	border-radius: 140px;
+	opacity: 0.5;		
+	background-image: url('../img/bg2.jpg');	
+}
+
+
+.coolbtn:active::before{
+	content: '';
+	position: absolute;
+	z-index: -1;
+	top: -8px;
+	right: -8px;
+	bottom: -8px;
+	left: -8px;
+	background-color: #eaeaea;
+	-moz-border-radius: 140px;
+	-webkit-border-radius: 140px;
+	border-radius: 140px;
+	opacity: 0.5;		
+}
+.coolbtn:active::before {
+	top: -9px;
+}
+ 
+.coolbtn:hover::before {
+	opacity: 1;
+	background-color: rgb(200, 200, 200);
+}
+.coolbtn img {
+	vertical-align: 3px;
+	width:60%
+}
+
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+.FormCustom{
+	
+	background-color: white;
+	border-radius: 25px;
+	padding:2%;
+	line-height: 2px;
+	opacity: 0.97;	
+}
+.form-group > div {
+	
+	padding:5px!important;
+	
+}
+.RoundedTop{
+	border-top-left-radius: 25px;
+	border-top-right-radius:  25px;
+	
+}
+
+.iconBtn {
+    width: 52px;
+    height:50px;
+/*     padding: :2px; */
+     
+    background-color:transparent!important;
+}
+
+.iconBtn:hover {
+    -webkit-filter: invert(1);
+   filter: invert(1);
+    
+}
+
+.facebook{
+	
+	background: url('/resources/defecto/img/social/FacebookIcon.jpg');
+	background-size: contain;
+}
+.twitter{
+	background-image: url('/resources/defecto/img/social/twitterIcon.jpg');
+	background-size: contain;
+   
+	
+}
+.youtube{
+	background-image: url('/resources/defecto/img/social/youtubeIcon.jpg');
+	background-size: contain;
+}
+.instagram{
+	background-image: url("/resources/defecto/img/social/instagramIcon.jpg");
+	background-size: contain;
+}
+
+
+
+.PerfilWrapper{
+	
+	/*height: 100%;*/
+
+
+}
+
+.FullHeight{
+	height: 100%;
+}
+.PerfilContent{
+	/*overflow-y: scroll;*/
+	
+}
+
+.HeaderPerfilEvento{
+	
+	margin-left: 10%;
+	margin-right: 10%;
+	height: 45%;
+}
+.HeaderPerfil{
+	margin-left: 10%;
+	margin-right: 10%;
+	height: 25%;
+	
+}
+.ImagenPerfil{
+/* 	background: rgb(255,255,255); */
+	height: 100%;
+	padding: 5px !important;
+	
+}
+.TituloPerfil{
+	background: rgb(25,100,255);
+	height: 70%;
+}
+.bannerPerfil{
+	height: 30%;
+	/*background: rgb(255,0,255);*/
+	
+}
+.PerfilNews{
+	
+	margin-left: 10%;
+	margin-right: 10%;
+	
+	
+}
+.newsWrapper{
+	border-radius: 5px;
+	padding:10px;
+	
+	
 }

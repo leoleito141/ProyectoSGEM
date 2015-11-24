@@ -32,14 +32,15 @@ angular.module('pruebaAngularApp', ['ui.router','satellizer'])
     
     // Configuración de las rutas/estados
     $urlRouterProvider.otherwise('/');
+    
     $stateProvider	    
     .state('adminLogin', {
-    	url:'/',
+    	url:'/Login',
 		templateUrl : 'views/login.html',
 		controller : 'AdminCtrl'
 	})
 	.state('main', {
-    	url:'/main',
+    	url:'/',
 		templateUrl : 'views/main.html',
 		controller : 'AdminCtrl'
 	})

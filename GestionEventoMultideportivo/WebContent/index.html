@@ -7,16 +7,55 @@
     <link rel="stylesheet" href="resources/defecto/css/jquery.minicolors.css" />
     <link rel="stylesheet" href="/resources/angular/shared/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"/>
     <link rel="stylesheet" href="resources/defecto/css/full-slider.css" /> 
+   <link rel="stylesheet" href="resources/defecto/css/Perfil.css" />
+  
+   <style>
+.overlay {
     
+   
+    position:absolute;
+    top:0px; bottom:-5%; left:0; right:0;
+    display:block;
+    z-index:2;
+    background-color:rgba(50,50,50,0.3);
     
+}
+.center {   
+   
+    position:absolute;
+    top:20%;  left:20%; right:20%;
+   color:white;
+    
+}
+.blur{
+
+ -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px)
+}
+#logonav{
+	background-image: url("resources/defecto/img/logo.png");
+		
+	background-repeat: no-repeat;
+	background-size: 50% auto;
+	height:50px;
+	display: block;
+    
+}
+#logonav:HOVER {
+	background-image: url("resources/defecto/img/logo2.png");
+}
+
+</style> 
   
   </head>
   <body ng-app="pruebaAngularApp" ng-controller="AppCtrl" ng-style="customStyle" >
 
 
     <!-- Add your site or application content here -->
-    <div style="height:100%" >
-    
+      
 		    
 
 		     <div class="header"ng-cloak>
@@ -24,10 +63,17 @@
 		      <nav class="navbar navbar-inverse  navbar-static-top" style="   margin-bottom: 0px;">
 		          <div class="container">
 		          
-		          <ul class="nav navbar-nav">
-		              <li class="text-navbar active">
-		              	<a href="/main">Inicio</a>
-		              </li>
+		          <ul  class="nav navbar-nav">
+		              
+		            <li style="height: 50px;width: 300px"  >
+						<a  id='logonav' ui-sref="main" style="padding:0px!important;" >
+						
+						</a>
+					</li>
+		              
+<!-- 		              <li class="text-navbar active"> -->
+<!-- 		              	<a href="/main">Inicio</a> -->
+<!-- 		              </li> -->
 		            
 		                 
 		                
@@ -59,11 +105,55 @@
 		          </div>
 		      </nav>
 		    </div>
-		  
 
-	    <div style="height:100%;width:100%;" ui-view></div>
 
-    </div>
+	
+      <header id="myCarousel"  class="carousel slide">
+        <!-- Indicators -->
+<!--         <ol class="carousel-indicators"> -->
+<!--             <li data-target="#myCarousel" data-slide-to="0" class="active"></li> -->
+<!--             <li data-target="#myCarousel" data-slide-to="1"></li> -->
+<!--             <li data-target="#myCarousel" data-slide-to="2"></li> -->
+<!--         </ol> -->
+
+        <!-- Wrapper for Slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <!-- Set the first background image using inline CSS below. -->
+                <div class="fill blur" style="background-image:url('../resources/defecto/img/Slider/1.jpg');"></div>
+<!--                 <div class="carousel-caption"> -->
+<!--                     <h2>Caption 1</h2> -->
+<!--                 </div> -->
+            </div>
+            <div class="item">
+                <!-- Set the second background image using inline CSS below. -->
+                <div class="fill blur" style="background-image:url('../resources/defecto/img/Slider/2.jpg');"></div>
+<!--                 <div class="carousel-caption"> -->
+<!--                     <h2>Caption 2</h2> -->
+<!--                 </div> -->
+            </div>
+            <div class="item">
+                <!-- Set the third background image using inline CSS below. -->
+                <div class="fill blur" style="background-image:url('../resources/defecto/img/Slider/3.jpg');"></div>
+<!--                 <div class="carousel-caption"> -->
+<!-- <!--                     <h2>deaodeaiudhe iuahdheiu</h2> --> 
+                    
+<!--                 </div> -->
+            </div>
+        </div>
+
+<!--         Controls -->
+<!--         <a class="left carousel-control" href="#myCarousel" data-slide="prev"> -->
+<!--             <span class="icon-prev"></span> -->
+<!--         </a> -->
+<!--         <a class="right carousel-control" href="#myCarousel" data-slide="next"> -->
+<!--             <span class="icon-next"></span> -->
+<!--         </a> -->
+
+    </header>
+
+	    <div class="overlay" ui-view></div>
+
 	<script type="text/javascript"  src="resources/angular/shared/angular/angular.js"></script>
 	<script type="text/javascript"  src="resources/angular/shared/i18n/angular-locale_es-uy.js"></script>
     <script  type="text/javascript" src="resources/angular/shared/jquery/jquery.js"></script>
