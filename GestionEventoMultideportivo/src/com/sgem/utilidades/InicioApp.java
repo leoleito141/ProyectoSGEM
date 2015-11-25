@@ -214,7 +214,7 @@ public class InicioApp implements ServletContextListener {
 		
 		
 		TenantHandler th = new TenantHandler();
-		Pais p3 = new Pais("Brasil","Rio2016");	
+		Pais p3 = new Pais("Brasil","Rio de Janeiro");	
 		EventoMultideportivo evento = new EventoMultideportivo("Rio2016", p3 , "logo.jpg", new Date(), new Date(), "facebook/Rio2016","Instagram/Rio2016", "#Rio2016", "youtube/Rio2016", "Rio2016.css");
 		List<EventoMultideportivo> listevento = new ArrayList<EventoMultideportivo>();
 		

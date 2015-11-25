@@ -17,6 +17,7 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 import com.sgem.datatypes.DataEvento;
 import com.sgem.datatypes.DataImagen;
+import com.sgem.datatypes.DataPais;
 import com.sgem.datatypes.DataTenant;
 import com.sgem.dominio.ComiteOlimpico;
 import com.sgem.dominio.EventoMultideportivo;
@@ -53,8 +54,8 @@ public class EventoMultiController implements IEventoMultiController {
 			TenantHandler th = new TenantHandler();
 
 			Pais p = new Pais();
-			p.setPais(dataEvento.getDataPais().getPais());
-			p.setCiudad(dataEvento.getDataPais().getCiudad());
+			p.setPais(dataEvento.getPais().getPais());
+			p.setCiudad(dataEvento.getPais().getCiudad());
 			
 			EventoMultideportivo evento = new EventoMultideportivo(dataEvento.getNombre(),p,dataEvento.getLogo(),dataEvento.getFechaInicio(),dataEvento.getFechaFin(),dataEvento.getFacebook(),
 				dataEvento.getInstagram(),dataEvento.getHashtag(),dataEvento.getCanalYoutube(),dataEvento.getCss());
@@ -116,6 +117,11 @@ public class EventoMultiController implements IEventoMultiController {
 			
 			dt.setColorFondo(e.getColorFondo());
 			dt.setColorNews(e.getColorNoticias());
+			
+			dt.setPais(new DataPais(e.getPais().getPaisID(), e.getPais().getPais(), e.getPais().getCiudad()));
+			
+			dt.setFechaInicio(e.getFechaInicio());
+			dt.setFechaFin(e.getFechaFin());
 			
 						
 		} catch (Exception ex) {
