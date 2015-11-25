@@ -98,17 +98,32 @@ public class DeportistaDAO implements IDeportistaDAO {
 
 		return null;
 	}
+	public List<String> listarDeportes(int tenantID, String sexo) {
+			
+			List<String> deportes = null;
+			
+			try {
+				
+				 deportes = em.createQuery("SELECT distinct ed.nombreDeporte FROM EventoDeportivo ed WHERE ed.tenantId = "+tenantID+" AND ed.sexo = '"+sexo+"'", String.class).getResultList();;
+				 
+				 return deportes;
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
 
 
 
 	@Override
-	public List<String> listarPaises() {
+	public List<String> listarPaises(int tenantID) {
 		List<String> paises = null;
 		
 		try {
 			
-			paises = em.createQuery("SELECT pais.pais FROM Pais pais", String.class).getResultList();;
-			 System.out.println(paises);
+			paises = em.createQuery("SELECT pais.pais FROM Usuario u, Pais pais, ComiteOlimpico co WHERE u.id = co.id AND u.tenantID = '"+tenantID+"' AND co.pais = pais.paisID ", String.class).getResultList();
+		
 			 return paises;
 			
 		} catch (Exception e) {
@@ -119,7 +134,7 @@ public class DeportistaDAO implements IDeportistaDAO {
 	
 	@Override
 	public List<Deportista> listarDeportistas(int tenantId,
-			String nombreDeportista, String deporte, String disciplina,String pais, String sexo) {
+			String nombreDeportista, String deporte, String pais, String sexo) {
 		
 		List<Deportista> dep = null;
 		try {
@@ -130,7 +145,6 @@ public class DeportistaDAO implements IDeportistaDAO {
 						" WHERE ed.tenant_ID = "+tenantId+
 						" AND d.tenantId = "+tenantId+" AND ed.sexo = '"+sexo+
 						"' AND ed.nombreDeporte = '"   + deporte   +
-						"' AND  ed.disciplina = '"     +disciplina +
 						"' AND de.Deportista_deportistaID = d.deportistaID "+
 					    "AND de.eventoDep_EventoDepId = ed.EventoDepId AND d.Sexo = '"+sexo+
 						"' AND co.id = d.comiteOlimpico_id AND co.pais_paisID = p.paisID "+
@@ -143,7 +157,6 @@ public class DeportistaDAO implements IDeportistaDAO {
 						" WHERE ed.tenant_ID = "+tenantId+
 						" AND d.tenantId = "+tenantId+" AND ed.sexo = '"+sexo+
 						"' AND ed.nombreDeporte = '"   + deporte   +
-						"' AND  ed.disciplina = '"     +disciplina +
 						"' AND de.Deportista_deportistaID = d.deportistaID "+
 					    "AND de.eventoDep_EventoDepId = ed.EventoDepId AND d.Sexo = '"+sexo+
 						"' AND co.id = d.comiteOlimpico_id AND co.pais_paisID = p.paisID "+

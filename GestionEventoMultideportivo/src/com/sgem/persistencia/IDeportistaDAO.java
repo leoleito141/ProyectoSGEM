@@ -22,11 +22,14 @@ public interface IDeportistaDAO {
 	
 	public List<EventoDeportivo> listarEventoDeportivo(int tenantID,String sexo);
 	
-	public List<String> listarPaises();
+	public List<String> listarPaises(int tenantID);
 	
-	public List<Deportista> listarDeportistas(int tenantId,String nombreDeportista, String deporte, String disciplina,String pais, String sexo);
+	public List<Deportista> listarDeportistas(int tenantId,String nombreDeportista, String deporte, String pais, String sexo);
 
+	public List<String> listarDeportes(int tenantID, String sexo);
+	
 	public List<Deportista> listarDeportistasPorEventoDeportivo(int tenantID, String nombreDeporte);
 
+	
 
 }

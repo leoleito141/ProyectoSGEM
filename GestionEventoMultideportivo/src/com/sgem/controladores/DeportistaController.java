@@ -324,19 +324,10 @@ public class DeportistaController implements IDeportistaController {
 	
 	public DataBusquedaDeportista listarFiltroDeportista(int tenantID,String sexo) {
 		try {
-
-			List<EventoDeportivo> listEvento = DeportistaDAO.listarEventoDeportivo(tenantID,sexo);
-			List<String> paises = DeportistaDAO.listarPaises();
-			
+			List<String> paises = DeportistaDAO.listarPaises(tenantID);
 			DataBusquedaDeportista dataBusqueda = new DataBusquedaDeportista();
-			List<String> nombreDeporte    = new ArrayList<String>();
-			List<String> nombreDisciplina = new ArrayList<String>();
-			for(int i = 0; i< listEvento.size(); i++){
-				nombreDeporte.add(listEvento.get(i).getNombreDeporte());
-				nombreDisciplina.add(listEvento.get(i).getDisciplina());
-			}
+			List<String> nombreDeporte    = DeportistaDAO.listarDeportes(tenantID,sexo);
 			dataBusqueda.setNombreDeporte(nombreDeporte);
-			dataBusqueda.setNombreDisciplina(nombreDisciplina);
 			dataBusqueda.setNombrePais(paises);
 			return dataBusqueda;
 		
@@ -350,7 +341,7 @@ public class DeportistaController implements IDeportistaController {
 	@Override
 	public List<DataDeportista> buscarDesportistas(DataBusquedaDeportista databusqueda) {
 		try {
-			List<Deportista> dep = DeportistaDAO.listarDeportistas(databusqueda.getTenantId(),databusqueda.getNombreDeportista(),databusqueda.getDeporte(),databusqueda.getDisciplina(),databusqueda.getPais(),databusqueda.getSexo());
+			List<Deportista> dep = DeportistaDAO.listarDeportistas(databusqueda.getTenantId(),databusqueda.getNombreDeportista(),databusqueda.getDeporte(),databusqueda.getPais(),databusqueda.getSexo());
 			List<DataDeportista> dataDep = new ArrayList<DataDeportista>();
 			for(int i = 0; i< dep.size(); i++){
 				DataDeportista d = convertirDeportista(dep.get(i),databusqueda.getDeporte());
