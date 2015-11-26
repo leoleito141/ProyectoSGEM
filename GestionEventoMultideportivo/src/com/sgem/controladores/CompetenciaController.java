@@ -126,7 +126,7 @@ public class CompetenciaController implements ICompetenciaController {
 			for(int i = 0; i< deportistas.size(); i++){
 				
 				
-				deportistas.get(i).addCompetencia(competencia);
+//				deportistas.get(i).addCompetencia(competencia);
 				competencia.addDeportista(deportistas.get(i));
 				
 				} 

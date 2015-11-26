@@ -1,12 +1,15 @@
 package com.sgem.persistencia;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import com.sgem.dominio.Competencia;
 import com.sgem.dominio.Deportista;
 import com.sgem.dominio.EventoDeportivo;
 
@@ -187,6 +190,23 @@ public class DeportistaDAO implements IDeportistaDAO {
 			return deportistas;
 		}		
 		return deportistas;
+	}
+
+	@Override
+	public Set<Competencia> traerCompetenciasDelDeportista(int deportistId, int tenantID) {
+		
+		List<Competencia> competencias = null;
+		 Set<Competencia> comp = null;
+		
+		try{
+			competencias = (List<Competencia>) em.createNativeQuery("SELECT c.* FROM Competencia c, Deportista d, competencia_deportista cd WHERE c.tenant_ID = '"+tenantID+"' AND d.tenantId = '"+tenantID+"' AND cd.competencia_CompetenciaId = c.CompetenciaId  AND cd.deportistas_deportistaID = d.deportistaID AND d.deportistaID = '"+deportistId+"'",Competencia.class).getResultList();	
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}		
+		return  comp = new HashSet<Competencia>(competencias);
+		
 	}
 
 	

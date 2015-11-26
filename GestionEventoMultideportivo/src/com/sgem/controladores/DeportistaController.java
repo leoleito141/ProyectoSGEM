@@ -150,7 +150,7 @@ public class DeportistaController implements IDeportistaController {
 				  d.getFechaNac(),dc,di);
 		
 		
-		dd.setListcompetencias(convertirListaCompetencias(d.getCompetencias()));
+		dd.setListcompetencias(convertirListaCompetencias(DeportistaDAO.traerCompetenciasDelDeportista(d.getDeportistaID(),d.getTenantID())));
 		dd.setListeventodeportivo(convertirEventosDeportivos(d.getEventoDep()));
 		dd.setListestadisticas(convertirEstadisticas(d.getEstadisticas()));
 		return dd;

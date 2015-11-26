@@ -1,9 +1,11 @@
 package com.sgem.persistencia;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.Local;
 
+import com.sgem.dominio.Competencia;
 import com.sgem.dominio.Deportista;
 import com.sgem.dominio.EventoDeportivo;
 
@@ -29,6 +31,8 @@ public interface IDeportistaDAO {
 	public List<String> listarDeportes(int tenantID, String sexo);
 	
 	public List<Deportista> listarDeportistasPorEventoDeportivo(int tenantID, String nombreDeporte);
+
+	public Set<Competencia> traerCompetenciasDelDeportista(int idDeportista, int tenantid);
 
 	
 

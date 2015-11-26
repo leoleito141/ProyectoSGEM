@@ -405,7 +405,7 @@ public class InicioApp implements ServletContextListener {
 		//Colectivo
 		Competencia c1 = new Competencia(1, datec1, "Estadio Centenario", 1500.0F, false, 76609, f, j, r2, null, 0, deportistas, null);		
 		CompetenciaDAO.guardarCompetencia(c1);
-		
+	/*	
 		du.addCompetencia(c1);	
 		du1.addCompetencia(c1);
 		du2.addCompetencia(c1);
@@ -416,7 +416,7 @@ public class InicioApp implements ServletContextListener {
 		da2.addCompetencia(c1);
 		da3.addCompetencia(c1);
 				
-		
+	*/	
 		Set<Entrada> entradas = new HashSet<Entrada>();
 		
 		Competencia comp = CompetenciaDAO.buscarCompetencia(1, 1);
@@ -524,13 +524,13 @@ public class InicioApp implements ServletContextListener {
 		
 		RondaDAO.modificarRonda(r3);
 		
-		du.addCompetencia(comp2);	
+	/*	du.addCompetencia(comp2);	
 		du3.addCompetencia(comp2);
 		
 		da.addCompetencia(comp2);
 		da1.addCompetencia(comp2);
 		da3.addCompetencia(comp2);
-		
+	*/	
 		DeportistaDAO.modificarDeportista(du);
 		DeportistaDAO.modificarDeportista(du3);
 		
