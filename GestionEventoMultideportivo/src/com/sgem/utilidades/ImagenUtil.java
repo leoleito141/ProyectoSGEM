@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.UUID;
 
 import javax.activation.MimetypesFileTypeMap;
 import javax.ws.rs.core.MultivaluedMap;
@@ -17,47 +18,25 @@ import com.sgem.seguridad.excepciones.AplicacionException;
 
 public class ImagenUtil {
 	
-
-
-//	private static final String FILE_PATH = "C:\\Users\\BeFx\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\";
-
-
 	// -Dimg.folder=C:\Users\USUARIO\git\ProyectoSGEM\GestionEventoMultideportivo\WebContent\resources\defecto\img\\" program argument en servidor.
 
 	private static final String FILE_PATH = System.getProperties().getProperty("img.folder").trim();
 
+	private static final String TENANT = "Tenant";
+	
 	private static final String NOVEDADES_DIR = "novedades";
 	private static final String COMITE_DIR = "comite_olimpico";
 	private static final String DEPORTISTAS_DIR = "deportistas";
 	private static final String CONFIGURACION_DIR = "configuracion";
-	
-	public static String getFileName(MultivaluedMap<String, String> header, String tenantId) {
-
-		String[] contentDisposition = header.getFirst("Content-Disposition").split(";");
 		
-		for (String filename : contentDisposition) {
-			if ((filename.trim().startsWith("filename"))) {
-
-				String[] name = filename.split("=");
-				
-				String finalFileName = name[1].trim().replaceAll("\"", "");
-				return FILE_PATH +"Tenant"+tenantId+"\\"+finalFileName;
-			}
-		}
-		return "unknown";
-	}
-	
 	public static String getNovedadFilePath(MultivaluedMap<String, String> header, String tenantId) {
 
 		String[] contentDisposition = header.getFirst("Content-Disposition").split(";");
 		
 		for (String filename : contentDisposition) {
 			if ((filename.trim().startsWith("filename"))) {
-
-				String[] name = filename.split("=");
-				
-				String finalFileName = name[1].trim().replaceAll("\"", "");
-				return FILE_PATH +"Tenant"+tenantId+"\\"+NOVEDADES_DIR+"\\"+finalFileName;
+				String fileName = getFileName(filename);
+				return FILE_PATH +TENANT+tenantId+File.separator+NOVEDADES_DIR+File.separator+fileName;
 			}
 		}
 		return "unknown";
@@ -69,11 +48,8 @@ public class ImagenUtil {
 		
 		for (String filename : contentDisposition) {
 			if ((filename.trim().startsWith("filename"))) {
-
-				String[] name = filename.split("=");
-				
-				String finalFileName = name[1].trim().replaceAll("\"", "");
-				return FILE_PATH +"Tenant"+tenantId+"\\"+COMITE_DIR+comiteId+"\\"+finalFileName;
+				String fileName = getFileName(filename);
+				return FILE_PATH +TENANT+tenantId+File.separator+COMITE_DIR+comiteId+File.separator+fileName;
 			}
 		}
 		return "unknown";
@@ -84,11 +60,8 @@ public class ImagenUtil {
 		
 		for (String filename : contentDisposition) {
 			if ((filename.trim().startsWith("filename"))) {
-
-				String[] name = filename.split("=");
-				
-				String finalFileName = name[1].trim().replaceAll("\"", "");
-				return FILE_PATH +"Tenant"+tenantId+"\\"+COMITE_DIR+comiteId+"\\"+DEPORTISTAS_DIR+"\\"+finalFileName;
+				String fileName = getFileName(filename);
+				return FILE_PATH +TENANT+tenantId+File.separator+COMITE_DIR+comiteId+File.separator+DEPORTISTAS_DIR+File.separator+fileName;
 			}
 		}
 		return "unknown";
@@ -99,34 +72,31 @@ public class ImagenUtil {
 		
 		for (String filename : contentDisposition) {
 			if ((filename.trim().startsWith("filename"))) {
-
-				String[] name = filename.split("=");
-				
-				String finalFileName = name[1].trim().replaceAll("\"", "");
-				return FILE_PATH +"Tenant"+tenantId+"\\"+CONFIGURACION_DIR+"\\"+finalFileName;
+				String fileName = getFileName(filename);
+				return FILE_PATH +TENANT+tenantId+File.separator+CONFIGURACION_DIR+File.separator+fileName;
 			}
 		}
 		return "unknown";
 	}
 	
 	public static String getDirectoryName(String tenantId) {
-		return FILE_PATH +"Tenant"+tenantId;
+		return FILE_PATH +TENANT+tenantId;
 	}
 	
 	public static String getNovedadDirectoryName(String tenantId) {
-		return FILE_PATH +"Tenant"+tenantId+"\\"+NOVEDADES_DIR+"\\";
+		return FILE_PATH +TENANT+tenantId+File.separator+NOVEDADES_DIR+File.separator;
 	}
 	
 	public static String getComiteDirectoryName(String tenantId, String comiteId) {
-		return FILE_PATH +"Tenant"+tenantId+"\\"+COMITE_DIR+comiteId+"\\";
+		return FILE_PATH +TENANT+tenantId+File.separator+COMITE_DIR+comiteId+File.separator;
 	}
 	
 	public static String getDeportistaDirectoryName(String tenantId, String comiteId) {
-		return FILE_PATH +"Tenant"+tenantId+"\\"+COMITE_DIR+comiteId+"\\"+DEPORTISTAS_DIR +"\\";
+		return FILE_PATH +TENANT+tenantId+File.separator+COMITE_DIR+comiteId+File.separator+DEPORTISTAS_DIR +File.separator;
 	}
 	
 	public static String getConfigDirectoryName(String tenantId) {
-		return FILE_PATH +"Tenant"+tenantId+"\\"+CONFIGURACION_DIR+"\\";
+		return FILE_PATH +TENANT+tenantId+File.separator+CONFIGURACION_DIR+File.separator;
 	}
 	
 	public static File writeFile(byte[] content, String filename, String dir ) throws IOException {
@@ -191,7 +161,13 @@ public class ImagenUtil {
 		return image;
 	} 
 
-
+	private static String getFileName(String filename){
+		String[] name = filename.split("=");
+		String finalFileName = name[1].trim().replaceAll("\"", "");
+		String ext = "."+(finalFileName.split("\\."))[1];
+		
+		return UUID.randomUUID().toString()+ext;
+	}
 	
 
 }
