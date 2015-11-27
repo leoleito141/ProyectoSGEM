@@ -143,6 +143,7 @@ public class DeportistaDAO implements IDeportistaDAO {
 		try {
 			
 			if(nombreDeportista != null){
+				
 				dep = em.createNativeQuery("SELECT distinct d.* FROM EventoDeportivo ed, Deportista d, "+
 						" deportista_eventodeportivo de, ComiteOlimpico co, Pais p "+
 						" WHERE ed.tenant_ID = "+tenantId+
@@ -151,8 +152,9 @@ public class DeportistaDAO implements IDeportistaDAO {
 						"' AND de.Deportista_deportistaID = d.deportistaID "+
 					    "AND de.eventoDep_EventoDepId = ed.EventoDepId AND d.Sexo = '"+sexo+
 						"' AND co.id = d.comiteOlimpico_id AND co.pais_paisID = p.paisID "+
-						" AND p.pais = '"+ pais+"' AND d.Nombre LIKE :nombreDeportista "+
-						";",Deportista.class).setParameter("nombreDeportista",  nombreDeportista+"%")
+						" AND p.pais = '"+ pais+"' AND (LOWER(d.Nombre) LIKE :nombreDeportista "+
+						" OR LOWER(d.Apellido) LIKE :nombreDeportista) "+
+						";",Deportista.class).setParameter("nombreDeportista", nombreDeportista.toLowerCase()+"%")
 						.getResultList();
 			}else{
 				dep = em.createNativeQuery("SELECT distinct d.* FROM EventoDeportivo ed, Deportista d, "+

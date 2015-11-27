@@ -57,13 +57,13 @@ import com.sgem.datatypes.DataEventoDeportivo;
 		@Path("/subirImagenDeportista")
 		public Response subirImagenDeportista(MultipartFormDataInput input);
 		
-		@RolesAllowed("USUARIO_COMUN")
+		@RolesAllowed("VISITANTE")
 		@GET
 		@Produces(MediaType.APPLICATION_JSON)
 		@Path("/listarFiltroDeportista/{tenantID}/{sexo}")
 		public Response  listarFiltroDeportista(@PathParam("tenantID") int tenantID, @PathParam("sexo") String sexo);
 	
-		@RolesAllowed("USUARIO_COMUN")
+		@RolesAllowed("VISITANTE")
 		@POST
 		@Produces(MediaType.APPLICATION_JSON)
 		@Consumes(MediaType.APPLICATION_JSON)
