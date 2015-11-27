@@ -30,7 +30,7 @@ angular.module('pruebaAngularApp')
 	        
 	            localStorage.setItem("dataUsuario", JSON.stringify(dataUsuario));
 	             	         
-	            $state.go("formAltaEventoMulti.altaEvento");
+	            $state.go("main");
 	           
 	        })
 	        .catch(function(error){

@@ -11,15 +11,13 @@ angular.module('pruebaAngularApp')
   	$('.carousel').carousel({
 	    interval: 5000 //changes the speed
 	})
-  	console.log($scope.customStyle);
 
   	$scope.salir = function() {
-  		
-	    $scope.usrLogin={nombre:""};//Deja usrLogin vacio
+  		localStorage.removeItem("dataUsuario");
 	    $auth.logout(); //Limpia localStorage y pone isAuthenticated en false
 	
 	    //Redirecciona al login
-	    $state.go('adminLogin');
+	    $state.go('main');
     };
     
     $scope.isAuthenticated = function() {

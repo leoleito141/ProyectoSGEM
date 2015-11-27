@@ -57,18 +57,7 @@ angular.module('pruebaAngularApp')
 	            	console.log(response); 
 	            });
 		  
-		  
-		  
-	  
-		  
-		  
-		  
 	  };
-	  
-	  $scope.soyOrganizador = function() {
-	    	 
-    	  return false;
-    };
 	  
 	  
   }]);
