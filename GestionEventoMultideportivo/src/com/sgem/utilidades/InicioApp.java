@@ -15,6 +15,9 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import com.sgem.controladores.IUsuarioController;
+import com.sgem.datatypes.DataImagen;
+import com.sgem.datatypes.DataNovedad;
 import com.sgem.dominio.Admin;
 import com.sgem.dominio.ComiteOlimpico;
 import com.sgem.dominio.Competencia;
@@ -26,6 +29,7 @@ import com.sgem.dominio.EventoMultideportivo;
 import com.sgem.dominio.HistorialLogin;
 import com.sgem.dominio.Imagen;
 import com.sgem.dominio.Juez;
+import com.sgem.dominio.Novedad;
 import com.sgem.dominio.Organizador;
 import com.sgem.dominio.Pais;
 import com.sgem.dominio.Ronda;
@@ -40,8 +44,12 @@ import com.sgem.persistencia.IEventoDeportivoDAO;
 import com.sgem.persistencia.IEventoMultiDAO;
 import com.sgem.persistencia.IHistorialLoginDAO;
 import com.sgem.persistencia.IImagenDAO;
+import com.sgem.persistencia.INovedadDAO;
 import com.sgem.persistencia.IRondaDAO;
 import com.sgem.persistencia.IUsuarioDAO;
+import com.sgem.persistencia.NovedadDAO;
+import com.sgem.seguridad.excepciones.AplicacionException;
+import com.sgem.seguridad.excepciones.UsuarioNoEncontradoException;
 
 
 @WebListener
@@ -73,6 +81,10 @@ public class InicioApp implements ServletContextListener {
 	
 	@EJB
 	private IImagenDAO ImagenDAO;
+	
+	@EJB
+	private INovedadDAO NovedadDAO;
+	
 		
     @Override
     public void contextDestroyed(ServletContextEvent arg0) {}
@@ -150,8 +162,8 @@ public class InicioApp implements ServletContextListener {
 		((ComiteOlimpico)comite2).setPais(p2); 
 		((ComiteOlimpico)comite2).setCodigo("ARG");
 		comite2.setEmail("coa@gmail.com");
-		comite2.setCanalYoutube("uruguay");
-		comite2.setTwitter("uruguay");
+		comite2.setCanalYoutube("Argentina");
+		comite2.setTwitter("Argentina");
 		comite2.setFacebook("Comite Olimpico Argentino");
 		comite2.setPassword("coa123");
 		comite2.setTenantID(1);			
@@ -1091,8 +1103,72 @@ public class InicioApp implements ServletContextListener {
 	
 		CompetenciaDAO.modificarCompetencia(comp4);	
 		
-		
+		///////////////////////////////////////////////////// Alta novedades ////////////////////
 	
+		Novedad n = new Novedad();
+		
+		n.setDescripcion("Manu Ginóbili dejó la tranquilidad familiar en San Antonio y bajó hasta Ciudad de México para vivir el partido clave del seleccionado frente a México. El bahiense sufrió todo el partido, al lado del presidente de la CABB, Federico Susbielles. Se tironeó la gorra, se agarró la cabeza, hizo comentarios y vivió la tensión como si jugará el pasaporte a Río 2016. Ah, sobre eso, ¿qué vas a hacer ahora Manu después de la temporada NBA? ");
+		n.setColumna(1);
+		n.setComite_olimpico(comiteArgentino);
+		n.setTitulo("¿Estas listo para Rio?");
+		n.setTenantID(1);
+		
+		Imagen ni = new Imagen();
+		ni.setMime("image/jpeg");
+		ni.setRuta("C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\novedades\\manuychapu.jpg");
+		ni.setTenantId(1);
+		ImagenDAO.guardarImagen(ni);
+		n.setImagen(ni);
+		
+		NovedadDAO.guardarNovedad(n);
+		
+		
+	Novedad n1 = new Novedad();
+		
+		n1.setDescripcion("El nadador santafesino Federico Grabich, ganador de una medalla de oro y una de plata en los Juegos Panamericanos de Toronto 2015, regresó al país tras su histórico tercer puesto en el Mundial de pileta larga de Kazan, Rusia, y aseguró que quiere llegar de la mejor manera a los Juegos Olímpicos de Río de Janeiro 2016."+
+
+"Estamos muy bien a un año de Río, es una doble motivación. Nos entrenamos muy duro para los dos torneos, los Panamericanos y el Mundial, y salió mucho mejor de lo que pensábamos, sobre todo por las marcas, aunque las medallas también son lindas, reconoció Grabich, de 25 años, luego de aterrizar en el Aeropuerto de Ezeiza."+
+
+"El deportista bajó sus propios récords, ganó en los Panamericanos la medalla de oro en los 100 metros libres y la de plata en los 200 metros libres, y se subió al tercer escalón del podio en el Mundial de Kazan, algo que nunca había conseguido un nadador argentino en un Mundial en pileta de 50 metros."+
+
+"En cuanto a sus chances a futuro, el oriundo de Casilda sostuvo: Creo que puedo nadar con mejores marcas, pero es cuestión de seguir entrenándome y limando detalles para bajar más de medio segundo. Mi objetivo es bajar los 48 segundos (en los 100 libres), pero no me pongo tiempos. Quiero llegar de la mejor manera a Río, no tengo una final y menos una medalla asegurada en los Juegos"+
+
+"Grabich se sorprendió del recibimiento en Ezeiza, tras estar 40 días fuera de la Argentina. Es una alegría muy grande, hay mucha gente en el aeropuerto, pero me lo tomo con calma, aseguró, en declaraciones realizadas en TyC Sports.");
+		n1.setColumna(1);
+		n1.setComite_olimpico(comiteArgentino);
+		n1.setTitulo("Federico Grabich: Quiero llegar de la mejor manera a los Juegos Olímpicos");
+		n1.setTenantID(1);
+		
+		Imagen n1i = new Imagen();
+		n1i.setMime("image/jpeg");
+		n1i.setRuta("C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\novedades\\novedadGrabich.jpg");
+		n1i.setTenantId(1);
+		ImagenDAO.guardarImagen(n1i);
+		n1.setImagen(n1i);
+		
+		NovedadDAO.guardarNovedad(n1);
+	
+		
+		Novedad n2 = new Novedad();
+		
+		n2.setDescripcion("Según publica el diario La República, a los 40 años de edad, Milton Wynants, que obtuvo la medalla de plata en los Juegos Olímpicos de Sidney 2000, volverá a competir oficialmente en ciclismo y quiere cerrar su carrera con la competencia que se realizará en Rio 2016. El Gorra, que hace dos temporadas que no compite, lo hará con Estudiantes de Colonia, quiere volver a estar en la Rutas de América y en la Vuelta Ciclista del Uruguay"+
+        "El sanducero que ganó cinco medallas en juegos Panamericanos, dos de oro en 2003, una de plata en 1995 y dos de bronce en Río 2007 y Winnipeg 1999, sabe que está en un equipo en formación y que debe ir entrenando lentamente."+
+        "Omnium es a donde apunta Wynants para el 2016, en esta categoría los participantes compiten en seis disciplinas: velocidad y fuerza, kilómetros contra reloj, scratch, prueba por puntos, keirin y Madison.");
+		n2.setColumna(2);
+		n2.setComite_olimpico(comiteUruguayo);
+		n2.setTitulo("Wynants quiere estar en Rio 2016");
+		n2.setTenantID(1);
+		
+		Imagen n2i = new Imagen();
+		n2i.setMime("image/jpeg");
+		n2i.setRuta("C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\novedades\\novedadMilton.jpg");
+		n2i.setTenantId(1);
+		ImagenDAO.guardarImagen(n2i);
+		n2.setImagen(n2i);
+		
+		NovedadDAO.guardarNovedad(n2);
+	
+		
 		
 		System.out.println("Guarde deportistas");
 		
