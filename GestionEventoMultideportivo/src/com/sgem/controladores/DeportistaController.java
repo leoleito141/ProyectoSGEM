@@ -366,11 +366,21 @@ public class DeportistaController implements IDeportistaController {
 	@Override
 	public List<DataDeportista> listarDeportistasPorEventoDeportivo(int tenantID, String nombreDeporte) throws AplicacionException {
 		try {
-			return convertir(DeportistaDAO.listarDeportistasPorEventoDeportivo(tenantID,nombreDeporte));
+			List<Deportista> ld = DeportistaDAO.listarDeportistasPorEventoDeportivo(tenantID,nombreDeporte);
+			List<DataDeportista> dataDep = new ArrayList<DataDeportista>();
+			for(int i = 0; i< ld.size(); i++){
+				DataDeportista d = convertirDeportista(ld.get(i),"");
+			
+				dataDep.add(d);
+			}
+			return dataDep;
 		}catch (Exception e){
 			e.printStackTrace();
 			throw new AplicacionException("Error al obtener deportistas");
 		}
 	}
+
 	
+	
+		
 }
