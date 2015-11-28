@@ -832,13 +832,17 @@ public class InicioApp implements ServletContextListener {
 		
 		
 
-
-				
-		 Iterator<Ronda> it = basketRonda.getRonda().iterator();
+ 
+		 Set<Ronda> setRondas = basketRonda.getRonda();
 		 Ronda r2 = new Ronda();
-		 if(it.hasNext()){
-			 r2 = it.next();
+		 for(Ronda i : setRondas){
+			 System.out.println(i.getNumeroRonda());
+			 if(i.getNumeroRonda()==1){
+				 r2 = i;
+			 }
+			 
 		 }
+		     
 		 
 	
 		//Colectivo
@@ -971,14 +975,17 @@ public class InicioApp implements ServletContextListener {
 		deportistasCompTenis.add(da3);
 		
 
-				
-		
-		 Iterator<Ronda> ite = tenisM.getRonda().iterator();
+		 
+		 Set<Ronda> setRondasTenism = tenisM.getRonda();
 		 Ronda r3 = new Ronda();
-		 if(ite.hasNext()){
-			 r3 = ite.next();
+		 for(Ronda i : setRondasTenism){
+			 if(i.getNumeroRonda()==1){
+				 r3 = i;
+			 }
+			 
 		 }
 		 
+	 
 	
 		Competencia c3 = new Competencia(1, datec1, "Rio Tennis Stadium", 250.0F, false, 20, tenisM, j, r3, null, 0, deportistasCompTenis, null);		
 		CompetenciaDAO.guardarCompetencia(c3);
@@ -1037,12 +1044,16 @@ public class InicioApp implements ServletContextListener {
 		deportistasCiclismo.add(da10);
 		
 
-				
-		 Iterator<Ronda> iter = ciclismo1.getRonda().iterator();
+		 
+		 Set<Ronda> setRondasCiclismo = ciclismo1.getRonda();
 		 Ronda r4 = new Ronda();
-		 if(iter.hasNext()){
-			 r4 = iter.next();
+		 for(Ronda i : setRondasCiclismo){
+			 if(i.getNumeroRonda()==1){
+				 r4 = i;
+			 }
+			 
 		 }
+		 
 		 
 	
 		//Colectivo
