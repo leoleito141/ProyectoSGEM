@@ -163,4 +163,13 @@ public interface IUsuarioService {
 	@Path("/obtenerComite/{tenantID}/{usuarioID}")
 	public Response obtenerComiteOlimpico(@PathParam("tenantID") int tenantID, @PathParam("usuarioID") int usuarioID);
 	
+	@RolesAllowed("USUARIO_COMUN")
+	//@PermitAll	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/listarEntradasCompradasUsuario/{tenantId}/{usuarioId}")
+	public Response listarEntradasCompradasUsuario(@PathParam("tenantId") Integer tenantId, @PathParam("usuarioId") Integer usuarioId);
+	
+	
+	
 }

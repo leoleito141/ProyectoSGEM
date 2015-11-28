@@ -8,6 +8,7 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 import com.sgem.datatypes.DataComite;
+import com.sgem.datatypes.DataEntrada;
 import com.sgem.datatypes.DataHistorialLogin;
 import com.sgem.datatypes.DataJuez;
 import com.sgem.datatypes.DataNovedad;
@@ -45,6 +46,7 @@ public interface IUsuarioController {
 	public List<DataComite> listarComitesOlimpicos(Integer tenantID) throws AplicacionException;
 	public DataNovedad getNovedad(int idnovedad);
 	public DataComite obtenerComite(int tenantid, int usuarioID) throws AplicacionException;
+	public List<DataEntrada> listarEntradasCompradasUsuario(Integer tenantId, Integer usuarioId)throws AplicacionException;
 	
 	
 }

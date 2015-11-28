@@ -3,6 +3,8 @@ package com.sgem.datatypes;
 public class DataUsuario {
 
 	private Integer tenantId;
+	
+	private int usuarioId;
 
 	private String email;
 
@@ -129,6 +131,14 @@ public class DataUsuario {
 
 	public void setTipoUsuario(String tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
+	}
+	
+	public int getUsuarioId() {
+		return usuarioId;
+	}
+
+	public void setUsuarioId(int usuarioId) {
+		this.usuarioId = usuarioId;
 	}
 
 	@Override

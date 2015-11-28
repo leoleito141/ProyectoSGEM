@@ -8,6 +8,7 @@ import com.sgem.datatypes.DataComite;
 import com.sgem.datatypes.DataUsuario;
 import com.sgem.dominio.Admin;
 import com.sgem.dominio.ComiteOlimpico;
+import com.sgem.dominio.Entrada;
 import com.sgem.dominio.Juez;
 import com.sgem.dominio.Organizador;
 import com.sgem.dominio.Usuario;
@@ -29,6 +30,7 @@ public interface IUsuarioDAO {
 	public List<ComiteOlimpico> listarComitesOlimpicos(Integer tenantID);
 	public int obtenerMaximoComite();
 	public ComiteOlimpico obtenerComite(int tenantid, int usuarioID);
+	public List<Entrada> listarEntradasCompradasUsuario(Integer tenantId, Integer usuarioId);
 	
 	
 	

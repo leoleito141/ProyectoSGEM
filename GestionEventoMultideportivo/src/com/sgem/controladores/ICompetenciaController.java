@@ -8,6 +8,7 @@ import com.sgem.datatypes.DataCompetencia;
 import com.sgem.datatypes.DataCompraEntrada;
 import com.sgem.datatypes.DataEstadistica;
 import com.sgem.datatypes.DataResultado;
+import com.sgem.dominio.Competencia;
 import com.sgem.seguridad.excepciones.AplicacionException;
 
 @Local
@@ -31,6 +32,6 @@ public interface ICompetenciaController {
 
 	public DataEstadistica listarEstadisticaPorPais(int tenantID, int competenciaID, int comiteID) throws AplicacionException;
 
-	
+	public DataCompetencia convertirCompetencia(Competencia competencia);
 }
 

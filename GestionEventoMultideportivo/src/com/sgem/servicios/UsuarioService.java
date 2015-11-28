@@ -224,5 +224,14 @@ public class UsuarioService implements IUsuarioService{
 		}
 	}
 
+	@Override
+	public Response listarEntradasCompradasUsuario(Integer tenantId, Integer usuarioId) {
+		try {
+			return Response.ok(iuc.listarEntradasCompradasUsuario(tenantId, usuarioId)).build();
+		} catch (AplicacionException e) {
+			return Response.serverError().build();
+		}
+	}
+
 	
 }

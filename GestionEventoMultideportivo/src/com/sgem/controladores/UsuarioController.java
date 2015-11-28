@@ -21,6 +21,9 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 import org.jboss.resteasy.util.Base64;
 
 import com.sgem.datatypes.DataComite;
+import com.sgem.datatypes.DataCompetencia;
+import com.sgem.datatypes.DataDeportista;
+import com.sgem.datatypes.DataEntrada;
 import com.sgem.datatypes.DataHistorialLogin;
 import com.sgem.datatypes.DataImagen;
 import com.sgem.datatypes.DataJuez;
@@ -29,6 +32,8 @@ import com.sgem.datatypes.DataPais;
 import com.sgem.datatypes.DataUsuario;
 import com.sgem.dominio.Admin;
 import com.sgem.dominio.ComiteOlimpico;
+import com.sgem.dominio.Deportista;
+import com.sgem.dominio.Entrada;
 import com.sgem.dominio.HistorialLogin;
 import com.sgem.dominio.Imagen;
 import com.sgem.dominio.Juez;
@@ -70,6 +75,9 @@ public class UsuarioController implements IUsuarioController {
 	
 	@EJB
 	private IHistorialLoginDAO HistorialLoginDAO;
+	
+	@EJB
+	private ICompetenciaController icc;
 	
 	@Override
 	public boolean guardarUsuario(DataUsuario dataUsuario) throws UsuarioYaExisteException, AplicacionException {
@@ -311,6 +319,7 @@ public class UsuarioController implements IUsuarioController {
 			} else { 	// organizador es muy parecido por ahora...			
 				DataUsuario du = convertir(u);
 				du.setTipoUsuario(tipoUsuario);
+				du.setUsuarioId(u.getId().intValue());
 				jwt = JWTUtil.generarToken(du);
 			}
 		}else{
@@ -391,6 +400,7 @@ public class UsuarioController implements IUsuarioController {
 		du.setFacebook(u.getFacebook());		
 		du.setTenantId(u.getTenantID());
 		du.setTwitter(u.getTwitter());
+		
 		
 		return du;
 	}
@@ -672,6 +682,42 @@ public class UsuarioController implements IUsuarioController {
 			e.printStackTrace();
 			throw new AplicacionException("Error al obtener comite Olimpico",e);
 		}
+	}
+
+	@Override
+	public List<DataEntrada> listarEntradasCompradasUsuario(Integer tenantId, Integer usuarioId) throws AplicacionException{
+	try{
+		return convertirListaEntradasCompradas(UsuarioDAO.listarEntradasCompradasUsuario(tenantId,usuarioId));
+	}catch(Exception e){
+		e.printStackTrace();
+		throw new AplicacionException("Error obteniendo las entradas.");
+	}
+	}
+
+	private List<DataEntrada> convertirListaEntradasCompradas(List<Entrada> listarEntradasCompradasUsuario) {
+		List<DataEntrada> dataEntradas = new ArrayList<DataEntrada>();
+		
+		for(int i = 0; i< listarEntradasCompradasUsuario.size(); i++){
+			DataEntrada e = convertirEntrada(listarEntradasCompradasUsuario.get(i));
+			dataEntradas.add(e);			
+		}
+		
+		return dataEntradas;
+	}
+
+	private DataEntrada convertirEntrada(Entrada entrada) {
+		DataEntrada e = new DataEntrada();
+		
+		e.setCompetencia(icc.convertirCompetencia(entrada.getCompetencia()));
+		e.setEntradaId(entrada.getEntradaId());
+		e.setFecha(entrada.getFecha());
+		e.setNumeroAsiento(entrada.getNumeroAsiento());
+		e.setPrecioEntrada(entrada.getPrecioEntrada());
+		e.setTenantId(entrada.getTenantId());
+		e.setUsuarioComun(convertir(entrada.getUsuarioComun()));
+		e.setVendida(entrada.isVendida());
+		
+		return e;
 	}
 
 }

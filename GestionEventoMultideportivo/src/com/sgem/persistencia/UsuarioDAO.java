@@ -2,15 +2,19 @@ package com.sgem.persistencia;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TemporalType;
 
 import com.sgem.datatypes.DataComite;
 import com.sgem.dominio.ComiteOlimpico;
+import com.sgem.dominio.Competencia;
+import com.sgem.dominio.Entrada;
 import com.sgem.dominio.Juez;
 import com.sgem.dominio.Organizador;
 import com.sgem.dominio.Usuario;
@@ -220,6 +224,21 @@ public class UsuarioDAO implements IUsuarioDAO {
 			return null;
 		}		
 		return (co.isEmpty() ? null : co.get(0));		
+	}
+
+	@Override
+	public List<Entrada> listarEntradasCompradasUsuario(Integer tenantId, Integer usuarioId) {
+		List<Entrada> entradas = null;			
+		try {			
+			entradas = em.createQuery("SELECT e "
+										+ "FROM Entrada e "
+										+ "WHERE e.tenantId ='"+tenantId+"' "
+										+ "AND e.UsuarioComun = "+usuarioId, Entrada.class).getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		 return entradas;
 	}
 
 	
