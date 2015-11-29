@@ -1,5 +1,6 @@
 package com.sgem.persistencia;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -191,6 +192,23 @@ public class EventoDeportivoDAO implements IEventoDeportivoDAO {
 			return deportes;
 		}
 		return deportes;
+	}
+
+	@Override
+	public int obtenerMaximoEventoDeportivo() {
+		int maxEventoDeportivo = 0;		
+		try{
+			String sql = "SELECT AUTO_INCREMENT " +
+						 "FROM information_schema.tables " +
+						 "WHERE table_name = 'eventodeportivo' " + 
+						 "AND table_schema = DATABASE()";
+			
+			maxEventoDeportivo = ((BigInteger) em.createNativeQuery(sql).getSingleResult()).intValue();		
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return maxEventoDeportivo;
 	}
 
 

@@ -24,9 +24,10 @@ public class ImagenUtil {
 
 	private static final String TENANT = "Tenant";
 	
-	private static final String NOVEDADES_DIR = "novedades";
+	private static final String NOVEDAD_DIR = "novedades";
 	private static final String COMITE_DIR = "comite_olimpico";
-	private static final String DEPORTISTAS_DIR = "deportistas";
+	private static final String DEPORTISTA_DIR = "deportistas";
+	private static final String DEPORTE_DIR = "deportes";
 	private static final String CONFIGURACION_DIR = "configuracion";
 		
 	public static String getNovedadFilePath(MultivaluedMap<String, String> header, String tenantId) {
@@ -36,7 +37,7 @@ public class ImagenUtil {
 		for (String filename : contentDisposition) {
 			if ((filename.trim().startsWith("filename"))) {
 				String fileName = getFileName(filename);
-				return FILE_PATH +TENANT+tenantId+File.separator+NOVEDADES_DIR+File.separator+fileName;
+				return FILE_PATH +TENANT+tenantId+File.separator+NOVEDAD_DIR+File.separator+fileName;
 			}
 		}
 		return "unknown";
@@ -61,7 +62,19 @@ public class ImagenUtil {
 		for (String filename : contentDisposition) {
 			if ((filename.trim().startsWith("filename"))) {
 				String fileName = getFileName(filename);
-				return FILE_PATH +TENANT+tenantId+File.separator+COMITE_DIR+comiteId+File.separator+DEPORTISTAS_DIR+File.separator+fileName;
+				return FILE_PATH +TENANT+tenantId+File.separator+COMITE_DIR+comiteId+File.separator+DEPORTISTA_DIR+File.separator+fileName;
+			}
+		}
+		return "unknown";
+	}
+	
+	public static String getDeporteFilePath(MultivaluedMap<String, String> header, String tenantId, String eventoDeportivoID) {
+		String[] contentDisposition = header.getFirst("Content-Disposition").split(";");
+		
+		for (String filename : contentDisposition) {
+			if ((filename.trim().startsWith("filename"))) {
+				String fileName = getFileName(filename);
+				return FILE_PATH +TENANT+tenantId+File.separator+DEPORTE_DIR+File.separator+fileName;
 			}
 		}
 		return "unknown";
@@ -84,7 +97,7 @@ public class ImagenUtil {
 	}
 	
 	public static String getNovedadDirectoryName(String tenantId) {
-		return FILE_PATH +TENANT+tenantId+File.separator+NOVEDADES_DIR+File.separator;
+		return FILE_PATH +TENANT+tenantId+File.separator+NOVEDAD_DIR+File.separator;
 	}
 	
 	public static String getComiteDirectoryName(String tenantId, String comiteId) {
@@ -92,7 +105,11 @@ public class ImagenUtil {
 	}
 	
 	public static String getDeportistaDirectoryName(String tenantId, String comiteId) {
-		return FILE_PATH +TENANT+tenantId+File.separator+COMITE_DIR+comiteId+File.separator+DEPORTISTAS_DIR +File.separator;
+		return FILE_PATH +TENANT+tenantId+File.separator+COMITE_DIR+comiteId+File.separator+DEPORTISTA_DIR +File.separator;
+	}
+	
+	public static String getDeporteDirectoryName(String tenantId, String eventoDeportivoID) {
+		return FILE_PATH +TENANT+tenantId+File.separator+DEPORTE_DIR+File.separator;
 	}
 	
 	public static String getConfigDirectoryName(String tenantId) {

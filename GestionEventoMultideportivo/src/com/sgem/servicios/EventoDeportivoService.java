@@ -4,10 +4,14 @@ package com.sgem.servicios;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
+import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 import com.sgem.controladores.IEventoDeportivoController;
 import com.sgem.datatypes.DataEventoDeportivo;
 import com.sgem.seguridad.excepciones.AplicacionException;
+import com.sgem.seguridad.excepciones.UsuarioYaExisteException;
 
 
 @Stateless
@@ -93,6 +97,15 @@ private IEventoDeportivoController iec;
 	}
 
 
-
+	@Override
+	public Response subirImagenEventoDeportivo(MultipartFormDataInput input) {
+		try {						
+			return Response.ok(iec.subirImagenEventoDeportivo(input)).build();	
+		}catch (UsuarioYaExisteException e) {
+			return Response.status(Status.FOUND).entity(new Boolean(false)).build();
+		} catch (AplicacionException e) {
+			return Response.serverError().build();
+		}	
+	}
 
 }

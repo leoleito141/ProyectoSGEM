@@ -187,6 +187,7 @@ public class CompetenciaController implements ICompetenciaController {
 		DataComite dc = new DataComite(d.getComiteOlimpico().getEmail(), "", d.getComiteOlimpico().getCodigo(),
 				pais, d.getComiteOlimpico().getFacebook(), d.getComiteOlimpico().getTwitter(), d.getComiteOlimpico().getPaypal(), 
 				d.getComiteOlimpico().getTenantID(),d.getComiteOlimpico().getId().intValue(), UsuarioController.USUARIO_COMITE);
+		dc.setLogo(new DataImagen(d.getComiteOlimpico().getLogo().getMime(), d.getComiteOlimpico().getLogo().getRuta(), d.getComiteOlimpico().getLogo().getTenantId()));
 		return new DataDeportista(d.getTenantID(),d.getDeportistaID(),d.getNombre(),d.getApellido(),d.getSexo(),
 								  d.getFechaNac(),dc,di);
 	}

@@ -6,6 +6,8 @@ public class DataEventoDeportivo{
 	
 	private int tenantId;
 
+	private String eventoDeportivoID;
+	
 	private String nombreDeporte;
 	
 	private String nombreDisciplina;
@@ -19,6 +21,10 @@ public class DataEventoDeportivo{
 	private int cantRondas;
 	
 	private String tipo;
+	
+	private DataImagen foto;
+	
+	public DataEventoDeportivo(){}
 	
 	public String getNombreDeporte() {
 		return nombreDeporte;
@@ -83,6 +89,22 @@ public class DataEventoDeportivo{
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+	
+	public DataImagen getFoto() {
+		return foto;
+	}
+
+	public void setFoto(DataImagen foto) {
+		this.foto = foto;
+	}
+	
+	public String getEventoDeportivoID() {
+		return eventoDeportivoID;
+	}
+
+	public void setEventoDeportivoID(String eventoDeportivoID) {
+		this.eventoDeportivoID = eventoDeportivoID;
+	}
 
 	@Override
 	public String toString() {
@@ -91,6 +113,5 @@ public class DataEventoDeportivo{
 				+ ", cantRondas=" + cantRondas + ", tipo=" + tipo + "]";
 	}
 
-	
-	
+		
 }

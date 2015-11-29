@@ -1,21 +1,35 @@
 package com.sgem.controladores;
 
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.core.MultivaluedMap;
+
+import org.apache.commons.io.IOUtils;
+import org.jboss.resteasy.plugins.providers.multipart.InputPart;
+import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 import com.sgem.datatypes.DataEventoDeportivo;
+import com.sgem.datatypes.DataImagen;
 import com.sgem.dominio.EventoDeportivo;
 import com.sgem.dominio.EventoMultideportivo;
+import com.sgem.dominio.Imagen;
 import com.sgem.dominio.Ronda;
 import com.sgem.persistencia.IEventoDeportivoDAO;
+import com.sgem.persistencia.IImagenDAO;
 import com.sgem.persistencia.IRondaDAO;
 import com.sgem.seguridad.excepciones.AplicacionException;
+import com.sgem.seguridad.excepciones.UsuarioYaExisteException;
+import com.sgem.utilidades.ImagenUtil;
 
 
 @Stateless
@@ -29,69 +43,76 @@ public class EventoDeportivoController implements IEventoDeportivoController {
 	
 	@EJB
 	private IEventoMultiController  iemc;
+	
+	@EJB
+	private IImagenDAO ImagenDAO;
 
 
 	@Override
 	public boolean guardarEventoDeportivo(DataEventoDeportivo dataEventoDeportivo) {
 		try {
-
-			EventoDeportivo eventoDeportivo = null;
-		//// Falta mandar el tennat del evento multideportivo al que pertenece 
-			        int idEventoMulti = 0;
-					eventoDeportivo = new EventoDeportivo();
-					
+						
+			if(EventosDAO.traerIDEventoDeportivo(dataEventoDeportivo.getTenantId(), dataEventoDeportivo.getNombreDeporte(), 
+												 dataEventoDeportivo.getNombreDisciplina(), dataEventoDeportivo.getSexo()) == null){
 				
+				Imagen foto = new Imagen(dataEventoDeportivo.getFoto().getMime(), dataEventoDeportivo.getFoto().getRuta(), dataEventoDeportivo.getFoto().getTenantId());
+			
+				if(ImagenDAO.guardarImagen(foto)){	
+					
+					EventoDeportivo eventoDeportivo = new EventoDeportivo();	
 					eventoDeportivo.setNombreDeporte(dataEventoDeportivo.getNombreDeporte());;
 					eventoDeportivo.setDisciplina(dataEventoDeportivo.getNombreDisciplina());
 					eventoDeportivo.setSexo(dataEventoDeportivo.getSexo());
 					eventoDeportivo.setFechaInicio(dataEventoDeportivo.getFechaInicio());
 					eventoDeportivo.setFechaFin(dataEventoDeportivo.getFechaFin());
 					eventoDeportivo.setTenantId(dataEventoDeportivo.getTenantId());
-					eventoDeportivo.setTipo(dataEventoDeportivo.getTipo());
+					eventoDeportivo.setTipo(dataEventoDeportivo.getTipo());					
+					eventoDeportivo.setFoto(foto);
 					
-					
-					
-					EventoMultideportivo emd = iemc.obtenerEventoMultideportivoXTenantId(dataEventoDeportivo.getTenantId()) ;
-					
+					EventoMultideportivo emd = iemc.obtenerEventoMultideportivoXTenantId(dataEventoDeportivo.getTenantId());					
 				
 					int cantidadRondas = dataEventoDeportivo.getCantRondas();
-					
-					
-		
-					
 					
 					boolean guardado = EventosDAO.guardarEventoDeportivo(eventoDeportivo,emd);
 					
 					if(guardado==true){
 						
-						EventoDeportivo eventoDep	= EventosDAO.traerEventoDeportivo(eventoDeportivo);
+						EventoDeportivo eventoDep = EventosDAO.traerEventoDeportivo(eventoDeportivo);
 						
-						for (int i = 0; i < cantidadRondas; i++) {
-							
+						for (int i = 0; i < cantidadRondas; i++) {							
 							int j = i+1;
-							Ronda r = new Ronda();
 							
+							Ronda r = new Ronda();							
 							r.setNumeroRonda(j);
 							r.setTenantId(emd.getTenantHandler().getTenantID());
-//							r.setEventoDepId(eventoDep.getEventoDepId());
 							r.setEventoDeportivo(eventoDep);
+							
 							eventoDep.addRonda(r);
 							
 							RondaDAO.guardarRonda(r);
-							
-							
 						}
-						
-						
-						
 						
 					}else{
 						return false;
 					}
 					
-					
-		
-			
+				}else{
+					try {
+						ImagenUtil.borrarImagen(dataEventoDeportivo.getFoto().getRuta());
+					} catch (IOException e) {
+						throw new AplicacionException("Error al guardar Evento Deportivo. No se pudo borrar la imagen.",e);
+					}		
+					throw new AplicacionException("Error al guardar imagen");
+				}
+			}else{
+				try {
+					ImagenUtil.borrarImagen(dataEventoDeportivo.getFoto().getRuta());
+				} catch (IOException e) {
+					throw new AplicacionException("Error al guardar Evento Deportivo. No se pudo borrar la imagen.",e);
+				}				
+				throw new UsuarioYaExisteException("El Comite Olimpico con codigo "+dataEventoDeportivo.getNombreDeporte()+" - " + dataEventoDeportivo.getNombreDisciplina()+ 
+												   "-" +dataEventoDeportivo.getSexo()+ " ya existe.");				
+			}		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -188,6 +209,8 @@ public class EventoDeportivoController implements IEventoDeportivoController {
 			ed.setSexo(deportes.get(i).getSexo());
 			ed.setTenantId(deportes.get(i).getTenantId());
 			ed.setTipo(deportes.get(i).getTipo());
+			ed.setFoto(new DataImagen(deportes.get(i).getFoto().getMime(), deportes.get(i).getFoto().getRuta(), deportes.get(i).getFoto().getTenantId()));
+			ed.setEventoDeportivoID(ed.getEventoDeportivoID());
 			
 			listaDeportas.add(ed);			
 		}		
@@ -230,6 +253,45 @@ public class EventoDeportivoController implements IEventoDeportivoController {
 			throw new AplicacionException("Error al obtener eventos deportivos",e);
 		}
 	}
+
+	@Override
+	public Imagen subirImagenEventoDeportivo(MultipartFormDataInput input) throws AplicacionException {
+
+		String fileName = "";
+		String tenantId = "";
+		String eventoDeportivoID = "";	
+		File f = null;
+		
+		try {
+			Map<String, List<InputPart>> uploadForm = input.getFormDataMap();
+			List<InputPart> inputParts = uploadForm.get("file");
+		
+			tenantId = uploadForm.get("tenantID").get(0).getBodyAsString();		
+			eventoDeportivoID = String.valueOf(EventosDAO.obtenerMaximoEventoDeportivo());	
+			
+			for (InputPart inputPart : inputParts) {		
 	
+				MultivaluedMap<String, String> header = inputPart.getHeaders();
+				
+				// Ojo con esto, puede que subam 2 noticias y la foto si se llama igual va a hacer cualquiera, quizas renombrarla..
+				fileName = ImagenUtil.getDeporteFilePath(header, tenantId, eventoDeportivoID);
+	
+				InputStream inputStream;
+			
+				inputStream = inputPart.getBody(InputStream.class,null);				
+	
+				byte [] bytes = IOUtils.toByteArray(inputStream);
+				
+				String dir = ImagenUtil.getDeporteDirectoryName(tenantId, eventoDeportivoID);
+				
+				f = ImagenUtil.writeFile(bytes,fileName,dir);			
+			}
+		} catch (IOException e) {
+			throw new AplicacionException("Error al subir la imagen del evento deportivo");
+		}			
+		
+		return (new Imagen(ImagenUtil.getMimeType(f), fileName,Integer.parseInt(tenantId)));
+		
+	}
 	
 }

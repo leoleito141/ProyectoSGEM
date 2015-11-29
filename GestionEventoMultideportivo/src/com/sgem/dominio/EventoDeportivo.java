@@ -11,9 +11,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -47,69 +47,32 @@ public class EventoDeportivo implements Serializable{
 	@Column(name = "tipo", nullable = false)
 	private String tipo;
 	
-	
 	@ManyToOne	
 	private EventoMultideportivo eventoMultideportivo;
 	
 	@OneToMany(fetch = FetchType.EAGER,mappedBy = "eventoDeportivo") 
 	private Set<Ronda> ronda= new HashSet<Ronda>();
 	
-	/*@ManyToMany( fetch = FetchType.EAGER)
-	private Set<Deportista> deportistas;*/
-	
-	/*@ManyToMany(mappedBy="eventoDep")
-	private Set<Deportista> deportistas;
-	*/
-	
+	@OneToOne(fetch = FetchType.LAZY)
+	private Imagen foto;
 
-	
 	public EventoDeportivo(){
-		
-		this.ronda = new HashSet<Ronda>();
-//		this.Competencia = new HashSet<Competencia>();
-		
+		this.ronda = new HashSet<Ronda>(); 
 	}
 	
-	public EventoDeportivo(int tenantId, String nombreDeporte, String disciplina,
-			Date fechaInicio, Date fechaFin, String sexo, EventoMultideportivo eventoMultideportivo, Set<Ronda> ronda, String tipo) {
-		super();
+	public EventoDeportivo(int tenantId, String nombreDeporte, String disciplina, Date fechaInicio,
+			Date fechaFin, String sexo,	EventoMultideportivo eventoMultideportivo,Set<Ronda> ronda,
+			String tipo,Imagen foto) {
 		this.tenantId = tenantId;
 		this.nombreDeporte = nombreDeporte;
 		this.disciplina = disciplina;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.sexo = sexo;
-		this.tipo = tipo;
 		this.eventoMultideportivo = eventoMultideportivo;
-		this.ronda = new HashSet<Ronda>();
-		
-	//	this.deportistas= deportistas;
-	}
-
-//	public Set<Competencia> getCompetencia() {
-//		return Competencia;
-//	}
-//
-//	public void setCompetencia(Set<Competencia> competencia) {
-//		Competencia = competencia;
-//	}
-//	
-//	public void addCompetencia(Competencia competencia) {
-//		this.Competencia.add(competencia);
-//	}
-
-	public Set<Ronda> getRonda() {
-		return ronda;
-	}
-
-	public void setRonda(Set<Ronda> ronda) {
 		this.ronda = ronda;
-	}
-	
-	
-	public void addRonda(Ronda ronda) {
-		this.ronda.add(ronda);
-		
+		this.tipo = tipo;
+		this.foto = foto;
 	}
 
 	public int getEventoDepId() {
@@ -168,6 +131,14 @@ public class EventoDeportivo implements Serializable{
 		this.sexo = sexo;
 	}
 
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
 	public EventoMultideportivo getEventoMultideportivo() {
 		return eventoMultideportivo;
 	}
@@ -176,16 +147,24 @@ public class EventoDeportivo implements Serializable{
 		this.eventoMultideportivo = eventoMultideportivo;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public Set<Ronda> getRonda() {
+		return ronda;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setRonda(Set<Ronda> ronda) {
+		this.ronda = ronda;
 	}
-	
-	
 
+	public Imagen getFoto() {
+		return foto;
+	}
 
+	public void setFoto(Imagen foto) {
+		this.foto = foto;
+	}
+
+	public void addRonda(Ronda r) {
+		this.ronda.add(r);		
+	}
 	
 }
