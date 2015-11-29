@@ -402,6 +402,39 @@ public class InicioApp implements ServletContextListener {
 			
 		}
 
+		Date fechaNac = null, fechaNac1 = null, fechaNac2= null, fechaNac3 = null, fechaNac4 = null, fechaNac5 = null, fechaNac6 = null, fechaNac7 = null, fechaNac8 = null, fechaNac9 = null, fechaNac10 = null, fechaNac11 = null, fechaNac12 = null, fechaNac13 = null, fechaNac14 = null, fechaNac15 = null, fechaNac16 = null, fechaNac17 = null, fechaNac18 = null, fechaNac19 = null,fechaNac20 = null;
+		
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		try {			
+			fechaNac = formato.parse("28/11/1985");
+			fechaNac1 = formato.parse("25/05/1983");
+			fechaNac2 = formato.parse("13/09/1982");
+			fechaNac3 = formato.parse("30/12/1987");
+			fechaNac4 = formato.parse("10/11/1987");
+			fechaNac5 = formato.parse("28/07/1977");
+			fechaNac6 = formato.parse("30/11/1979");
+			fechaNac7 = formato.parse("17/05/1977");
+			fechaNac8 = formato.parse("29/03/1984");
+			fechaNac9 = formato.parse("23/09/1988");
+			fechaNac10 = formato.parse("26/05/1990");
+			fechaNac11= formato.parse("22/06/1978");
+			fechaNac12 = formato.parse("04/02/1965");
+			fechaNac13 = formato.parse("13/06/1980");
+			fechaNac14 = formato.parse("29/01/1985");
+			fechaNac15 = formato.parse("06/07/1980");
+			fechaNac16 = formato.parse("03/06/1986");
+			fechaNac17 = formato.parse("01/01/1986");
+			fechaNac18 = formato.parse("14/01/1992");
+			fechaNac19 = formato.parse("29/03/1972");
+			fechaNac20 = formato.parse("07/07/1987");
+			
+			
+			
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
 		
    
 		System.out.println("Alta de 4 usuarios completa");
@@ -414,49 +447,49 @@ public class InicioApp implements ServletContextListener {
 		System.out.println("obtuve el usuario "+comiteUruguayo.getEmail()+" "+comiteUruguayo.getId());
 		System.out.println(" y es "+comiteUruguayo.soy());
 		
-		Deportista db = new Deportista(1, "Leandrinho", "Barbosa",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);			
-		Deportista db1 = new Deportista(1, "Marcelinho ", "Huertas",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);		
-		Deportista db2 = new Deportista(1, "Nene", "Hilario",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);			
-		Deportista db3 = new Deportista(1, "Thomaz", "Bellucci",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
-		Deportista db4 = new Deportista(1, "Teliana", "Pereira",new Date(), "Femenino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
-		Deportista db5 = new Deportista(1, "Gabriela", "Ce",new Date(), "Femenino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
-		Deportista db6 = new Deportista(1, "Augusto", "Cielo",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
-		Deportista db7 = new Deportista(1, "Sara", "Correa",new Date(), "Femenino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista db = new Deportista(1, "Leandrinho", "Barbosa",fechaNac, "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);			
+		Deportista db1 = new Deportista(1, "Marcelinho ", "Huertas",fechaNac1, "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);		
+		Deportista db2 = new Deportista(1, "Nene", "Hilario",fechaNac3, "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);			
+		Deportista db3 = new Deportista(1, "Thomaz", "Bellucci",fechaNac4, "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista db4 = new Deportista(1, "Teliana", "Pereira",fechaNac, "Femenino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista db5 = new Deportista(1, "Gabriela", "Ce",fechaNac3, "Femenino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista db6 = new Deportista(1, "Augusto", "Cielo",fechaNac4, "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista db7 = new Deportista(1, "Sara", "Correa",fechaNac8, "Femenino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
 		
 		
-		Deportista da = new Deportista(1, "Emanuel", "Ginobili",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);			
-		Deportista da1 = new Deportista(1, "Andres", "Nocioni",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);		
-		Deportista da2 = new Deportista(1, "Pablo", "Prigioni",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
-		Deportista da3 = new Deportista(1, "Juan", "Monaco",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
-		Deportista da4 = new Deportista(1, "Juan Martin", "Del Potro",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
-		Deportista da5 = new Deportista(1, "Maria", "Irigoyen",new Date(), "Femenino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
-		Deportista da6 = new Deportista(1, "Paula", "Ormaechea",new Date(), "Femenino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
-		Deportista da7 = new Deportista(1, "Federico", "Grabich",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
-		Deportista da8 = new Deportista(1, "Jose", "Meolans",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
-		Deportista da9 = new Deportista(1, "Walter", "Perez",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
-		Deportista da10 = new Deportista(1, "Juan", "Curuchet",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista da = new Deportista(1, "Emanuel", "Ginobili",fechaNac5, "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);			
+		Deportista da1 = new Deportista(1, "Andres", "Nocioni",fechaNac6, "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);		
+		Deportista da2 = new Deportista(1, "Pablo", "Prigioni",fechaNac7, "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista da3 = new Deportista(1, "Juan", "Monaco",fechaNac8, "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista da4 = new Deportista(1, "Juan Martin", "Del Potro",fechaNac9, "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista da5 = new Deportista(1, "Maria", "Irigoyen",fechaNac6, "Femenino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista da6 = new Deportista(1, "Paula", "Ormaechea",fechaNac15, "Femenino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista da7 = new Deportista(1, "Federico", "Grabich",fechaNac10, "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista da8 = new Deportista(1, "Jose", "Meolans",fechaNac11, "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista da9 = new Deportista(1, "Walter", "Perez",fechaNac18, "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista da10 = new Deportista(1, "Juan", "Curuchet",fechaNac12, "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
 		
 		
-		Deportista de = new Deportista(1, "Juan Carlos", "Navarro",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);			
-		Deportista de1 = new Deportista(1, "Pau", "Gasol",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);		
-		Deportista de2 = new Deportista(1, "Marc", "Gasol",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
-		Deportista de3 = new Deportista(1, "Rafael", "Nadal",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
-		Deportista de4 = new Deportista(1, "Carla", "Suarez",new Date(), "Femenino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
-		Deportista de5 = new Deportista(1, "Javier", "Martinez",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
-		Deportista de6 = new Deportista(1, "Nicolas", "Fernandez",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
-		Deportista de7 = new Deportista(1, "Fernanda", "Gonzalez",new Date(), "Femenino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
-		Deportista de8 = new Deportista(1, "Alberto", "Contador",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
-		Deportista de9 = new Deportista(1, "Alejandro", "Valverde",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista de = new Deportista(1, "Juan Carlos", "Navarro",fechaNac13, "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);			
+		Deportista de1 = new Deportista(1, "Pau", "Gasol",fechaNac14, "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);		
+		Deportista de2 = new Deportista(1, "Marc", "Gasol",fechaNac15, "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista de3 = new Deportista(1, "Rafael", "Nadal",fechaNac16, "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista de4 = new Deportista(1, "Carla", "Suarez",fechaNac6, "Femenino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista de5 = new Deportista(1, "Javier", "Martinez",fechaNac12, "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista de6 = new Deportista(1, "Nicolas", "Fernandez",fechaNac19, "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista de7 = new Deportista(1, "Fernanda", "Gonzalez",fechaNac20, "Femenino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista de8 = new Deportista(1, "Alberto", "Contador",fechaNac11, "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista de9 = new Deportista(1, "Alejandro", "Valverde",fechaNac4, "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
 		
 		
 		
-		Deportista du = new Deportista(1, "Pablo", "Cuevas",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);			
-		Deportista du1 = new Deportista(1, "Martin", "Cuevas",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);		
-		Deportista du2 = new Deportista(1, "Gabriel", "Melconian",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
-		Deportista du3 = new Deportista(1, "Ines", "Remersaro",new Date(), "Femenino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
-		Deportista du4 = new Deportista(1, "Noelia", "Petti",new Date(), "Femenino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
-		Deportista du5 = new Deportista(1, "Milton", "Wynants",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
-		Deportista du6 = new Deportista(1, "Fabricio", "Ferrari",new Date(), "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista du = new Deportista(1, "Pablo", "Cuevas",fechaNac17, "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);			
+		Deportista du1 = new Deportista(1, "Martin", "Cuevas",fechaNac18, "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);		
+		Deportista du2 = new Deportista(1, "Gabriel", "Melconian",fechaNac20, "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista du3 = new Deportista(1, "Ines", "Remersaro",fechaNac15, "Femenino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista du4 = new Deportista(1, "Noelia", "Petti",fechaNac, "Femenino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista du5 = new Deportista(1, "Milton", "Wynants",fechaNac19, "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
+		Deportista du6 = new Deportista(1, "Fabricio", "Ferrari",fechaNac14, "Masculino",new HashSet<EventoDeportivo>(),new HashSet<Competencia>(),null,new HashSet<Estadistica>(), null);	
 		
 		
 		///////////////////////////////////// Subir imagen de deportistas //////////////////////////
@@ -785,7 +818,7 @@ public class InicioApp implements ServletContextListener {
 		UsuarioDAO.guardarUsuario(j1);
 			
 		
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		
 		
 		/**** Competencias ***/
 		
@@ -802,6 +835,7 @@ public class InicioApp implements ServletContextListener {
 		UsuarioDAO.guardarUsuario(u2);
 		
 		Date datec1 = null,datec2 = null;
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		try {			
 			datec1 = formatter.parse("28/10/2015 14:30:00");
 			datec2 = formatter.parse("30/10/2015 19:45:00");
