@@ -146,8 +146,8 @@ public class InicioApp implements ServletContextListener {
 		((ComiteOlimpico)comite1).setCodigo("URU");
 		comite1.setEmail("cou@gmail.com");
 		comite1.setCanalYoutube("uruguay");
-		comite1.setTwitter("uruguay");
-		comite1.setFacebook("Comite Olimpico Uruguayo");
+		comite1.setTwitter("https://twitter.com/llamaceleste");
+		comite1.setFacebook("https://www.facebook.com/pages/Uruguayan-Olympic-Committee/223236431139272?fref=ts&rf=215368038668221");
 		comite1.setPassword("cou123");
 		((ComiteOlimpico)comite1).setPaypal("N28JFDC8R7MEQ");
 		comite1.setTenantID(1);			
@@ -163,8 +163,8 @@ public class InicioApp implements ServletContextListener {
 		((ComiteOlimpico)comite2).setCodigo("ARG");
 		comite2.setEmail("coa@gmail.com");
 		comite2.setCanalYoutube("Argentina");
-		comite2.setTwitter("Argentina");
-		comite2.setFacebook("Comite Olimpico Argentino");
+		comite2.setTwitter("https://twitter.com/PrensaCOA");
+		comite2.setFacebook("https://www.facebook.com/Comit%C3%A9-Ol%C3%ADmpico-Argentino-331659723531812/");
 		comite2.setPassword("coa123");
 		comite2.setTenantID(1);			
 		
@@ -180,8 +180,8 @@ public class InicioApp implements ServletContextListener {
 		((ComiteOlimpico)comite3).setCodigo("BRA");
 		comite3.setEmail("cobra@gmail.com");
 		comite3.setCanalYoutube("brasil");
-		comite3.setTwitter("brasiltw");
-		comite3.setFacebook("FacebookBrasil");
+		comite3.setTwitter("https://twitter.com/timebrasil");
+		comite3.setFacebook("https://www.facebook.com/timebrasil");
 		comite3.setPassword("123");
 		comite3.setTenantID(1);			
 		
@@ -196,8 +196,8 @@ public class InicioApp implements ServletContextListener {
 		((ComiteOlimpico)comite4).setCodigo("ESP");
 		comite4.setEmail("coesp@gmail.com");
 		comite4.setCanalYoutube("españa");
-		comite4.setTwitter("españatw");
-		comite4.setFacebook("FacebookEspaña");
+		comite4.setTwitter("https://twitter.com/COE_es");
+		comite4.setFacebook("https://www.facebook.com/ComiteOlimpico");
 		comite4.setPassword("123");
 		comite4.setTenantID(1);			
 		
@@ -218,7 +218,8 @@ public class InicioApp implements ServletContextListener {
 		
 		TenantHandler th = new TenantHandler();
 		Pais p5 = new Pais("Brasil","Rio de Janeiro");	
-		EventoMultideportivo evento = new EventoMultideportivo("Rio2016", p5 , "logo.jpg", new Date(), new Date(2016,2,4), "facebook/Rio2016","Instagram/Rio2016", "#Rio2016", "youtube/Rio2016", "Rio2016.css");
+		EventoMultideportivo evento = new EventoMultideportivo("Rio2016", p5 , "logo.jpg", new Date(), new Date(2016,2,4), "https://www.facebook.com/rio2016","https://www.instagram.com/rio2016/", "#Rio2016", "https://www.youtube.com/rio2016", "Rio2016.css");
+		evento.setTwitter("https://twitter.com/rio2016");
 		List<EventoMultideportivo> listevento = new ArrayList<EventoMultideportivo>();
 		
 		
