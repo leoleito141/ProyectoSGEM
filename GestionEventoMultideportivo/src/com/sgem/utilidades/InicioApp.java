@@ -238,31 +238,31 @@ public class InicioApp implements ServletContextListener {
 		
 		///////////////////// Imagenes Eventos Deportivos
 		
-		Imagen basketImg = new Imagen("image/jpeg", "C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\deportes\\3x3.jpg", 1);
+		Imagen basketImg = new Imagen("image/jpeg", "C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\deportes\\basquetebol.png", 1);
 		ImagenDAO.guardarImagen(basketImg);
 		
-		Imagen tenisImg = new Imagen("image/jpeg", "C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\deportes\\singles.png", 1);
+		Imagen tenisImg = new Imagen("image/jpeg", "C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\deportes\\tenisSingles.png", 1);
 		ImagenDAO.guardarImagen(tenisImg);
 		
-		Imagen tenisFImg = new Imagen("image/jpeg", "C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\deportes\\singles.png", 1);
+		Imagen tenisFImg = new Imagen("image/jpeg", "C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\deportes\\tenisSingles.png", 1);
 		ImagenDAO.guardarImagen(tenisFImg);
 		
-		Imagen tenisMdoblesImg = new Imagen("image/jpeg", "C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\deportes\\doubles.png", 1);
+		Imagen tenisMdoblesImg = new Imagen("image/jpeg", "C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\deportes\\tenisDobles.png", 1);
 		ImagenDAO.guardarImagen(tenisMdoblesImg);
 		
-		Imagen Natacion1Img = new Imagen("image/jpeg", "C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\deportes\\100.png", 1);
+		Imagen Natacion1Img = new Imagen("image/jpeg", "C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\deportes\\natacion100mariposa.png", 1);
 		ImagenDAO.guardarImagen(Natacion1Img);
 		
-		Imagen Natacion2Img = new Imagen("image/jpeg", "C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\deportes\\100.png", 1);
+		Imagen Natacion2Img = new Imagen("image/jpeg", "C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\deportes\\natacion100mariposa.png", 1);
 		ImagenDAO.guardarImagen(Natacion2Img);
 		
-		Imagen Natacion3Img = new Imagen("image/jpeg", "C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\deportes\\200.png", 1);
+		Imagen Natacion3Img = new Imagen("image/jpeg", "C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\deportes\\natacion200Libres.png", 1);
 		ImagenDAO.guardarImagen(Natacion3Img);
 		
-		Imagen Natacion4Img = new Imagen("image/jpeg", "C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\deportes\\200.png", 1);
+		Imagen Natacion4Img = new Imagen("image/jpeg", "C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\deportes\\natacion200Libres.png", 1);
 		ImagenDAO.guardarImagen(Natacion4Img);
 		
-		Imagen ciclismoImg = new Imagen("image/jpeg", "C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\deportes\\ciclismo.png", 1);
+		Imagen ciclismoImg = new Imagen("image/jpeg", "C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\deportes\\ciclismoRuta.png", 1);
 		ImagenDAO.guardarImagen(ciclismoImg);
 
 		
