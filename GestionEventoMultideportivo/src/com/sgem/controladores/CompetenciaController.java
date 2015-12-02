@@ -18,6 +18,7 @@ import com.sgem.datatypes.DataImagen;
 import com.sgem.datatypes.DataJuez;
 import com.sgem.datatypes.DataPais;
 import com.sgem.datatypes.DataResultado;
+import com.sgem.dominio.ComiteOlimpico;
 import com.sgem.dominio.Competencia;
 import com.sgem.dominio.Deportista;
 import com.sgem.dominio.Entrada;
@@ -105,6 +106,7 @@ public class CompetenciaController implements ICompetenciaController {
 		competencia.setJuez(j);
 		competencia.setRonda(r);
 		competencia.setEventoDeportivo(ed);
+		competencia.setPuesto(dataCompetencia.getPuesto());
 		
 		
 			for(int i = 1; i< (dataCompetencia.getCantEntradas()+1); i++){
@@ -186,7 +188,8 @@ public class CompetenciaController implements ICompetenciaController {
 		DataPais pais = new DataPais(d.getComiteOlimpico().getPais().getPaisID(), d.getComiteOlimpico().getPais().getPais(), d.getComiteOlimpico().getPais().getCiudad());
 		DataComite dc = new DataComite(d.getComiteOlimpico().getEmail(), "", d.getComiteOlimpico().getCodigo(),
 				pais, d.getComiteOlimpico().getFacebook(), d.getComiteOlimpico().getTwitter(), d.getComiteOlimpico().getPaypal(), 
-				d.getComiteOlimpico().getTenantID(),d.getComiteOlimpico().getId().intValue(), UsuarioController.USUARIO_COMITE);
+				d.getComiteOlimpico().getTenantID(),d.getComiteOlimpico().getId().intValue(), UsuarioController.USUARIO_COMITE,d.getComiteOlimpico().getPuesto1(),
+				d.getComiteOlimpico().getPuesto2(),d.getComiteOlimpico().getPuesto3());
 		dc.setLogo(new DataImagen(d.getComiteOlimpico().getLogo().getMime(), d.getComiteOlimpico().getLogo().getRuta(), d.getComiteOlimpico().getLogo().getTenantId()));
 		return new DataDeportista(d.getTenantID(),d.getDeportistaID(),d.getNombre(),d.getApellido(),d.getSexo(),
 								  d.getFechaNac(),dc,di);
@@ -251,6 +254,10 @@ public class CompetenciaController implements ICompetenciaController {
 	public boolean guardarResultado(DataResultado resultado) throws AplicacionException {
 	
 		boolean guardo = false;
+		Deportista primero = new Deportista();
+		Deportista segundo = new Deportista();
+		Deportista tercero = new Deportista();
+		List<String> comites = new ArrayList<String>();
 		
 		Set<Estadistica> estadisticas = new HashSet<Estadistica>();
 		for(DataEstadistica e : resultado.getEstadisticas()){
@@ -277,9 +284,52 @@ public class CompetenciaController implements ICompetenciaController {
 		while(it.hasNext()){
 			Estadistica e = it.next();
 			e.setResultado(r);
+			
 			if (!EstadisticaDAO.modificarEstadistica(e)) {
 				throw new AplicacionException("Error al guardar el resultado. Error al guardar estadistica");
 			} 	
+			
+			if(e.getPosicion() == 1){
+				primero = e.getDeportista();
+			}else if(e.getPosicion() == 2){
+				segundo = e.getDeportista();
+			}else{
+				tercero = e.getDeportista();
+			}
+			
+			if(comites.indexOf(e.getDeportista().getComiteOlimpico().getCodigo()) == -1){
+				comites.add(e.getDeportista().getComiteOlimpico().getCodigo());
+			}
+		}
+				
+		
+		if(competencia.getEventoDeportivo().getTipo().equals("individual") && competencia.getPuesto() == 1){
+			
+			if(competencia.getDeportistas().size() > 2){
+				primero.getComiteOlimpico().setPuesto1(primero.getComiteOlimpico().getPuesto1()+1);
+				segundo.getComiteOlimpico().setPuesto2(segundo.getComiteOlimpico().getPuesto2()+1);
+				tercero.getComiteOlimpico().setPuesto3(tercero.getComiteOlimpico().getPuesto3()+1);				
+			}else{// es mano a mano
+				primero.getComiteOlimpico().setPuesto1(primero.getComiteOlimpico().getPuesto1()+1);
+				segundo.getComiteOlimpico().setPuesto2(segundo.getComiteOlimpico().getPuesto2()+1);
+			}
+			
+		} else if(competencia.getEventoDeportivo().getTipo().equals("colectivo") && competencia.getPuesto() == 1){
+			
+			if(comites.size() > 2){
+				primero.getComiteOlimpico().setPuesto1(primero.getComiteOlimpico().getPuesto1()+1);
+				segundo.getComiteOlimpico().setPuesto2(segundo.getComiteOlimpico().getPuesto2()+1);
+				tercero.getComiteOlimpico().setPuesto3(tercero.getComiteOlimpico().getPuesto3()+1);				
+			}else{// es mano a mano
+				primero.getComiteOlimpico().setPuesto1(primero.getComiteOlimpico().getPuesto1()+1);
+				segundo.getComiteOlimpico().setPuesto2(segundo.getComiteOlimpico().getPuesto2()+1);
+			}
+			
+		} else if (competencia.getEventoDeportivo().getTipo().equals("individual") && competencia.getPuesto() == 3 
+				|| competencia.getEventoDeportivo().getTipo().equals("colectivo") && competencia.getPuesto() == 3){
+			
+			primero.getComiteOlimpico().setPuesto3(primero.getComiteOlimpico().getPuesto3()+1);
+			
 		}
 				
 		competencia.setFinalizada(true);
@@ -375,6 +425,7 @@ public class CompetenciaController implements ICompetenciaController {
 		c.setEntradasVendidas(competencia.getEntradasVendidas());
 		c.setTipoDeporte(competencia.getEventoDeportivo().getTipo());
 		c.setFinalizada(competencia.isFinalizada());
+		c.setPuesto(competencia.getPuesto());
 		
 		return c;
 	}

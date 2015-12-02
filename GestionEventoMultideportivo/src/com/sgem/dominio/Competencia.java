@@ -32,8 +32,7 @@ public class Competencia implements Serializable{
 	private int tenantId;
 	
 	@Column(name = "fecha", nullable = false)
-	private Date fecha;
-	
+	private Date fecha;	
 	
 	@Column(name = "estadio", nullable = false)
 	private String estadio;
@@ -50,14 +49,15 @@ public class Competencia implements Serializable{
 	@Column(name = "finalizada", nullable = false)
 	private boolean finalizada;
 	
-	
+	@Column(name = "puesto", nullable = false)
+	private int puesto;	
+		
 	@ManyToOne	
 	private EventoDeportivo eventoDeportivo;
 
 	@ManyToOne	
 	private Juez juez;
-	
-	
+		
 	@ManyToOne	
 	private Ronda ronda;
 	
@@ -69,9 +69,6 @@ public class Competencia implements Serializable{
 
 	@OneToMany(fetch = FetchType.EAGER,mappedBy = "competencia") 
 	private Set<Entrada> entradas = new HashSet<Entrada>();
-
-	
-	
 	
 	public Competencia(){
 		this.deportistas = new HashSet<Deportista>();
@@ -81,7 +78,7 @@ public class Competencia implements Serializable{
 	
 	public Competencia(int tenantId, Date fecha, String Estadio,float precioEntrada, boolean finalizada,int cantEntradas,
 			EventoDeportivo eventoDeportivo, Juez juez, Ronda ronda, Resultado resultado,int entradasVendidas,
-			Set<Deportista> deportistas, Set<Entrada> entradas) {
+			Set<Deportista> deportistas, Set<Entrada> entradas,int puesto) {
 		
 		//super();
 		
@@ -98,6 +95,7 @@ public class Competencia implements Serializable{
 		this.finalizada = finalizada;
 		this.deportistas = new HashSet<Deportista>();
 		this.entradas = new HashSet<Entrada>();
+		this.puesto = puesto;
 	}
 
 	public int getCompetenciaId() {
@@ -230,7 +228,16 @@ public class Competencia implements Serializable{
 	public void setEntradasVendidas(int entradasVendidas) {
 		this.entradasVendidas = entradasVendidas;
 	}
-	
 
+
+	public int getPuesto() {
+		return puesto;
+	}
+
+
+	public void setPuesto(int puesto) {
+		this.puesto = puesto;
+	}
+	
 	
 }

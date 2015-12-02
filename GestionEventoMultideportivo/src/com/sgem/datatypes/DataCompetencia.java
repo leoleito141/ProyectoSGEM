@@ -34,12 +34,14 @@ public class DataCompetencia {
 	private List<DataDeportista> deportistas;
 	
 	private boolean finalizada;
+	
+	private int puesto;
 
 	public DataCompetencia() {}
 
 	public DataCompetencia(int tenantId, Date fecha, String estadio,float precioEntrada, int cantEntradas, String nombreDeporte,
-			String nombreDisciplina, String tipoDeporte, String sexo,DataJuez juez, int ronda, int entradasVendidas,boolean finalizada,
-			List<DataDeportista> deportistas) {
+			String nombreDisciplina, String tipoDeporte, String sexo,DataJuez juez, int ronda, int entradasVendidas, boolean finalizada,
+			List<DataDeportista> deportistas, int puesto) {
 		this.tenantId = tenantId;
 		this.fecha = fecha;
 		this.estadio = estadio;
@@ -54,6 +56,7 @@ public class DataCompetencia {
 		this.ronda = ronda;
 		this.finalizada = finalizada;
 		this.deportistas = deportistas;
+		this.puesto = puesto;
 	}
 
 	public int getTenantId() {
@@ -175,6 +178,14 @@ public class DataCompetencia {
 	public void setEntradasVendidas(int entradasVendidas) {
 		this.entradasVendidas = entradasVendidas;
 	}
+	
+	public int getPuesto() {
+		return puesto;
+	}
+
+	public void setPuesto(int puesto) {
+		this.puesto = puesto;
+	}
 
 	@Override
 	public String toString() {
@@ -186,7 +197,7 @@ public class DataCompetencia {
 				+ nombreDisciplina + ", tipoDeporte=" + tipoDeporte + ", sexo="
 				+ sexo + ", juez=" + juez + ", ronda=" + ronda
 				+ ", deportistas=" + deportistas + ", finalizada=" + finalizada
-				+ "]";
+				+ ", puesto=" + puesto + "]";
 	}
 
 }

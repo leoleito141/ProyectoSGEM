@@ -912,7 +912,7 @@ public class InicioApp implements ServletContextListener {
 		 
 	
 		//Colectivo
-		Competencia c1 = new Competencia(1, datec1, "Estadio Basquet", 1500.0F, false, 20, basketRonda, j, r2, null, 0, deportistasCompBasquet, null);		
+		Competencia c1 = new Competencia(1, datec1, "Estadio Basquet", 1500.0F, false, 20, basketRonda, j, r2, null, 0, deportistasCompBasquet, null,0);		
 		CompetenciaDAO.guardarCompetencia(c1);
 		
 
@@ -981,7 +981,7 @@ public class InicioApp implements ServletContextListener {
 		
 		
 		
-		Competencia c2 = new Competencia(1, datec2, "Estadio Basquet", 500.0F, false, 30, basketRonda, j1, r2, null, 0, deportistasCompBasquet2, null);		
+		Competencia c2 = new Competencia(1, datec2, "Estadio Basquet", 500.0F, false, 30, basketRonda, j1, r2, null, 0, deportistasCompBasquet2, null,0);		
 		CompetenciaDAO.guardarCompetencia(c2);
 			
 		
@@ -1053,7 +1053,7 @@ public class InicioApp implements ServletContextListener {
 		 
 	 
 	
-		Competencia c3 = new Competencia(1, datec1, "Rio Tennis Stadium", 250.0F, false, 20, tenisM, j, r3, null, 0, deportistasCompTenis, null);		
+		Competencia c3 = new Competencia(1, datec1, "Rio Tennis Stadium", 250.0F, false, 20, tenisM, j, r3, null, 0, deportistasCompTenis, null,0);		
 		CompetenciaDAO.guardarCompetencia(c3);
 		
 
@@ -1123,7 +1123,7 @@ public class InicioApp implements ServletContextListener {
 		 
 	
 		//Colectivo
-		Competencia c4 = new Competencia(1, datec1, "Circuito callejero", 250.0F, false, 15, ciclismo1, j1, r4, null, 0, deportistasCiclismo, null);		
+		Competencia c4 = new Competencia(1, datec1, "Circuito callejero", 250.0F, false, 15, ciclismo1, j1, r4, null, 0, deportistasCiclismo, null,1);		
 		CompetenciaDAO.guardarCompetencia(c4);
 		
 

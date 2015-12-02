@@ -310,7 +310,10 @@ public class UsuarioController implements IUsuarioController {
 			tipoUsuario = u instanceof UsuarioComun ? USUARIO_COMUN : u instanceof ComiteOlimpico ? USUARIO_COMITE : u instanceof Organizador ? USUARIO_ORGANIZADOR : USUARIO_JUEZ;
 			
 			if(tipoUsuario.equals(USUARIO_COMITE)){
-				DataComite dc = new DataComite(u.getEmail(),"",((ComiteOlimpico)u).getCodigo(),new DataPais(((ComiteOlimpico)u).getPais().getPaisID(),((ComiteOlimpico)u).getPais().getPais(),((ComiteOlimpico)u).getPais().getCiudad()),u.getFacebook(),u.getTwitter(),((ComiteOlimpico)u).getPaypal(),u.getTenantID(),u.getId().intValue(),tipoUsuario);
+				DataComite dc = new DataComite(u.getEmail(),"",((ComiteOlimpico)u).getCodigo(),new DataPais(((ComiteOlimpico)u).getPais().getPaisID(),
+											  ((ComiteOlimpico)u).getPais().getPais(),((ComiteOlimpico)u).getPais().getCiudad()),u.getFacebook(),u.getTwitter(),
+											  ((ComiteOlimpico)u).getPaypal(),u.getTenantID(),u.getId().intValue(),tipoUsuario,((ComiteOlimpico)u).getPuesto1(),((ComiteOlimpico)u).getPuesto2(),
+											  ((ComiteOlimpico)u).getPuesto3());
 				jwt = JWTUtil.generarToken(dc);
 
 			} else if(tipoUsuario.equals(USUARIO_JUEZ)){				
@@ -645,7 +648,10 @@ public class UsuarioController implements IUsuarioController {
 			c.setTenantId(comites.get(i).getTenantID());
 			c.setTipoUsuario(USUARIO_COMITE);
 			c.setTwitter(comites.get(i).getTwitter());			
-
+			c.setPuesto1(comites.get(i).getPuesto1());
+			c.setPuesto2(comites.get(i).getPuesto2());
+			c.setPuesto3(comites.get(i).getPuesto3());
+			
 			listaComites.add(c);			
 		}		
 		return listaComites;		
