@@ -47,6 +47,7 @@ public interface IUsuarioController {
 	public DataNovedad getNovedad(int idnovedad);
 	public DataComite obtenerComite(int tenantid, int usuarioID) throws AplicacionException;
 	public List<DataEntrada> listarEntradasCompradasUsuario(Integer tenantId, Integer usuarioId)throws AplicacionException;
+	public String obtenerBalance() throws AplicacionException;
 	
 	
 }

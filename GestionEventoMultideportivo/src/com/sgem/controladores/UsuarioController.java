@@ -20,6 +20,9 @@ import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 import org.jboss.resteasy.util.Base64;
 
+import urn.ebay.api.PayPalAPI.GetBalanceResponseType;
+import urn.ebay.apis.CoreComponentTypes.BasicAmountType;
+
 import com.sgem.datatypes.DataComite;
 import com.sgem.datatypes.DataCompetencia;
 import com.sgem.datatypes.DataDeportista;
@@ -53,6 +56,7 @@ import com.sgem.seguridad.excepciones.UsuarioYaExisteException;
 import com.sgem.seguridad.jwt.JWTUtil;
 import com.sgem.seguridad.jwt.Token;
 import com.sgem.utilidades.Correo;
+import com.sgem.utilidades.GetBalance;
 import com.sgem.utilidades.ImagenUtil;
 
 @Stateless
@@ -724,6 +728,21 @@ public class UsuarioController implements IUsuarioController {
 		e.setVendida(entrada.isVendida());
 		
 		return e;
+	}
+
+	@Override
+	public String obtenerBalance() throws AplicacionException {
+		String balance = null;
+		try{
+			GetBalance getBalance = new GetBalance();
+			GetBalanceResponseType getBalanceResponse = getBalance.getBalance();
+			BasicAmountType amount = getBalanceResponse.getBalance();
+			balance = "{\"balance\":\""+amount.getValue()+ " " +amount.getCurrencyID().getValue()+"\"}";
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new AplicacionException("Error al obtener Balance Paypal",e);
+		}
+		return balance;
 	}
 
 }

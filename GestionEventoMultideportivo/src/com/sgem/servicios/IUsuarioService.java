@@ -170,6 +170,11 @@ public interface IUsuarioService {
 	@Path("/listarEntradasCompradasUsuario/{tenantId}/{usuarioId}")
 	public Response listarEntradasCompradasUsuario(@PathParam("tenantId") Integer tenantId, @PathParam("usuarioId") Integer usuarioId);
 	
+	@RolesAllowed("COMITE_OLIMPICO")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/obtenerBalance")
+	public Response obtenerBalance();
 	
 	
 }

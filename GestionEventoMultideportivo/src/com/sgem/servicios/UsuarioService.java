@@ -233,5 +233,14 @@ public class UsuarioService implements IUsuarioService{
 		}
 	}
 
+	@Override
+	public Response obtenerBalance() {
+		try {
+			return Response.ok(iuc.obtenerBalance()).build();
+		} catch (AplicacionException e) {
+			return Response.serverError().build();
+		}
+	}
+
 	
 }
