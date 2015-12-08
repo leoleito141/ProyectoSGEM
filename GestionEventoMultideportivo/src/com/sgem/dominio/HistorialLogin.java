@@ -9,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import com.sgem.enums.Tipo;
-
 @Entity
 public class HistorialLogin {
 
@@ -26,9 +24,6 @@ public class HistorialLogin {
 	
 	@OneToOne
 	private Usuario usuario;
-	
-	private Tipo tipo;
-
 	public HistorialLogin(){}
 	
 //	public HistorialLogin(int tenantId, Date date, Usuario usuario) {
@@ -37,12 +32,11 @@ public class HistorialLogin {
 //		this.usuario = usuario;
 //	}
 	
-	public HistorialLogin(int tenantId, Date fecha, Usuario usuario, Tipo tipo) {
+	public HistorialLogin(int tenantId, Date fecha, Usuario usuario) {
 		super();
 		this.tenantId = tenantId;
 		this.fecha = fecha;
 		this.usuario = usuario;
-		this.tipo = tipo;
 	}
 
 	public int getIdHistorialLogin() {
@@ -75,14 +69,6 @@ public class HistorialLogin {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
-	}
-
-	public Tipo getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(Tipo tipo) {
-		this.tipo = tipo;
 	}
 
 }

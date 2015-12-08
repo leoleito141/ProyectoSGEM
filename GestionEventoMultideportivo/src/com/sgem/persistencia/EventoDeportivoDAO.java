@@ -36,20 +36,19 @@ public class EventoDeportivoDAO implements IEventoDeportivoDAO {
 
 
 	
-	public List<String> listarDisciplinas(int tenantID, String sexo, String nombreDeporte) {
+	public List<EventoDeportivo> listarDisciplinas(int tenantID, String sexo, String nombreDeporte) {
 			
-		List<String> disciplinas = null;
+		List<EventoDeportivo> disciplinas = null;
 		
 		try {
 			
-			disciplinas = em.createQuery("SELECT ed.disciplina FROM EventoDeportivo ed WHERE ed.tenantId = "+tenantID+" AND ed.sexo = '"+sexo+"' AND ed.nombreDeporte = '"+nombreDeporte+"'", String.class).getResultList();;
+			disciplinas = em.createQuery("SELECT ed FROM EventoDeportivo ed WHERE ed.tenantId = "+tenantID+" AND ed.sexo = '"+sexo+"' AND ed.nombreDeporte = '"+nombreDeporte+"'", EventoDeportivo.class).getResultList();
 			 
-			 return disciplinas;
-			
 		} catch (Exception e) {
 			e.printStackTrace();
+			return disciplinas;
 		}
-		return null;
+		return disciplinas;
 	}
 
 

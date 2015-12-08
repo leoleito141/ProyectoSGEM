@@ -20,7 +20,7 @@ public interface IEventoDeportivoController {
 
 	public List<String> listarDeportes(int tenantID, String sexo);
 
-	public List<String> listarDisciplinas(int tenantID, String nombreDeporte, String sexo);
+	public List<DataEventoDeportivo> listarDisciplinas(int tenantID, String nombreDeporte, String sexo);
 
 	public List<EventoDeportivo> buscarEventosDeportivos(Integer tenantId, String deporte, List<String> disciplinas, String sexo);
 

@@ -22,8 +22,7 @@
 	<class>com.sgem.dominio.Ronda</class>
 	<class>com.sgem.dominio.TenantHandler</class>
 	<class>com.sgem.dominio.Usuario</class>
-	<class>com.sgem.dominio.UsuarioComun</class>
-	<class>com.sgem.enums.convertidores.TipoConverter</class>	
+	<class>com.sgem.dominio.UsuarioComun</class>	
 	
 	<properties>
 		<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />

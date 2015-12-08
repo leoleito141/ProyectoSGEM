@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -15,9 +14,6 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
-import com.sgem.controladores.IUsuarioController;
-import com.sgem.datatypes.DataImagen;
-import com.sgem.datatypes.DataNovedad;
 import com.sgem.dominio.Admin;
 import com.sgem.dominio.ComiteOlimpico;
 import com.sgem.dominio.Competencia;
@@ -36,7 +32,6 @@ import com.sgem.dominio.Ronda;
 import com.sgem.dominio.TenantHandler;
 import com.sgem.dominio.Usuario;
 import com.sgem.dominio.UsuarioComun;
-import com.sgem.enums.Tipo;
 import com.sgem.persistencia.ICompetenciaDAO;
 import com.sgem.persistencia.IDeportistaDAO;
 import com.sgem.persistencia.IEntradaDAO;
@@ -47,9 +42,6 @@ import com.sgem.persistencia.IImagenDAO;
 import com.sgem.persistencia.INovedadDAO;
 import com.sgem.persistencia.IRondaDAO;
 import com.sgem.persistencia.IUsuarioDAO;
-import com.sgem.persistencia.NovedadDAO;
-import com.sgem.seguridad.excepciones.AplicacionException;
-import com.sgem.seguridad.excepciones.UsuarioNoEncontradoException;
 
 
 @WebListener
@@ -1267,14 +1259,14 @@ public class InicioApp implements ServletContextListener {
 			e.printStackTrace();
 		}
 		
-		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, u,Tipo.LOGIN));
-		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date2, u,Tipo.LOGIN));
-		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date3, u,Tipo.LOGIN));
-		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date4, u,Tipo.LOGIN));
-		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date5, u,Tipo.LOGIN));
-		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date6, u,Tipo.LOGIN));
-		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date7, u,Tipo.LOGIN));
-		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date8, u,Tipo.LOGIN));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date2, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date3, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date4, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date5, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date6, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date7, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date8, u));
 
 //		Token jwt = JWTUtil.generarToken( new DataUsuario(1, "mail@gmail.com", "f", "t", "y", "usuario", "data", 1,12345678, "123", "UsuarioComun"));
 //	

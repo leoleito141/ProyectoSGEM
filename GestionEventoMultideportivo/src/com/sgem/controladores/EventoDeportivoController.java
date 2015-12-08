@@ -132,10 +132,10 @@ public class EventoDeportivoController implements IEventoDeportivoController {
 	}
 
 	@Override
-	public List<String> listarDisciplinas(int tenantID, String nombreDeporte, String sexo) {
+	public List<DataEventoDeportivo> listarDisciplinas(int tenantID, String nombreDeporte, String sexo) {
 		try {
 				
-			return EventosDAO.listarDisciplinas(tenantID,nombreDeporte,sexo);
+			return convertirEventosDeportivos(EventosDAO.listarDisciplinas(tenantID,nombreDeporte,sexo));
 		
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -13,7 +13,7 @@ public interface IEventoDeportivoDAO {
 	public boolean guardarEventoDeportivo(EventoDeportivo eventoDeportivo, EventoMultideportivo emd);
 	public List<String> listarDeportes(int tenantID, String sexo);
 	public List<EventoDeportivo> listarDeportes(int tenantID);	
-	public List<String> listarDisciplinas(int tenantID, String nombreDeporte, String sexo);
+	public List<EventoDeportivo> listarDisciplinas(int tenantID, String nombreDeporte, String sexo);
 	public EventoDeportivo traerEventoDeportivo(Integer idEventoDep);
 	public Integer traerIDEventoDeportivo(Integer tenantId, String deporte, String disciplina, String sexo);
 	public EventoDeportivo traerEventoDeportivo(EventoDeportivo eventoDeportivo);

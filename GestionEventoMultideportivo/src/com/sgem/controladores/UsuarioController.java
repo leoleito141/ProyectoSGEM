@@ -24,8 +24,6 @@ import urn.ebay.api.PayPalAPI.GetBalanceResponseType;
 import urn.ebay.apis.CoreComponentTypes.BasicAmountType;
 
 import com.sgem.datatypes.DataComite;
-import com.sgem.datatypes.DataCompetencia;
-import com.sgem.datatypes.DataDeportista;
 import com.sgem.datatypes.DataEntrada;
 import com.sgem.datatypes.DataHistorialLogin;
 import com.sgem.datatypes.DataImagen;
@@ -35,7 +33,6 @@ import com.sgem.datatypes.DataPais;
 import com.sgem.datatypes.DataUsuario;
 import com.sgem.dominio.Admin;
 import com.sgem.dominio.ComiteOlimpico;
-import com.sgem.dominio.Deportista;
 import com.sgem.dominio.Entrada;
 import com.sgem.dominio.HistorialLogin;
 import com.sgem.dominio.Imagen;
@@ -45,7 +42,6 @@ import com.sgem.dominio.Organizador;
 import com.sgem.dominio.Pais;
 import com.sgem.dominio.Usuario;
 import com.sgem.dominio.UsuarioComun;
-import com.sgem.enums.Tipo;
 import com.sgem.persistencia.IHistorialLoginDAO;
 import com.sgem.persistencia.IImagenDAO;
 import com.sgem.persistencia.INovedadDAO;
@@ -335,7 +331,7 @@ public class UsuarioController implements IUsuarioController {
 
 		if(!tipoUsuario.equals(USUARIO_ORGANIZADOR)){
 			try {
-				HistorialLoginDAO.guardarHistorial(new HistorialLogin(u.getTenantID(), new Date(), u,Tipo.LOGIN));
+				HistorialLoginDAO.guardarHistorial(new HistorialLogin(u.getTenantID(), new Date(), u));
 			} catch (Exception e) {
 				return jwt;
 			}
