@@ -23,4 +23,6 @@ public interface ICompetenciaDAO {
 
 	public List<Competencia> listarCompetenciasPorDisciplina(int tenantID, String nombreDeporte, String nombreDisciplina, String sexo);
 
+	public Competencia getCompetenciaPorEstadistica(int tenantID, int estadisticaID);
+
 }

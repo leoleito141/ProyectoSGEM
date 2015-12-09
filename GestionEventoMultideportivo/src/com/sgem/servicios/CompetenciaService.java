@@ -124,6 +124,16 @@ public class CompetenciaService implements ICompetenciaService{
 			return Response.serverError().build();
 		}
 	}
+
+
+	@Override
+	public Response getCompetenciaPorEstadistica(int tenantID, int estadisticaID) {
+		try {						
+			return Response.ok(icc.getCompetenciaPorEstadistica(tenantID,  estadisticaID)).build();	
+		} catch (AplicacionException e) {
+			return Response.serverError().build();
+		}
+	}
 	
 }
 

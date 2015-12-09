@@ -134,6 +134,23 @@ public class CompetenciaDAO implements ICompetenciaDAO{
 		return competencias;
 	}
 
+	@Override
+	public Competencia getCompetenciaPorEstadistica(int tenantID, int estadisticaID) {
+		Competencia c = null;
+		
+		try{		
+			c = em.createQuery("SELECT c "
+							 + "FROM Competencia c, Estadistica e, Resultado r "
+							 + "WHERE e.estadisticaId = "+estadisticaID+" AND e.resultado = r.resultadoId "
+							 + "AND c.resultado = r.resultadoId "
+							 + "AND r.tenantId = "+tenantID+" AND e.tenantId = "+tenantID+" AND c.tenantId = "+tenantID,Competencia.class).getSingleResult();
+		}catch(Exception e){
+			e.printStackTrace();
+			return c;
+		}
+		return c;
+	}
+
 	
 	
 

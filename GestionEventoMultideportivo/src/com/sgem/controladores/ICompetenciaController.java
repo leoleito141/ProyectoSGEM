@@ -33,5 +33,7 @@ public interface ICompetenciaController {
 	public DataEstadistica listarEstadisticaPorPais(int tenantID, int competenciaID, int comiteID) throws AplicacionException;
 
 	public DataCompetencia convertirCompetencia(Competencia competencia);
+
+	public DataCompetencia getCompetenciaPorEstadistica(int tenantID, int estadisticaID) throws AplicacionException;
 }
 

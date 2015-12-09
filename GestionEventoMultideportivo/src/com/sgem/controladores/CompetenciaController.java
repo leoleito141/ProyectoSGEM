@@ -459,6 +459,16 @@ public class CompetenciaController implements ICompetenciaController {
 			throw new AplicacionException("Error al obtener estadistica para la competencia nro.: "+competenciaID, e);
 		}
 	}
+
+	@Override
+	public DataCompetencia getCompetenciaPorEstadistica(int tenantID, int estadisticaID) throws AplicacionException {
+		try{
+			return convertirCompetencia(CompetenciaDAO.getCompetenciaPorEstadistica(tenantID, estadisticaID));
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new AplicacionException("Error al obtener competencia para la estadistica con id: "+estadisticaID, e);
+		}
+	}
 	
 	
 }

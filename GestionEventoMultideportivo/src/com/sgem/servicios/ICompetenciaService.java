@@ -86,4 +86,10 @@ public interface ICompetenciaService {
 	@Path("/listarEstadisticaPorPais/{tenantID}/{competenciaID}/{comiteID}")
 	public Response listarEstadisticaPorPais(@PathParam("tenantID") int tenantID, @PathParam("competenciaID") int competenciaID, @PathParam("comiteID") int comiteID);
 
+	@PermitAll
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getCompetenciaPorEstadistica/{tenantID}/{estadisticaID}")
+	public Response getCompetenciaPorEstadistica(@PathParam("tenantID") int tenantID, @PathParam("estadisticaID") int estadisticaID);
+	
 }
