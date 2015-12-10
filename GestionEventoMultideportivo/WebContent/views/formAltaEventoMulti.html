@@ -2,22 +2,22 @@
 
 </style>
 
-<div class="center" style="max-height:100%; background-color: rgba(255,255,255,0.95); color:black;border-radius:25px">
-<div class="col-md-12">
-<div class="page-header text-center">
-	<!-- the links to our nested states using relative paths -->
-	<!-- add the active class if the state matches our ui-sref -->
-	<div id="status-buttons" class="text-center">
-		<a ui-sref-active="active" class="coolbtn" ui-sref=".altaEvento"><img src="resources/defecto/img/1.png"/></a> 
-		<a ui-sref-active="active" class="coolbtn" ui-sref=".organizador"><img src="resources/defecto/img/2.png"/></a> 
-	</div>
+<div class="center" style="background-color: rgba(255,255,255,0.95);color: black;border-radius: 25px;background-color: white!important;margin-left: 10%;margin-right: 10%;float: left;">
+	<div class="col-md-12">
+		<div class=" text-center" style="padding-bottom: 9px;margin: 10px 0 10px;border-bottom: 1px solid #eee;">
+			<!-- the links to our nested states using relative paths -->
+			<!-- add the active class if the state matches our ui-sref -->
+			<div id="status-buttons" class="text-center">
+				<a ui-sref-active="active" class="coolbtn" ui-sref=".altaEvento"><img src="resources/defecto/img/1.png"/></a> 
+				<a ui-sref-active="active" class="coolbtn" ui-sref=".organizador"><img src="resources/defecto/img/2.png"/></a> 
+			</div>
+			
+		</div>
 	
+	<form id="signup-form" role="form">
+		<!-- our nested state views will be injected here -->
+		<div id="form-views"  style="max-height: 20%!important" ui-view></div>
+	
+	</form>
 	</div>
-
-<form id="signup-form" role="form">
-	<!-- our nested state views will be injected here -->
-	<div id="form-views"  style="max-height: 20%!important" ui-view></div>
-
-</form>
-</div>
 </div>

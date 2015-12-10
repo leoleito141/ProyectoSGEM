@@ -13,17 +13,21 @@
 .overlay {
     
    
-    position:absolute;
-    top:0px; bottom:-5%; left:0; right:0;
-    display:block;
-    z-index:2;
-    background-color:rgba(50,50,50,0.3);
+    height: auto;
+   top:0;
+   
+    bottom: -5%;
+    left: 0;
+    right: 0;
+    display: block;
+    z-index: 2;
+    background-color: rgba(50,50,50,0.3);
     
 }
 .center {   
    
     position:absolute;
-    top:20%;  left:5%; right:5%;
+    top:55px;  left:5%; right:5%;
    color:white;
     
 }
@@ -135,7 +139,7 @@
 
     </header>
 
-	    <div class="overlay" style="max-height: 80%!important" ui-view></div>
+	    <div class="overlay"  ui-view></div>
 
 	<script type="text/javascript"  src="resources/angular/shared/angular/angular.js"></script>
 	<script type="text/javascript"  src="resources/angular/shared/i18n/angular-locale_es-uy.js"></script>
