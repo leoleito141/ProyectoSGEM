@@ -210,7 +210,11 @@ public class InicioApp implements ServletContextListener {
 		
 		TenantHandler th = new TenantHandler();
 		Pais p5 = new Pais("Brasil","Rio de Janeiro");	
-		EventoMultideportivo evento = new EventoMultideportivo("Rio2016", p5 , "logo.jpg", new Date(), new Date(2016,2,4), "https://www.facebook.com/rio2016","https://www.instagram.com/rio2016/", "#Rio2016", "https://www.youtube.com/rio2016", "Rio2016.css");
+		Date fechaFin = new Date();
+		fechaFin.setDate(20);
+		fechaFin.setYear(2016);
+		fechaFin.setMonth(1);
+		EventoMultideportivo evento = new EventoMultideportivo("Rio2016", p5 , "logo.jpg", new Date(), fechaFin, "https://www.facebook.com/rio2016","https://www.instagram.com/rio2016/", "#Rio2016", "https://www.youtube.com/rio2016", "Rio2016.css");
 		evento.setTwitter("https://twitter.com/rio2016");
 		List<EventoMultideportivo> listevento = new ArrayList<EventoMultideportivo>();
 		

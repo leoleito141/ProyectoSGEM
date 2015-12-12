@@ -45,7 +45,8 @@ public interface ICompetenciaService {
 	public Response obtenerPrecio(@PathParam("tenantID") int tenantID, @PathParam("idCompetencia") int idCompetencia);
 
 	
-	@RolesAllowed("USUARIO_COMUN")
+
+	@PermitAll
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
