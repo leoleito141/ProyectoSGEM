@@ -31,13 +31,13 @@ angular.module('pruebaAngularApp')
           	console.log(response); 
           });
 	
-	$scope.hoverIn = function(){
-	    this.hoverInfo = true;
-	};
+	$scope.irEvento = function(nombreEvento){
+		localStorage.clear();
+		window.location.href = "https://sgem-eventos.com:8443/#/"+nombreEvento+"/";
 
-	$scope.hoverOut = function(){
-	    this.hoverInfo = false;
 	};
+	
+	
 	////////////////Fin listado de eventos///////////////////  
     
 

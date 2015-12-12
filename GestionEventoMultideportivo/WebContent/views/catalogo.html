@@ -1,11 +1,11 @@
 <style>
 .portfolio-item {
-    margin-top: 2cm;
+    margin-top: 1%;
 }
 
-.portfolio-item:hover {
-  opacity: 0.75;
-}
+/* .portfolio-item:hover { */
+/*   opacity: 0.75; */
+/* } */
 </style>
    
     <!-- Page Content -->
@@ -13,23 +13,16 @@
 
         <!-- Projects Row -->
         <div ng-repeat="cat in catalogo"  class="row">
-            <div ng-repeat="evento in cat" class="col-md-3 portfolio-item " ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()" >
-            
-                <a>
-                    <img class="img-responsive" ng-src="{{evento.pagina && evento.pagina.ruta || '/resources/defecto/img/favicon.png'}}" alt="">
-                
-                 
-                </a>
-               <span ng-show="hoverInfo">
-            		<a>
-            			<h1 ng-bind="evento.nombre_url"></h1>
-            			 <strong>Fecha Inicio:</strong><strong ng-bind="evento.fechaInicio | date:'dd/MM/yyyy'"></strong>
-            			<br>
-            			<strong>Fecha Fin:</strong><strong ng-bind="evento.fechaFin | date:'dd/MM/yyyy'"></strong>
-            		</a>
-            		
-        		</span>
-                
+            <div ng-repeat="evento in cat" class="view view-eighth col-md-3 portfolio-item  " >
+                <img style="margin-left: auto;margin-right: auto; height: 200px"  class="img-responsive" ng-src="{{evento.pagina && evento.pagina.ruta || '/resources/defecto/img/favicon.png'}}" alt="">
+                <div class="mask">  
+     				<h2 ng-bind="evento.nombre_url"></h2>  
+     				<p> <strong>Fecha Inicio:</strong><strong ng-bind="evento.fechaInicio | date:'dd/MM/yyyy'"></strong>
+             			<br>
+            	   		<strong>Fecha Fin:</strong><strong ng-bind="evento.fechaFin | date:'dd/MM/yyyy'"></strong>
+     				</p>  
+         			<a ng-click="irEvento(evento.nombre_url)" class="info">Ver Evento</a>  
+    			 </div>  
             </div>
            
          
