@@ -1,0 +1,41 @@
+<style>
+.portfolio-item {
+    margin-top: 2cm;
+}
+
+.portfolio-item:hover {
+  opacity: 0.75;
+}
+</style>
+   
+    <!-- Page Content -->
+    <div class="container center">
+
+        <!-- Projects Row -->
+        <div ng-repeat="cat in catalogo"  class="row">
+            <div ng-repeat="evento in cat" class="col-md-3 portfolio-item " ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()" >
+            
+                <a>
+                    <img class="img-responsive" ng-src="{{evento.pagina && evento.pagina.ruta || '/resources/defecto/img/favicon.png'}}" alt="">
+                
+                 
+                </a>
+               <span ng-show="hoverInfo">
+            		<a>
+            			<h1 ng-bind="evento.nombre_url"></h1>
+            			 <strong>Fecha Inicio:</strong><strong ng-bind="evento.fechaInicio | date:'dd/MM/yyyy'"></strong>
+            			<br>
+            			<strong>Fecha Fin:</strong><strong ng-bind="evento.fechaFin | date:'dd/MM/yyyy'"></strong>
+            		</a>
+            		
+        		</span>
+                
+            </div>
+           
+         
+        </div>
+        <!-- /.row -->
+
+
+    </div>
+    <!-- /.container -->

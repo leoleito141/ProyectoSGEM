@@ -46,6 +46,24 @@ angular.module('pruebaAngularApp')
        
        }, 1000); //espera 1 segundo
 	};
+	
+	 //////////////////////Listar EventosMultideportivos////////////////////////
+	dataFactory.listarEventosMulti()
+   		.then(function (response, status, headers, config) {
+            console.log(response.data);  
+            for(var i=0; i < response.data.length ; i++){
+	   			response.data[i].pagina.ruta = "https://sgem-eventos.com:8443/"+ response.data[i].pagina.ruta.substr(response.data[i].pagina.ruta.indexOf("resources"));
+	   			
+            }
+   			$scope.catalogo = response.data;
+               
+            
+          })
+          .catch(function(response){
+              // Si ha habido errores llegamos a esta parte
+          	console.log(response); 
+          });
+	////////////////Fin listado de eventos///////////////////  
     
 
 }]);

@@ -19,9 +19,8 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 import com.sgem.controladores.IEventoMultiController;
 import com.sgem.datatypes.DataEvento;
-import com.sgem.datatypes.DataTenant;
 import com.sgem.seguridad.excepciones.AplicacionException;
-import com.sgem.seguridad.excepciones.UsuarioNoEncontradoException;
+
 
 @Stateless
 public class EventoMultiService implements IEventoMultiService{
@@ -215,6 +214,15 @@ public class EventoMultiService implements IEventoMultiService{
 	public Response guardarConfiguracion(DataEvento datosEvento) {
 		try {						
 			return Response.ok(iemc.guardarConfiguracion(datosEvento)).build();					
+		} catch (AplicacionException e) {
+			return Response.serverError().build();
+		}
+	}
+
+	@Override
+	public Response listarEventosMulti() {
+		try {						
+			return Response.ok(iemc.listarEventosMulti()).build();					
 		} catch (AplicacionException e) {
 			return Response.serverError().build();
 		}

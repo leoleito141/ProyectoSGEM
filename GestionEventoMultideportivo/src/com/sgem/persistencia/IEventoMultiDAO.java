@@ -1,8 +1,8 @@
 package com.sgem.persistencia;
 
-import javax.ejb.Local;
+import java.util.List;
 
-import com.sgem.datatypes.DataTenant;
+import javax.ejb.Local;
 import com.sgem.dominio.EventoMultideportivo;
 import com.sgem.dominio.TenantHandler;
 
@@ -16,5 +16,6 @@ public interface IEventoMultiDAO {
 	public EventoMultideportivo traerEventoMulti(int tenantId);
 	public int obtenerMaximoTenant();
 	public boolean guardarConfiguracion(EventoMultideportivo evento);
+	public List<EventoMultideportivo> listarEventosMulti();
 
 }

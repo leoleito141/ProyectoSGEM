@@ -7,7 +7,6 @@ import javax.ejb.Local;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 import com.sgem.datatypes.DataEvento;
-import com.sgem.datatypes.DataTenant;
 import com.sgem.dominio.EventoMultideportivo;
 import com.sgem.dominio.Imagen;
 import com.sgem.seguridad.excepciones.AplicacionException;
@@ -21,5 +20,6 @@ public interface IEventoMultiController {
 	public String obtenerProximoTenant();
 	public List<Imagen> subirImagenConfiguracion(MultipartFormDataInput input) throws AplicacionException;
 	public boolean guardarConfiguracion(DataEvento datosEvento) throws AplicacionException;
+	public List<DataEvento> listarEventosMulti() throws AplicacionException;
 
 }

@@ -85,6 +85,12 @@ public interface IEventoMultiService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/configuracion")
 	public Response guardarConfiguracion(DataEvento datosEvento);
+	
+	@PermitAll	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/listarEventosMulti")
+	public Response listarEventosMulti();
 
 
 		

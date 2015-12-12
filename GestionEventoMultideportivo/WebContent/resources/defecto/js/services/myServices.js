@@ -5,16 +5,12 @@
     const dominio = "https://sgem.com/rest/";
 
     dataFactory.getStatus = function () {
-
-        console.log($location.absUrl());
         return $http.get(dominio+'UsuarioService/status/', {
             headers: { 'Rol' : 'ADMIN'} 
         });
     };
         
      dataFactory.getUsuario = function (nombre) {
-
-    	    console.log(nombre);
             return $http.get(dominio+'UsuarioService/usuarioPrueba/'+nombre );
 
         };
@@ -108,13 +104,7 @@
 			       	.then(function (response) {
 	
 			       		localStorage.setItem("tenantActual", JSON.stringify(response.data));
-			       				       		
-			                 console.log("Entre get Data tenant");
-			                 console.log(response);
-			                 console.log(response.status);
-			                 console.log(response.headers);
-			                 console.log(response.config);
-			                 return response; 
+			            return response; 
 			                 
 		             }).catch(function(response){
 			             	console.log(response); 
@@ -142,9 +132,13 @@
 
 	    
         dataFactory.altaDeportista = function(datos){
-        	console.log(datos);
             return $http.post(dominio+'DeportistaService/altaDeportista', datos,
             		{headers: { 'Rol' : 'COMITE_OLIMPICO'}});       	
+        };
+        
+        dataFactory.listarEventosMulti = function(){
+            return $http.get(dominio+'EventoMultiService/listarEventosMulti/',
+            		{headers: {'Rol' : 'ADMIN'}});       	
         };
         
         

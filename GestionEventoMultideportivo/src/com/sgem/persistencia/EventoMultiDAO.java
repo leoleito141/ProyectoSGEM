@@ -6,9 +6,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-
-import com.sgem.datatypes.DataTenant;
 import com.sgem.dominio.EventoMultideportivo;
 import com.sgem.dominio.TenantHandler;
 
@@ -117,6 +114,19 @@ public class EventoMultiDAO implements IEventoMultiDAO {
 			e.printStackTrace();
 		}
 		return maxTenant;
+	}
+
+	@Override
+	public List<EventoMultideportivo> listarEventosMulti() {
+		try{
+			
+			return em.createQuery("SELECT e FROM EventoMultideportivo e ", EventoMultideportivo.class).getResultList();
+			
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 		
 }

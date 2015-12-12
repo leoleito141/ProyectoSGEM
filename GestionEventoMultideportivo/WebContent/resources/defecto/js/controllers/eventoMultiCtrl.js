@@ -36,14 +36,14 @@ angular.module('pruebaAngularApp')
      
 	 
 	
-	  /////////////////////////////////////////////////////////////////
+	  ////////////////////////////Alta EventoMultideportivo /////////////////////////////////////
 	  $scope.altaEvento = function(){
 		  var evento = $scope.evento;
-		  evento.dataPais = $scope.pais;
+		  evento.pais = $scope.pais;
 		  console.log(evento);
 		  dataFactory.altaEvento(evento)
 	     	.then(function (data, status, headers, config) {
-	                 console.log(data);
+	                
 	                 if(data.status == "200"){
 		                 
 		                 $state.go('main');
@@ -58,6 +58,9 @@ angular.module('pruebaAngularApp')
 	            });
 		  
 	  };
+	 
+	 
+	  
 	  
 	  
   }]);

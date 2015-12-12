@@ -59,6 +59,12 @@ angular.module('pruebaAngularApp', ['ui.router','satellizer'])
         url: '/organizador',
         templateUrl: 'views/altaOrganizador.html'
         	
+    })
+    .state('catalogo', {
+    	url:'/catalogo',
+		templateUrl : 'views/catalogo.html',
+		controller : 'CatalogoCtrl'
+        	
     });
 	
 

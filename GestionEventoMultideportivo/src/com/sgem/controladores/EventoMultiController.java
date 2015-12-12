@@ -1,28 +1,22 @@
 package com.sgem.controladores;
 
-import java.io.File;
+
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ws.rs.core.MultivaluedMap;
 
-import org.apache.commons.io.IOUtils;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 import com.sgem.datatypes.DataEvento;
 import com.sgem.datatypes.DataImagen;
 import com.sgem.datatypes.DataPais;
-import com.sgem.datatypes.DataTenant;
-import com.sgem.dominio.ComiteOlimpico;
 import com.sgem.dominio.EventoMultideportivo;
 import com.sgem.dominio.Imagen;
-import com.sgem.dominio.Novedad;
 import com.sgem.dominio.Organizador;
 import com.sgem.dominio.Pais;
 import com.sgem.dominio.TenantHandler;
@@ -65,6 +59,7 @@ public class EventoMultiController implements IEventoMultiController {
 			Organizador org = new Organizador();
 			org.setEmail(dataEvento.getEmailOrganizador());
 			org.setPassword(dataEvento.getPasswordOrganizador());
+			org.setTenantID(EventoMultiDAO.obtenerMaximoTenant() + 1);
 			org.setEvento(evento);
 			evento.setOrganizador(org);
 			evento.setTenantHandler(th);
@@ -132,7 +127,7 @@ public class EventoMultiController implements IEventoMultiController {
 
 	}
 
-private DataImagen getDataImagen(Imagen i){
+	private DataImagen getDataImagen(Imagen i){
 		
 		DataImagen di = new DataImagen(i.getMime(),i.getRuta(),i.getTenantId());
 		return di ;
@@ -216,11 +211,6 @@ private DataImagen getDataImagen(Imagen i){
 
 	@Override
 	public boolean guardarConfiguracion(DataEvento datosEvento) throws AplicacionException {
-		
-
-		//System.out.println(datosEvento);
-	
-
 		boolean guardo = false;
 		EventoMultideportivo eventoMulti = (EventoMultideportivo)EventoMultiDAO.traerEventoMulti(datosEvento.getTenantId());		
 		System.out.println(eventoMulti);
@@ -271,6 +261,73 @@ private DataImagen getDataImagen(Imagen i){
 		
 		return guardo;
 	}
+
+
+	@Override
+	public List<DataEvento> listarEventosMulti() throws AplicacionException {
+		List<DataEvento> dt = null;
+		try {
+			dt = convertir(EventoMultiDAO.listarEventosMulti());		
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		return dt;
+	}
+	
+	private List<DataEvento> convertir(List<EventoMultideportivo> eventos) {
+		List<DataEvento> dataEvento = new ArrayList<DataEvento>();
+		DataEvento de;
+		
+			try {
+				for ( EventoMultideportivo ev : eventos) {
+					
+				de = new DataEvento();			
+				de.setTenantId(ev.getTenantHandler().getTenantID());
+				
+				
+//				de.setFacebook(ev.getFacebook());
+//				de.setCanalYoutube(ev.getCanalYoutube());
+//				de.setInstagram(ev.getInstagram());
+//				de.setTwitter(ev.getTwitter());
+				
+				
+//				de.setWidgetFacebook(ev.getWidget_facebook());
+//				de.setWidgetInstagram(ev.getWidget_instagram());
+//				de.setWidgetTwitter(ev.getWidget_twitter());
+//				de.setWidgetYoutube(ev.getWidget_Youtube());
+				
+				
+				de.setNombre_url(ev.getNombre());
+				DataImagen fotoBanner = ev.getImagenBanner()!=null ? getDataImagen(ev.getImagenBanner()): null;
+				DataImagen fotoFondo = ev.getImagenFondo() !=null ? getDataImagen(ev.getImagenFondo()):null;
+				DataImagen fotoLogo = ev.getImagenPagina()!=null ? getDataImagen(ev.getImagenPagina()):null;			
+						
+				de.setBanner(fotoBanner);
+				de.setFondo(fotoFondo);
+				de.setPagina(fotoLogo);
+				
+//				de.setColorFondo(ev.getColorFondo());
+//				de.setColorNews(ev.getColorNoticias());
+				
+				de.setPais(new DataPais(ev.getPais().getPaisID(), ev.getPais().getPais(), ev.getPais().getCiudad()));
+				
+				de.setFechaInicio(ev.getFechaInicio());
+				de.setFechaFin(ev.getFechaFin());
+				
+				
+				dataEvento.add(de);
+			}
+							
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+				
+		
+
+		return dataEvento;
+
+	}	
 
 	
 }
