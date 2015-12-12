@@ -194,6 +194,7 @@ public class EventoMultiController implements IEventoMultiController {
 			List<InputPart> inputPartsPagina = uploadForm.get("filePagina");
 		
 			tenantId = uploadForm.get("tenantId").get(0).getBodyAsString();
+			ImagenUtil.chequearTenant(tenantId);			
 			Imagen banner = ImagenUtil.salvarImagen(inputPartsBanner,tenantId);
 			Imagen fondo  = ImagenUtil.salvarImagen(inputPartsFondo,tenantId);
 			Imagen pagina = ImagenUtil.salvarImagen(inputPartsPagina,tenantId);

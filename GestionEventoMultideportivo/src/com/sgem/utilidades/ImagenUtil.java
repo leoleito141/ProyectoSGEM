@@ -185,6 +185,21 @@ public class ImagenUtil {
 		
 		return UUID.randomUUID().toString()+ext;
 	}
+
+	public static void chequearTenant(String tenantId) {
+		
+		String dirTenant = getDirectoryName(tenantId);
+		
+		File directorio = new File(dirTenant);	
+
+		if (!directorio.exists()) {
+			if (directorio.mkdir()) {
+				System.out.println("Directory is created!");
+			} else {
+				System.out.println("Failed to create directory!");
+			}
+		}
+	}
 	
 
 }
