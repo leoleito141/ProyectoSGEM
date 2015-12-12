@@ -210,10 +210,21 @@ public class InicioApp implements ServletContextListener {
 		
 		TenantHandler th = new TenantHandler();
 		Pais p5 = new Pais("Brasil","Rio de Janeiro");	
-		Date fechaFin = new Date();
-		fechaFin.setDate(20);
-		fechaFin.setYear(2016);
-		fechaFin.setMonth(1);
+//		Date fechaFin = new Date();
+//		fechaFin.setDate(20);
+//		fechaFin.setYear(2016);
+//		fechaFin.setMonth(1);
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		String dateInString = "20/01/2016";
+		Date fechaFin = null;
+				
+		try {			
+			fechaFin = formatter.parse("20/01/2016 00:00:00");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
 		EventoMultideportivo evento = new EventoMultideportivo("Rio2016", p5 , "logo.jpg", new Date(), fechaFin, "https://www.facebook.com/rio2016","https://www.instagram.com/rio2016/", "#Rio2016", "https://www.youtube.com/rio2016", "Rio2016.css");
 		evento.setTwitter("https://twitter.com/rio2016");
 		List<EventoMultideportivo> listevento = new ArrayList<EventoMultideportivo>();
@@ -862,7 +873,7 @@ public class InicioApp implements ServletContextListener {
 		UsuarioDAO.guardarUsuario(u2);
 		
 		Date datec1 = null,datec2 = null;
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
 		try {			
 			datec1 = formatter.parse("28/10/2015 14:30:00");
 			datec2 = formatter.parse("30/10/2015 19:45:00");
