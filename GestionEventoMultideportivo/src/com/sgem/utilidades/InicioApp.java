@@ -77,6 +77,9 @@ public class InicioApp implements ServletContextListener {
 	@EJB
 	private INovedadDAO NovedadDAO;
 	
+	
+	@EJB
+	private IImagenDAO imagenDAO;
 		
     @Override
     public void contextDestroyed(ServletContextEvent arg0) {}
@@ -205,7 +208,7 @@ public class InicioApp implements ServletContextListener {
 		UsuarioDAO.guardarUsuario(comite2);	
 		UsuarioDAO.guardarUsuario(comite3);	
         UsuarioDAO.guardarUsuario(comite4); 
- ////////////////////////////////////////////
+ //////////////////////////////////////////// Evento Rio 2016
 		
 		
 		TenantHandler th = new TenantHandler();
@@ -242,6 +245,124 @@ public class InicioApp implements ServletContextListener {
 		listevento.add(evento);
 		th.setEventos(listevento);
 		EventoMultiDAO.guardarTenant(th);
+		
+		
+		
+ //////////////////////////////////////////// Evento Toronto 2015
+		
+		
+		TenantHandler th1 = new TenantHandler();
+		Pais Canada = new Pais("Canada","Toronto");	
+
+		
+		
+		String dateInString2 = "20/06/2015";
+		Date fechaInicioToronto = null;
+		
+		String dateInString3 = "10/07/2015";
+		Date fechaFinToronto = null;
+				
+		try {			
+			fechaFinToronto = formatter.parse("10/07/2015 00:00:00");
+			fechaInicioToronto = formatter.parse("20/06/2015 00:00:00");
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		EventoMultideportivo eventoToro = new EventoMultideportivo("Toronto2015", Canada , "logo.jpg", fechaInicioToronto, fechaFinToronto, "https://www.facebook.com/Toronto2015","https://www.instagram.com/Toronto2015/", "#Toronto2015", "https://www.youtube.com/toronto2015", "Toronto.css");
+		eventoToro.setTwitter("https://twitter.com/toronto2015");
+		
+		List<EventoMultideportivo> listevento1 = new ArrayList<EventoMultideportivo>();
+		
+		
+		Organizador organizador2 = new Organizador();
+		organizador2.setEmail("organizador2@gmail.com");
+		organizador2.setPassword("123");
+		organizador2.setTenantID(2);
+		organizador2.setEvento(eventoToro);
+		
+		eventoToro.setOrganizador(organizador2);
+		eventoToro.setTenantHandler(th1);
+		listevento1.add(eventoToro);
+		th1.setEventos(listevento1);
+		EventoMultiDAO.guardarTenant(th1);
+		
+		
+		boolean guardo = false;
+		EventoMultideportivo eventoMultiToronto = (EventoMultideportivo)EventoMultiDAO.traerEventoMulti(2);		
+
+				
+			Imagen pagina = new Imagen("image/jpeg", "C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant2\\configuracion\\146bf6dd-76fe-454b-8081-f3ca28f1b88a.jpg", 2);
+			Imagen fondo  = new Imagen("image/png", "C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant2\\configuracion\\96da689b-4f26-4ae2-aafc-726ff5c4b87a.png", 2);
+			
+			if(imagenDAO.guardarImagen(fondo) && imagenDAO.guardarImagen(pagina) ){			
+				
+				eventoMultiToronto.setImagenFondo(pagina);
+				eventoMultiToronto.setImagenPagina(fondo);
+		
+			}
+			
+			EventoMultiDAO.guardarConfiguracion(eventoMultiToronto);
+			
+			
+			 //////////////////////////////////////////// Evento Lima 2019
+			
+			
+			TenantHandler th2 = new TenantHandler();
+			Pais Peru = new Pais("Peru","Lima");	
+
+			
+			
+			String dateInString4 = "20/08/2019";
+			Date fechaInicioLima = null;
+			
+			String dateInString5 = "10/09/2019";
+			Date fechaFinLima = null;
+					
+			try {			
+				fechaFinLima = formatter.parse("10/09/2019 00:00:00");
+				fechaInicioLima = formatter.parse("20/8/2019 00:00:00");
+				
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+			EventoMultideportivo eventoLima = new EventoMultideportivo("Lima2019", Peru , "logo.jpg", fechaInicioLima, fechaFinLima, "https://www.facebook.com/Lima2019","https://www.instagram.com/Lima2019/", "#Lima2019", "https://www.youtube.com/lima2019", "Lima.css");
+			eventoToro.setTwitter("https://twitter.com/toronto2015");
+			
+			List<EventoMultideportivo> listevento2 = new ArrayList<EventoMultideportivo>();
+			
+			
+			Organizador organizador3 = new Organizador();
+			organizador3.setEmail("organizador3@gmail.com");
+			organizador3.setPassword("123");
+			organizador3.setTenantID(3);
+			organizador3.setEvento(eventoLima);
+			
+			eventoLima.setOrganizador(organizador3);
+			eventoLima.setTenantHandler(th2);
+			listevento2.add(eventoLima);
+			th2.setEventos(listevento2);
+			EventoMultiDAO.guardarTenant(th2);
+			
+			
+			
+			EventoMultideportivo eventoMultiLima = (EventoMultideportivo)EventoMultiDAO.traerEventoMulti(3);		
+
+					
+				Imagen pagina2 = new Imagen("image/jpeg", "C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant3\\configuracion\\5818cce5-e2bb-4bcd-9482-272c8ff90c14.jpg", 3);
+				Imagen fondo2  = new Imagen("image/png", "C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant3\\configuracion\\30ae94a7-5b8d-490f-96f2-a6ac39bfbb35.png", 3);
+				
+				if(imagenDAO.guardarImagen(fondo2) && imagenDAO.guardarImagen(pagina2) ){			
+					
+					eventoMultiLima.setImagenFondo(pagina2);
+					eventoMultiLima.setImagenPagina(fondo2);
+			
+				}
+				
+				EventoMultiDAO.guardarConfiguracion(eventoMultiLima);	
+			
 		
 		///////////////////// Imagenes Eventos Deportivos
 		
