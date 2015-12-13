@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('pruebaAngularApp', ['ui.router','satellizer'])
+angular.module('pruebaAngularApp', ['ui.router','satellizer','ngAnimate'])
 .run(['dataFactory','$rootScope','$state','$auth',function(dataFactory,$rootScope, $state, $auth){ // esto se ejecuta en tiempo de ejecucion,
   $rootScope.$on('$stateChangeStart', function(event, next, current) {
   
