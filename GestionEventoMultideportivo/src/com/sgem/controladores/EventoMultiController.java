@@ -52,7 +52,7 @@ public class EventoMultiController implements IEventoMultiController {
 			p.setCiudad(dataEvento.getPais().getCiudad());
 			
 			EventoMultideportivo evento = new EventoMultideportivo(dataEvento.getNombre(),p,dataEvento.getLogo(),dataEvento.getFechaInicio(),dataEvento.getFechaFin(),dataEvento.getFacebook(),
-				dataEvento.getInstagram(),dataEvento.getHashtag(),dataEvento.getCanalYoutube(),dataEvento.getCss());
+				dataEvento.getInstagram(),dataEvento.getTwitter(),dataEvento.getCanalYoutube(),dataEvento.getCss());
 			
 			List<EventoMultideportivo> listevento = new ArrayList<EventoMultideportivo>();
 			

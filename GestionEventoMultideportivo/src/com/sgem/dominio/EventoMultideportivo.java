@@ -116,7 +116,7 @@ public class EventoMultideportivo implements Serializable{
 		this.fechaFin = date2;
 		this.facebook = facebook;
 		this.instagram = instagram;
-		this.Hashtag = hashtag;
+		this.twitter = hashtag;
 		this.canalYoutube = canalYoutube;
 		this.Css = css;
 

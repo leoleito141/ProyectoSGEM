@@ -329,7 +329,7 @@ public class InicioApp implements ServletContextListener {
 			}
 			
 			EventoMultideportivo eventoLima = new EventoMultideportivo("Lima2019", Peru , "logo.jpg", fechaInicioLima, fechaFinLima, "https://www.facebook.com/Lima2019","https://www.instagram.com/Lima2019/", "#Lima2019", "https://www.youtube.com/lima2019", "Lima.css");
-			eventoToro.setTwitter("https://twitter.com/toronto2015");
+			eventoLima.setTwitter("https://twitter.com/lima2016");
 			
 			List<EventoMultideportivo> listevento2 = new ArrayList<EventoMultideportivo>();
 			
