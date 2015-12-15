@@ -3,11 +3,7 @@
 angular.module('pruebaAngularApp')
   .controller('AppCtrl', ['$scope','$state','$auth', function ($scope,$state,$auth) {
   	$scope.usrLogin={nombre:""};
-  	$scope.tenantid={tenant:""};
-  	$scope.customStyle={
-  			background:"",
-  			
-  	};
+  	  	  	$scope.tenantid={tenant:""};				
   	$('.carousel').carousel({
 	    interval: 5000 //changes the speed
 	})
@@ -24,8 +20,5 @@ angular.module('pruebaAngularApp')
     	 
     	  return $auth.isAuthenticated();
     };
- 
-	 
-
 
   }]);

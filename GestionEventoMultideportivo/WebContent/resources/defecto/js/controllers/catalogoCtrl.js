@@ -32,9 +32,9 @@ angular.module('pruebaAngularApp')
           });
 	
 	$scope.irEvento = function(nombreEvento){
-		localStorage.clear();
-		window.location.href = "https://sgem-eventos.com:8443/#/"+nombreEvento+"/";
-
+//		localStorage.clear();
+//		window.location.href = "https://sgem-eventos.com:8443/#/"+nombreEvento+"/";
+        return nombreEvento;
 	};
 	
 	

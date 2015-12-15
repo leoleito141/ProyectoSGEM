@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="resources/defecto/css/full-slider.css" /> 
   	<link rel="stylesheet" href="resources/defecto/css/Perfil.css" />
   	<link rel="stylesheet" href="resources/defecto/css/catalogo.css" />
+  	<link rel="stylesheet" href="resources/defecto/css/animation.css" />
  	<link rel="icon" href="resources/defecto/img/favicon.png" type="image/x-icon" />
    <style>
 .overlay {
@@ -56,14 +57,14 @@
 </style> 
   
   </head>
-  <body ng-app="pruebaAngularApp" ng-controller="AppCtrl" ng-style="customStyle" >
+  <body ng-app="pruebaAngularApp" ng-controller="AppCtrl">
 
 
     <!-- Add your site or application content here -->
       
 		    
 
-		     <div class="header"ng-cloak>
+		     <div class="header" ng-cloak>
 
 		      <nav class="navbar navbar-inverse  navbar-static-top" style="   margin-bottom: 0px;">
 		          <div class="container">
@@ -141,7 +142,7 @@
 
     </header>
 
-	    <div class="overlay"  ui-view></div>
+	    <div class="overlay view-slide-in"  ui-view></div>
 
 	<script type="text/javascript"  src="resources/angular/shared/angular/angular.js"></script>
 	<script type="text/javascript"  src="resources/angular/shared/i18n/angular-locale_es-uy.js"></script>
