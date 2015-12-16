@@ -247,6 +247,26 @@ public class InicioApp implements ServletContextListener {
 		EventoMultiDAO.guardarTenant(th);
 		
 		
+		EventoMultideportivo eventoMultiRio = (EventoMultideportivo)EventoMultiDAO.traerEventoMulti(1);		
+
+		
+		Imagen pagina3 = new Imagen("image/jpeg", "C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\configuracion\\fondoRio.jpg", 1);
+		Imagen fondo3  = new Imagen("image/png", "C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\configuracion\\logoRio.png", 1);
+		Imagen bannerrio  = new Imagen("image/png", "C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\configuracion\\bannerRio.png", 1);
+		
+		if(imagenDAO.guardarImagen(fondo3) && imagenDAO.guardarImagen(pagina3)&& imagenDAO.guardarImagen(bannerrio) ){			
+			
+			eventoMultiRio.setImagenFondo(pagina3);
+			eventoMultiRio.setImagenPagina(fondo3);
+			eventoMultiRio.setImagenBanner(bannerrio);
+			
+		}
+		
+		EventoMultiDAO.guardarConfiguracion(eventoMultiRio);	
+		
+		
+		
+		
 		
  //////////////////////////////////////////// Evento Pyeongchang 2018
 		
