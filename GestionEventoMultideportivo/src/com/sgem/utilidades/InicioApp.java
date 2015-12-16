@@ -262,6 +262,18 @@ public class InicioApp implements ServletContextListener {
 			
 		}
 		
+				eventoMultiRio.setColorFondo("#FFFFFF");
+			
+				eventoMultiRio.setColorNoticias("#FFFFFFF");
+			
+				eventoMultiRio.setWidget_facebook("Rio2016");
+			
+				eventoMultiRio.setWidget_instagram("Rio2016");
+			
+				eventoMultiRio.setWidget_twitter("666003012909998085");
+			
+			    eventoMultiRio.setWidget_Youtube("UCCqXbw99bsRafFHzXL4fS0g");
+		
 		EventoMultiDAO.guardarConfiguracion(eventoMultiRio);	
 		
 		
