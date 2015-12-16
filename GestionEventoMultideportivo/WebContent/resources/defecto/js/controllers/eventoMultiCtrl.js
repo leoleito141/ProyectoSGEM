@@ -39,13 +39,13 @@ angular.module('pruebaAngularApp')
 			  return false;
 		  }
 		  return  ($scope.evento.nombre == null || $scope.pais.pais == null 
-			    || $scope.pais.ciudad == null || $scope.evento.anio == null || $scope.evento.hashtag == null
+			    || $scope.pais.ciudad == null || $scope.evento.anio == null 
 			    || $scope.evento.twitter == null || $scope.evento.facebook == null || $scope.evento.instagram == null
 			    || $scope.evento.canalYoutube == null || $scope.evento.fechaInicio == null
 			    || $scope.evento.fechaFin == null || $scope.evento.emailOrganizador == null || $scope.evento.passwordOrganizador == null
 			    
 			    || $scope.evento.nombre == "" || $scope.pais.pais == ""
-			    || $scope.pais.ciudad == "" || $scope.evento.anio == 0 || $scope.evento.hashtag == ""
+			    || $scope.pais.ciudad == "" || $scope.evento.anio == 0
 			    || $scope.evento.twitter == "" || $scope.evento.facebook == "" || $scope.evento.instagram == ""
 			    || $scope.evento.canalYoutube == "" 
 			    || $scope.evento.emailOrganizador == "" || $scope.evento.passwordOrganizador == "");	

@@ -248,30 +248,30 @@ public class InicioApp implements ServletContextListener {
 		
 		
 		
- //////////////////////////////////////////// Evento Toronto 2015
+ //////////////////////////////////////////// Evento Pyeongchang 2018
 		
 		
 		TenantHandler th1 = new TenantHandler();
-		Pais Canada = new Pais("Canada","Toronto");	
+		Pais Corea = new Pais("Corea del Sur","Pyeongchang");	
 
 		
 		
-		String dateInString2 = "20/06/2015";
+		String dateInString2 = "20/06/2018";
 		Date fechaInicioToronto = null;
 		
-		String dateInString3 = "10/07/2015";
+		String dateInString3 = "10/07/2018";
 		Date fechaFinToronto = null;
 				
 		try {			
-			fechaFinToronto = formatter.parse("10/07/2015 00:00:00");
-			fechaInicioToronto = formatter.parse("20/06/2015 00:00:00");
+			fechaFinToronto = formatter.parse("10/07/2018 00:00:00");
+			fechaInicioToronto = formatter.parse("20/06/2018 00:00:00");
 			
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		
-		EventoMultideportivo eventoToro = new EventoMultideportivo("Toronto2015", Canada , "logo.jpg", fechaInicioToronto, fechaFinToronto, "https://www.facebook.com/Toronto2015","https://www.instagram.com/Toronto2015/", "#Toronto2015", "https://www.youtube.com/toronto2015", "Toronto.css");
-		eventoToro.setTwitter("https://twitter.com/toronto2015");
+		EventoMultideportivo eventoToro = new EventoMultideportivo("Pyeongchang", Corea , "logo.jpg", fechaInicioToronto, fechaFinToronto, "https://www.facebook.com/PyeongChang2018/","https://www.instagram.com/pyeongchang_olympic_2018/", "#Pyeongchang2018", "https://www.youtube.com/user/PyeongChang2018", "PyeongChang2018.css");
+		eventoToro.setTwitter("https://twitter.com/2018PyeongChang");
 		
 		List<EventoMultideportivo> listevento1 = new ArrayList<EventoMultideportivo>();
 		
@@ -328,8 +328,8 @@ public class InicioApp implements ServletContextListener {
 				e.printStackTrace();
 			}
 			
-			EventoMultideportivo eventoLima = new EventoMultideportivo("Lima2019", Peru , "logo.jpg", fechaInicioLima, fechaFinLima, "https://www.facebook.com/Lima2019","https://www.instagram.com/Lima2019/", "#Lima2019", "https://www.youtube.com/lima2019", "Lima.css");
-			eventoLima.setTwitter("https://twitter.com/lima2016");
+			EventoMultideportivo eventoLima = new EventoMultideportivo("Lima2019", Peru , "logo.jpg", fechaInicioLima, fechaFinLima, "https://www.facebook.com/Lima2019Oficial","https://www.instagram.com/lima2019/", "#Lima2019", "https://www.youtube.com/user/Lima2019oficial", "Lima.css");
+			eventoLima.setTwitter("https://twitter.com/JPLima2019");
 			
 			List<EventoMultideportivo> listevento2 = new ArrayList<EventoMultideportivo>();
 			

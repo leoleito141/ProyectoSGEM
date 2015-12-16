@@ -141,7 +141,7 @@ public class UsuarioController implements IUsuarioController {
 	
 				if(guardo){
 					try {
-						if(Correo.enviarMensajeConAuth("smtp.gmail.com", 587,"inmogrupo13@gmail.com", co.getEmail(),"inmobiliaria13", "Notificacion de contrase�a", "Estimado Comite Olimpico Nacional de "+co.getPais()+":Su contrase�a es:"+co.getPassword()+"")){
+						if(Correo.enviarMensajeConAuth("smtp.gmail.com", 587,"sgemultideportivos@gmail.com", co.getEmail(),"SGEMultiDeportivos2015", "Notificacion de contrase�a", "Estimado Comite Olimpico Nacional de "+co.getPais()+":Su contrase�a es:"+co.getPassword()+"")){
 							System.out.println("Correo enviado con exito!");
 						}else{
 							System.out.println("Error - Correo no enviado");
@@ -525,7 +525,7 @@ public class UsuarioController implements IUsuarioController {
 		
 					if(guardo){
 						// Se deber�a enviar luego del guardar Usuario.. porque devuelve un booleano, si se pudo guardar enviar correo, sino no.
-						enviado = Correo.enviarMensajeConAuth("smtp.gmail.com", 587,"inmogrupo13@gmail.com", j.getEmail(),"inmobiliaria13", "Notificacion de contrase�a", "Estimado Se�or Juez : 	Su contrase�a es:"+j.getPassword()+"");
+						enviado = Correo.enviarMensajeConAuth("smtp.gmail.com", 587,"sgemultideportivos@gmail.com", j.getEmail(),"SGEMultideportivos2015", "Notificacion de contrase�a", "Estimado Se�or Juez : 	Su contrase�a es:"+j.getPassword()+"");
 						
 					}else{
 						// controlar esto..

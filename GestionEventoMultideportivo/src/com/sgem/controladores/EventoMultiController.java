@@ -25,6 +25,7 @@ import com.sgem.persistencia.IImagenDAO;
 import com.sgem.persistencia.IUsuarioDAO;
 import com.sgem.seguridad.excepciones.AplicacionException;
 import com.sgem.seguridad.excepciones.UsuarioNoEncontradoException;
+import com.sgem.utilidades.Correo;
 import com.sgem.utilidades.ImagenUtil;
 
 @Stateless
@@ -66,7 +67,8 @@ public class EventoMultiController implements IEventoMultiController {
 			listevento.add(evento);
 			th.setEventos(listevento);			
 			EventoMultiDAO.guardarTenant(th);
-
+			Correo.enviarMensajeConAuth("smtp.gmail.com", 587,"sgemultideportivos@gmail.com", dataEvento.getEmailOrganizador(),"SGEMultiDeportivos2015", "Notificacion de contraseña", "Estimado Organizador del evento multideportivo "+dataEvento.getNombre()+":Su contraseña es:"+dataEvento.getPasswordOrganizador()+"");
+				
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
