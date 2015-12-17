@@ -1406,6 +1406,64 @@ public class InicioApp implements ServletContextListener {
 		NovedadDAO.guardarNovedad(n2);
 	
 		
+		Novedad n3 = new Novedad();
+		
+		n3.setDescripcion("El Campeón Olímpico de Pekín, en los 50 metros libre, Cesar Augusto Cielo Filho,  se convirtió hoy en la figura del día del Mundial de Natación e ingresó en la historia deportiva de su país, tras triunfar en una espectacular carrera y apresar el oro en la final de los 100m libres de Roma, quebrando el récord mundial en 46''91, del australiano Eamon Sullivan en Pekín 2008. Em la quinta jornada de hoy jueves, se sumaron un total de nuevas 6 plusmarcas mundiales.");
+		n3.setColumna(1);
+		n3.setComite_olimpico(comiteBrasilero);
+		n3.setTitulo("Cielo, la esperanza brasilera en Rio");
+		n3.setTenantID(1);
+		
+		Imagen n3i = new Imagen();
+		n3i.setMime("image/jpeg");
+		n3i.setRuta("C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\novedades\\novedadCielo.jpg");
+		n3i.setTenantId(1);
+		ImagenDAO.guardarImagen(n3i);
+		n3.setImagen(n3i);
+		
+		NovedadDAO.guardarNovedad(n3);
+		
+		Novedad n4 = new Novedad();
+		
+		n4.setDescripcion("El tenista español Rafael Nadal reiteró que los Juegos Olímpicos de Río de Janeiro 2016 es una de sus grandes metas a largo plazo después de la decepción que le supuso no poder luchar por el oro en Londres 2012, informó dpa."
+
+        +"Los Juegos Olímpicos son un momento muy especial para mí. No tuve la oportunidad de competir en Londres 2012 (a raíz de una lesión en la rodilla izquierda), fue un momento difícil, afirmó el número tres del mundo en una entrevista que publicó hoy el diario brasileño O Globo."+
+
+        "Nadal, quien busca esta semana su segundo título en el torneo de Río de Janeiro, afirmó que se siente cómodo en la ciudad, lo que es una razón más para alentarlo a disputar, a los 30 años de edad, los Juegos de 2016.");
+		
+		n4.setColumna(2);
+		n4.setComite_olimpico(comiteEspaniol);
+		n4.setTitulo("Nadal sueña con el oro olímpico en Río 2016");
+		n4.setTenantID(1);
+		
+		Imagen n4i = new Imagen();
+		n4i.setMime("image/jpeg");
+		n4i.setRuta("C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\novedades\\novedadNadal.jpg");
+		n4i.setTenantId(1);
+		ImagenDAO.guardarImagen(n4i);
+		n4.setImagen(n4i);
+		
+		NovedadDAO.guardarNovedad(n4);
+		
+		Novedad n5 = new Novedad();
+		
+		n5.setDescripcion("Gasol ha sido el máximo anotador del Eurobasket por tercera ocasión en su carrera con una media de 25,6 puntos, muy por encima de los 21 del alemán Schröder, los 19,3 del checo Vesely y los 17,9 del italiano Gallinari. Sus dos anteriores títulos en este apartado los obtuvo en 2009 con 18,7 puntos y en 2003 con 25,8. Solo le supera el griego Nikos Galis, cuatro veces máximo artillero en los Europeos de 1983, 1987, 1991 y 1993."+
+
+        "Pau concluyó con el cuarto mejor promedio en rebotes, con 8,8, por detrás del ruso Vorontsevich, con 9,2 pero solo en cinco partidos, del checo Vesely, con 9,1, y del ucranio Fesenko, con 8,8. Y también ha sido el jugador con mejor promedio en tapones, 2,2, superando los 2,0 del francés Gobert.");
+		
+		n5.setColumna(1);
+		n5.setComite_olimpico(comiteEspaniol);
+		n5.setTitulo("Los hermanos Gasol confirman su participación");
+		n5.setTenantID(1);
+		
+		Imagen n5i = new Imagen();
+		n5i.setMime("image/jpeg");
+		n5i.setRuta("C:\\Users\\USUARIO\\git\\EventosSGEM\\EventosSGEM\\WebContent\\resources\\defecto\\img\\Tenant1\\novedades\\novedadGasol.jpg");
+		n5i.setTenantId(1);
+		ImagenDAO.guardarImagen(n5i);
+		n5.setImagen(n5i);
+		
+		NovedadDAO.guardarNovedad(n5);
 		
 		System.out.println("Guarde deportistas");
 		
