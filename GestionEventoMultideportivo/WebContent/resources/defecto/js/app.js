@@ -35,7 +35,7 @@ angular.module('pruebaAngularApp', ['ui.router','satellizer','ngAnimate'])
     
     $stateProvider	    
     .state('404', {
-    	templateUrl: 'views/tenant/error.html',
+    	templateUrl: 'views/error.html',
     })
     .state('adminLogin', {
     	url:'/Login',
