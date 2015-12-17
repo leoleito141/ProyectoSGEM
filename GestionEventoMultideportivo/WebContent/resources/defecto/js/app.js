@@ -34,6 +34,9 @@ angular.module('pruebaAngularApp', ['ui.router','satellizer','ngAnimate'])
     $urlRouterProvider.otherwise('/');
     
     $stateProvider	    
+    .state('404', {
+    	templateUrl: 'views/tenant/error.html',
+    })
     .state('adminLogin', {
     	url:'/Login',
 		templateUrl : 'views/login.html',
@@ -68,6 +71,11 @@ angular.module('pruebaAngularApp', ['ui.router','satellizer','ngAnimate'])
     });
 	
 
+    $urlRouterProvider.otherwise(function($injector, $location){
+        var state = $injector.get('$state');
+        state.go('404');
+        return $location.path();
+     });
  });
 
 
