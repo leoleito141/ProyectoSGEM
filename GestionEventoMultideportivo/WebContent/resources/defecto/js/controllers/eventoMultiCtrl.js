@@ -54,6 +54,7 @@ angular.module('pruebaAngularApp')
 	  
 	  ////////////////////////////Alta EventoMultideportivo /////////////////////////////////////
 	  $scope.altaEvento = function(){
+		  $scope.cargando = true;	
 		  var evento = $scope.evento;
 		  evento.pais = $scope.pais;
 		  console.log(evento);
@@ -61,7 +62,7 @@ angular.module('pruebaAngularApp')
 	     	.then(function (data, status, headers, config) {
 	                
 	                 if(data.status == "200"){
-		                 
+	                	 $scope.cargando = false;	
 		                 $state.go('main');
 	                	 
 	                 }
@@ -69,6 +70,7 @@ angular.module('pruebaAngularApp')
 	                
 	            })
 	            .catch(function(response){
+	            	$scope.cargando = false;	
 	                // Si ha habido errores llegamos a esta parte
 	            	console.log(response); 
 	            });
