@@ -9,12 +9,12 @@
 </style>
    
     <!-- Page Content -->
-    <div class="container center">
+    <div class="container center"  style="background-color: rgba(255, 255, 255, 0.9);border-radius:10px;padding-bottom: 1%;margin-top: 2%">
 
         <!-- Projects Row -->
-        <div ng-repeat="cat in catalogo"  class="row">
-            <div ng-repeat="evento in cat" class="view view-eighth col-md-3 portfolio-item  " >
-                <img style="margin-left: auto;margin-right: auto; height: 200px"  class="img-responsive" ng-src="{{evento.pagina && evento.pagina.ruta || '/resources/defecto/img/favicon.png'}}" alt="">
+        <div ng-repeat="cat in catalogo"  class="row" >
+            <div ng-repeat="evento in cat" class="view view-eighth col-md-3 portfolio-item  "  >
+                <img style="margin-left: auto;margin-right: auto; width: 100%;max-height: 100%;  class="img-responsive" ng-src="{{evento.pagina && evento.pagina.ruta || '/resources/defecto/img/favicon.png'}}" alt="">
                 <div class="mask">  
      				<h2 ng-bind="evento.nombre_url"></h2>  
      				<p> <strong>Fecha Inicio:</strong><strong ng-bind="evento.fechaInicio | date:'dd/MM/yyyy'"></strong>

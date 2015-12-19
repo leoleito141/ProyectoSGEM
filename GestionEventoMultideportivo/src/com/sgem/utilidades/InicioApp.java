@@ -262,9 +262,9 @@ public class InicioApp implements ServletContextListener {
 			
 		}
 		
-				eventoMultiRio.setColorFondo("#FFFFFF");
+				eventoMultiRio.setColorFondo("#3d9c36");
 			
-				eventoMultiRio.setColorNoticias("#FFFFFFF");
+				eventoMultiRio.setColorNoticias("#e0de57");
 			
 				eventoMultiRio.setWidget_facebook("Rio2016");
 			
@@ -1017,13 +1017,26 @@ public class InicioApp implements ServletContextListener {
 		u.setEmail("leo@gmail.com");
 		u.setPassword("123");
 		u.setTenantID(1);
-		UsuarioDAO.guardarUsuario(u);
 		
 		UsuarioComun u2 = new UsuarioComun();
 		u2.setEmail("juanma@gmail.com");
 		u2.setPassword("123");
 		u2.setTenantID(1);
+		
+		UsuarioComun u3 = new UsuarioComun();
+		u3.setEmail("maxi@gmail.com");
+		u3.setPassword("123");
+		u3.setTenantID(1);
+		
+		UsuarioComun u4 = new UsuarioComun();
+		u4.setEmail("bruno@gmail.com");
+		u4.setPassword("123");
+		u4.setTenantID(1);
+		
+		UsuarioDAO.guardarUsuario(u);
 		UsuarioDAO.guardarUsuario(u2);
+		UsuarioDAO.guardarUsuario(u3);
+		UsuarioDAO.guardarUsuario(u4);
 		
 		Date datec1 = null,datec2 = null;
 
@@ -1347,7 +1360,7 @@ public class InicioApp implements ServletContextListener {
 		n.setDescripcion("Manu Ginóbili dejó la tranquilidad familiar en San Antonio y bajó hasta Ciudad de México para vivir el partido clave del seleccionado frente a México. El bahiense sufrió todo el partido, al lado del presidente de la CABB, Federico Susbielles. Se tironeó la gorra, se agarró la cabeza, hizo comentarios y vivió la tensión como si jugará el pasaporte a Río 2016. Ah, sobre eso, ¿qué vas a hacer ahora Manu después de la temporada NBA? ");
 		n.setColumna(1);
 		n.setComite_olimpico(comiteArgentino);
-		n.setTitulo("¿Estas listo para Rio?");
+		n.setTitulo("¿Estás listo para Rio?");
 		n.setTenantID(1);
 		
 		Imagen ni = new Imagen();

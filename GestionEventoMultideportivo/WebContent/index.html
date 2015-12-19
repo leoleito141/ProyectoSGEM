@@ -13,47 +13,44 @@
  	<link rel="icon" href="resources/defecto/img/favicon.png" type="image/x-icon" />
    <style>
 .overlay {
-    
-   
-    height: auto;
-   top:0;
-   
-    bottom: -5%;
-    left: 0;
-    right: 0;
-    display: block;
-    z-index: 2;
-    background-color: rgba(50,50,50,0.3);
-    
+	height: auto;
+	top: 0;
+	position: absolute;
+	bottom: -5%;
+	left: 0;
+	right: 0;
+	display: block;
+	z-index: 2;
+	background-color: rgba(50, 50, 50, 0.3);
 }
-.center {   
-   
-    position:absolute;
-    top:55px;  left:5%; right:5%;
-   color:white;
-    
-}
-.blur{
 
- -webkit-filter: blur(2px);
-  -moz-filter: blur(2px);
-  -o-filter: blur(2px);
-  -ms-filter: blur(2px);
-  filter: blur(2px)
+.center {
+	position: absolute;
+	top: 55px;
+	left: 5%;
+	right: 5%;
+	color: white;
 }
-#logonav{
+
+.blur {
+	-webkit-filter: blur(2px);
+	-moz-filter: blur(2px);
+	-o-filter: blur(2px);
+	-ms-filter: blur(2px);
+	filter: blur(2px)
+}
+
+#logonav {
 	background-image: url("resources/defecto/img/logo.png");
-		
 	background-repeat: no-repeat;
 	background-size: 50% auto;
-	height:50px;
+	height: 50px;
 	display: block;
-    
 }
+
 #logonav:HOVER {
 	background-image: url("resources/defecto/img/logo2.png");
 }
-
 </style> 
   
   </head>
@@ -61,12 +58,11 @@
 
 
     <!-- Add your site or application content here -->
-      
-		    
+      	    
 
 		     <div class="header" ng-cloak>
 
-		      <nav class="navbar navbar-inverse  navbar-static-top" style="   margin-bottom: 0px;">
+		      <nav class="navbar navbar-default  navbar-static-top" style="   margin-bottom: 0px;">
 		          <div class="container">
 		          
 		          <ul  class="nav navbar-nav">
@@ -77,26 +73,20 @@
 						</a>
 					</li>
 		              
-		                 
-		                
-					  <li > <a ui-sref="catalogo" class="" >Catalogo</a> </li>
-		              <li class="dropdown" ng-show="isAuthenticated()">
+		        </ul>      
+		            
+		
+				<ul class="nav navbar-nav navbar-right">
+						              <li class="dropdown" ng-show="isAuthenticated()">
 			          	<a  class="dropdown-toggle" data-toggle="dropdown" >Eventos <b class="caret"></b></a>
 				          <ul class="dropdown-menu">
 				            <li><a ui-sref="formAltaEventoMulti.altaEvento">Crear Eventos</a></li>
 				          </ul>
 			          </li>
-			          
-<!-- 		            <li class="dropdown" ng-show="isAuthenticated()"> -->
-<!-- 			          	<a  class="dropdown-toggle" data-toggle="dropdown" >Eventos Deportivos <b class="caret"></b></a> -->
-				     
-<!-- 			          </li> -->
-			          
-		        </ul>      
-		            
-		
-				<ul class="nav navbar-nav navbar-right">
-		        	<li ng-show="isAuthenticated()" class="text-navbar"><a ng-click="salir()">Cerrar Sesion</a></li>
+				
+				<li > <a ui-sref="catalogo" class="" >Cat&aacutelogo</a> </li>
+
+		        	<li ng-show="isAuthenticated()" class="text-navbar"><a ng-click="salir()">Cerrar Sesi&oacuten</a></li>
 		        	<li ng-show="!isAuthenticated()" class="text-navbar"><a ui-sref="adminLogin">Login</a></li>
 				</ul>
 				
@@ -119,30 +109,23 @@
             <div class="item active">
                 <!-- Set the first background image using inline CSS below. -->
                 <div class="fill blur" style="background-image:url('../resources/defecto/img/Slider/1.jpg');"></div>
-<!--                 <div class="carousel-caption"> -->
-<!--                     <h2>Caption 1</h2> -->
-<!--                 </div> -->
+
             </div>
             <div class="item">
                 <!-- Set the second background image using inline CSS below. -->
-                <div class="fill blur" style="background-image:url('../resources/defecto/img/Slider/2.jpg');"></div>
-<!--                 <div class="carousel-caption"> -->
-<!--                     <h2>Caption 2</h2> -->
-<!--                 </div> -->
+                <div class="fill blur" style="background-image:url('../resources/defecto/img/Slider/5.jpg');"></div>
+
             </div>
             <div class="item">
                 <!-- Set the third background image using inline CSS below. -->
-                <div class="fill blur" style="background-image:url('../resources/defecto/img/Slider/3.jpg');"></div>
-<!--                 <div class="carousel-caption"> -->
-<!-- <!--                     <h2>deaodeaiudhe iuahdheiu</h2> --> 
-                    
-<!--                 </div> -->
+                <div class="fill blur" style="background-image:url('../resources/defecto/img/Slider/6.jpg');"></div>
+
             </div>
         </div>
 
     </header>
 
-	    <div class="overlay"  ui-view></div>
+    <div class="overlay"  ui-view></div>
 
 	<script type="text/javascript"  src="resources/angular/shared/angular/angular.js"></script>
 	<script type="text/javascript"  src="resources/angular/shared/i18n/angular-locale_es-uy.js"></script>
@@ -152,19 +135,11 @@
     <script  type="text/javascript" src="resources/angular/shared/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
     <script  type="text/javascript" src="resources/angular/shared/angular-route/angular-route.js"></script>
     <script  type="text/javascript" src="resources/angular/shared/angular-cookies/angular-cookies.js"></script>
-<!--     <script  type="text/javascript" src="resources/angular/shared/angular-bootstrap/ui-bootstrap-tpls-0.13.3.min.js"></script> -->
     <script  type="text/javascript" src="resources/angular/shared/satellizer/satellizer.min.js"></script>
     <script  type="text/javascript" src="resources/angular/shared/angular-ui-router/angular-ui-router.min.js"></script>
     <script  type="text/javascript" src="resources/angular/shared/angular-animate/angular-animate.min.js"></script>
     <script  type="text/javascript" src="resources/angular/shared/moment/locale/es.js"></script>
 
-       
-    
-
-    
-  
- 
- 
    
     <!-- Modules -->
     <script src="resources/defecto/js/app.js"></script>
@@ -173,36 +148,10 @@
     <script src="resources/defecto/js/controllers/adminCtrl.js"></script>
     <script src="resources/defecto/js/controllers/eventoMultiCtrl.js"></script>
 	<script src="resources/defecto/js/controllers/catalogoCtrl.js"></script>
-    
-<!--     <script src="resources/defecto/js/Others/ColorPicker/jquery.minicolors.min.js"></script> -->
-    
     <!-- Services -->
     <script src="resources/defecto/js/services/myServices.js"></script>
     <!-- Directives -->
     <script src="resources/defecto/js/directives/fileModel.js"></script>
-   
-    
-    
-
-<script type="text/javascript">
-
-$(function(){
-    $(".dropdown").hover(            
-            function() {
-                $('.dropdown-menu', this).stop( true, true ).fadeIn("fast");
-                $(this).toggleClass('open');
-                $('b', this).toggleClass("caret caret-up");                
-            },
-            function() {
-                $('.dropdown-menu', this).stop( true, true ).fadeOut("fast");
-                $(this).toggleClass('open');
-                $('b', this).toggleClass("caret caret-up");                
-            });
-    });
-
-
-</script>
-      
    
 
 </body>
