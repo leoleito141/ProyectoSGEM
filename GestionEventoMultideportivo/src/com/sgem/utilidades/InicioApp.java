@@ -4,6 +4,7 @@ import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -213,22 +214,18 @@ public class InicioApp implements ServletContextListener {
 		
 		TenantHandler th = new TenantHandler();
 		Pais p5 = new Pais("Brasil","Rio de Janeiro");	
-//		Date fechaFin = new Date();
-//		fechaFin.setDate(20);
-//		fechaFin.setYear(2016);
-//		fechaFin.setMonth(1);
 		
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		String dateInString = "20/01/2016";
-		Date fechaFin = null;
+		Date fechaInicio = null, fechaFin = null;
 				
-		try {			
-			fechaFin = formatter.parse("20/01/2016 00:00:00");
+		try {
+			fechaInicio = formatter.parse("31/09/2015 00:00:00");
+			fechaFin = formatter.parse("31/12/2015 00:00:00");
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		
-		EventoMultideportivo evento = new EventoMultideportivo("Rio2016", p5 , "logo.jpg", new Date(), fechaFin, "https://www.facebook.com/rio2016","https://www.instagram.com/rio2016/", "#Rio2016", "https://www.youtube.com/rio2016", "Rio2016.css");
+		EventoMultideportivo evento = new EventoMultideportivo("Rio2016", p5 , "logo.jpg", fechaInicio, fechaFin, "https://www.facebook.com/rio2016","https://www.instagram.com/rio2016/", "#Rio2016", "https://www.youtube.com/rio2016", "Rio2016.css");
 		evento.setTwitter("https://twitter.com/rio2016");
 		List<EventoMultideportivo> listevento = new ArrayList<EventoMultideportivo>();
 		
@@ -1033,16 +1030,58 @@ public class InicioApp implements ServletContextListener {
 		u4.setPassword("123");
 		u4.setTenantID(1);
 		
+		UsuarioComun u5 = new UsuarioComun();
+		u5.setEmail("bandido@gmail.com");
+		u5.setPassword("123");
+		u5.setTenantID(1);
+		
+		UsuarioComun u6 = new UsuarioComun();
+		u6.setEmail("befx@gmail.com");
+		u6.setPassword("123");
+		u6.setTenantID(1);
+		
+		UsuarioComun u7 = new UsuarioComun();
+		u7.setEmail("leoleito141@gmail.com");
+		u7.setPassword("123");
+		u7.setTenantID(1);
+		
+		UsuarioComun u8 = new UsuarioComun();
+		u8.setEmail("kmaxnano@gmail.com");
+		u8.setPassword("123");
+		u8.setTenantID(1);
+		
+		UsuarioComun u9 = new UsuarioComun();
+		u9.setEmail("manularra@gmail.com");
+		u9.setPassword("123");
+		u9.setTenantID(1);
+		
+		UsuarioComun u10 = new UsuarioComun();
+		u10.setEmail("ginobili@gmail.com");
+		u10.setPassword("123");
+		u10.setTenantID(1);
+		
+		UsuarioComun u11 = new UsuarioComun();
+		u11.setEmail("masteryii@gmail.com");
+		u11.setPassword("123");
+		u11.setTenantID(1);
+			
 		UsuarioDAO.guardarUsuario(u);
 		UsuarioDAO.guardarUsuario(u2);
 		UsuarioDAO.guardarUsuario(u3);
 		UsuarioDAO.guardarUsuario(u4);
+		UsuarioDAO.guardarUsuario(u5);
+		UsuarioDAO.guardarUsuario(u6);
+		UsuarioDAO.guardarUsuario(u7);
+		UsuarioDAO.guardarUsuario(u8);
+		UsuarioDAO.guardarUsuario(u9);
+		UsuarioDAO.guardarUsuario(u10);
+		UsuarioDAO.guardarUsuario(u11);
 		
 		Date datec1 = null,datec2 = null;
 
 		try {			
-			datec1 = formatter.parse("28/10/2015 14:30:00");
-			datec2 = formatter.parse("30/10/2015 19:45:00");
+			datec1 = formatter.parse("28/11/2015 14:30:00");
+			datec2 = formatter.parse("30/11/2015 19:45:00");
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -1483,45 +1522,412 @@ public class InicioApp implements ServletContextListener {
 		
 		/***** Historial *****/
 		
-		Date date1 = null,date2 = null,date3 = null,date4 = null,date5 = null,date6 = null,date7 = null,date8 = null;
+		// 20/12/2015
+		//20/01/2016
+		
+		Date date1 = null,date2 = null,date3 = null,date4 = null,date5 = null,date6 = null,date7 = null,date8 = null,date9 = null,date10 = null,date11 = null,date12 = null,date13 = null,date14 = null,date15 = null,date16 = null,date17 = null,date18 = null,date19 = null,date20 = null,date21 = null,date22 = null,date23 = null,date24 = null,date25 = null,date26 = null,date27 = null,date28 = null,date29 = null,date30 = null,date31 = null,date32 = null,date33 = null,date34 = null,date35 = null,date36 = null;
 		
 		try {
-			date1 = formatter.parse("28/10/2015 14:30:00");
-			date2 = formatter.parse("30/10/2015 17:40:00");
-			date3 = formatter.parse("05/11/2015 14:30:00");
-			date4 = formatter.parse("15/11/2015 13:30:00");
-			date5 = formatter.parse("30/11/2015 14:00:00");
-			date6 = formatter.parse("02/12/2015 08:30:00");
-			date7 = formatter.parse("15/12/2015 10:00:00");
-			date8 = formatter.parse("25/12/2015 20:30:00");
+			
+			/*** COMITE OLIMPICO ***/
+			
+			/* Septiembre */
+			date1 = formatter.parse("20/09/2015 00:00:00");
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			
+			/* Octubre */
+			date1 = formatter.parse("01/10/2015 00:00:00");	
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			date1 = formatter.parse("04/10/2015 00:00:00");		
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			date1 = formatter.parse("08/10/2015 00:00:00");		
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			date1 = formatter.parse("15/10/2015 00:00:00");		
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			date1 = formatter.parse("29/10/2015 00:00:00");		
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			
+			/* Noviembre */
+			date1 = formatter.parse("01/11/2015 00:00:00");	
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			date1 = formatter.parse("04/11/2015 00:00:00");		
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			date1 = formatter.parse("08/11/2015 00:00:00");		
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			date1 = formatter.parse("15/11/2015 00:00:00");		
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			date1 = formatter.parse("29/11/2015 00:00:00");		
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			
+			/* Diciembre */
+			date1 = formatter.parse("01/12/2015 00:00:00");	
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			date1 = formatter.parse("15/12/2015 00:00:00");		
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, comite1));
+			
+			
+			/*** JUECES ***/
+			
+			/* Septiembre */
+			date1 = formatter.parse("20/09/2015 00:00:00");
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			
+			/* Octubre */
+			date1 = formatter.parse("01/10/2015 00:00:00");	
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			date1 = formatter.parse("04/10/2015 00:00:00");		
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			date1 = formatter.parse("08/10/2015 00:00:00");		
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			date1 = formatter.parse("15/10/2015 00:00:00");		
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			
+			/* Noviembre */
+			date1 = formatter.parse("01/11/2015 00:00:00");	
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			date1 = formatter.parse("04/11/2015 00:00:00");		
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			date1 = formatter.parse("08/11/2015 00:00:00");		
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			date1 = formatter.parse("15/11/2015 00:00:00");		
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			
+			/* Diciembre */
+			date1 = formatter.parse("01/12/2015 00:00:00");	
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			date1 = formatter.parse("15/12/2015 00:00:00");		
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));
+			HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, j));		
+			
+			
+			/*** USUARIO COMUN ***/					
+			date4 = formatter.parse("02/10/2015 08:30:00");
+			date5 = formatter.parse("05/10/2015 10:00:00");
+			date6 = formatter.parse("15/10/2015 09:00:00");
+			date7 = formatter.parse("17/10/2015 10:00:00");
+			date8 = formatter.parse("17/10/2015 15:00:00");
+			date9 = formatter.parse("19/10/2015 10:00:00");
+			date10 = formatter.parse("20/10/2015 20:00:00");
+			date11 = formatter.parse("20/10/2015 20:00:00");
+			date12 = formatter.parse("20/10/2015 20:00:00");
+			date13 = formatter.parse("21/10/2015 20:00:00");
+			date14 = formatter.parse("22/10/2015 20:00:00");
+			date15 = formatter.parse("22/10/2015 20:00:00");
+			date16 = formatter.parse("23/10/2015 20:00:00");
+			
+			date17 = formatter.parse("01/11/2015 13:30:00");
+			date18 = formatter.parse("03/11/2015 12:30:00");
+			date19 = formatter.parse("03/11/2015 08:30:00");
+			date20 = formatter.parse("05/11/2015 07:30:00");
+			date21 = formatter.parse("07/11/2015 05:30:00");
+			date22 = formatter.parse("07/11/2015 05:30:00");
+			date23 = formatter.parse("09/11/2015 05:30:00");
+			date24 = formatter.parse("10/11/2015 05:30:00");
+			date25 = formatter.parse("11/11/2015 05:30:00");
+			date26 = formatter.parse("12/11/2015 05:30:00");
+			date27 = formatter.parse("13/11/2015 05:30:00");
+			date28 = formatter.parse("15/11/2015 05:30:00");
+			date29 = formatter.parse("20/11/2015 05:30:00");
+			
+			date30 = formatter.parse("01/12/2015 05:30:00");
+			date31 = formatter.parse("05/12/2015 05:30:00");
+			date32 = formatter.parse("07/12/2015 05:30:00");
+			date33 = formatter.parse("12/12/2015 05:30:00");
+			date34 = formatter.parse("13/12/2015 05:30:00");
+			date35 = formatter.parse("15/12/2015 05:30:00");
+			date36 = formatter.parse("15/12/2015 05:30:00");
+			
+			
+			
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+				
 		
-		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, u));
-		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date2, u));
-		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date3, u));
+//		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date1, u));
+//		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date2, u));
+//		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date3, u));
+		
+		/* Octubre */
 		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date4, u));
 		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date5, u));
 		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date6, u));
 		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date7, u));
 		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date8, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date9, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date10, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date11, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date12, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date13, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date14, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date14, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date14, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date14, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date14, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date14, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date15, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date16, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date4, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date5, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date6, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date7, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date8, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date9, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date10, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date11, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date12, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date13, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date14, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date14, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date14, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date14, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date14, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date14, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date15, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date16, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date4, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date5, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date6, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date7, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date8, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date9, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date10, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date11, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date12, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date13, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date14, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date14, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date14, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date14, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date14, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date14, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date15, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date16, u));
+		
+		/* Noviembre */
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date17, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date18, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date19, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date20, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date21, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date22, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date22, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date22, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date22, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date22, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date22, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date23, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date24, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date25, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date25, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date25, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date25, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date25, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date26, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date27, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date28, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date29, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date17, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date18, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date19, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date20, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date21, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date22, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date22, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date22, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date22, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date22, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date22, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date23, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date24, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date25, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date25, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date25, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date25, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date25, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date26, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date27, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date28, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date29, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date26, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date27, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date28, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date29, u));
+		
+		/* Diciembre */
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date30, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date31, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date32, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date33, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date34, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date35, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date36, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date30, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date31, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date32, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date33, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date34, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date35, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date36, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date32, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date33, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date34, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date35, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date36, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date36, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date32, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date33, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date34, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date35, u));
+		HistorialLoginDAO.guardarHistorial(new HistorialLogin(1, date36, u));
 
-//		Token jwt = JWTUtil.generarToken( new DataUsuario(1, "mail@gmail.com", "f", "t", "y", "usuario", "data", 1,12345678, "123", "UsuarioComun"));
-//	
-//		String[] partes = (jwt.getToken()).split("\\.");
-//		
-//		try {
-//			String payload = new String(Base64.decode(partes[1]));
-//			System.out.println(payload);
-//			JsonObject newObj = new JsonParser().parse(payload).getAsJsonObject();
-			
-
-//		Map<String, Object> body = new HashMap<String, Object>();
-//		
-//		body = JWTUtil.getBody(jwt.getToken());
-//		String iss = (String) body.get(JWTUtil.BODY_ISS);
-//		Integer exp = (Integer) body.get(JWTUtil.BODY_EXP);
 		
     }
     
